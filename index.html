@@ -224,8 +224,8 @@
                 <h1 class="hero-title">Vision produit<br><span>GestiLoc</span></h1>
                 <p class="hero-subtitle">Ce document présente la <strong style="color:white;">maquette fonctionnelle front-end</strong> de GestiLoc — 47 fonctionnalités identifiées, 8 modules conçus, 22 pages HTML statiques avec données fictives. Le back-end (Laravel) et la persistance des données restent à développer.</p>
                 <div class="hero-cta-wrapper">
-                    <a href="#modules" class="hero-cta">
-                        <i class="fas fa-rocket"></i> Découvrir la puissance
+                    <a href="#cahier-des-charges" class="hero-cta">
+                        <i class="fas fa-file-lines"></i> Lire le cahier des charges
                     </a>
                     <a href="tableau-de-bord.html" class="hero-cta-ghost">
                         <i class="fas fa-play-circle"></i> Tester l'application
@@ -359,6 +359,562 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════
+                 CAHIER DES CHARGES
+            ══════════════════════════════════════════════════ -->
+            <div id="cahier-des-charges" style="margin-bottom:2.5rem;">
+
+                <!-- En-tête cahier des charges -->
+                <div style="text-align:center;padding:2.5rem 1rem 2rem;">
+                    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(30,58,138,0.08);border:1px solid rgba(30,58,138,0.2);border-radius:50px;padding:0.4rem 1.1rem;font-size:0.75rem;font-weight:700;color:var(--primary);letter-spacing:0.5px;margin-bottom:1.25rem;text-transform:uppercase;">
+                        <i class="fas fa-file-lines"></i> Document officiel
+                    </div>
+                    <h2 style="font-size:2.2rem;font-weight:800;color:var(--primary);letter-spacing:-0.5px;line-height:1.15;margin-bottom:0.75rem;">
+                        Cahier des charges<br><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GestiLoc — Application de gestion locative</span>
+                    </h2>
+                    <p style="font-size:0.95rem;color:var(--text-muted);max-width:640px;margin:0 auto 0.5rem;line-height:1.7;">
+                        Ce document définit les exigences fonctionnelles et techniques du projet GestiLoc. Il sert de référence pour le développement de la version complète (back-end Laravel inclus).
+                    </p>
+                    <div style="display:inline-flex;align-items:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;justify-content:center;">
+                        <span style="font-size:0.8rem;color:var(--text-muted);"><i class="fas fa-calendar me-1" style="color:var(--primary-light);"></i>Version : Mars 2025</span>
+                        <span style="font-size:0.8rem;color:var(--text-muted);"><i class="fas fa-user me-1" style="color:var(--primary-light);"></i>Rédacteur : Christophe Lai</span>
+                        <span style="font-size:0.8rem;color:var(--text-muted);"><i class="fas fa-flask me-1" style="color:#7c3aed;"></i>Statut : POC front-end livré</span>
+                    </div>
+                </div>
+
+                <!-- Table des matières -->
+                <div class="card" style="margin-bottom:1.5rem;border-left:4px solid var(--primary);">
+                    <div class="card-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">
+                        <i class="fas fa-list-ul"></i> Table des matières
+                    </div>
+                    <div class="card-body" style="padding:1.25rem 1.5rem;">
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <ul style="list-style:none;margin:0;padding:0;">
+                                    <li style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><a href="#cdc-contexte" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>1. Contexte &amp; objectifs</a></li>
+                                    <li style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><a href="#cdc-utilisateurs" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>2. Utilisateurs cibles</a></li>
+                                    <li style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><a href="#cdc-perimetre" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>3. Périmètre fonctionnel</a></li>
+                                    <li style="padding:0.35rem 0;font-size:0.88rem;"><a href="#cdc-modules" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>4. Détail des modules</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul style="list-style:none;margin:0;padding:0;">
+                                    <li style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><a href="#cdc-non-fonctionnel" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>5. Exigences non fonctionnelles</a></li>
+                                    <li style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><a href="#cdc-contraintes" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>6. Contraintes techniques</a></li>
+                                    <li style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><a href="#cdc-livraisons" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>7. Livrables attendus</a></li>
+                                    <li style="padding:0.35rem 0;font-size:0.88rem;"><a href="#cdc-criteres" style="color:var(--primary);text-decoration:none;font-weight:500;"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);font-size:0.6rem;"></i>8. Critères d'acceptation</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Contexte & objectifs -->
+                <div class="card" id="cdc-contexte" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <i class="fas fa-bullseye"></i> 1. Contexte &amp; objectifs
+                    </div>
+                    <div class="card-body" style="padding:1.5rem;">
+                        <div class="row g-4">
+                            <div class="col-lg-7">
+                                <h5 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.75rem;"><i class="fas fa-info-circle me-2" style="color:var(--secondary);"></i>Contexte du projet</h5>
+                                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.25rem;">
+                                    GestiLoc est une application web de gestion locative destinée aux propriétaires bailleurs privés et aux petites agences immobilières. Elle centralise toutes les opérations liées à la gestion d'un parc immobilier : suivi des locataires, quittances, contrats, maintenance, documents et finances.
+                                </p>
+                                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.8;margin-bottom:0;">
+                                    Ce projet est actuellement au stade <strong style="color:var(--primary);">POC (Proof of Concept) front-end statique</strong>. Les 22 pages HTML maquettées constituent la base visuelle et fonctionnelle pour le développement de la version complète avec back-end Laravel.
+                                </p>
+                            </div>
+                            <div class="col-lg-5">
+                                <h5 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.75rem;"><i class="fas fa-flag me-2" style="color:var(--secondary);"></i>Objectifs principaux</h5>
+                                <ul style="list-style:none;margin:0;padding:0;">
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.87rem;">
+                                        <span style="width:24px;height:24px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;color:var(--success);">✓</span>
+                                        <span><strong>Centraliser</strong> la gestion de tous les biens et locataires en un seul outil</span>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.87rem;">
+                                        <span style="width:24px;height:24px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;color:var(--success);">✓</span>
+                                        <span><strong>Automatiser</strong> les tâches répétitives (quittances, alertes loyer, relances)</span>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.87rem;">
+                                        <span style="width:24px;height:24px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;color:var(--success);">✓</span>
+                                        <span><strong>Sécuriser</strong> les documents légaux (baux, DPE, assurances) dans un espace dédié</span>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.87rem;">
+                                        <span style="width:24px;height:24px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;color:var(--success);">✓</span>
+                                        <span><strong>Visualiser</strong> en temps réel les finances, revenus et taux d'occupation</span>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem 0;font-size:0.87rem;">
+                                        <span style="width:24px;height:24px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;color:var(--success);">✓</span>
+                                        <span><strong>Piloter</strong> les interventions de maintenance et les relations prestataires</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Utilisateurs cibles -->
+                <div class="card" id="cdc-utilisateurs" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i> 2. Utilisateurs cibles
+                    </div>
+                    <div class="card-body" style="padding:1.5rem;">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;height:100%;background:linear-gradient(135deg,rgba(30,58,138,0.03),white);">
+                                    <div style="width:44px;height:44px;background:rgba(30,58,138,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:0.75rem;">🏠</div>
+                                    <h6 style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;">Propriétaire bailleur privé</h6>
+                                    <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.75rem;">Personne physique gérant 1 à 20 biens en location (vide ou meublée). Cherche à gagner du temps sur les tâches administratives.</p>
+                                    <div style="font-size:0.78rem;color:var(--text-muted);"><strong style="color:var(--primary);">Besoins clés :</strong> quittances auto, suivi loyers, alertes impayés, stockage contrats.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="border:1.5px solid var(--secondary);border-radius:12px;padding:1.25rem;height:100%;background:linear-gradient(135deg,rgba(6,182,212,0.04),white);">
+                                    <div style="width:44px;height:44px;background:rgba(6,182,212,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:0.75rem;">🏢</div>
+                                    <h6 style="font-weight:700;color:var(--secondary);margin-bottom:0.5rem;">Petite agence immobilière</h6>
+                                    <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.75rem;">Structure de 1 à 5 personnes gérant des mandats de gestion locative pour le compte de propriétaires tiers.</p>
+                                    <div style="font-size:0.78rem;color:var(--text-muted);"><strong style="color:var(--secondary);">Besoins clés :</strong> multi-propriétés, rapports clients, exports comptables, gestion documents légaux.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="border:1px solid var(--border);border-radius:12px;padding:1.25rem;height:100%;background:linear-gradient(135deg,rgba(139,92,246,0.03),white);">
+                                    <div style="width:44px;height:44px;background:rgba(139,92,246,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:0.75rem;">📊</div>
+                                    <h6 style="font-weight:700;color:#7c3aed;margin-bottom:0.5rem;">Investisseur locatif</h6>
+                                    <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.75rem;">Profil patrimonial avec plusieurs biens. Priorité sur la rentabilité, les analyses financières et la vision consolidée du portefeuille.</p>
+                                    <div style="font-size:0.78rem;color:var(--text-muted);"><strong style="color:#7c3aed;">Besoins clés :</strong> tableau de bord KPIs, graphiques revenus, taux d'occupation, exports fiscaux.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Périmètre fonctionnel -->
+                <div class="card" id="cdc-perimetre" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <i class="fas fa-sitemap"></i> 3. Périmètre fonctionnel
+                    </div>
+                    <div class="card-body" style="padding:1.5rem;">
+                        <p style="font-size:0.87rem;color:var(--text-muted);margin-bottom:1.25rem;">L'application couvre <strong>8 modules fonctionnels majeurs</strong> organisés en 3 phases de développement. Le tableau ci-dessous présente l'ensemble des fonctionnalités incluses dans le périmètre du projet.</p>
+                        <div class="table-responsive">
+                            <table class="table" style="font-size:0.87rem;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:18%;">Module</th>
+                                        <th style="width:42%;">Fonctionnalités incluses</th>
+                                        <th style="width:15%;">Type</th>
+                                        <th style="width:12%;">Priorité</th>
+                                        <th style="width:13%;">Phase</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong style="color:var(--primary);">🎨 Design System</strong></td>
+                                        <td style="color:var(--text-muted);">CSS variables, composants réutilisables, responsive Bootstrap 5, typographie Inter, icônes Font Awesome</td>
+                                        <td><span style="background:rgba(59,130,246,0.1);color:#2563eb;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Transverse</span></td>
+                                        <td><span class="badge-priority-high">Critique</span></td>
+                                        <td><span class="phase-tag phase-1" style="margin-left:0;">Phase 1</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td><strong style="color:var(--primary);">📊 Tableau de bord</strong></td>
+                                        <td style="color:var(--text-muted);">KPIs temps réel (revenus, taux occupation, impayés), graphiques Chart.js revenus/types, alertes urgentes, actions rapides</td>
+                                        <td><span style="background:rgba(16,185,129,0.1);color:#059669;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Pilotage</span></td>
+                                        <td><span class="badge-priority-high">Critique</span></td>
+                                        <td><span class="phase-tag phase-2" style="margin-left:0;">Phase 2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong style="color:var(--primary);">🏠 Propriétés</strong></td>
+                                        <td style="color:var(--text-muted);">Inventaire complet des biens (type, surface, adresse, loyer, charges), fiche détail avec DPE/diagnostics, filtres multi-critères, CRUD complet</td>
+                                        <td><span style="background:rgba(30,58,138,0.1);color:var(--primary);font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Patrimoine</span></td>
+                                        <td><span class="badge-priority-high">Critique</span></td>
+                                        <td><span class="phase-tag phase-2" style="margin-left:0;">Phase 2</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td><strong style="color:var(--primary);">👤 Locataires</strong></td>
+                                        <td style="color:var(--text-muted);">Dossier locataire complet (coordonnées, pièce d'identité, garant), historique des paiements, statut du bail, score de fiabilité, filtres avancés</td>
+                                        <td><span style="background:rgba(30,58,138,0.1);color:var(--primary);font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Gestion</span></td>
+                                        <td><span class="badge-priority-high">Critique</span></td>
+                                        <td><span class="phase-tag phase-2" style="margin-left:0;">Phase 2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong style="color:var(--primary);">💶 Finances</strong></td>
+                                        <td style="color:var(--text-muted);">Suivi loyers + charges, encaissements, impayés avec relances, génération quittances PDF, exports comptables, graphiques financiers</td>
+                                        <td><span style="background:rgba(16,185,129,0.1);color:#059669;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Finances</span></td>
+                                        <td><span class="badge-priority-high">Critique</span></td>
+                                        <td><span class="phase-tag phase-2" style="margin-left:0;">Phase 2</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td><strong style="color:var(--primary);">🔧 Maintenance</strong></td>
+                                        <td style="color:var(--text-muted);">Tickets d'intervention (signalement, suivi, clôture), assignation prestataires, historique des travaux par bien, alertes préventives</td>
+                                        <td><span style="background:rgba(245,158,11,0.1);color:#d97706;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Opérationnel</span></td>
+                                        <td><span class="badge-priority-med">Haute</span></td>
+                                        <td><span class="phase-tag phase-3" style="margin-left:0;">Phase 3</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong style="color:var(--primary);">📄 Contrats</strong></td>
+                                        <td style="color:var(--text-muted);">Gestion des baux (création, renouvellement, résiliation), suivi durée/expiration, révision IRL, gestion préavis, clauses personnalisées</td>
+                                        <td><span style="background:rgba(99,102,241,0.1);color:#4338ca;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Juridique</span></td>
+                                        <td><span class="badge-priority-med">Haute</span></td>
+                                        <td><span class="phase-tag phase-3" style="margin-left:0;">Phase 3</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td><strong style="color:var(--primary);">📁 Documents</strong></td>
+                                        <td style="color:var(--text-muted);">GED sécurisée, upload drag-and-drop (PDF, JPG, DOCX, max 10 Mo), classification par catégorie, association bien/locataire/contrat, liens de téléchargement</td>
+                                        <td><span style="background:rgba(6,182,212,0.1);color:#0891b2;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">GED</span></td>
+                                        <td><span class="badge-priority-med">Haute</span></td>
+                                        <td><span class="phase-tag phase-3" style="margin-left:0;">Phase 3</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong style="color:var(--primary);">📈 Rapports</strong></td>
+                                        <td style="color:var(--text-muted);">Tableau de synthèse annuel, graphiques revenus/charges/solde, répartition par propriété, export Excel (Laravel Excel) et PDF (DomPDF), filtres période</td>
+                                        <td><span style="background:rgba(139,92,246,0.1);color:#7c3aed;font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;">Reporting</span></td>
+                                        <td><span class="badge-priority-low">Moyenne</span></td>
+                                        <td><span class="phase-tag phase-3" style="margin-left:0;">Phase 3</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Détail des modules (user stories) -->
+                <div class="card" id="cdc-modules" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <i class="fas fa-puzzle-piece"></i> 4. Détail des modules — Spécifications fonctionnelles
+                    </div>
+                    <div class="card-body" style="padding:1.5rem;">
+
+                        <!-- Module Tableau de bord -->
+                        <div style="margin-bottom:2rem;">
+                            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.85rem;padding-bottom:0.65rem;border-bottom:2px solid rgba(6,182,212,0.2);">
+                                <span style="width:36px;height:36px;background:rgba(6,182,212,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📊</span>
+                                <h5 style="font-size:1rem;font-weight:700;color:var(--primary);margin:0;">Module Tableau de bord</h5>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div style="background:var(--light-2);border-radius:8px;padding:1rem;">
+                                        <div style="font-size:0.78rem;font-weight:700;color:var(--secondary);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.65rem;">Fonctionnalités détaillées</div>
+                                        <ul class="feature-list">
+                                            <li><i class="fas fa-circle"></i> Indicateurs clés : revenus du mois, taux d'occupation, impayés en cours, interventions ouvertes</li>
+                                            <li><i class="fas fa-circle"></i> Graphique linéaire : évolution des revenus sur 12 mois (Chart.js)</li>
+                                            <li><i class="fas fa-circle"></i> Graphique doughnut : répartition des biens par type (appartement, maison, studio)</li>
+                                            <li><i class="fas fa-circle"></i> Panneau d'alertes : baux expirant &lt; 90 jours, loyers en retard, interventions urgentes</li>
+                                            <li><i class="fas fa-circle"></i> Actions rapides : ajouter propriété, enregistrer paiement, créer ticket</li>
+                                            <li><i class="fas fa-circle"></i> Liste des dernières activités (paiements, nouvelles locations, interventions)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div style="background:var(--light-2);border-radius:8px;padding:1rem;">
+                                        <div style="font-size:0.78rem;font-weight:700;color:var(--secondary);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.65rem;">User stories</div>
+                                        <ul class="feature-list">
+                                            <li><i class="fas fa-circle"></i> <em>En tant que propriétaire</em>, je veux voir d'un coup d'œil l'état de mon patrimoine à date</li>
+                                            <li><i class="fas fa-circle"></i> <em>En tant que propriétaire</em>, je veux être alerté automatiquement des impayés et expirations à venir</li>
+                                            <li><i class="fas fa-circle"></i> <em>En tant que propriétaire</em>, je veux visualiser l'évolution de mes revenus sur l'année en cours</li>
+                                            <li><i class="fas fa-circle"></i> <em>En tant que propriétaire</em>, je veux accéder rapidement aux actions les plus fréquentes sans chercher dans les menus</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module Propriétés -->
+                        <div style="margin-bottom:2rem;">
+                            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.85rem;padding-bottom:0.65rem;border-bottom:2px solid rgba(30,58,138,0.15);">
+                                <span style="width:36px;height:36px;background:rgba(30,58,138,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🏠</span>
+                                <h5 style="font-size:1rem;font-weight:700;color:var(--primary);margin:0;">Module Propriétés</h5>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div style="background:var(--light-2);border-radius:8px;padding:1rem;">
+                                        <div style="font-size:0.78rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.65rem;">Fonctionnalités détaillées</div>
+                                        <ul class="feature-list">
+                                            <li><i class="fas fa-circle"></i> Liste des biens avec filtres (type, ville, statut : libre/occupé/en travaux)</li>
+                                            <li><i class="fas fa-circle"></i> Fiche bien : adresse, surface, DPE, loyer HC + charges, photos, description</li>
+                                            <li><i class="fas fa-circle"></i> Indicateurs par bien : taux d'occupation, revenus générés, historique locataires</li>
+                                            <li><i class="fas fa-circle"></i> Formulaire de création/modification avec validation champs obligatoires</li>
+                                            <li><i class="fas fa-circle"></i> Liens directs vers locataire actif, contrat en cours, documents associés</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div style="background:var(--light-2);border-radius:8px;padding:1rem;">
+                                        <div style="font-size:0.78rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.65rem;">Règles métier</div>
+                                        <ul class="feature-list">
+                                            <li><i class="fas fa-circle"></i> Un bien ne peut avoir qu'un seul locataire actif à la fois</li>
+                                            <li><i class="fas fa-circle"></i> Le statut "En travaux" bloque toute nouvelle mise en location</li>
+                                            <li><i class="fas fa-circle"></i> La suppression d'un bien est impossible si un contrat actif lui est lié</li>
+                                            <li><i class="fas fa-circle"></i> Le loyer HC doit être &gt; 0 et les charges ≥ 0</li>
+                                            <li><i class="fas fa-circle"></i> Le DPE doit être renseigné pour les biens construits avant 1999</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module Finances -->
+                        <div style="margin-bottom:2rem;">
+                            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.85rem;padding-bottom:0.65rem;border-bottom:2px solid rgba(16,185,129,0.2);">
+                                <span style="width:36px;height:36px;background:rgba(16,185,129,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">💶</span>
+                                <h5 style="font-size:1rem;font-weight:700;color:var(--primary);margin:0;">Module Finances &amp; Paiements</h5>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div style="background:var(--light-2);border-radius:8px;padding:1rem;">
+                                        <div style="font-size:0.78rem;font-weight:700;color:var(--success);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.65rem;">Fonctionnalités détaillées</div>
+                                        <ul class="feature-list">
+                                            <li><i class="fas fa-circle"></i> Enregistrement des paiements de loyer (montant, date, mode, référence)</li>
+                                            <li><i class="fas fa-circle"></i> Détection automatique des impayés (loyer non reçu après J+5)</li>
+                                            <li><i class="fas fa-circle"></i> Génération de quittances PDF à la demande ou automatique</li>
+                                            <li><i class="fas fa-circle"></i> Suivi des charges récupérables et régularisation annuelle</li>
+                                            <li><i class="fas fa-circle"></i> Vue consolidée revenus / charges / solde net par propriété</li>
+                                            <li><i class="fas fa-circle"></i> Export CSV/Excel pour déclaration fiscale</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div style="background:var(--light-2);border-radius:8px;padding:1rem;">
+                                        <div style="font-size:0.78rem;font-weight:700;color:var(--success);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.65rem;">Règles métier</div>
+                                        <ul class="feature-list">
+                                            <li><i class="fas fa-circle"></i> Un paiement est lié à un locataire, une propriété et une période (mois/année)</li>
+                                            <li><i class="fas fa-circle"></i> Montant du paiement = loyer HC + charges (valeur par défaut depuis contrat)</li>
+                                            <li><i class="fas fa-circle"></i> Une quittance ne peut être émise que pour un paiement validé (statut = "Payé")</li>
+                                            <li><i class="fas fa-circle"></i> Les retards sont calculés en nombre de jours depuis la date d'échéance du bail</li>
+                                            <li><i class="fas fa-circle"></i> Révision annuelle du loyer basée sur l'indice IRL (INSEE) si prévu au contrat</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modules Maintenance + Contrats + Documents (résumé) -->
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;">
+                                    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;">
+                                        <span style="font-size:1.1rem;">🔧</span>
+                                        <strong style="font-size:0.9rem;color:var(--primary);">Maintenance</strong>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Création de ticket avec photos jointes</li>
+                                        <li><i class="fas fa-circle"></i> Statuts : Nouveau → En cours → Résolu</li>
+                                        <li><i class="fas fa-circle"></i> Assignation à un prestataire (artisan, plombier…)</li>
+                                        <li><i class="fas fa-circle"></i> Historique complet par logement</li>
+                                        <li><i class="fas fa-circle"></i> Alertes maintenances préventives programmées</li>
+                                        <li><i class="fas fa-circle"></i> Suivi des coûts d'intervention</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;">
+                                    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;">
+                                        <span style="font-size:1.1rem;">📄</span>
+                                        <strong style="font-size:0.9rem;color:var(--primary);">Contrats &amp; Baux</strong>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Saisie complète du bail (durée, loyer, dépôt, clauses)</li>
+                                        <li><i class="fas fa-circle"></i> Barre de progression de la durée du bail</li>
+                                        <li><i class="fas fa-circle"></i> Alertes J-90 / J-30 avant expiration</li>
+                                        <li><i class="fas fa-circle"></i> Gestion du préavis (délais légaux)</li>
+                                        <li><i class="fas fa-circle"></i> Révision loyer IRL automatique</li>
+                                        <li><i class="fas fa-circle"></i> Archivage des baux résiliés</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;">
+                                    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;">
+                                        <span style="font-size:1.1rem;">📁</span>
+                                        <strong style="font-size:0.9rem;color:var(--primary);">Documents &amp; GED</strong>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Upload par drag-and-drop ou clic (PDF, JPG, DOCX)</li>
+                                        <li><i class="fas fa-circle"></i> Taille max 10 Mo par fichier</li>
+                                        <li><i class="fas fa-circle"></i> Classification : contrat, diagnostic, quittance, assurance, facture</li>
+                                        <li><i class="fas fa-circle"></i> Association à un bien, locataire ou contrat</li>
+                                        <li><i class="fas fa-circle"></i> Gestion dates de validité + alertes expiration</li>
+                                        <li><i class="fas fa-circle"></i> Liens de téléchargement sécurisés (URLs signées)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Exigences non fonctionnelles -->
+                <div class="card" id="cdc-non-fonctionnel" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <i class="fas fa-shield-halved"></i> 5. Exigences non fonctionnelles
+                    </div>
+                    <div class="card-body" style="padding:1.5rem;">
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-3">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;text-align:center;">
+                                    <i class="fas fa-bolt" style="font-size:1.75rem;color:var(--warning);margin-bottom:0.75rem;display:block;"></i>
+                                    <h6 style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;">Performance</h6>
+                                    <ul style="list-style:none;margin:0;padding:0;text-align:left;">
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--warning);font-size:0.65rem;"></i>Temps de chargement &lt; 2s (FCP)</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--warning);font-size:0.65rem;"></i>Score Lighthouse &gt; 85</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;"><i class="fas fa-arrow-right me-1" style="color:var(--warning);font-size:0.65rem;"></i>Pages &lt; 500 Ko (gzip)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;text-align:center;">
+                                    <i class="fas fa-lock" style="font-size:1.75rem;color:var(--danger);margin-bottom:0.75rem;display:block;"></i>
+                                    <h6 style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;">Sécurité</h6>
+                                    <ul style="list-style:none;margin:0;padding:0;text-align:left;">
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--danger);font-size:0.65rem;"></i>Authentification JWT / session Laravel</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--danger);font-size:0.65rem;"></i>Protection CSRF sur tous les formulaires</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--danger);font-size:0.65rem;"></i>Validation & sanitisation des inputs</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;"><i class="fas fa-arrow-right me-1" style="color:var(--danger);font-size:0.65rem;"></i>HTTPS obligatoire en production</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;text-align:center;">
+                                    <i class="fas fa-mobile-screen" style="font-size:1.75rem;color:var(--secondary);margin-bottom:0.75rem;display:block;"></i>
+                                    <h6 style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;">Responsive</h6>
+                                    <ul style="list-style:none;margin:0;padding:0;text-align:left;">
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--secondary);font-size:0.65rem;"></i>Mobile-first (≥ 320px)</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--secondary);font-size:0.65rem;"></i>Tablette (≥ 768px)</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--secondary);font-size:0.65rem;"></i>Desktop (≥ 1200px)</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;"><i class="fas fa-arrow-right me-1" style="color:var(--secondary);font-size:0.65rem;"></i>Touch targets ≥ 48px</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div style="border:1px solid var(--border);border-radius:10px;padding:1.1rem;height:100%;text-align:center;">
+                                    <i class="fas fa-universal-access" style="font-size:1.75rem;color:var(--success);margin-bottom:0.75rem;display:block;"></i>
+                                    <h6 style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;">Accessibilité</h6>
+                                    <ul style="list-style:none;margin:0;padding:0;text-align:left;">
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--success);font-size:0.65rem;"></i>Contraste WCAG AA (ratio ≥ 4.5:1)</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--success);font-size:0.65rem;"></i>Navigation clavier complète</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;border-bottom:1px solid var(--border);"><i class="fas fa-arrow-right me-1" style="color:var(--success);font-size:0.65rem;"></i>Balises aria-label sur icônes</li>
+                                        <li style="font-size:0.8rem;color:var(--text-muted);padding:0.25rem 0;"><i class="fas fa-arrow-right me-1" style="color:var(--success);font-size:0.65rem;"></i>Messages d'erreur explicites</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6 & 7. Contraintes techniques + Livrables -->
+                <div class="row g-3 mb-0">
+                    <div class="col-lg-6">
+                        <div class="card" id="cdc-contraintes" style="height:100%;margin-bottom:0;">
+                            <div class="card-header">
+                                <i class="fas fa-code"></i> 6. Contraintes techniques
+                            </div>
+                            <div class="card-body" style="padding:1.25rem 1.5rem;">
+                                <div class="table-responsive">
+                                    <table class="table" style="font-size:0.84rem;">
+                                        <thead>
+                                            <tr>
+                                                <th style="padding:0.55rem 0.75rem;">Contrainte</th>
+                                                <th style="padding:0.55rem 0.75rem;">Valeur</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Framework back-end</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Laravel 11 (PHP 8.3+)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Base de données</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">MySQL 8+ (ou PostgreSQL)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Authentification</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Laravel Breeze (sessions)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Front-end</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Bootstrap 5.3 + JS vanilla ES6</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Graphiques</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Chart.js 4.4</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">PDF quittances</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">DomPDF (barryvdh/laravel-dompdf)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Export Excel</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Laravel Excel (maatwebsite)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Stockage fichiers</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Storage Laravel (local ou S3)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Tests</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">PHPUnit (Feature tests)</td></tr>
+                                            <tr><td style="padding:0.55rem 0.75rem;font-weight:600;">Navigateurs supportés</td><td style="padding:0.55rem 0.75rem;color:var(--text-muted);">Chrome 100+, Firefox 100+, Safari 15+, Edge 100+</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card" id="cdc-livraisons" style="height:100%;margin-bottom:0;">
+                            <div class="card-header">
+                                <i class="fas fa-box-open"></i> 7. Livrables attendus
+                            </div>
+                            <div class="card-body" style="padding:1.25rem 1.5rem;">
+                                <ul style="list-style:none;margin:0;padding:0;">
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);">
+                                        <span style="width:26px;height:26px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--success);flex-shrink:0;margin-top:1px;">✓</span>
+                                        <div><strong style="font-size:0.88rem;">22 pages HTML statiques</strong><div style="font-size:0.78rem;color:var(--text-muted);">Front-end complet avec données fictives — <span style="color:var(--success);">Livré</span></div></div>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);">
+                                        <span style="width:26px;height:26px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--success);flex-shrink:0;margin-top:1px;">✓</span>
+                                        <div><strong style="font-size:0.88rem;">Design System CSS documenté</strong><div style="font-size:0.78rem;color:var(--text-muted);">Variables, composants, responsive — <span style="color:var(--success);">Livré</span></div></div>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);">
+                                        <span style="width:26px;height:26px;background:rgba(16,185,129,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--success);flex-shrink:0;margin-top:1px;">✓</span>
+                                        <div><strong style="font-size:0.88rem;">Cahier des charges complet</strong><div style="font-size:0.78rem;color:var(--text-muted);">Ce document — specs fonctionnelles + techniques — <span style="color:var(--success);">Livré</span></div></div>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);">
+                                        <span style="width:26px;height:26px;background:rgba(245,158,11,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--warning);flex-shrink:0;margin-top:1px;">⏳</span>
+                                        <div><strong style="font-size:0.88rem;">Application Laravel complète</strong><div style="font-size:0.78rem;color:var(--text-muted);">Back-end + BDD + API — <span style="color:var(--warning);">À développer (20 JH)</span></div></div>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);">
+                                        <span style="width:26px;height:26px;background:rgba(245,158,11,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--warning);flex-shrink:0;margin-top:1px;">⏳</span>
+                                        <div><strong style="font-size:0.88rem;">Module quittances PDF</strong><div style="font-size:0.78rem;color:var(--text-muted);">DomPDF — génération automatique — <span style="color:var(--warning);">À développer</span></div></div>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);">
+                                        <span style="width:26px;height:26px;background:rgba(245,158,11,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--warning);flex-shrink:0;margin-top:1px;">⏳</span>
+                                        <div><strong style="font-size:0.88rem;">Tests PHPUnit + Feature tests</strong><div style="font-size:0.78rem;color:var(--text-muted);">Couverture minimale 70% — <span style="color:var(--warning);">À développer</span></div></div>
+                                    </li>
+                                    <li style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.65rem 0;">
+                                        <span style="width:26px;height:26px;background:rgba(245,158,11,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--warning);flex-shrink:0;margin-top:1px;">⏳</span>
+                                        <div><strong style="font-size:0.88rem;">Déploiement production</strong><div style="font-size:0.78rem;color:var(--text-muted);">Nginx/Apache, HTTPS, CI/CD — <span style="color:var(--warning);">À configurer</span></div></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Critères d'acceptation -->
+                <div class="card" id="cdc-criteres" style="margin-top:1.5rem;border-left:4px solid var(--success);">
+                    <div class="card-header" style="background:linear-gradient(135deg,#059669,#10b981);">
+                        <i class="fas fa-clipboard-check"></i> 8. Critères d'acceptation
+                    </div>
+                    <div class="card-body" style="padding:1.5rem;">
+                        <p style="font-size:0.87rem;color:var(--text-muted);margin-bottom:1.25rem;">La version complète (avec back-end) sera considérée comme acceptée lorsque <strong>l'ensemble des critères suivants</strong> seront validés lors de la recette.</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div style="background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:1.1rem;">
+                                    <div style="font-size:0.78rem;font-weight:700;color:var(--success);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;"><i class="fas fa-check-double me-1"></i>Fonctionnel</div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> CRUD complet fonctionnel pour les 8 modules</li>
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> Authentification : connexion / déconnexion / protection routes</li>
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> Génération PDF quittance pour chaque paiement validé</li>
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> Upload fichier et récupération via lien sécurisé</li>
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> Alertes automatiques : impayé, bail expirant, maintenance due</li>
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> Filtres et recherche opérationnels sur toutes les listes</li>
+                                        <li><i class="fas fa-circle" style="color:var(--success);"></i> Export Excel du récapitulatif financier annuel</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:1.1rem;">
+                                    <div style="font-size:0.78rem;font-weight:700;color:var(--primary-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;"><i class="fas fa-shield-halved me-1"></i>Technique &amp; Qualité</div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Tous les formulaires valident les données côté serveur (Form Requests)</li>
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Aucune faille XSS / CSRF / injection SQL détectable</li>
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Score Lighthouse performance ≥ 85 sur toutes les pages principales</li>
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Application fonctionnelle sur Chrome, Firefox, Safari, Edge (versions récentes)</li>
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Interface 100% utilisable sur smartphone (≥ 375px)</li>
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Couverture tests PHPUnit ≥ 70% sur les controllers</li>
+                                        <li><i class="fas fa-circle" style="color:var(--primary-light);"></i> Déploiement réussi en environnement de production (HTTPS)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- fin #cahier-des-charges -->
 
             <!-- Tableau principal des modules -->
             <div class="card" id="modules">
