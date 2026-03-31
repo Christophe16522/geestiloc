@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Fiche détaillée de votre propriété : informations, locataire actuel et historique.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>GestiLoc — Fiche propriété · Appartement Paris 15e</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .hero-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px; color: white; padding: 2rem; margin-bottom: 1.5rem;
+            position: relative; overflow: hidden;
+        }
+        .hero-card::before { content: ''; position: absolute; bottom: -60px; left: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none; z-index: 0; }
+        .hero-card::after  { content: ''; position: absolute; top: -40px; right: -40px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.05); pointer-events: none; z-index: 0; }
+        .hero-card > * { position: relative; z-index: 1; }
+        .kpi-box { background: rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem 1.5rem; text-align: center; transition: background 0.2s ease; }
+        .kpi-box:hover { background: rgba(255,255,255,0.18); }
+        .hero-badge { background: rgba(6,182,212,0.2); color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 0.75rem; }
+        @media (max-width: 768px) {
+            .page-header .d-flex.gap-2 { flex-direction: column; width: 100%; }
+            .page-header .d-flex.gap-2 .btn { width: 100%; text-align: center; }
+            .hero-card { padding: 1.25rem; }
+            .hero-card .col-auto { flex: 0 0 calc(50% - 0.5rem); max-width: calc(50% - 0.5rem); }
+            .kpi-box { padding: 0.75rem; }
+        }
+        @media (max-width: 576px) {
+            .hero-card { padding: 1rem; }
+            .hero-card .col-auto { flex: 0 0 100%; max-width: 100%; }
+            .kpi-box { padding: 0.6rem; }
+            .hero-badge { font-size: 0.72rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="properties.html"><i class="fas fa-th-list"></i> Retour au parc immobilier</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-bolt"></i> Actions rapides</h5>
+                        <div class="sidebar-item"><a href="property-form.html"><i class="fas fa-edit" style="color:var(--primary-light);"></i> Modifier ce bien</a></div>
+                        <div class="sidebar-item"><a href="property-form.html"><i class="fas fa-plus" style="color:var(--success);"></i> Ajouter un nouveau bien</a></div>
+                        <div class="sidebar-item"><a href="#" onclick="if(!confirm('Confirmer la suppression de ce bien ? Cette action est irréversible.')) return false;" style="color:var(--danger);"><i class="fas fa-trash-alt"></i> Supprimer ce bien</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-link"></i> Modules liés</h5>
+                        <div class="sidebar-item"><a href="tenants.html"><i class="fas fa-user-check"></i> Fiche locataire</a></div>
+                        <div class="sidebar-item"><a href="contracts.html"><i class="fas fa-file-contract"></i> Bail en cours</a></div>
+                        <div class="sidebar-item"><a href="maintenance.html"><i class="fas fa-tools"></i> Travaux &amp; Maintenance</a></div>
+                        <div class="sidebar-item"><a href="documents.html"><i class="fas fa-folder-open"></i> Documents du bien</a></div>
+                        <div class="sidebar-item"><a href="finances.html"><i class="fas fa-chart-bar"></i> Historique financier</a></div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <div>
+                                <h1 class="page-title">Appartement Paris 15e</h1>
+                                <p class="page-subtitle"><i class="fas fa-map-marker-alt me-1"></i>23 Rue de la Convention, 75015 Paris &nbsp;&bull;&nbsp; <span style="color:var(--primary-light);font-weight:600;">Réf. PROP-001</span></p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="property-form.html" class="btn btn-primary" style="background:linear-gradient(135deg,var(--primary-light),var(--primary));border:none;font-weight:600;"><i class="fas fa-edit me-2"></i>Modifier</a>
+                                <a href="properties.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Retour au parc</a>
+                            </div>
+                        </div>
+
+                        <!-- Hero Card -->
+                        <div class="hero-card">
+                            <div class="hero-badge"><i class="fas fa-check-circle me-1"></i> Bien occupé &mdash; Loyer encaissé</div>
+                            <h2 style="font-size:1.8rem;font-weight:700;margin-bottom:0.25rem;">Appartement T3 — Paris 15e</h2>
+                            <p style="opacity:0.75;margin-bottom:1.5rem;font-size:0.95rem;"><i class="fas fa-map-marker-alt me-1"></i>23 Rue de la Convention, 75015 Paris &nbsp;&bull;&nbsp; Classe énergie : <strong>C</strong></p>
+                            <div class="row g-3">
+                                <div class="col-auto">
+                                    <div class="kpi-box">
+                                        <div style="font-size:1.8rem;font-weight:700;">1 200 €</div>
+                                        <div style="font-size:0.78rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Loyer HC / mois</div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="kpi-box">
+                                        <div style="font-size:1.8rem;font-weight:700;">75 m²</div>
+                                        <div style="font-size:0.78rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Surface hab.</div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="kpi-box">
+                                        <div style="font-size:1.8rem;font-weight:700;">T3</div>
+                                        <div style="font-size:0.78rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">3 pièces</div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="kpi-box">
+                                        <div style="font-size:1.8rem;font-weight:700;color:#34d399;">5,14%</div>
+                                        <div style="font-size:0.78rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Rendement brut</div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="kpi-box">
+                                        <div style="font-size:1.8rem;font-weight:700;">2019</div>
+                                        <div style="font-size:0.78rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Acquisition</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Informations générales -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-info-circle"></i> Identification du bien</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Type de bien</div>
+                                        <div class="info-value">Appartement</div>
+                                        <div class="info-label">Adresse complète</div>
+                                        <div class="info-value">23 Rue de la Convention, 75015 Paris</div>
+                                        <div class="info-label">Arrondissement</div>
+                                        <div class="info-value">15e arrondissement</div>
+                                        <div class="info-label">Code postal</div>
+                                        <div class="info-value">75015</div>
+                                        <div class="info-label">Ville</div>
+                                        <div class="info-value">Paris</div>
+                                        <div class="info-label">Statut actuel</div>
+                                        <div class="info-value"><span class="badge bg-success">Occupée</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caractéristiques -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-ruler-combined"></i> Caractéristiques &amp; Équipements</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Surface habitable</div>
+                                        <div class="info-value">75 m²</div>
+                                        <div class="info-label">Nombre de pièces</div>
+                                        <div class="info-value">3 pièces (T3)</div>
+                                        <div class="info-label">Étage</div>
+                                        <div class="info-value">3e étage sur 6</div>
+                                        <div class="info-label">Exposition</div>
+                                        <div class="info-value">Sud-Est</div>
+                                        <div class="info-label">Parking</div>
+                                        <div class="info-value">1 place incluse</div>
+                                        <div class="info-label">Classe énergie</div>
+                                        <div class="info-value"><span class="badge" style="background:rgba(16,185,129,0.15);color:#10b981;">C</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Informations financières -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-chart-line"></i> Performance financière</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Loyer mensuel hors charges</div>
+                                        <div class="info-value">1 200 €</div>
+                                        <div class="info-label">Charges mensuelles (provisions)</div>
+                                        <div class="info-value">120 €</div>
+                                        <div class="info-label">Loyer charges comprises (TTC)</div>
+                                        <div class="info-value" style="color:var(--primary);font-weight:700;">1 320 €</div>
+                                        <div class="info-label">Dépôt de garantie</div>
+                                        <div class="info-value">2 400 € <span style="font-size:0.82rem;color:var(--text-muted);">(2 mois)</span></div>
+                                        <div class="info-label">Prix d'acquisition (2019)</div>
+                                        <div class="info-value">280 000 €</div>
+                                        <div class="info-label">Rendement locatif brut</div>
+                                        <div class="info-value" style="color:var(--success);font-size:1.2rem;font-weight:700;"><i class="fas fa-arrow-trend-up me-1"></i>5,14 %</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Locataire actuel -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-user-check"></i> Locataire en place</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Locataire</div>
+                                        <div class="info-value" style="font-size:1.1rem;">Marie Dupont</div>
+                                        <div class="info-label">Téléphone</div>
+                                        <div class="info-value"><a href="tel:0612345678" style="color:var(--primary-light);text-decoration:none;"><i class="fas fa-phone-alt me-1"></i>06 12 34 56 78</a></div>
+                                        <div class="info-label">Email</div>
+                                        <div class="info-value"><a href="mailto:marie.dupont@email.com" style="color:var(--primary-light);text-decoration:none;"><i class="fas fa-envelope me-1"></i>marie.dupont@email.com</a></div>
+                                        <div class="info-label">Période du bail</div>
+                                        <div class="info-value">01/09/2022 &rarr; 31/08/2025</div>
+                                        <div class="info-label">Statut des paiements</div>
+                                        <div class="info-value"><span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Loyers à jour</span></div>
+                                        <a href="tenant-detail.html" class="btn btn-sm btn-outline-primary mt-2"><i class="fas fa-user me-1"></i>Ouvrir la fiche locataire</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Historique des interventions -->
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-tools"></i> Historique des travaux &amp; interventions</div>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead><tr><th>Date</th><th>Catégorie</th><th>Description des travaux</th><th>Coût TTC</th><th>Statut</th></tr></thead>
+                                                <tbody>
+                                                    <tr><td>15/02/2025</td><td><span class="badge" style="background:rgba(59,130,246,0.12);color:var(--primary-light);">Plomberie</span></td><td>Réparation fuite robinet cuisine</td><td><strong>180 €</strong></td><td><span class="badge bg-success"><i class="fas fa-check me-1"></i>Terminé</span></td></tr>
+                                                    <tr><td>10/11/2024</td><td><span class="badge" style="background:rgba(245,158,11,0.12);color:#d97706;">Électricité</span></td><td>Remplacement tableau électrique</td><td><strong>620 €</strong></td><td><span class="badge bg-success"><i class="fas fa-check me-1"></i>Terminé</span></td></tr>
+                                                    <tr><td>05/08/2024</td><td><span class="badge" style="background:rgba(16,185,129,0.12);color:#10b981;">Peinture</span></td><td>Rafraîchissement couloir et salon</td><td><strong>850 €</strong></td><td><span class="badge bg-success"><i class="fas fa-check me-1"></i>Terminé</span></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Documents liés -->
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-folder-open"></i> Coffre-fort documentaire — Pièces attachées</div>
+                                    <div class="card-body">
+                                        <div class="row g-2">
+                                            <div class="col-auto"><a href="documents.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-contract me-1" style="color:#3b82f6;"></i> Bail signé 2022</a></div>
+                                            <div class="col-auto"><a href="documents.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-pdf me-1" style="color:#ef4444;"></i> Diagnostic DPE (classe C)</a></div>
+                                            <div class="col-auto"><a href="documents.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-pdf me-1" style="color:#ef4444;"></i> Assurance PNO 2025</a></div>
+                                            <div class="col-auto"><a href="documents.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-invoice me-1" style="color:#10b981;"></i> Quittance Mars 2025</a></div>
+                                            <div class="col-auto"><a href="documents.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus me-1"></i> Ajouter un document</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Enregistrer un nouveau paiement ou une transaction financière.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Saisir un paiement — Enregistrement locatif · GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Finance: green save button */
+        .btn-save {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            box-shadow: 0 4px 15px rgba(16,185,129,0.35);
+        }
+        .btn-save:hover { box-shadow: 0 8px 24px rgba(16,185,129,0.45); }
+        @media (max-width: 576px) {
+            .col-md-3, .col-md-4, .col-md-6 { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="finances.html"><i class="fas fa-th-list"></i> Retour à la liste</a></div>
+                        <div class="sidebar-item"><a href="finance-detail.html"><i class="fas fa-eye"></i> Voir le détail du paiement</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-info-circle"></i> Aide</h5>
+                        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;">Saisissez chaque paiement dès réception pour garder un historique précis et générer les quittances automatiquement.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div style="margin-bottom:2rem;">
+                            <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin:0;"><i class="fas fa-plus-circle" style="color:var(--secondary);margin-right:0.5rem;"></i>Saisir un paiement</h1>
+                            <p style="color:var(--text-muted);margin-top:0.5rem;">Enregistrez un encaissement — loyer, charges ou régularisation — pour un suivi financier impeccable</p>
+                        </div>
+
+                        <form data-redirect="finances.html" data-success-msg="Paiement enregistré avec succès !">
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-user"></i> Locataire & Bien concerné</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Locataire <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Marie Janvier</option>
+                                                <option>Pierre Dupont</option>
+                                                <option>Sophie Martin</option>
+                                                <option>Lucas Bernard</option>
+                                                <option>Emma Petit</option>
+                                                <option>Thomas Leroy</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Propriété <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Apt. Paris 15e</option>
+                                                <option>Studio Lyon 7e</option>
+                                                <option>Villa Marseille Sud</option>
+                                                <option>Maison Toulouse Cap.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-euro-sign"></i> Détails du paiement</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Mois <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option><option>Mai</option><option selected>Juin</option><option>Juillet</option><option>Août</option><option>Septembre</option><option>Octobre</option><option>Novembre</option><option>Décembre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Année <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option>2024</option>
+                                                <option selected>2025</option>
+                                                <option>2026</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Loyer HC (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" class="form-control" value="1200" placeholder="Ex. : 1 200">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Charges locatives (€)</label>
+                                            <input type="number" class="form-control" value="120" placeholder="Ex. : 120">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date d'encaissement</label>
+                                            <input type="date" class="form-control" value="2025-06-01">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Moyen de paiement</label>
+                                            <select class="form-select">
+                                                <option selected>Virement bancaire</option>
+                                                <option>Chèque</option>
+                                                <option>Espèces</option>
+                                                <option>Prélèvement auto.</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Statut <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Payé</option>
+                                                <option>En attente</option>
+                                                <option>Retard</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Note interne</label>
+                                            <textarea class="form-control" rows="2" placeholder="Ex. : paiement partiel, accord amiable, remise en place d'un prélèvement..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="footer-actions">
+                                <a href="finances.html" class="btn btn-outline-secondary px-4"><i class="fas fa-times me-1"></i>Annuler</a>
+                                <button type="submit" class="btn btn-save"><i class="fas fa-check-circle me-2"></i>Confirmer l'encaissement</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

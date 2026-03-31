@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Gérez tout votre parc immobilier : appartements, maisons, studios. Filtrez et suivez vos biens.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>GestiLoc — Mon Parc Immobilier · Gérez tous vos biens</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-sliders-h"></i> Filtrer les biens</h5>
+                        <input type="text" id="propSearch" class="form-control form-control-sm mb-3" placeholder="Rechercher par nom, ville...">
+                        <hr style="border-color:var(--border);">
+                        <p class="filter-label">Statut de location</p>
+                        <div class="sidebar-item"><a href="#" class="filter-status active" data-value="all"><i class="fas fa-th-list"></i> Tous les biens <span class="ms-auto badge" style="background:rgba(59,130,246,0.12);color:var(--primary-light);font-size:0.75rem;" id="cnt-all">14</span></a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-status" data-value="occupee"><i class="fas fa-check-circle" style="color:#10b981;"></i> Occupés <span class="ms-auto badge" style="background:rgba(16,185,129,0.12);color:#10b981;font-size:0.75rem;" id="cnt-occupee">11</span></a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-status" data-value="vacante"><i class="fas fa-door-open" style="color:#f59e0b;"></i> Vacants — disponibles <span class="ms-auto badge" style="background:rgba(245,158,11,0.12);color:#f59e0b;font-size:0.75rem;" id="cnt-vacante">3</span></a></div>
+                        <hr style="border-color:var(--border);">
+                        <p class="filter-label">Filtrer par ville</p>
+                        <select id="cityFilter" class="form-select form-select-sm mb-2">
+                            <option value="">Toutes les villes</option>
+                            <option value="Paris">Paris</option>
+                            <option value="Lyon">Lyon</option>
+                            <option value="Marseille">Marseille</option>
+                            <option value="Toulouse">Toulouse</option>
+                            <option value="Bordeaux">Bordeaux</option>
+                            <option value="Nantes">Nantes</option>
+                            <option value="Nice">Nice</option>
+                        </select>
+                        <p class="filter-label">Filtrer par type de bien</p>
+                        <select id="typeFilter" class="form-select form-select-sm">
+                            <option value="">Tous les types</option>
+                            <option value="Appartement">Appartement</option>
+                            <option value="Studio">Studio</option>
+                            <option value="Maison">Maison</option>
+                            <option value="Villa">Villa</option>
+                        </select>
+                        <hr style="border-color:var(--border);">
+                        <a href="property-form.html" class="btn btn-sm w-100" style="background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;font-weight:600;border-radius:8px;padding:0.6rem;">
+                            <i class="fas fa-plus me-2"></i>Ajouter un nouveau bien
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <div>
+                                <h1 class="page-title">Mon Parc Immobilier</h1>
+                                <p class="page-subtitle">Gérez, suivez et optimisez l'ensemble de vos biens locatifs en un seul endroit</p>
+                            </div>
+                            <a href="property-form.html" class="btn-new"><i class="fas fa-plus me-2"></i> Ajouter un bien</a>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                                    <div class="stat-label">Total des biens</div>
+                                    <div class="stat-value">14</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card" style="border-top:4px solid #10b981;">
+                                    <div class="stat-icon" style="background:rgba(16,185,129,0.1);color:#10b981;"><i class="fas fa-check-circle"></i></div>
+                                    <div class="stat-label">Biens occupés</div>
+                                    <div class="stat-value" style="color:#10b981;">11</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card" style="border-top:4px solid #f59e0b;">
+                                    <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;"><i class="fas fa-door-open"></i></div>
+                                    <div class="stat-label">Biens vacants — disponibles</div>
+                                    <div class="stat-value" style="color:#f59e0b;">3</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-12"><div class="card"><div class="card-header"><i class="fas fa-map-marked-alt"></i> Répartition géographique de votre portefeuille</div><div class="card-body">
+                                <div class="mb-3"><div class="d-flex justify-content-between mb-1"><small><strong>Paris</strong></small><small>5</small></div><div class="progress" style="height:6px;"><div class="progress-bar" style="width:36%;background:linear-gradient(90deg,var(--primary-light),var(--secondary));"></div></div></div>
+                                <div class="mb-3"><div class="d-flex justify-content-between mb-1"><small><strong>Lyon</strong></small><small>3</small></div><div class="progress" style="height:6px;"><div class="progress-bar" style="width:21%;background:#10b981;"></div></div></div>
+                                <div class="mb-3"><div class="d-flex justify-content-between mb-1"><small><strong>Marseille</strong></small><small>2</small></div><div class="progress" style="height:6px;"><div class="progress-bar" style="width:14%;background:#f59e0b;"></div></div></div>
+                                <div><div class="d-flex justify-content-between mb-1"><small><strong>Autres</strong></small><small>4</small></div><div class="progress" style="height:6px;"><div class="progress-bar" style="width:29%;background:#8b5cf6;"></div></div></div>
+                            </div></div></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 style="color:var(--primary);font-weight:700;margin:0;"><i class="fas fa-list"></i> Liste complète des biens</h3>
+                            <small class="text-muted fw-semibold" id="result-count"><i class="fas fa-filter me-1"></i>14 propriétés</small>
+                        </div>
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table mb-0" id="propTable">
+                                    <thead><tr><th>Bien immobilier</th><th>Ville</th><th>Type</th><th>Surface</th><th>Loyer / mois</th><th>Statut</th><th>Actions</th></tr></thead>
+                                    <tbody>
+                                        <tr data-status="occupee" data-city="Paris" data-type="Appartement"><td><strong>Apt. Paris 15e</strong></td><td>Paris</td><td>Appartement</td><td>75 m²</td><td>1 200 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="vacante" data-city="Lyon" data-type="Studio"><td><strong>Studio Lyon 7e</strong></td><td>Lyon</td><td>Studio</td><td>35 m²</td><td>650 €</td><td><span class="badge bg-danger">Vacante</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Marseille" data-type="Villa"><td><strong>Villa Marseille Sud</strong></td><td>Marseille</td><td>Villa</td><td>180 m²</td><td>2 100 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Toulouse" data-type="Maison"><td><strong>Maison Toulouse Cap.</strong></td><td>Toulouse</td><td>Maison</td><td>120 m²</td><td>1 400 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Paris" data-type="Appartement"><td><strong>Apt. Paris 11e</strong></td><td>Paris</td><td>Appartement</td><td>62 m²</td><td>1 100 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Paris" data-type="Appartement"><td><strong>Apt. Paris 18e</strong></td><td>Paris</td><td>Appartement</td><td>48 m²</td><td>950 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Paris" data-type="Studio"><td><strong>Studio Paris 5e</strong></td><td>Paris</td><td>Studio</td><td>28 m²</td><td>820 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Lyon" data-type="Appartement"><td><strong>Apt. Lyon 3e</strong></td><td>Lyon</td><td>Appartement</td><td>55 m²</td><td>780 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Lyon" data-type="Maison"><td><strong>Maison Lyon Ouest</strong></td><td>Lyon</td><td>Maison</td><td>95 m²</td><td>1 250 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Marseille" data-type="Appartement"><td><strong>Apt. Marseille 6e</strong></td><td>Marseille</td><td>Appartement</td><td>68 m²</td><td>890 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="vacante" data-city="Bordeaux" data-type="Studio"><td><strong>Studio Bordeaux Centre</strong></td><td>Bordeaux</td><td>Studio</td><td>32 m²</td><td>600 €</td><td><span class="badge bg-danger">Vacante</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Nantes" data-type="Appartement"><td><strong>Apt. Nantes Erdre</strong></td><td>Nantes</td><td>Appartement</td><td>70 m²</td><td>880 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="occupee" data-city="Nice" data-type="Villa"><td><strong>Villa Nice Collines</strong></td><td>Nice</td><td>Villa</td><td>210 m²</td><td>2 800 €</td><td><span class="badge bg-success">Occupée</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                        <tr data-status="vacante" data-city="Paris" data-type="Appartement"><td><strong>Apt. Paris 20e</strong></td><td>Paris</td><td>Appartement</td><td>42 m²</td><td>870 €</td><td><span class="badge bg-danger">Vacante</span></td><td><a href="property-detail.html" class="btn btn-sm btn-outline-primary me-1" title="Voir"><i class="fas fa-eye"></i></a><a href="property-form.html" class="btn btn-sm btn-outline-secondary me-1" title="Modifier"><i class="fas fa-edit"></i></a><button class="btn btn-sm btn-outline-danger" title="Supprimer" onclick="if(!confirm('Supprimer cette propriété ?')) return false;"><i class="fas fa-trash-alt"></i></button></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="no-results" class="text-center py-5" style="display:none;">
+                            <i class="fas fa-search" style="font-size:3rem;color:var(--border);"></i>
+                            <p class="mt-3 text-muted fw-semibold">Aucun bien ne correspond à vos critères de recherche</p>
+                            <p class="text-muted" style="font-size:0.88rem;">Essayez de modifier vos filtres ou <a href="property-form.html" style="color:var(--primary-light);">ajoutez un nouveau bien</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        initFilter({
+    tableId: 'propTable', searchId: 'propSearch', counterId: 'result-count',
+    counterLabel: ['propriété', 'propriétés'],
+    searchCells: [0, 1],
+    dropdowns: [{ id: 'cityFilter', dataAttr: 'city' }, { id: 'typeFilter', dataAttr: 'type' }]
+});
+    </script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

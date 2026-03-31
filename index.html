@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — 47 fonctionnalités pour gérer votre patrimoine immobilier de A à Z. Modules, bénéfices et plan de développement.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Fonctionnalités & Développement - GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        :root { --primary: #1e3a8a; --primary-light: #3b82f6; --primary-dark: #1e40af; --secondary: #06b6d4; --success: #10b981; --warning: #f59e0b; --danger: #ef4444; --light: #f8fafc; --light-2: #f1f5f9; --border: #e2e8f0; --text: #1e293b; --text-muted: #64748b; }
+
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeInLeft { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulseGlow { 0%,100% { box-shadow:0 0 0 0 rgba(6,182,212,0.5); } 50% { box-shadow:0 0 0 14px rgba(6,182,212,0); } }
+        @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+        @keyframes shimmer { 0% { background-position:-200% center; } 100% { background-position:200% center; } }
+        @keyframes spin-slow { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+        @keyframes countUp { from { opacity:0; transform:scale(0.6); } to { opacity:1; transform:scale(1); } }
+        @keyframes borderPulse { 0%,100% { border-color:rgba(6,182,212,0.4); } 50% { border-color:rgba(6,182,212,1); } }
+
+        html { scroll-behavior: smooth; }
+        html, body { background: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 50%, #f0fdff 100%); min-height: 100vh; color: var(--text); }
+        .navbar { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-bottom: none; box-shadow: 0 4px 20px rgba(30,58,138,0.2); padding: 1rem 0; }
+        .navbar-brand { font-weight: 700; font-size: 1.4rem; color: white !important; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.75rem; }
+        .navbar-brand i { font-size: 1.8rem; color: var(--secondary); }
+        .nav-link { color: rgba(255,255,255,0.8) !important; font-weight: 500; font-size: 0.95rem; position: relative; transition: all 0.3s ease; padding: 0.5rem 1rem !important; }
+        .nav-link:hover, .nav-link.active { color: var(--secondary) !important; }
+        .nav-link::after { content:''; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:0; height:2px; background:var(--secondary); transition:width 0.3s ease; }
+        .nav-link.active::after { width:60%; }
+
+        /* ── Hero Section ── */
+        .hero-section { position:relative; overflow:hidden; background:linear-gradient(135deg, #0f172a 0%, #1e3a8a 40%, #0f4c81 70%, #0891b2 100%); border-radius:20px; padding:4rem 3rem; color:white; margin-bottom:2.5rem; animation:fadeInUp 0.7s ease both; }
+        .hero-section::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events:none; }
+        .hero-section::after { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%); pointer-events:none; }
+        .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(6,182,212,0.2); border:1px solid rgba(6,182,212,0.4); border-radius:50px; padding:0.4rem 1rem; font-size:0.78rem; font-weight:600; color:#67e8f9; margin-bottom:1.25rem; animation:borderPulse 2.5s ease infinite; }
+        .hero-badge i { animation:spin-slow 4s linear infinite; }
+        .hero-title { font-size:2.8rem; font-weight:800; line-height:1.1; margin:0 0 1rem; letter-spacing:-1px; }
+        .hero-title span { background:linear-gradient(90deg, #67e8f9, #a78bfa, #67e8f9); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s linear infinite; }
+        .hero-subtitle { font-size:1.1rem; opacity:0.85; max-width:600px; line-height:1.7; margin-bottom:2rem; }
+        .hero-cta { display:inline-flex; align-items:center; gap:0.75rem; background:linear-gradient(135deg, var(--secondary), #0284c7); color:white; font-weight:700; font-size:1rem; padding:0.85rem 2rem; border-radius:50px; text-decoration:none; transition:all 0.3s; box-shadow:0 4px 20px rgba(6,182,212,0.4); animation:pulseGlow 2.5s ease infinite; }
+        .hero-cta:hover { transform:translateY(-3px) scale(1.03); color:white; box-shadow:0 8px 30px rgba(6,182,212,0.6); text-decoration:none; }
+        .hero-cta-ghost { display:inline-flex; align-items:center; gap:0.5rem; border:1.5px solid rgba(255,255,255,0.3); color:rgba(255,255,255,0.9); font-weight:600; font-size:0.95rem; padding:0.8rem 1.75rem; border-radius:50px; text-decoration:none; transition:all 0.3s; margin-left:1rem; }
+        .hero-cta-ghost:hover { background:rgba(255,255,255,0.1); color:white; text-decoration:none; }
+        .hero-stats { display:flex; gap:2.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.12); flex-wrap:wrap; }
+        .hero-stat { text-align:center; }
+        .hero-stat-value { font-size:2rem; font-weight:800; color:#67e8f9; line-height:1; animation:countUp 0.8s ease both; }
+        .hero-stat-label { font-size:0.75rem; opacity:0.65; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem; }
+        .hero-float-card { position:absolute; right:3rem; top:40%; transform:translateY(-50%); background:rgba(255,255,255,0.07); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.15); border-radius:16px; padding:1.5rem; width:220px; animation:float 4s ease-in-out infinite; z-index:2; pointer-events:none; }
+        @media (max-width: 992px) {
+            .hero-float-card { display:none; }
+            .hero-title { font-size:2rem; }
+            .hero-section [style*="max-width:calc"] { max-width:100% !important; }
+        }
+
+        /* ── KPI Cards ── */
+        .main-container { padding: 2.5rem 0 4rem; }
+        .kpi-card { background:white; border-radius:16px; border:1px solid var(--border); padding:1.75rem 1.5rem; box-shadow:0 4px 15px rgba(0,0,0,0.06); text-align:center; transition:all 0.3s ease; position:relative; overflow:hidden; }
+        .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--primary), var(--secondary)); }
+        .kpi-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(30,58,138,0.12); }
+        .kpi-card .kpi-value { font-size:2.4rem; font-weight:800; line-height:1; margin-bottom:0.4rem; animation:countUp 0.6s ease both; }
+        .kpi-card .kpi-label { font-size:0.82rem; color:var(--text-muted); font-weight:500; text-transform:uppercase; letter-spacing:0.5px; }
+        .kpi-card .kpi-icon { position:absolute; right:1rem; top:1rem; font-size:2rem; opacity:0.07; }
+
+        /* ── Benefits Section ── */
+        .benefits-section { margin-bottom:2.5rem; }
+        .benefits-title { text-align:center; margin-bottom:2rem; }
+        .benefits-title h2 { font-size:1.9rem; font-weight:800; color:var(--primary); margin-bottom:0.5rem; }
+        .benefits-title p { color:var(--text-muted); font-size:1rem; max-width:550px; margin:0 auto; }
+        .benefit-card { background:white; border-radius:16px; border:1px solid var(--border); padding:1.75rem; height:100%; transition:all 0.35s ease; box-shadow:0 2px 10px rgba(0,0,0,0.04); }
+        .benefit-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(30,58,138,0.12); border-color:var(--primary-light); }
+        .benefit-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:1rem; }
+        .benefit-card h4 { font-size:1rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem; }
+        .benefit-card p { font-size:0.87rem; color:var(--text-muted); line-height:1.6; margin:0; }
+
+        /* ── Cards ── */
+        .card { background:white; border:1px solid var(--border); border-radius:16px; box-shadow:0 4px 15px rgba(0,0,0,0.06); margin-bottom:1.5rem; transition:box-shadow 0.3s; }
+        .card:hover { box-shadow:0 8px 30px rgba(30,58,138,0.1); }
+        .card-header { background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color:white; border:none; border-radius:16px 16px 0 0; padding:1.1rem 1.5rem; font-weight:700; font-size:0.95rem; display:flex; align-items:center; gap:0.75rem; }
+        .card-header i { color:var(--secondary); }
+        .card-body { padding: 0; }
+
+        /* ── Table ── */
+        .table { margin: 0; font-size: 0.88rem; }
+        .table thead th { background:var(--light-2); color:var(--primary); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px; padding:0.85rem 1.25rem; border:none; border-bottom:2px solid var(--border); }
+        .table tbody td { padding:0.9rem 1.25rem; border-color:var(--border); vertical-align:middle; }
+        .table tbody tr { transition:background 0.2s; }
+        .table tbody tr:hover { background:linear-gradient(90deg, rgba(59,130,246,0.04), rgba(6,182,212,0.04)); }
+        .table tbody tr:last-child td { border-bottom:none; }
+        .badge-done { background:rgba(16,185,129,0.12); color:#059669; font-weight:600; font-size:0.75rem; padding:0.3rem 0.7rem; border-radius:20px; }
+        .badge-priority-high { background:rgba(239,68,68,0.1); color:#dc2626; font-size:0.72rem; padding:0.2rem 0.6rem; border-radius:20px; font-weight:600; }
+        .badge-priority-med { background:rgba(245,158,11,0.1); color:#d97706; font-size:0.72rem; padding:0.2rem 0.6rem; border-radius:20px; font-weight:600; }
+        .badge-priority-low { background:rgba(16,185,129,0.1); color:#059669; font-size:0.72rem; padding:0.2rem 0.6rem; border-radius:20px; font-weight:600; }
+        .module-icon { width:32px; height:32px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:0.85rem; margin-right:0.5rem; }
+        .module-name { font-weight:600; color:var(--primary); }
+        .feature-list { margin:0; padding:0; list-style:none; }
+        .feature-list li { font-size:0.82rem; color:var(--text-muted); padding:0.1rem 0; display:flex; align-items:center; gap:0.4rem; }
+        .feature-list li i { font-size:0.6rem; color:var(--success); }
+        .jh-badge { background:rgba(30,58,138,0.08); color:var(--primary); font-weight:700; font-size:0.85rem; padding:0.35rem 0.8rem; border-radius:8px; white-space:nowrap; }
+        .progress-bar-custom { height:6px; border-radius:3px; background:var(--border); overflow:hidden; margin-top:0.4rem; }
+        .progress-fill { height:100%; border-radius:3px; }
+        .total-row td { background:linear-gradient(135deg, rgba(30,58,138,0.05), rgba(6,182,212,0.05)); font-weight:700; color:var(--primary); border-top:2px solid var(--primary-light) !important; }
+        .phase-tag { font-size:0.7rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; margin-left:0.5rem; }
+        .phase-1 { background:rgba(59,130,246,0.15); color:#2563eb; }
+        .phase-2 { background:rgba(6,182,212,0.15); color:#0891b2; }
+        .phase-3 { background:rgba(139,92,246,0.15); color:#7c3aed; }
+        .section-divider { background:var(--light-2); }
+        .section-divider td { padding:0.5rem 1.25rem !important; font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; border:none !important; }
+        .tech-tag { display:inline-block; background:var(--light-2); border:1px solid var(--border); border-radius:6px; font-size:0.72rem; font-weight:500; color:var(--text-muted); padding:0.15rem 0.5rem; margin:0.1rem; }
+        .tjm-card { border-radius:16px; padding:1.75rem; border:2px solid transparent; text-align:center; transition:all 0.3s; cursor:default; }
+        .tjm-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,0.1); }
+        .tjm-card.junior { background:var(--light-2); border-color:var(--border); }
+        .tjm-card.confirme { background:linear-gradient(135deg, rgba(30,58,138,0.06), rgba(59,130,246,0.08)); border-color:var(--primary-light); }
+        .tjm-card.senior { background:linear-gradient(135deg, rgba(30,58,138,0.1), rgba(6,182,212,0.1)); border-color:var(--secondary); }
+        .tjm-label { font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem; }
+        .tjm-rate { font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem; }
+        .tjm-total { font-size:1.9rem; font-weight:700; line-height:1; }
+        .tjm-note { font-size:0.72rem; color:var(--text-muted); margin-top:0.5rem; }
+
+        /* ── CTA Section ── */
+        .cta-section { background:linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0891b2 100%); border-radius:20px; padding:3.5rem 3rem; color:white; text-align:center; margin-top:2rem; position:relative; overflow:hidden; }
+        .cta-section::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events:none; }
+        .cta-section h2 { font-size:2.2rem; font-weight:800; margin-bottom:1rem; }
+        .cta-section p { opacity:0.8; font-size:1rem; max-width:500px; margin:0 auto 2rem; }
+        .cta-btn { display:inline-flex; align-items:center; gap:0.75rem; background:white; color:var(--primary); font-weight:700; font-size:1rem; padding:0.9rem 2.2rem; border-radius:50px; text-decoration:none; transition:all 0.3s; box-shadow:0 4px 20px rgba(0,0,0,0.3); }
+        .cta-btn:hover { transform:translateY(-3px) scale(1.04); color:var(--primary); box-shadow:0 10px 35px rgba(0,0,0,0.4); text-decoration:none; }
+        .cta-btn-ghost { display:inline-flex; align-items:center; gap:0.5rem; border:1.5px solid rgba(255,255,255,0.4); color:white; font-weight:600; font-size:0.95rem; padding:0.85rem 2rem; border-radius:50px; text-decoration:none; transition:all 0.3s; margin-left:1rem; }
+        .cta-btn-ghost:hover { background:rgba(255,255,255,0.1); color:white; text-decoration:none; }
+        .cta-features { display:flex; justify-content:center; gap:2rem; margin-top:2rem; flex-wrap:wrap; }
+        .cta-feature { display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; opacity:0.75; }
+        .cta-feature i { color:#67e8f9; }
+
+        /* ── Scroll animations ── */
+        .animate-in { animation:fadeInUp 0.6s ease both; }
+        .animate-in-delay-1 { animation:fadeInUp 0.6s 0.1s ease both; }
+        .animate-in-delay-2 { animation:fadeInUp 0.6s 0.2s ease both; }
+        .animate-in-delay-3 { animation:fadeInUp 0.6s 0.3s ease both; }
+        .animate-in-delay-4 { animation:fadeInUp 0.6s 0.4s ease both; }
+
+        /* ── Responsive 768px ── */
+        @media (max-width: 768px) {
+            /* Hero section */
+            .hero-section { padding: 2.5rem 1.5rem; border-radius: 14px; }
+            .hero-float-card { display: none; }
+            /* Le wrapper de contenu hero doit prendre 100% */
+            .hero-section > div[style*="max-width"] { max-width: 100% !important; }
+            .hero-title { font-size: 1.75rem; letter-spacing: -0.5px; }
+            .hero-subtitle { font-size: 0.95rem; margin-bottom: 1.25rem; }
+            /* Boutons CTA hero : s'empilent verticalement */
+            .hero-cta-wrapper { display: flex; flex-direction: column; gap: 0.75rem; }
+            .hero-cta { width: 100%; justify-content: center; }
+            .hero-cta-ghost { margin-left: 0 !important; width: 100%; justify-content: center; }
+            /* Hero stats : 2 colonnes en grille */
+            .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem; margin-top: 1.5rem; padding-top: 1.5rem; }
+            .hero-stat-value { font-size: 1.5rem; }
+            /* KPI cards : 2 colonnes */
+            .kpi-card { padding: 1.25rem 1rem; }
+            .kpi-card .kpi-value { font-size: 1.8rem; }
+            /* Benefits cards : déjà col-md-4, Bootstrap les empile */
+            .benefit-card { padding: 1.25rem; }
+            /* Tables : scroll horizontal via .table-responsive déjà ajouté */
+            .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            /* CTA section */
+            .cta-section { padding: 2.5rem 1.5rem; border-radius: 14px; }
+            .cta-section h2 { font-size: 1.5rem; }
+            /* Boutons CTA section : s'empilent */
+            .cta-btn-wrapper { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; }
+            .cta-btn { width: 100%; max-width: 320px; justify-content: center; }
+            .cta-btn-ghost { margin-left: 0 !important; width: 100%; max-width: 320px; justify-content: center; }
+            /* CTA features : flex-wrap */
+            .cta-features { gap: 0.75rem 1rem; }
+            /* Packs tarifs : 1 colonne sur mobile */
+            .col-lg-3.col-md-6 { width: 100%; }
+            /* Main container padding */
+            .main-container { padding: 1.5rem 0 2.5rem; }
+        }
+
+        /* ── Responsive 576px ── */
+        @media (max-width: 576px) {
+            .hero-section { padding: 2rem 1rem; }
+            .hero-title { font-size: 1.45rem; }
+            .hero-badge { font-size: 0.72rem; padding: 0.35rem 0.85rem; }
+            .hero-stats { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .hero-stat-value { font-size: 1.3rem; }
+            /* KPI cards : 2 colonnes conservées (col-6 déjà en HTML) */
+            .kpi-card .kpi-value { font-size: 1.5rem; }
+            /* Benefits section titre */
+            .benefits-title h2 { font-size: 1.45rem; }
+            /* CTA section */
+            .cta-section { padding: 2rem 1rem; }
+            .cta-section h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <div class="ms-3"><i class="fas fa-user-circle" style="font-size:1.8rem;color:white;"></i></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid" style="max-width:1400px;">
+
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div style="position:relative;z-index:1;max-width:calc(100% - 260px);">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> N°1 de la gestion locative intelligente
+                </div>
+                <h1 class="hero-title">Boostez vos revenus<br>avec <span>GestiLoc</span></h1>
+                <p class="hero-subtitle">Arrêtez de perdre du temps et de l'argent. GestiLoc automatise votre gestion locative en totalité — 47 fonctionnalités puissantes, 8 modules ultra-complets, résultats immédiats.</p>
+                <div class="hero-cta-wrapper">
+                    <a href="#modules" class="hero-cta">
+                        <i class="fas fa-rocket"></i> Découvrir la puissance
+                    </a>
+                    <a href="tableau-de-bord.html" class="hero-cta-ghost">
+                        <i class="fas fa-play-circle"></i> Tester l'application
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">47</div>
+                        <div class="hero-stat-label">Fonctionnalités exclusives</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">8</div>
+                        <div class="hero-stat-label">Modules intégrés</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">22</div>
+                        <div class="hero-stat-label">Pages livrées clé en main</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">100%</div>
+                        <div class="hero-stat-label">Prêt à l'emploi dès J+1</div>
+                    </div>
+                </div>
+                </div><!-- end content wrapper -->
+                <!-- Floating card -->
+                <div class="hero-float-card">
+                    <div style="font-size:0.72rem;font-weight:700;color:#67e8f9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;"><i class="fas fa-bolt me-1"></i> Tout inclus, sans surprise</div>
+                    <ul style="list-style:none;margin:0;padding:0;">
+                        <li style="font-size:0.8rem;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.08);opacity:0.85;"><i class="fas fa-home me-2" style="color:#67e8f9;width:14px;"></i> Portefeuille immobilier centralisé</li>
+                        <li style="font-size:0.8rem;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.08);opacity:0.85;"><i class="fas fa-users me-2" style="color:#67e8f9;width:14px;"></i> Locataires sous contrôle total</li>
+                        <li style="font-size:0.8rem;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.08);opacity:0.85;"><i class="fas fa-euro-sign me-2" style="color:#67e8f9;width:14px;"></i> Revenus optimisés & automatisés</li>
+                        <li style="font-size:0.8rem;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.08);opacity:0.85;"><i class="fas fa-wrench me-2" style="color:#67e8f9;width:14px;"></i> Zéro litige, zéro impayé oublié</li>
+                        <li style="font-size:0.8rem;padding:0.35rem 0;opacity:0.85;"><i class="fas fa-chart-bar me-2" style="color:#67e8f9;width:14px;"></i> Analyses & rentabilité en temps réel</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- KPIs -->
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3 animate-in-delay-1">
+                    <div class="kpi-card">
+                        <i class="fas fa-layer-group kpi-icon"></i>
+                        <div class="kpi-value" style="color:var(--primary);">8</div>
+                        <div class="kpi-label">Modules puissants</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 animate-in-delay-2">
+                    <div class="kpi-card">
+                        <i class="fas fa-list-check kpi-icon"></i>
+                        <div class="kpi-value" style="color:var(--secondary);">47</div>
+                        <div class="kpi-label">Fonctionnalités exclusives</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 animate-in-delay-3">
+                    <div class="kpi-card">
+                        <i class="fas fa-file-code kpi-icon"></i>
+                        <div class="kpi-value" style="color:var(--success);">22</div>
+                        <div class="kpi-label">Pages livrées clé en main</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 animate-in-delay-4">
+                    <div class="kpi-card">
+                        <i class="fas fa-clock kpi-icon"></i>
+                        <div class="kpi-value" style="color:var(--warning);">43 JH</div>
+                        <div class="kpi-label">Charge totale (Laravel inclus)</div>
+                        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem;">23 JH front + 20 JH back</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="benefits-section animate-in">
+                <div class="benefits-title">
+                    <h2>Pourquoi GestiLoc va transformer votre quotidien ?</h2>
+                    <p>Des milliers d'heures économisées. Des revenus sécurisés. Un patrimoine piloté avec précision — tout ça en un seul outil.</p>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col-md-4 animate-in-delay-1">
+                        <div class="benefit-card">
+                            <div class="benefit-icon" style="background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(59,130,246,0.12));">
+                                <i class="fas fa-bolt" style="color:var(--primary-light);"></i>
+                            </div>
+                            <h4>Récupérez vos heures perdues</h4>
+                            <p>Quittances, relances, paiements — tout s'automatise. Concentrez-vous sur ce qui compte vraiment : développer votre patrimoine.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 animate-in-delay-2">
+                        <div class="benefit-card">
+                            <div class="benefit-icon" style="background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(14,165,233,0.12));">
+                                <i class="fas fa-shield-halved" style="color:var(--secondary);"></i>
+                            </div>
+                            <h4>Dormez sur vos deux oreilles</h4>
+                            <p>Alertes intelligentes sur les baux, impayés et interventions. Ne laissez plus rien passer — GestiLoc veille pour vous 24h/24.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 animate-in-delay-3">
+                        <div class="benefit-card">
+                            <div class="benefit-icon" style="background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(5,150,105,0.12));">
+                                <i class="fas fa-chart-line" style="color:var(--success);"></i>
+                            </div>
+                            <h4>Maximisez votre rentabilité</h4>
+                            <p>Tableau de bord en temps réel, graphiques de revenus, taux d'occupation. Prenez les bonnes décisions grâce à des données instantanées.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 animate-in-delay-1">
+                        <div class="benefit-card">
+                            <div class="benefit-icon" style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(109,40,217,0.12));">
+                                <i class="fas fa-folder-open" style="color:#7c3aed;"></i>
+                            </div>
+                            <h4>Tous vos documents en 1 clic</h4>
+                            <p>Contrats, diagnostics, quittances PDF — classés, sécurisés, accessibles partout. Dites adieu aux dossiers éparpillés pour toujours.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 animate-in-delay-2">
+                        <div class="benefit-card">
+                            <div class="benefit-icon" style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(217,119,6,0.12));">
+                                <i class="fas fa-mobile-screen" style="color:var(--warning);"></i>
+                            </div>
+                            <h4>Gérez depuis n'importe où</h4>
+                            <p>Bureau, canapé ou déplacement — GestiLoc s'adapte parfaitement à tous vos écrans. Votre gestion locative toujours dans votre poche.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 animate-in-delay-3">
+                        <div class="benefit-card">
+                            <div class="benefit-icon" style="background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(220,38,38,0.12));">
+                                <i class="fas fa-plug" style="color:var(--danger);"></i>
+                            </div>
+                            <h4>Évolutif & prêt pour demain</h4>
+                            <p>Architecture Laravel solide, API prête, authentification intégrée. GestiLoc grandit avec votre activité — sans jamais vous bloquer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau principal des modules -->
+            <div class="card" id="modules">
+                <div class="card-header">
+                    <i class="fas fa-layer-group"></i> Charge détaillée par module — Front-end &amp; Laravel (Jours Homme)
+                    <span style="margin-left:auto;font-size:0.8rem;font-weight:400;opacity:0.85;">
+                        <span style="background:rgba(59,130,246,0.25);padding:0.15rem 0.5rem;border-radius:4px;margin-right:0.5rem;"><i class="fas fa-desktop me-1"></i>Front 23 JH</span>
+                        <span style="background:rgba(234,88,12,0.3);padding:0.15rem 0.5rem;border-radius:4px;"><i class="fab fa-laravel me-1"></i>Laravel 20 JH</span>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:17%;">Module</th>
+                                <th style="width:22%;">Fonctionnalités <span style="color:var(--primary-light);">Front-end</span></th>
+                                <th style="width:22%;">Fonctionnalités <span style="color:#ea580c;">Laravel</span></th>
+                                <th style="width:7%;">Pages</th>
+                                <th style="width:9%;">Statut</th>
+                                <th style="width:8%;" title="Front-end JH">Front JH</th>
+                                <th style="width:8%;" title="Laravel JH">Laravel JH</th>
+                                <th style="width:7%;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Phase 1 -->
+                            <tr class="section-divider">
+                                <td colspan="8"><i class="fas fa-circle-dot me-2" style="color:var(--primary-light);"></i>Phase 1 — Structure & Design System · <strong>Front 2 JH + Laravel 1 JH = 3 JH</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(30,58,138,0.1);">🎨</span>
+                                        <span class="module-name">Design System<span class="phase-tag phase-1">Phase 1</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> CSS variables globales (couleurs, typographie)</li>
+                                        <li><i class="fas fa-circle"></i> Composants réutilisables (cards, badges, boutons)</li>
+                                        <li><i class="fas fa-circle"></i> Responsive mobile (Bootstrap 5 grid)</li>
+                                        <li><i class="fas fa-circle"></i> Google Fonts Inter + Font Awesome 6</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Layouts Blade maîtres (app.blade, guest.blade)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Composants Blade réutilisables (@component)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Vite.js — compilation assets CSS/JS</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">Transverse</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">1 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">0.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">1.5 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(6,182,212,0.1);">🧭</span>
+                                        <span class="module-name">Navigation<span class="phase-tag phase-1">Phase 1</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Navbar dégradé premium sticky (22 pages)</li>
+                                        <li><i class="fas fa-circle"></i> Lien actif avec indicateur animé (CSS)</li>
+                                        <li><i class="fas fa-circle"></i> Menu burger responsive Bootstrap</li>
+                                        <li><i class="fas fa-circle"></i> Sidebar contextuelle (pages CRUD)</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Partial Blade navbar inclus dans tous les layouts</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Détection route active via Request::routeIs()</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Middleware auth sur les routes protégées</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">22 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">1 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">0.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">1.5 JH</span></td>
+                            </tr>
+
+                            <!-- Infrastructure Laravel -->
+                            <tr class="section-divider">
+                                <td colspan="8"><i class="fab fa-laravel me-2" style="color:#ea580c;"></i>Infrastructure Laravel — Socle technique back-end · <strong>Front 0 JH + Laravel 5 JH = 5 JH</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(234,88,12,0.1);">⚙️</span>
+                                        <span class="module-name" style="color:#c2410c;">Config & environnement<span class="phase-tag" style="background:rgba(234,88,12,0.15);color:#c2410c;">Laravel</span></span>
+                                    </div>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">— (back-end uniquement)</span></td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Installation Laravel 11 + Composer</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Config .env (DB MySQL, mail, storage)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Routes web.php + groupes prefix/middleware</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Config Vite + npm pour assets</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">Transverse</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>À faire</span></td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">—</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">1 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(234,88,12,0.1);">🔐</span>
+                                        <span class="module-name" style="color:#c2410c;">Auth & sécurité<span class="phase-tag" style="background:rgba(234,88,12,0.15);color:#c2410c;">Laravel</span></span>
+                                    </div>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">— (back-end uniquement)</span></td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Laravel Breeze (login, register, reset mdp)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Rôles propriétaire / admin (Gates + Policies)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Middleware auth + redirect non connectés</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> CSRF protection sur tous les formulaires</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">Transverse</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>À faire</span></td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">—</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">1.5 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(234,88,12,0.1);">🗄️</span>
+                                        <span class="module-name" style="color:#c2410c;">Modèles & BDD<span class="phase-tag" style="background:rgba(234,88,12,0.15);color:#c2410c;">Laravel</span></span>
+                                    </div>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">— (back-end uniquement)</span></td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> 8 migrations MySQL (proprietes, locataires, paiements, contrats, interventions, documents, users…)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Modèles Eloquent + relations (hasMany, belongsTo, morphTo)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Seeders et factories (données de test)</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">Transverse</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>À faire</span></td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">—</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">1.5 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(234,88,12,0.1);">🧪</span>
+                                        <span class="module-name" style="color:#c2410c;">Tests & déploiement<span class="phase-tag" style="background:rgba(234,88,12,0.15);color:#c2410c;">Laravel</span></span>
+                                    </div>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">— (back-end uniquement)</span></td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Feature tests PHPUnit (CRUD + auth)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Config Nginx/Apache + PHP-FPM</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Mise en prod (artisan optimize, cache config)</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">Transverse</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>À faire</span></td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">—</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">1 JH</span></td>
+                            </tr>
+
+                            <!-- Phase 2 -->
+                            <tr class="section-divider">
+                                <td colspan="8"><i class="fas fa-circle-dot me-2" style="color:var(--secondary);"></i>Phase 2 — Modules principaux · <strong>Front 11 JH + Laravel 8 JH = 19 JH</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(59,130,246,0.1);">📊</span>
+                                        <span class="module-name">Tableau de bord<span class="phase-tag phase-2">Phase 2</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> KPIs statiques (loyers, taux occupation, impayés)</li>
+                                        <li><i class="fas fa-circle"></i> Graphique revenus mensuels (Chart.js barres)</li>
+                                        <li><i class="fas fa-circle"></i> Graphique répartition propriétés (doughnut)</li>
+                                        <li><i class="fas fa-circle"></i> Alertes expirations et impayés (données fictives)</li>
+                                        <li><i class="fas fa-circle"></i> Activité récente et paiements du mois</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> DashboardController avec agrégats Eloquent</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Calcul taux d'occupation réel (BDD)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Alertes dynamiques via requêtes filtrées</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Données JSON injectées pour Chart.js</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">1 page</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">2 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">3 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(16,185,129,0.1);">🏠</span>
+                                        <span class="module-name">Propriétés<span class="phase-tag phase-2">Phase 2</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Liste + filtres JS (type, statut, ville, loyer)</li>
+                                        <li><i class="fas fa-circle"></i> Recherche temps réel + tri colonnes</li>
+                                        <li><i class="fas fa-circle"></i> Fiche détail (infos, finances, locataire, interventions)</li>
+                                        <li><i class="fas fa-circle"></i> Formulaire ajout/modification (4 sections)</li>
+                                        <li><i class="fas fa-circle"></i> Actions Voir / Modifier / Supprimer inline</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> PropertyController (index, show, create, store, edit, update, destroy)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> StorePropertyRequest (validation : type, surface, adresse…)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Pagination Eloquent + filtres query string</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Upload photo propriété (Storage::disk)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Blade : index, show, create/edit</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">3 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">3 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">4.5 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(245,158,11,0.1);">👥</span>
+                                        <span class="module-name">Locataires<span class="phase-tag phase-2">Phase 2</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Liste + filtres (statut, propriété, retard)</li>
+                                        <li><i class="fas fa-circle"></i> Fiche profil (infos perso, situation pro, garant)</li>
+                                        <li><i class="fas fa-circle"></i> Historique paiements + synthèse financière</li>
+                                        <li><i class="fas fa-circle"></i> Formulaire complet (5 sections)</li>
+                                        <li><i class="fas fa-circle"></i> Actions Voir / Modifier / Supprimer inline</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> TenantController CRUD complet</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Relation belongsTo(Propriete) + hasMany(Paiement)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> StoreTenantRequest (validation : email, tel, CNI…)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Scopes Eloquent (enRetard, actifs)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Blade : index, show, create/edit</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">3 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">3 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">4.5 JH</span></td>
+                            </tr>
+                            <tr id="finances-module">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(16,185,129,0.1);">💶</span>
+                                        <span class="module-name">Finances<span class="phase-tag phase-2">Phase 2</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Liste paiements + filtres (statut, mois, propriété)</li>
+                                        <li><i class="fas fa-circle"></i> Graphique revenus Chart.js</li>
+                                        <li><i class="fas fa-circle"></i> Fiche détail paiement + quittance</li>
+                                        <li><i class="fas fa-circle"></i> Formulaire enregistrement paiement</li>
+                                        <li><i class="fas fa-circle"></i> Bouton imprimer / envoyer quittance</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> PaymentController CRUD + calcul total HC+charges</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Génération quittance PDF (DomPDF) via route dédiée</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Envoi quittance par email (Mailable + queue)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Détection automatique retards (scheduled command)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Requêtes agrégées par mois pour Chart.js</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">3 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">3 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">5.5 JH</span></td>
+                            </tr>
+
+                            <!-- Phase 3 -->
+                            <tr class="section-divider">
+                                <td colspan="8"><i class="fas fa-circle-dot me-2" style="color:#7c3aed;"></i>Phase 3 — Modules secondaires · <strong>Front 10 JH + Laravel 6 JH = 16 JH</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(239,68,68,0.1);">🔧</span>
+                                        <span class="module-name">Maintenance<span class="phase-tag phase-3">Phase 3</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Liste interventions (statut, priorité, catégorie)</li>
+                                        <li><i class="fas fa-circle"></i> Fiche détail — barre avancement + journal</li>
+                                        <li><i class="fas fa-circle"></i> Formulaire (planning, prestataire, coûts)</li>
+                                        <li><i class="fas fa-circle"></i> Suivi acompte / coût réel final</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> MaintenanceController CRUD + filtres</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Relation morphMany(Document) pour pièces jointes</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Champ avancement (%) mis à jour via AJAX</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Calcul automatique solde restant (coût − acompte)</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">3 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">2.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">4 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(99,102,241,0.1);">📄</span>
+                                        <span class="module-name">Contrats<span class="phase-tag phase-3">Phase 3</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Liste baux + filtres (type, statut, expiration)</li>
+                                        <li><i class="fas fa-circle"></i> Fiche détail — barre progression durée bail</li>
+                                        <li><i class="fas fa-circle"></i> Formulaire (parties, conditions, clauses)</li>
+                                        <li><i class="fas fa-circle"></i> Gestion révision loyer IRL et préavis</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> ContractController CRUD + validation dates</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Alertes auto expiration (Command + notification)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Calcul % écoulé bail (Carbon diff)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Scope expirantBientot() (< 90 jours)</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">3 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">2.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">4 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(6,182,212,0.1);">📁</span>
+                                        <span class="module-name">Documents<span class="phase-tag phase-3">Phase 3</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Liste + filtres (catégorie, statut)</li>
+                                        <li><i class="fas fa-circle"></i> Aperçu métadonnées (format, taille, dates)</li>
+                                        <li><i class="fas fa-circle"></i> Upload drag-and-drop + clic fallback</li>
+                                        <li><i class="fas fa-circle"></i> Association propriété / locataire / contrat</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> DocumentController — upload Storage::disk('local')</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Validation MIME (pdf, jpg, png, docx) + taille max 10 Mo</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Relation polymorphe morphTo (propriété, locataire, contrat)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Lien de téléchargement sécurisé (Storage::temporaryUrl)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Suppression fichier physique + enregistrement BDD</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">3 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">2.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">5 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(30,58,138,0.1);">📈</span>
+                                        <span class="module-name">Rapports<span class="phase-tag phase-3">Phase 3</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Graphiques revenus / charges / solde</li>
+                                        <li><i class="fas fa-circle"></i> Répartition par propriété et type</li>
+                                        <li><i class="fas fa-circle"></i> Tableau récapitulatif annuel</li>
+                                        <li><i class="fas fa-circle"></i> Filtres période + propriété</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> ReportController — requêtes groupBy mois/propriété</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Export Excel (Laravel Excel — maatwebsite)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Export PDF récap annuel (DomPDF)</li>
+                                        <li><i class="fas fa-circle" style="color:#ea580c;"></i> Filtres via query string validés (année, propriété)</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">1 page</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">2 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">3.5 JH</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="module-icon" style="background:rgba(30,58,138,0.1);">📋</span>
+                                        <span class="module-name">Documentation<span class="phase-tag phase-3">Phase 3</span></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-circle"></i> Fonctionnalités, JH, TJM, Gantt</li>
+                                        <li><i class="fas fa-circle"></i> Charges Laravel par module</li>
+                                    </ul>
+                                </td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">—</span></td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">1 page</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>Fait</span></td>
+                                <td><span class="jh-badge">0.5 JH</span></td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">—</span></td>
+                                <td><span class="jh-badge" style="background:rgba(30,58,138,0.15);font-weight:700;">0.5 JH</span></td>
+                            </tr>
+
+                            <!-- Total -->
+                            <tr class="total-row">
+                                <td colspan="3" style="font-size:0.9rem;"><i class="fas fa-sigma me-2"></i>TOTAL PROJET — 11 modules · 22 pages HTML</td>
+                                <td><span style="color:var(--text-muted);font-size:0.82rem;">22 pages</span></td>
+                                <td><span class="badge-done"><i class="fas fa-check me-1"></i>100% Fait</span></td>
+                                <td><span class="jh-badge" style="background:rgba(59,130,246,0.18);">23 JH</span></td>
+                                <td><span class="jh-badge" style="background:rgba(234,88,12,0.18);color:#c2410c;">20 JH</span></td>
+                                <td><span class="jh-badge" style="font-size:0.95rem;background:rgba(30,58,138,0.2);color:var(--primary);">43 JH</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div><!-- end table-responsive -->
+                </div>
+            </div>
+
+            <!-- Pricing Section — Style Apple/Marketing Premium -->
+            <div style="margin-bottom:2.5rem;" id="pricing">
+
+                <!-- Headline section -->
+                <div style="text-align:center;padding:3rem 1rem 2.5rem;">
+                    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);border-radius:50px;padding:0.4rem 1.1rem;font-size:0.75rem;font-weight:700;color:#0891b2;letter-spacing:0.5px;margin-bottom:1.25rem;text-transform:uppercase;">
+                        <i class="fas fa-fire"></i> Offre de lancement
+                    </div>
+                    <h2 style="font-size:2.6rem;font-weight:800;color:var(--primary);letter-spacing:-1px;line-height:1.1;margin-bottom:1rem;">
+                        Un seul outil.<br><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Des résultats immédiats.</span>
+                    </h2>
+                    <p style="font-size:1.05rem;color:var(--text-muted);max-width:520px;margin:0 auto 0.75rem;line-height:1.7;">
+                        Commencez petit. Pensez grand. Chaque formule est conçue pour vous faire gagner du temps dès le premier jour.
+                    </p>
+                    <p style="font-size:0.82rem;color:var(--text-muted);opacity:0.7;">Livraison immédiate · Code source inclus · Sans abonnement</p>
+                </div>
+
+                <!-- Grille des packs -->
+                <div class="row g-4 align-items-stretch mb-4">
+
+                    <!-- Pack Starter -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="pricing-card" style="border:1.5px solid var(--border);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:white;" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.1)';this.style.borderColor='#94a3b8'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--border)'">
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">🚀</div>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:0.4rem;">Starter</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:0.2rem;">2 800 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
+                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
+                            <div style="font-size:0.82rem;font-style:italic;color:var(--text-muted);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);">"Le premier pas vers la liberté locative."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Interface premium <strong>22 pages</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tableau de bord KPIs & graphiques</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Navbar & Design System</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Gestion propriétés & locataires</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Module Finances & quittances</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Maintenance, Contrats, Documents</span></li>
+                            </ul>
+                            <div style="margin-top:1.5rem;background:var(--light-2);border-radius:10px;padding:0.6rem;text-align:center;font-size:0.75rem;color:var(--text-muted);font-weight:500;">
+                                <i class="fas fa-bolt me-1" style="color:#94a3b8;"></i> 3 modules · 4 JH de développement
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pack Essentiel -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="pricing-card" style="border:1.5px solid var(--primary-light);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,rgba(59,130,246,0.03),white);" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(59,130,246,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">🏠</div>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary-light);margin-bottom:0.4rem;">Essentiel</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.2rem;">5 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
+                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
+                            <div style="font-size:0.82rem;font-style:italic;color:var(--primary);opacity:0.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(59,130,246,0.15);">"Gérez vos biens et vos locataires comme un pro."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Starter</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Gestion complète des propriétés</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Suivi locataires & dossiers</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Filtres, recherche, fiches détail</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Module Finances & quittances</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Maintenance, Contrats, Documents</span></li>
+                            </ul>
+                            <div style="margin-top:1.5rem;background:rgba(30,58,138,0.06);border-radius:10px;padding:0.6rem;text-align:center;font-size:0.75rem;color:var(--primary);font-weight:600;">
+                                <i class="fas fa-bolt me-1"></i> 5 modules · 10 JH de développement
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pack Pro — LE PLUS POPULAIRE -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="pricing-card" style="border:2.5px solid var(--secondary);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,#e0f9ff,#f0fdff,white);box-shadow:0 8px 30px rgba(6,182,212,0.15);" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 24px 60px rgba(6,182,212,0.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 30px rgba(6,182,212,0.15)'">
+                            <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0891b2,#1e3a8a);color:white;font-size:0.7rem;font-weight:800;padding:0.35rem 1.25rem;border-radius:50px;white-space:nowrap;letter-spacing:1px;box-shadow:0 4px 15px rgba(6,182,212,0.4);">⭐ LE PLUS POPULAIRE</div>
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;margin-top:0.5rem;">💎</div>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--secondary);margin-bottom:0.4rem;">Pro</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:#0891b2;line-height:1;margin-bottom:0.2rem;">9 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
+                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
+                            <div style="font-size:0.82rem;font-style:italic;color:#0891b2;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(6,182,212,0.2);">"La solution qu'adoptent 8 propriétaires sur 10."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Essentiel</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Finances, loyers & quittances PDF</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Maintenance & suivi travaux</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Gestion des baux & contrats</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Alertes impayés & expirations</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Documents & Rapports avancés</span></li>
+                            </ul>
+                            <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(8,145,178,0.08));border-radius:10px;padding:0.7rem;text-align:center;font-size:0.78rem;color:#0891b2;font-weight:700;border:1px solid rgba(6,182,212,0.2);">
+                                <i class="fas fa-star me-1" style="color:#f59e0b;"></i> 8 modules · 17 JH · Le meilleur rapport qualité/prix
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pack Complet -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="pricing-card" style="border:2px solid var(--primary);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,rgba(30,58,138,0.05),white);" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(30,58,138,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                            <div style="position:absolute;top:-14px;right:1.25rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;font-size:0.68rem;font-weight:800;padding:0.3rem 0.9rem;border-radius:50px;letter-spacing:0.5px;">TOUT INCLUS</div>
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;margin-top:0.5rem;">👑</div>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary);margin-bottom:0.4rem;">Complet</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.2rem;">13 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
+                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
+                            <div style="font-size:0.82rem;font-style:italic;color:var(--primary);opacity:0.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(30,58,138,0.12);">"L'arsenal complet du gestionnaire immobilier d'élite."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Pro</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Coffre-fort documentaire</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Rapports & analyses avancées</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Export Excel & PDF annuel</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Upload drag-and-drop sécurisé</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Documentation complète incluse</strong></span></li>
+                            </ul>
+                            <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(30,58,138,0.1),rgba(6,182,212,0.06));border-radius:10px;padding:0.7rem;text-align:center;font-size:0.78rem;color:var(--primary);font-weight:700;border:1px solid rgba(30,58,138,0.15);">
+                                <i class="fas fa-crown me-1" style="color:#f59e0b;"></i> 11 modules · 22 pages · Solution clé en main
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bande de réassurance style Apple -->
+                <div style="background:linear-gradient(135deg,#0f172a,#1e3a8a);border-radius:20px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📦</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Livraison immédiate</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Code source complet, prêt à déployer</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🔒</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Sans abonnement</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Paiement unique, propriété définitive</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">⚡</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">43 JH de travail inclus</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Des semaines de développement économisées</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🚀</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Laravel-ready</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Connectez votre back-end en quelques jours</div></div>
+                    </div>
+                </div>
+
+                <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.85rem;margin-bottom:0;text-align:center;"><i class="fas fa-info-circle me-1"></i>Tarifs hors taxes · Front-end statique · Hébergement, domaine et maintenance non inclus · <a href="#laravel" style="color:var(--primary-light);">Voir la dynamisation Laravel ci-dessous →</a></p>
+            </div>
+
+            <!-- Laravel dynamisation -->
+            <div class="card" id="laravel" style="border-color:#f97316;">
+                <div class="card-header" style="background:linear-gradient(135deg,#c2410c 0%,#ea580c 100%);">
+                    <i class="fab fa-laravel"></i> Dynamisation Laravel — Charge & Tarifs supplémentaires
+                </div>
+                <div class="card-body" style="padding:1.5rem;">
+                    <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">
+                        Coût additionnel pour connecter l'interface statique à un back-end <strong>Laravel (PHP)</strong> avec base de données MySQL, authentification, API REST, stockage fichiers et exports PDF.
+                        <span style="display:inline-block;margin-left:0.5rem;background:rgba(234,88,12,0.1);color:#c2410c;font-size:0.75rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:10px;">+20 JH</span>
+                    </p>
+
+                    <!-- Détail tâches Laravel -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-lg-8">
+                            <div class="table-responsive">
+                            <table class="table" style="font-size:0.85rem;border:1px solid #fed7aa;border-radius:8px;overflow:hidden;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">Tâche Laravel</th>
+                                        <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">Périmètre</th>
+                                        <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">Charge</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">⚙️ Configuration & environnement</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Composer, .env, MySQL, routes, Vite, config sessions</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1 JH</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">🔐 Authentification & rôles</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Laravel Breeze, middleware auth, rôles propriétaire/admin</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">1.5 JH</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">🗄️ Modèles & migrations</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">8 tables, relations Eloquent (hasMany, belongsTo, morphTo)</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2 JH</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">🏠 Propriétés + Locataires</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Controllers CRUD, Form Requests, Blade templates, pagination</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">3 JH</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">💶 Finances & quittances</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Controller paiements, calculs loyer/charges, génération PDF (DomPDF)</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">🔧 Maintenance & Contrats</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Controllers, alertes automatiques (expiration bail, préavis)</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">📁 Documents & upload</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Storage Laravel, upload fichiers, validation MIME/taille, liens signés</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                    </tr>
+                                    <tr style="background:var(--light);">
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">📈 Dashboard & Rapports</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Requêtes Eloquent agrégées, exports Excel (Laravel Excel)</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.65rem 1rem;font-weight:600;">🧪 Tests & déploiement</td>
+                                        <td style="padding:0.65rem 1rem;color:var(--text-muted);font-size:0.82rem;">Feature tests PHPUnit, config serveur (Nginx/Apache), mise en prod</td>
+                                        <td style="padding:0.65rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.1);color:#c2410c;">2.5 JH</span></td>
+                                    </tr>
+                                    <tr style="font-weight:700;background:#fff7ed;">
+                                        <td style="padding:0.7rem 1rem;" colspan="2">TOTAL Laravel</td>
+                                        <td style="padding:0.7rem 1rem;"><span class="jh-badge" style="background:rgba(234,88,12,0.15);color:#c2410c;font-size:0.9rem;">20 JH</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div><!-- end table-responsive -->
+                        </div>
+                        <div class="col-lg-4">
+                            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
+                                <div style="font-size:0.75rem;font-weight:700;color:#c2410c;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;"><i class="fab fa-laravel me-1"></i> Stack Laravel</div>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> Laravel 11 (PHP 8.3)</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> MySQL 8 + Eloquent ORM</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> Laravel Breeze (auth)</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> Blade templates</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> DomPDF (quittances)</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> Laravel Excel (exports)</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> Storage (fichiers)</li>
+                                    <li><i class="fas fa-circle" style="color:#ea580c;"></i> PHPUnit (tests)</li>
+                                </ul>
+                            </div>
+                            <div style="background:var(--light-2);border:1px solid var(--border);border-radius:10px;padding:1rem;font-size:0.78rem;color:var(--text-muted);">
+                                <strong style="color:var(--primary);">Résumé charge :</strong><br>
+                                <span style="display:flex;justify-content:space-between;margin-top:0.5rem;"><span>Front-end statique</span><strong>23 JH</strong></span>
+                                <span style="display:flex;justify-content:space-between;margin-top:0.25rem;"><span>Dynamisation Laravel</span><strong style="color:#c2410c;">+ 20 JH</strong></span>
+                                <hr style="margin:0.5rem 0;border-color:var(--border);">
+                                <span style="display:flex;justify-content:space-between;font-weight:700;color:var(--primary);font-size:0.85rem;"><span>TOTAL PROJET</span><span>43 JH</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tableau comparatif tarifs avec Laravel -->
+                    <div style="font-weight:700;color:#c2410c;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;"><i class="fas fa-scale-balanced me-2"></i>Comparatif tarifaire — Statique vs Laravel</div>
+                    <div class="table-responsive">
+                    <table class="table" style="font-size:0.85rem;border:1px solid #fed7aa;border-radius:8px;overflow:hidden;">
+                        <thead>
+                            <tr>
+                                <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">Profil freelance</th>
+                                <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">TJM</th>
+                                <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">Front seul (23 JH)</th>
+                                <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;">Laravel (20 JH)</th>
+                                <th style="padding:0.7rem 1rem;background:#fff7ed;color:#c2410c;font-weight:700;">Total projet (43 JH)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.7rem 1rem;font-weight:600;">👨‍💻 Junior</td>
+                                <td style="padding:0.7rem 1rem;">350 € / j</td>
+                                <td style="padding:0.7rem 1rem;color:var(--text-muted);">8 050 €</td>
+                                <td style="padding:0.7rem 1rem;color:#c2410c;font-weight:600;">+ 7 000 €</td>
+                                <td style="padding:0.7rem 1rem;font-weight:700;">15 050 €</td>
+                            </tr>
+                            <tr style="background:#fff7ed;">
+                                <td style="padding:0.7rem 1rem;font-weight:600;">🧑‍💻 Confirmé <span style="background:rgba(30,58,138,0.12);color:var(--primary);font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:8px;margin-left:0.4rem;">Recommandé</span></td>
+                                <td style="padding:0.7rem 1rem;">550 € / j</td>
+                                <td style="padding:0.7rem 1rem;color:var(--primary);">12 650 €</td>
+                                <td style="padding:0.7rem 1rem;color:#c2410c;font-weight:600;">+ 11 000 €</td>
+                                <td style="padding:0.7rem 1rem;font-weight:700;color:var(--primary);font-size:0.95rem;">23 650 €</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.7rem 1rem;font-weight:600;">👨‍🔬 Senior</td>
+                                <td style="padding:0.7rem 1rem;">750 € / j</td>
+                                <td style="padding:0.7rem 1rem;color:#0891b2;">17 250 €</td>
+                                <td style="padding:0.7rem 1rem;color:#c2410c;font-weight:600;">+ 15 000 €</td>
+                                <td style="padding:0.7rem 1rem;font-weight:700;color:#0891b2;">32 250 €</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div><!-- end table-responsive -->
+                    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;margin-bottom:0;"><i class="fas fa-info-circle me-1"></i>Estimations hors taxes. Ne comprend pas : hébergement serveur, nom de domaine, licence SSL, maintenance mensuelle post-livraison.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Graphique JH par module -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-bar"></i> Charge par module (JH)
+                        </div>
+                        <div class="card-body" style="padding:1.5rem;">
+                            <div id="jhChart" style="display:flex;align-items:flex-end;gap:0.5rem;height:200px;padding-top:1.5rem;"></div>
+                            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.25rem;">
+                                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--text-muted);"><span style="width:12px;height:12px;border-radius:3px;background:#1e3a8a;display:inline-block;"></span>Phase 1 — 2 JH</div>
+                                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--text-muted);"><span style="width:12px;height:12px;border-radius:3px;background:#06b6d4;display:inline-block;"></span>Phase 2 — 11 JH</div>
+                                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--text-muted);"><span style="width:12px;height:12px;border-radius:3px;background:#7c3aed;display:inline-block;"></span>Phase 3 — 10 JH</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stack technique -->
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fas fa-code-branch"></i> Stack technique
+                        </div>
+                        <div class="card-body" style="padding:1.5rem;">
+                            <div class="table-responsive">
+                            <table class="table" style="font-size:0.87rem;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding:0.6rem 0.75rem;">Technologie</th>
+                                        <th style="padding:0.6rem 0.75rem;">Version</th>
+                                        <th style="padding:0.6rem 0.75rem;">Usage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">HTML5</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">—</td>
+                                        <td style="padding:0.6rem 0.75rem;">Structure de toutes les pages</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">CSS3</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">—</td>
+                                        <td style="padding:0.6rem 0.75rem;">Variables CSS, animations, gradients</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">Bootstrap</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">5.3.0</td>
+                                        <td style="padding:0.6rem 0.75rem;">Grid, composants, responsive</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">Font Awesome</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">6.4.0</td>
+                                        <td style="padding:0.6rem 0.75rem;">Icônes dans toute l'interface</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">Google Fonts</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">Inter</td>
+                                        <td style="padding:0.6rem 0.75rem;">Typographie principale</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">Chart.js</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">4.4.0</td>
+                                        <td style="padding:0.6rem 0.75rem;">Graphiques dashboard, finances, rapports</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.6rem 0.75rem;"><span class="tech-tag">JavaScript</span></td>
+                                        <td style="padding:0.6rem 0.75rem;color:var(--text-muted);">ES6</td>
+                                        <td style="padding:0.6rem 0.75rem;">Filtres, tri, interactions, validation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div><!-- end table-responsive -->
+                            <div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--light-2);border-radius:8px;font-size:0.8rem;color:var(--text-muted);">
+                                <i class="fas fa-info-circle me-2" style="color:var(--primary-light);"></i>
+                                Application 100% statique — aucun serveur, aucun framework JS, aucune dépendance npm.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planning & Gantt -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-calendar-alt"></i> Planning de développement
+                </div>
+                <div class="card-body" style="padding:1.5rem;">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;height:100%;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+                                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(30,58,138,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">1️⃣</div>
+                                    <div>
+                                        <div style="font-weight:700;color:var(--primary);font-size:0.9rem;">Phase 1 — 2 JH</div>
+                                        <div style="font-size:0.75rem;color:var(--text-muted);">Structure & Design System</div>
+                                    </div>
+                                </div>
+                                <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#1e3a8a,#3b82f6);"></div></div>
+                                <ul class="feature-list mt-3">
+                                    <li><i class="fas fa-circle" style="color:#1e3a8a;"></i> CSS variables et tokens de design</li>
+                                    <li><i class="fas fa-circle" style="color:#1e3a8a;"></i> Navbar premium uniformisée (22 pages)</li>
+                                    <li><i class="fas fa-circle" style="color:#1e3a8a;"></i> Composants de base (cards, badges)</li>
+                                    <li><i class="fas fa-circle" style="color:#1e3a8a;"></i> Responsive mobile Bootstrap 5</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;height:100%;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+                                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(6,182,212,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">2️⃣</div>
+                                    <div>
+                                        <div style="font-weight:700;color:var(--secondary);font-size:0.9rem;">Phase 2 — 11 JH</div>
+                                        <div style="font-size:0.75rem;color:var(--text-muted);">Tableau de bord + 3 modules principaux</div>
+                                    </div>
+                                </div>
+                                <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#06b6d4,#3b82f6);"></div></div>
+                                <ul class="feature-list mt-3">
+                                    <li><i class="fas fa-circle" style="color:#06b6d4;"></i> Tableau de bord KPIs + graphiques Chart.js</li>
+                                    <li><i class="fas fa-circle" style="color:#06b6d4;"></i> Module Propriétés — 3 JH</li>
+                                    <li><i class="fas fa-circle" style="color:#06b6d4;"></i> Module Locataires — 3 JH</li>
+                                    <li><i class="fas fa-circle" style="color:#06b6d4;"></i> Module Finances — 3 JH</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;height:100%;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+                                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">3️⃣</div>
+                                    <div>
+                                        <div style="font-weight:700;color:#7c3aed;font-size:0.9rem;">Phase 3 — 10 JH</div>
+                                        <div style="font-size:0.75rem;color:var(--text-muted);">5 modules complémentaires</div>
+                                    </div>
+                                </div>
+                                <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#7c3aed,#06b6d4);"></div></div>
+                                <ul class="feature-list mt-3">
+                                    <li><i class="fas fa-circle" style="color:#7c3aed;"></i> Maintenance — 2.5 JH</li>
+                                    <li><i class="fas fa-circle" style="color:#7c3aed;"></i> Contrats — 2.5 JH</li>
+                                    <li><i class="fas fa-circle" style="color:#7c3aed;"></i> Documents + drag-drop — 2.5 JH</li>
+                                    <li><i class="fas fa-circle" style="color:#7c3aed;"></i> Rapports + documentation — 2.5 JH</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gantt -->
+                    <div>
+                        <div style="font-weight:700;color:var(--primary);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem;">Diagramme de Gantt — 23 JH</div>
+                        <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">Axe : jours homme cumulés · Livraison possible sur 4–5 semaines à mi-temps</div>
+                        <div id="gantt"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section animate-in">
+                <div style="position:relative;z-index:1;">
+                    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(6,182,212,0.2);border:1px solid rgba(6,182,212,0.4);border-radius:50px;padding:0.35rem 1rem;font-size:0.78rem;font-weight:600;color:#67e8f9;margin-bottom:1.25rem;">
+                        <i class="fas fa-fire"></i> Offre exclusive — Disponible maintenant
+                    </div>
+                    <h2>Passez à la vitesse supérieure avec GestiLoc</h2>
+                    <p>Votre solution clé en main livrée, opérationnelle, sans stress. Des centaines d'heures de développement — disponibles immédiatement pour transformer votre activité.</p>
+                    <div class="cta-btn-wrapper">
+                        <a href="tableau-de-bord.html" class="cta-btn">
+                            <i class="fas fa-play-circle"></i> Tester l'application
+                        </a>
+                        <a href="#modules" class="cta-btn-ghost">
+                            <i class="fas fa-rocket"></i> Voir les fonctionnalités
+                        </a>
+                    </div>
+                    <div class="cta-features">
+                        <div class="cta-feature"><i class="fas fa-check-circle"></i> 22 pages livrées immédiatement</div>
+                        <div class="cta-feature"><i class="fas fa-check-circle"></i> Code premium & documenté</div>
+                        <div class="cta-feature"><i class="fas fa-check-circle"></i> Laravel-ready & scalable</div>
+                        <div class="cta-feature"><i class="fas fa-check-circle"></i> 100% responsive & mobile</div>
+                        <div class="cta-feature"><i class="fas fa-check-circle"></i> 43 JH de valeur inclus</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        // Bar chart JH par module
+        const modules = [
+            { name: 'Design\nSystem', jh: 1, phase: 1 },
+            { name: 'Navigation', jh: 1, phase: 1 },
+            { name: 'Tableau de bord', jh: 2, phase: 2 },
+            { name: 'Propriétés', jh: 3, phase: 2 },
+            { name: 'Locataires', jh: 3, phase: 2 },
+            { name: 'Finances', jh: 3, phase: 2 },
+            { name: 'Maintenance', jh: 2.5, phase: 3 },
+            { name: 'Contrats', jh: 2.5, phase: 3 },
+            { name: 'Documents', jh: 2.5, phase: 3 },
+            { name: 'Rapports', jh: 2, phase: 3 },
+            { name: 'Doc.', jh: 0.5, phase: 3 },
+        ];
+        const phaseColors = { 1: '#1e3a8a', 2: '#06b6d4', 3: '#7c3aed' };
+        const maxJH = Math.max(...modules.map(m => m.jh));
+        const chartEl = document.getElementById('jhChart');
+        modules.forEach(m => {
+            const pct = (m.jh / maxJH) * 100;
+            const col = document.createElement('div');
+            col.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;';
+            col.innerHTML = `
+                <div style="font-size:0.72rem;font-weight:700;color:${phaseColors[m.phase]};">${m.jh} JH</div>
+                <div style="width:100%;height:${pct * 1.6}px;background:${phaseColors[m.phase]};border-radius:4px 4px 0 0;min-height:6px;opacity:0.85;" title="${m.name.replace('\n',' ')} : ${m.jh} JH"></div>
+                <div style="font-size:0.67rem;color:var(--text-muted);text-align:center;line-height:1.2;white-space:pre-line;">${m.name}</div>
+            `;
+            chartEl.appendChild(col);
+        });
+
+        // Gantt (axe = JH cumulés, total 23)
+        const tasks = [
+            { name: 'Design System & Navigation', start: 0,    dur: 2,   color: '#1e3a8a' },
+            { name: 'Tableau de bord',                  start: 2,    dur: 2,   color: '#06b6d4' },
+            { name: 'Propriétés',                 start: 4,    dur: 3,   color: '#06b6d4' },
+            { name: 'Locataires',                 start: 7,    dur: 3,   color: '#06b6d4' },
+            { name: 'Finances',                   start: 10,   dur: 3,   color: '#06b6d4' },
+            { name: 'Maintenance',                start: 13,   dur: 2.5, color: '#7c3aed' },
+            { name: 'Contrats',                   start: 15.5, dur: 2.5, color: '#7c3aed' },
+            { name: 'Documents',                  start: 18,   dur: 2.5, color: '#7c3aed' },
+            { name: 'Rapports & Documentation',   start: 20.5, dur: 2.5, color: '#7c3aed' },
+        ];
+        const totalJH = 23;
+        const gantt = document.getElementById('gantt');
+
+        // Axe gradué
+        const axis = document.createElement('div');
+        axis.style.cssText = 'display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;';
+        let axisHtml = '<div style="width:190px;"></div><div style="flex:1;display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted);">';
+        for (let i = 0; i <= totalJH; i += 5) {
+            axisHtml += `<span>${i} JH</span>`;
+        }
+        axisHtml += '<span>23 JH</span></div>';
+        axis.innerHTML = axisHtml;
+        gantt.appendChild(axis);
+
+        tasks.forEach(t => {
+            const row = document.createElement('div');
+            row.style.cssText = 'display:flex;align-items:center;gap:0.75rem;margin-bottom:0.45rem;';
+            const leftPct = (t.start / totalJH) * 100;
+            const widthPct = (t.dur / totalJH) * 100;
+            row.innerHTML = `
+                <div style="width:190px;font-size:0.78rem;color:var(--text-muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.name}</div>
+                <div style="flex:1;background:var(--light-2);border-radius:4px;height:24px;position:relative;">
+                    <div style="position:absolute;left:${leftPct}%;width:${widthPct}%;height:100%;background:${t.color};border-radius:4px;display:flex;align-items:center;padding:0 0.5rem;min-width:28px;opacity:0.88;">
+                        <span style="font-size:0.68rem;font-weight:700;color:white;white-space:nowrap;">${t.dur} JH</span>
+                    </div>
+                </div>
+            `;
+            gantt.appendChild(row);
+        });
+    </script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

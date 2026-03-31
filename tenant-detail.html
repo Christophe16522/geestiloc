@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Fiche locataire complète : informations personnelles, paiements et dossier.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Fiche Locataire — Marie Janvier · GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: white; font-weight: 700;
+        }
+        .btn-action-primary {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border: none; color: white; font-weight: 600; padding: 0.6rem 1.4rem;
+            border-radius: 8px; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: all 0.3s ease; box-shadow: 0 3px 12px rgba(59,130,246,0.3);
+        }
+        .btn-action-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,130,246,0.4); color: white; }
+        .score-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(16,185,129,0.1); color: var(--success); padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.82rem; font-weight: 700; }
+        @media (max-width: 768px) {
+            .page-header .d-flex.gap-2 { flex-direction: column; width: 100%; }
+            .page-header .d-flex.gap-2 .btn,
+            .page-header .d-flex.gap-2 .btn-action-primary { width: 100%; text-align: center; justify-content: center; }
+            .card-body .d-flex.align-items-center { flex-direction: column; text-align: center; gap: 1rem; }
+            .avatar { width: 60px; height: 60px; font-size: 1.5rem; }
+        }
+        @media (max-width: 576px) {
+            .info-value { font-size: 0.9rem; }
+            .info-label { font-size: 0.72rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="tenants.html"><i class="fas fa-th-list"></i> Retour à la liste</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-bolt"></i> Actions rapides</h5>
+                        <div class="sidebar-item"><a href="tenant-form.html"><i class="fas fa-edit"></i> Modifier ce locataire</a></div>
+                        <div class="sidebar-item"><a href="tenant-form.html"><i class="fas fa-user-plus"></i> Nouveau locataire</a></div>
+                        <div class="sidebar-item"><a href="#" onclick="if(!confirm('Supprimer définitivement ce locataire ? Cette action est irréversible.')) return false;" style="color:var(--danger);"><i class="fas fa-trash-alt"></i> Supprimer le dossier</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-link"></i> Accès rapides</h5>
+                        <div class="sidebar-item"><a href="property-detail.html"><i class="fas fa-home"></i> Bien loué</a></div>
+                        <div class="sidebar-item"><a href="contract-detail.html"><i class="fas fa-file-contract"></i> Contrat en cours</a></div>
+                        <div class="sidebar-item"><a href="finances.html"><i class="fas fa-euro-sign"></i> Suivi des paiements</a></div>
+                        <div class="sidebar-item"><a href="documents.html"><i class="fas fa-folder-open"></i> Dossier documents</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <div>
+                                <h1 class="page-title">Marie Janvier</h1>
+                                <p class="page-subtitle">Dossier locataire complet · Réf. <strong>LOC-001</strong></p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="tenant-form.html" class="btn-action-primary"><i class="fas fa-edit"></i> Modifier</a>
+                                <a href="tenants.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-1"></i>Retour</a>
+                            </div>
+                        </div>
+
+                        <!-- En-tête profil -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-4">
+                                    <div class="avatar">MJ</div>
+                                    <div>
+                                        <h3 style="font-weight:700;color:var(--primary);margin-bottom:0.25rem;">Marie Janvier</h3>
+                                        <p style="color:var(--text-muted);margin-bottom:0.75rem;"><i class="fas fa-envelope me-1"></i>marie.janvier@email.fr &nbsp;·&nbsp; <i class="fas fa-phone me-1"></i>06 12 34 56 78</p>
+                                        <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Paiements à jour</span>
+                                        <span class="badge ms-2" style="background:rgba(30,58,138,0.1);color:var(--primary);"><i class="fas fa-calendar-alt me-1"></i>Locataire depuis Mar 2022</span>
+                                        <span class="score-badge ms-2"><i class="fas fa-star"></i> Locataire exemplaire</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-user"></i> Informations personnelles & Contact</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Nom complet</div>
+                                        <div class="info-value">Marie Janvier</div>
+                                        <div class="info-label">Date de naissance</div>
+                                        <div class="info-value">14 mars 1988</div>
+                                        <div class="info-label">Email</div>
+                                        <div class="info-value">marie.janvier@email.fr</div>
+                                        <div class="info-label">Téléphone</div>
+                                        <div class="info-value">06 12 34 56 78</div>
+                                        <div class="info-label">Profession</div>
+                                        <div class="info-value">Ingénieure informatique</div>
+                                        <div class="info-label">Employeur</div>
+                                        <div class="info-value">TechCorp SAS</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-home"></i> Bien loué & Conditions bail</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Propriété</div>
+                                        <div class="info-value"><a href="property-detail.html" style="color:var(--primary-light);text-decoration:none;font-weight:700;"><i class="fas fa-external-link-alt me-1" style="font-size:0.75rem;"></i>Apt. Paris 15e</a></div>
+                                        <div class="info-label">Adresse complète</div>
+                                        <div class="info-value">23 Rue de la Convention, 75015 Paris</div>
+                                        <div class="info-label">Entrée dans les lieux</div>
+                                        <div class="info-value">01 mars 2022</div>
+                                        <div class="info-label">Échéance du bail</div>
+                                        <div class="info-value">28 février 2026 <span style="font-size:0.78rem;color:var(--warning);margin-left:0.5rem;"><i class="fas fa-exclamation-triangle me-1"></i>Renouvellement à prévoir</span></div>
+                                        <div class="info-label">Loyer mensuel</div>
+                                        <div class="info-value" style="color:var(--success);font-size:1.15rem;font-weight:700;">1 200 € HC</div>
+                                        <div class="info-label">Statut paiement</div>
+                                        <div class="info-value"><span class="badge bg-success"><i class="fas fa-check me-1"></i>À jour</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-shield-alt"></i> Garanties & Couvertures</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Type de garant</div>
+                                        <div class="info-value">Garant physique</div>
+                                        <div class="info-label">Nom du garant</div>
+                                        <div class="info-value">Jean Janvier (père)</div>
+                                        <div class="info-label">Téléphone garant</div>
+                                        <div class="info-value">06 98 76 54 32</div>
+                                        <div class="info-label">Dépôt de garantie versé</div>
+                                        <div class="info-value">2 400 €</div>
+                                        <div class="info-label">Assurance habitation</div>
+                                        <div class="info-value"><span style="color:var(--success);font-weight:700;"><i class="fas fa-check-circle me-1"></i>Valide</span> — Expire le 31/12/2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-chart-line"></i> Synthèse financière & Fiabilité</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Total loyers encaissés</div>
+                                        <div class="info-value" style="font-size:1.2rem;color:var(--primary);font-weight:700;">46 800 €</div>
+                                        <div class="info-label">Fiabilité de paiement</div>
+                                        <div class="info-value" style="color:var(--success);">38 / 39 <span style="font-size:0.78rem;color:var(--text-muted);margin-left:0.25rem;">(97,4 % à l'heure)</span></div>
+                                        <div class="info-label">Dernier paiement reçu</div>
+                                        <div class="info-value">01 juin 2025 — <strong>1 200 €</strong></div>
+                                        <div class="info-label">Solde actuel</div>
+                                        <div class="info-value" style="color:var(--success);font-weight:700;"><i class="fas fa-check-circle me-1"></i>Aucun impayé</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-history"></i> Derniers paiements enregistrés</div>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead><tr><th>Période</th><th>Montant</th><th>Date de réception</th><th>Statut</th><th>Actions</th></tr></thead>
+                                                <tbody>
+                                                    <tr><td>Juin 2025</td><td>1 200 €</td><td>01/06/2025</td><td><span class="badge bg-success">Payé</span></td><td><a href="finance-detail.html" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></a></td></tr>
+                                                    <tr><td>Mai 2025</td><td>1 200 €</td><td>02/05/2025</td><td><span class="badge bg-success">Payé</span></td><td><a href="finance-detail.html" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></a></td></tr>
+                                                    <tr><td>Avr 2025</td><td>1 200 €</td><td>01/04/2025</td><td><span class="badge bg-success">Payé</span></td><td><a href="finance-detail.html" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></a></td></tr>
+                                                    <tr><td>Mar 2025</td><td>1 200 €</td><td>01/03/2025</td><td><span class="badge bg-success">Payé</span></td><td><a href="finance-detail.html" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></a></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

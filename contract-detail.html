@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Détail d'un contrat de bail : locataire, durée et conditions.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Détail du Contrat de Bail — GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .duration-bar {
+            background: linear-gradient(135deg, var(--light-2), rgba(59,130,246,0.04));
+            border-radius: 8px; padding: 1.25rem; border: 1px solid var(--border);
+        }
+        .loyer-value { font-size: 1.4rem; font-weight: 700; color: var(--success); }
+        @media (max-width: 768px) {
+            .page-header { flex-direction: column; gap: 1rem; align-items: flex-start !important; }
+            .duration-bar { padding: 1rem; }
+            .duration-bar .d-flex { flex-wrap: wrap; gap: 0.5rem; }
+        }
+        @media (max-width: 576px) {
+            .loyer-value { font-size: 1.2rem; }
+            .d-flex.gap-2 { flex-direction: column; width: 100%; }
+            .d-flex.gap-2 .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="contracts.html"><i class="fas fa-th-list"></i> Retour aux contrats</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-bolt"></i> Actions rapides</h5>
+                        <div class="sidebar-item"><a href="contract-form.html"><i class="fas fa-edit"></i> Modifier ce contrat</a></div>
+                        <div class="sidebar-item"><a href="contract-form.html"><i class="fas fa-plus"></i> Créer un nouveau contrat</a></div>
+                        <div class="sidebar-item"><a href="#" onclick="window.print();return false;"><i class="fas fa-print"></i> Imprimer le bail</a></div>
+                        <div class="sidebar-item"><a href="#" onclick="if(!confirm('Confirmer la résiliation de ce contrat ?')) return false;" style="color:var(--warning);"><i class="fas fa-times-circle"></i> Résilier le bail</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-link"></i> Accès rapide</h5>
+                        <div class="sidebar-item"><a href="tenant-detail.html"><i class="fas fa-user"></i> Profil locataire</a></div>
+                        <div class="sidebar-item"><a href="property-detail.html"><i class="fas fa-home"></i> Fiche propriété</a></div>
+                        <div class="sidebar-item"><a href="finances.html"><i class="fas fa-euro-sign"></i> Historique des paiements</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <div>
+                                <h1 class="page-title">Bail — Marie Janvier</h1>
+                                <p class="page-subtitle"><i class="fas fa-map-marker-alt me-1" style="color:var(--secondary);"></i>Apt. Paris 15e &nbsp;·&nbsp; Location vide &nbsp;·&nbsp; <span style="color:var(--text-muted);">Réf. CTR-001</span></p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="contract-form.html" class="btn btn-outline-primary"><i class="fas fa-edit me-2"></i>Modifier</a>
+                                <a href="contracts.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Retour</a>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="duration-bar">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span style="font-weight:600;color:var(--primary);">01 mars 2022</span>
+                                                <span class="badge bg-success">Actif</span>
+                                                <span style="font-weight:600;color:var(--primary);">28 fév 2026</span>
+                                            </div>
+                                            <div class="progress" style="height:10px;border-radius:5px;">
+                                                <div class="progress-bar bg-success" style="width:82%;" title="82% du bail écoulé"></div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-1">
+                                                <small style="color:var(--text-muted);">Début du bail</small>
+                                                <small style="color:var(--success);font-weight:600;">82% écoulé — 11 mois restants</small>
+                                                <small style="color:var(--text-muted);">Fin du bail</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-file-contract"></i> Conditions juridiques du bail</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Type de bail</div>
+                                        <div class="info-value">Location vide (loi Alur)</div>
+                                        <div class="info-label">Durée</div>
+                                        <div class="info-value">3 ans renouvelable</div>
+                                        <div class="info-label">Date de début</div>
+                                        <div class="info-value">01 mars 2022</div>
+                                        <div class="info-label">Date de fin</div>
+                                        <div class="info-value">28 février 2026</div>
+                                        <div class="info-label">Préavis de départ locataire</div>
+                                        <div class="info-value">3 mois</div>
+                                        <div class="info-label">Révision annuelle</div>
+                                        <div class="info-value">Indice IRL — Chaque 1er mars</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-euro-sign"></i> Conditions financières</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Loyer mensuel HC</div>
+                                        <div class="info-value loyer-value">1 200 €</div>
+                                        <div class="info-label">Provision charges</div>
+                                        <div class="info-value">120 €</div>
+                                        <div class="info-label">Total TTC</div>
+                                        <div class="info-value">1 320 €</div>
+                                        <div class="info-label">Dépôt de garantie</div>
+                                        <div class="info-value">2 400 € (2 mois HC)</div>
+                                        <div class="info-label">Date d'échéance mensuelle</div>
+                                        <div class="info-value">1er de chaque mois</div>
+                                        <div class="info-label">Mode de paiement</div>
+                                        <div class="info-value">Virement bancaire</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-user"></i> Locataire</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Nom complet</div>
+                                        <div class="info-value"><a href="tenant-detail.html" style="color:var(--primary-light);text-decoration:none;">Marie Janvier</a></div>
+                                        <div class="info-label">Email</div>
+                                        <div class="info-value">marie.janvier@email.fr</div>
+                                        <div class="info-label">Téléphone</div>
+                                        <div class="info-value">06 12 34 56 78</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-home"></i> Propriété</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Bien loué</div>
+                                        <div class="info-value"><a href="property-detail.html" style="color:var(--primary-light);text-decoration:none;">Apt. Paris 15e</a></div>
+                                        <div class="info-label">Surface</div>
+                                        <div class="info-value">75 m² — T3</div>
+                                        <div class="info-label">Adresse</div>
+                                        <div class="info-value">23 Rue de la Convention, 75015 Paris</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-folder-open"></i> Documents officiels du bail</div>
+                                    <div class="card-body">
+                                        <div class="row g-2">
+                                            <div class="col-auto"><a href="document-detail.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-pdf me-1" style="color:#ef4444;"></i>Bail signé (PDF)</a></div>
+                                            <div class="col-auto"><a href="document-detail.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-alt me-1" style="color:#f59e0b;"></i>État des lieux d'entrée</a></div>
+                                            <div class="col-auto"><a href="document-detail.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-shield-alt me-1" style="color:#8b5cf6;"></i>Attestation d'assurance</a></div>
+                                            <div class="col-auto"><a href="document-form.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus me-1"></i>Joindre un document</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

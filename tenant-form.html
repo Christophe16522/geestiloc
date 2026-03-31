@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Ajouter ou modifier un dossier locataire.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Modifier le dossier locataire — Marie Janvier · GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        @media (max-width: 576px) {
+            .col-md-3, .col-md-4, .col-md-6 { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="tenants.html"><i class="fas fa-th-list"></i> Retour à la liste</a></div>
+                        <div class="sidebar-item"><a href="tenant-detail.html"><i class="fas fa-eye"></i> Voir la fiche</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-info-circle"></i> Conseils & Aide</h5>
+                        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;">Les champs marqués <span style="color:var(--danger);font-weight:700;">*</span> sont obligatoires.<br><br>Un dossier complet (revenus, garant, assurance) maximise votre sécurité locative et accélère la mise en location.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <h1 class="page-title"><i class="fas fa-user-edit" style="color:var(--secondary);margin-right:0.5rem;"></i>Modifier le dossier locataire</h1>
+                            <p class="page-subtitle">Marie Janvier · Réf. <strong>LOC-001</strong> &nbsp;—&nbsp; Mettez à jour les informations du locataire</p>
+                        </div>
+
+                        <form data-redirect="tenants.html" data-success-msg="Locataire enregistré avec succès !">
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-user"></i> Identité & Contact du locataire</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Civilité</label>
+                                            <select class="form-select">
+                                                <option selected>Mme</option>
+                                                <option>M.</option>
+                                                <option>Autre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Prénom <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-control" value="Marie">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label">Nom <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-control" value="Janvier">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date de naissance</label>
+                                            <input type="date" class="form-control" value="1988-03-14">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Lieu de naissance</label>
+                                            <input type="text" class="form-control" value="Paris 14e">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Nationalité</label>
+                                            <input type="text" class="form-control" value="Française">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email <span style="color:var(--danger);">*</span></label>
+                                            <input type="email" class="form-control" value="marie.janvier@email.fr">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Téléphone <span style="color:var(--danger);">*</span></label>
+                                            <input type="tel" class="form-control" value="06 12 34 56 78">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-briefcase"></i> Situation professionnelle</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Situation professionnelle</label>
+                                            <select class="form-select">
+                                                <option selected>CDI</option>
+                                                <option>CDD</option>
+                                                <option>Indépendant</option>
+                                                <option>Fonctionnaire</option>
+                                                <option>Étudiant</option>
+                                                <option>Retraité</option>
+                                                <option>Sans emploi</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Employeur</label>
+                                            <input type="text" class="form-control" value="TechCorp SAS">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Profession</label>
+                                            <input type="text" class="form-control" value="Ingénieure informatique">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Revenus mensuels nets (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" class="form-control" value="3800" placeholder="Ex. : 3 500">
+                                            <div class="form-text"><i class="fas fa-info-circle me-1"></i>Taux d'effort actuel : <strong>31,6 %</strong> — Seuil recommandé : 33 %</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-shield-alt"></i> Garanties & Caution</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Type de garantie</label>
+                                            <select class="form-select">
+                                                <option selected>Garant physique</option>
+                                                <option>Garant moral (société)</option>
+                                                <option>Visale</option>
+                                                <option>GLI (assurance)</option>
+                                                <option>Aucun</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Nom du garant</label>
+                                            <input type="text" class="form-control" value="Jean Janvier">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Lien avec le locataire</label>
+                                            <input type="text" class="form-control" value="Père">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Téléphone garant</label>
+                                            <input type="tel" class="form-control" value="06 98 76 54 32">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Email garant</label>
+                                            <input type="email" class="form-control" value="jean.janvier@email.fr">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-home"></i> Affectation du logement</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Bien immobilier associé <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Apt. Paris 15e</option>
+                                                <option>Studio Lyon 7e</option>
+                                                <option>Villa Marseille Sud</option>
+                                                <option>Maison Toulouse Cap.</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Statut paiement</label>
+                                            <select class="form-select">
+                                                <option selected>Payé</option>
+                                                <option>En attente</option>
+                                                <option>En retard</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Date d'entrée</label>
+                                            <input type="date" class="form-control" value="2022-03-01">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-align-left"></i> Notes & Observations internes</div>
+                                <div class="card-body">
+                                    <textarea class="form-control" rows="3" placeholder="Ex. : Locataire sérieux, renouvellement bail prévu, animaux de compagnie déclarés...">Locataire exemplaire. Toujours à jour. Renouvellement bail prévu en mars 2026.</textarea>
+                                    <div class="form-text mt-2"><i class="fas fa-lock me-1"></i>Ces notes sont strictement internes et ne sont pas visibles par le locataire.</div>
+                                </div>
+                            </div>
+
+                            <div class="footer-actions">
+                                <a href="tenants.html" class="btn btn-outline-secondary px-4"><i class="fas fa-times me-1"></i>Annuler</a>
+                                <button type="submit" class="btn btn-save"><i class="fas fa-save me-2"></i>Enregistrer les modifications</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

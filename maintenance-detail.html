@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Suivi d'une intervention de maintenance sur vos biens.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Suivi d'Intervention — GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .timeline-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--primary-light); margin-top: 4px; flex-shrink: 0; }
+        .timeline-line { position: relative; }
+        .timeline-line::before { content: ''; position: absolute; left: 5px; top: 16px; bottom: -20px; width: 2px; background: var(--border); pointer-events: none; }
+        .cost-highlight { background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(16,185,129,0.1)); border: 1px solid rgba(16,185,129,0.2); border-radius: 8px; padding: 0.5rem 0.75rem; display: inline-block; }
+        @media (max-width: 768px) {
+            .page-header { flex-direction: column; gap: 1rem; align-items: flex-start !important; }
+            .timeline-item { gap: 0.75rem; }
+        }
+        @media (max-width: 576px) {
+            .d-flex.gap-2 { flex-direction: column; }
+            .d-flex.gap-2 .btn { width: 100%; justify-content: flex-start; }
+            .info-value { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="maintenance.html"><i class="fas fa-th-list"></i> Retour aux interventions</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-bolt"></i> Actions rapides</h5>
+                        <div class="sidebar-item"><a href="maintenance-form.html"><i class="fas fa-edit"></i> Modifier cette intervention</a></div>
+                        <div class="sidebar-item"><a href="maintenance-form.html"><i class="fas fa-plus"></i> Signaler une nouvelle intervention</a></div>
+                        <div class="sidebar-item"><a href="#" onclick="if(!confirm('Supprimer définitivement cette intervention ?')) return false;" style="color:var(--danger);"><i class="fas fa-trash-alt"></i> Supprimer</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-link"></i> Accès rapide</h5>
+                        <div class="sidebar-item"><a href="property-detail.html"><i class="fas fa-home"></i> Fiche propriété</a></div>
+                        <div class="sidebar-item"><a href="documents.html"><i class="fas fa-folder"></i> Documents associés</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <div>
+                                <h1 class="page-title">Ravalement de façade</h1>
+                                <p class="page-subtitle"><i class="fas fa-map-marker-alt me-1" style="color:var(--secondary);"></i>Villa Marseille Sud &nbsp;·&nbsp; <span style="color:var(--text-muted);">Réf. INT-001</span></p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="maintenance-form.html" class="btn btn-outline-primary"><i class="fas fa-edit me-2"></i>Modifier</a>
+                                <a href="maintenance.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Retour</a>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-info-circle"></i> Informations de l'intervention</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Type d'intervention</div>
+                                        <div class="info-value">Ravalement de façade</div>
+                                        <div class="info-label">Catégorie</div>
+                                        <div class="info-value">Gros œuvre / Entretien</div>
+                                        <div class="info-label">Priorité</div>
+                                        <div class="info-value"><span class="badge" style="background:rgba(239,68,68,0.15);color:#ef4444;">Haute</span></div>
+                                        <div class="info-label">Statut</div>
+                                        <div class="info-value"><span class="badge bg-warning">En cours</span></div>
+                                        <div class="info-label">Date de signalement</div>
+                                        <div class="info-value">10 janvier 2025</div>
+                                        <div class="info-label">Date de début prévue</div>
+                                        <div class="info-value">03 février 2025</div>
+                                        <div class="info-label">Date de fin estimée</div>
+                                        <div class="info-value">28 mars 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-euro-sign"></i> Budget & Prestataire</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Devis initial accepté</div>
+                                        <div class="info-value">3 200 €</div>
+                                        <div class="info-label">Coût final estimé</div>
+                                        <div class="info-value">3 500 € <small style="color:var(--warning);font-weight:400;">(révision +300 €)</small></div>
+                                        <div class="info-label">Acompte versé</div>
+                                        <div class="info-value" style="color:var(--success);">1 000 €</div>
+                                        <div class="info-label">Solde à régler</div>
+                                        <div class="info-value" style="color:var(--warning);font-size:1.1rem;">2 500 €</div>
+                                        <div class="info-label">Prestataire</div>
+                                        <div class="info-value">Entreprise Bâtiment Martin</div>
+                                        <div class="info-label">Contact direct</div>
+                                        <div class="info-value"><a href="tel:0491234567" style="color:var(--primary-light);text-decoration:none;"><i class="fas fa-phone me-1"></i>04 91 23 45 67</a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-tasks"></i> Avancement du chantier</div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span style="font-weight:600;">Progression globale</span>
+                                            <span style="font-weight:700;color:var(--primary);font-size:1.1rem;">60%</span>
+                                        </div>
+                                        <div class="progress mb-4" style="height:12px;border-radius:6px;">
+                                            <div class="progress-bar" style="width:60%;background:linear-gradient(90deg,var(--primary-light),var(--secondary));border-radius:6px;"></div>
+                                        </div>
+                                        <h6 style="font-weight:700;color:var(--primary);margin-bottom:1rem;"><i class="fas fa-history me-2" style="color:var(--secondary);"></i>Journal de chantier</h6>
+                                        <div class="timeline-item timeline-line">
+                                            <div class="timeline-dot"></div>
+                                            <div><strong>03 Fév 2025</strong> — Début des travaux. Installation échafaudage et bâches de protection.</div>
+                                        </div>
+                                        <div class="timeline-item timeline-line">
+                                            <div class="timeline-dot"></div>
+                                            <div><strong>15 Fév 2025</strong> — Décapage et nettoyage haute-pression de la façade nord terminés.</div>
+                                        </div>
+                                        <div class="timeline-item timeline-line">
+                                            <div class="timeline-dot"></div>
+                                            <div><strong>01 Mar 2025</strong> — Façade est en cours d'enduit. Découverte fissures supplémentaires, devis réajusté (+300 €).</div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-dot" style="background:var(--border);"></div>
+                                            <div style="color:var(--text-muted);"><strong>Prévu 28 Mar 2025</strong> — Finitions peinture, retrait échafaudage, nettoyage chantier.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-home"></i> Bien immobilier concerné</div>
+                                    <div class="card-body">
+                                        <div class="info-label">Propriété</div>
+                                        <div class="info-value"><a href="property-detail.html" style="color:var(--primary-light);text-decoration:none;font-weight:700;">Villa Marseille Sud</a></div>
+                                        <div class="info-label">Adresse complète</div>
+                                        <div class="info-value">12 Avenue du Prado, 13008 Marseille</div>
+                                        <div class="info-label">Locataire en place</div>
+                                        <div class="info-value"><i class="fas fa-check-circle me-1" style="color:var(--success);"></i>Pierre Dupont — Informé le 25 jan. 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-folder-open"></i> Pièces jointes & Documents</div>
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column gap-2">
+                                            <a href="document-detail.html" class="btn btn-outline-secondary btn-sm text-start"><i class="fas fa-file-pdf me-2" style="color:#ef4444;"></i>Devis — Entreprise Bâtiment Martin</a>
+                                            <a href="document-detail.html" class="btn btn-outline-secondary btn-sm text-start"><i class="fas fa-file-image me-2" style="color:#f59e0b;"></i>Photos avant travaux</a>
+                                            <a href="document-form.html" class="btn btn-outline-primary btn-sm text-start"><i class="fas fa-plus me-2"></i>Joindre un nouveau document</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Saisir une nouvelle intervention ou demande de travaux.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Saisie d'Intervention — GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        @media (max-width: 576px) {
+            .col-md-3, .col-md-4, .col-md-6, .col-md-8 { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="maintenance.html"><i class="fas fa-th-list"></i> Retour aux interventions</a></div>
+                        <div class="sidebar-item"><a href="maintenance-detail.html"><i class="fas fa-eye"></i> Aperçu de l'intervention</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div style="margin-bottom:2rem;">
+                            <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin:0;"><i class="fas fa-hammer me-2" style="color:var(--secondary);"></i>Modifier l'intervention</h1>
+                            <p style="color:var(--text-muted);margin-top:0.5rem;">Ravalement de façade &nbsp;·&nbsp; Réf. INT-001 &nbsp;·&nbsp; <span style="color:var(--warning);">En cours</span></p>
+                            <p class="required-note"><span style="color:var(--danger);">*</span> Champs obligatoires</p>
+                        </div>
+
+                        <form data-redirect="maintenance.html" data-success-msg="Intervention sauvegardée avec succès !">
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-info-circle"></i> Informations de l'intervention</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Intitulé de l'intervention <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-control" value="Ravalement façade" placeholder="Ex : Réparation fuite salle de bain, Remplacement chaudière...">
+                                            <div class="form-text">Décrivez brièvement la nature des travaux.</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Catégorie</label>
+                                            <select class="form-select">
+                                                <option>Plomberie</option>
+                                                <option>Électricité</option>
+                                                <option selected>Gros œuvre</option>
+                                                <option>Peinture / Décoration</option>
+                                                <option>Menuiserie</option>
+                                                <option>Chauffage / Climatisation</option>
+                                                <option>Toiture</option>
+                                                <option>Autre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Propriété concernée <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option>Apt. Paris 15e</option>
+                                                <option selected>Villa Marseille Sud</option>
+                                                <option>Studio Lyon 7e</option>
+                                                <option>Maison Toulouse Cap.</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Priorité</label>
+                                            <select class="form-select">
+                                                <option selected>Haute</option>
+                                                <option>Moyenne</option>
+                                                <option>Basse</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Statut</label>
+                                            <select class="form-select">
+                                                <option>À faire</option>
+                                                <option selected>En cours</option>
+                                                <option>Terminé</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Description détaillée des travaux</label>
+                                            <textarea class="form-control" rows="3" placeholder="Décrivez précisément les travaux à effectuer, les matériaux, les contraintes d'accès...">Ravalement complet de la façade extérieure. Décapage, nettoyage haute-pression, application enduit et peinture. Inclus réparation fissures.</textarea>
+                                            <div class="form-text">Plus votre description est précise, plus le devis sera juste.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-calendar-alt"></i> Planning</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date de signalement</label>
+                                            <input type="date" class="form-control" value="2025-01-10">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date de début prévue</label>
+                                            <input type="date" class="form-control" value="2025-02-03">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date de fin estimée</label>
+                                            <input type="date" class="form-control" value="2025-03-28">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Avancement (%)</label>
+                                            <input type="number" class="form-control" value="60" min="0" max="100" placeholder="0 à 100">
+                                            <div class="form-text">Indiquez 100 pour clôturer l'intervention.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-euro-sign"></i> Prestataire & Budget</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Prestataire</label>
+                                            <input type="text" class="form-control" value="Entreprise Bâtiment Martin">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Téléphone prestataire</label>
+                                            <input type="tel" class="form-control" value="04 91 23 45 67">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Email prestataire</label>
+                                            <input type="email" class="form-control" value="martin.batiment@email.fr">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Coût estimé (€)</label>
+                                            <input type="number" class="form-control" value="3200">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Acompte versé (€)</label>
+                                            <input type="number" class="form-control" value="1000">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Coût final réel (€)</label>
+                                            <input type="number" class="form-control" placeholder="À compléter à la clôture">
+                                            <div class="form-text">Laissez vide tant que les travaux ne sont pas terminés.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-align-left"></i> Notes internes & Suivi</div>
+                                <div class="card-body">
+                                    <textarea class="form-control" rows="3" placeholder="Ajoutez ici vos notes privées, observations de chantier, échanges avec le prestataire...">Découverte de fissures supplémentaires lors du chantier. Devis réajusté à 3500€. Locataire informé et accord obtenu par email le 02/03/2025.</textarea>
+                                    <div class="form-text">Ces notes sont confidentielles et visibles uniquement par votre équipe.</div>
+                                </div>
+                            </div>
+
+                            <div class="footer-actions">
+                                <a href="maintenance.html" class="btn btn-outline-secondary px-4">Annuler les modifications</a>
+                                <button type="submit" class="btn btn-save"><i class="fas fa-save me-2"></i>Sauvegarder l'intervention</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

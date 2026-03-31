@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Rapports et analyses KPI de votre patrimoine immobilier locatif.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Tableaux de Bord & Rapports — GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .btn-report {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white; border: none; border-radius: 10px;
+            padding: 1rem 1.25rem; width: 100%; text-align: left;
+            font-weight: 600; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .btn-report:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(30,58,138,0.25); color: white; }
+        .btn-report i { font-size: 1.2rem; color: var(--secondary); flex-shrink: 0; }
+        .kpi-trend { font-size: 0.78rem; font-weight: 600; }
+        .kpi-trend.up   { color: var(--success); }
+        .kpi-trend.down { color: var(--danger); }
+        @media (max-width: 768px) {
+            #kpi-cards .col-md-3 { width: 50%; }
+            .d-flex.justify-content-between.align-items-center { flex-direction: column; gap: 0.5rem; align-items: flex-start !important; }
+        }
+        @media (max-width: 576px) {
+            #kpi-cards .col-md-3 { width: 100%; }
+            .row.g-3.mb-4 .col-md-6 { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-sliders-h"></i> Filtres</h5>
+                        <p class="filter-label">Période</p>
+                        <div class="sidebar-item"><a href="#" class="filter-period active" data-value="all"><i class="fas fa-calendar-alt"></i> Toutes périodes</a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-period" data-value="2025"><i class="fas fa-calendar" style="color:var(--primary-light);"></i> 2025 <span class="badge ms-auto" style="background:rgba(59,130,246,0.12);color:var(--primary-light);">En cours</span></a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-period" data-value="2024"><i class="fas fa-calendar" style="color:#10b981;"></i> 2024</a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-period" data-value="2023"><i class="fas fa-calendar" style="color:#f59e0b;"></i> 2023</a></div>
+                        <hr style="border-color:var(--border);">
+                        <p class="filter-label">Type de rapport</p>
+                        <div class="sidebar-item"><a href="#" class="filter-type active-type" data-value="all"><i class="fas fa-th-list"></i> Tous les types</a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-type" data-value="financier"><i class="fas fa-euro-sign" style="color:#10b981;"></i> Financier</a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-type" data-value="occupation"><i class="fas fa-home" style="color:var(--primary-light);"></i> Occupation</a></div>
+                        <div class="sidebar-item"><a href="#" class="filter-type" data-value="maintenance"><i class="fas fa-hammer" style="color:#f59e0b;"></i> Maintenance</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div style="margin-bottom:2rem;">
+                            <h1 class="page-title"><i class="fas fa-chart-bar" style="color:var(--secondary);margin-right:0.5rem;"></i>Analyse & Rapports</h1>
+                            <p class="page-subtitle">Mesurez la performance de votre patrimoine et prenez des décisions éclairées</p>
+                        </div>
+
+                        <div class="row g-3 mb-4" id="kpi-cards">
+                            <div class="col-md-3"><div class="stat-card"><div class="stat-icon"><i class="fas fa-percent"></i></div><div class="stat-label">Taux d'occupation</div><div class="stat-value" id="kpi-occupation" style="color:#10b981;">79%</div><small class="kpi-trend up"><i class="fas fa-arrow-up me-1"></i>+1 pt vs N-1</small></div></div>
+                            <div class="col-md-3"><div class="stat-card"><div class="stat-icon" style="background:rgba(6,182,212,0.1);color:#06b6d4;"><i class="fas fa-chart-line"></i></div><div class="stat-label">ROI net annuel</div><div class="stat-value" id="kpi-roi" style="color:#06b6d4;">8.5%</div><small class="kpi-trend up"><i class="fas fa-arrow-up me-1"></i>+0.3 pt vs N-1</small></div></div>
+                            <div class="col-md-3"><div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;"><i class="fas fa-euro-sign"></i></div><div class="stat-label">Revenus locatifs</div><div class="stat-value" id="kpi-revenus" style="color:#f59e0b;">178K €</div><small class="kpi-trend up"><i class="fas fa-arrow-up me-1"></i>+7.6% vs N-1</small></div></div>
+                            <div class="col-md-3"><div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:#10b981;"><i class="fas fa-user-check"></i></div><div class="stat-label">Fidélité locataires</div><div class="stat-value" id="kpi-fidelite" style="color:#10b981;">89%</div><small class="kpi-trend up"><i class="fas fa-arrow-up me-1"></i>+4 pts vs N-1</small></div></div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6"><button class="btn-report" onclick="alert('Génération du rapport financier en cours...')"><i class="fas fa-file-pdf"></i><div><div style="font-size:1rem;">Rapport Financier</div><small style="font-weight:400;opacity:0.85;">Revenus, dépenses, rentabilité nette</small></div><i class="fas fa-download ms-auto" style="font-size:0.9rem;opacity:0.7;"></i></button></div>
+                            <div class="col-md-6"><button class="btn-report" onclick="alert('Génération du rapport d\'occupation en cours...')"><i class="fas fa-home"></i><div><div style="font-size:1rem;">Rapport d'Occupation</div><small style="font-weight:400;opacity:0.85;">Taux de remplissage, vacance, durée</small></div><i class="fas fa-download ms-auto" style="font-size:0.9rem;opacity:0.7;"></i></button></div>
+                            <div class="col-md-6"><button class="btn-report" onclick="alert('Génération du rapport impayés en cours...')"><i class="fas fa-exclamation-triangle"></i><div><div style="font-size:1rem;">Rapport Impayés & Recouvrement</div><small style="font-weight:400;opacity:0.85;">Retards, contentieux, suivi débiteurs</small></div><i class="fas fa-download ms-auto" style="font-size:0.9rem;opacity:0.7;"></i></button></div>
+                            <div class="col-md-6"><button class="btn-report" onclick="alert('Génération du rapport maintenance en cours...')"><i class="fas fa-hammer"></i><div><div style="font-size:1rem;">Rapport Maintenance & Travaux</div><small style="font-weight:400;opacity:0.85;">Coûts engagés, prestataires, délais</small></div><i class="fas fa-download ms-auto" style="font-size:0.9rem;opacity:0.7;"></i></button></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 style="color:var(--primary);font-weight:700;margin:0;"><i class="fas fa-history"></i> Historique de performance</h3>
+                            <small class="text-muted" id="result-count">12 entrées</small>
+                        </div>
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table mb-0" id="reportTable">
+                                    <thead><tr><th>Période</th><th>Type</th><th>Occupation</th><th>Revenus</th><th>Impayés</th><th>Coûts maint.</th><th>ROI</th></tr></thead>
+                                    <tbody>
+                                        <tr data-period="2025" data-type="financier"><td>T1 2025</td><td><span class="badge" style="background:rgba(16,185,129,0.1);color:#10b981;">Financier</span></td><td>79%</td><td>44 800 €</td><td>650 €</td><td>2 100 €</td><td>8.5%</td></tr>
+                                        <tr data-period="2025" data-type="occupation"><td>T1 2025</td><td><span class="badge" style="background:rgba(59,130,246,0.1);color:var(--primary-light);">Occupation</span></td><td>79%</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                                        <tr data-period="2025" data-type="maintenance"><td>T1 2025</td><td><span class="badge" style="background:rgba(245,158,11,0.1);color:#f59e0b;">Maintenance</span></td><td>—</td><td>—</td><td>—</td><td>2 100 €</td><td>—</td></tr>
+                                        <tr data-period="2024" data-type="financier"><td>T4 2024</td><td><span class="badge" style="background:rgba(16,185,129,0.1);color:#10b981;">Financier</span></td><td>83%</td><td>46 200 €</td><td>880 €</td><td>1 800 €</td><td>8.8%</td></tr>
+                                        <tr data-period="2024" data-type="occupation"><td>T4 2024</td><td><span class="badge" style="background:rgba(59,130,246,0.1);color:var(--primary-light);">Occupation</span></td><td>83%</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                                        <tr data-period="2024" data-type="financier"><td>T3 2024</td><td><span class="badge" style="background:rgba(16,185,129,0.1);color:#10b981;">Financier</span></td><td>87%</td><td>47 500 €</td><td>450 €</td><td>3 200 €</td><td>9.1%</td></tr>
+                                        <tr data-period="2024" data-type="maintenance"><td>T3 2024</td><td><span class="badge" style="background:rgba(245,158,11,0.1);color:#f59e0b;">Maintenance</span></td><td>—</td><td>—</td><td>—</td><td>3 200 €</td><td>—</td></tr>
+                                        <tr data-period="2024" data-type="financier"><td>T2 2024</td><td><span class="badge" style="background:rgba(16,185,129,0.1);color:#10b981;">Financier</span></td><td>85%</td><td>45 900 €</td><td>1 200 €</td><td>950 €</td><td>8.7%</td></tr>
+                                        <tr data-period="2024" data-type="financier"><td>T1 2024</td><td><span class="badge" style="background:rgba(16,185,129,0.1);color:#10b981;">Financier</span></td><td>80%</td><td>43 200 €</td><td>1 650 €</td><td>2 400 €</td><td>8.2%</td></tr>
+                                        <tr data-period="2023" data-type="financier"><td>T4 2023</td><td><span class="badge" style="background:rgba(16,185,129,0.1);color:#10b981;">Financier</span></td><td>78%</td><td>41 800 €</td><td>2 100 €</td><td>1 600 €</td><td>7.9%</td></tr>
+                                        <tr data-period="2023" data-type="occupation"><td>T4 2023</td><td><span class="badge" style="background:rgba(59,130,246,0.1);color:var(--primary-light);">Occupation</span></td><td>78%</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                                        <tr data-period="2023" data-type="maintenance"><td>T2 2023</td><td><span class="badge" style="background:rgba(245,158,11,0.1);color:#f59e0b;">Maintenance</span></td><td>—</td><td>—</td><td>—</td><td>4 800 €</td><td>—</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="no-results" class="text-center py-5" style="display:none;"><i class="fas fa-chart-bar" style="font-size:3rem;color:var(--border);"></i><p class="mt-3 text-muted fw-semibold">Aucune donnée pour cette combinaison de filtres</p><p style="font-size:0.88rem;color:var(--text-muted);">Élargissez la période ou changez le type de rapport.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        let activePeriod = 'all';
+        let activeType = 'all';
+
+        const kpiData = {
+            'all': { occupation: '79%', roi: '8.5%', revenus: '178K €', fidelite: '89%' },
+            '2025': { occupation: '79%', roi: '8.5%', revenus: '44.8K €', fidelite: '91%' },
+            '2024': { occupation: '84%', roi: '8.7%', revenus: '182.8K €', fidelite: '88%' },
+            '2023': { occupation: '78%', roi: '7.9%', revenus: '165.2K €', fidelite: '85%' }
+        };
+
+        function filterReports() {
+            const rows = document.querySelectorAll('#reportTable tbody tr');
+            let visible = 0;
+
+            rows.forEach(row => {
+                const rowPeriod = row.dataset.period;
+                const rowType = row.dataset.type;
+                const ok = (activePeriod === 'all' || rowPeriod === activePeriod)
+                    && (activeType === 'all' || rowType === activeType);
+                row.style.display = ok ? '' : 'none';
+                if (ok) visible++;
+            });
+
+            document.getElementById('result-count').textContent = visible + ' entrée' + (visible > 1 ? 's' : '');
+            document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+
+            const kpi = kpiData[activePeriod] || kpiData['all'];
+            document.getElementById('kpi-occupation').textContent = kpi.occupation;
+            document.getElementById('kpi-roi').textContent = kpi.roi;
+            document.getElementById('kpi-revenus').textContent = kpi.revenus;
+            document.getElementById('kpi-fidelite').textContent = kpi.fidelite;
+        }
+
+        document.querySelectorAll('.filter-period').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.filter-period').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                activePeriod = this.dataset.value;
+                filterReports();
+            });
+        });
+
+        document.querySelectorAll('.filter-type').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.filter-type').forEach(l => l.classList.remove('active-type'));
+                this.classList.add('active-type');
+                activeType = this.dataset.value;
+                filterReports();
+            });
+        });
+    </script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

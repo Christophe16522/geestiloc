@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Rédiger un nouveau contrat de bail.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>Rédaction de Contrat — GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        @media (max-width: 576px) {
+            .col-md-3, .col-md-4, .col-md-6 { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="contracts.html"><i class="fas fa-th-list"></i> Retour aux contrats</a></div>
+                        <div class="sidebar-item"><a href="contract-detail.html"><i class="fas fa-eye"></i> Aperçu du contrat</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div style="margin-bottom:2rem;">
+                            <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin:0;"><i class="fas fa-file-contract me-2" style="color:var(--secondary);"></i>Modifier le contrat</h1>
+                            <p style="color:var(--text-muted);margin-top:0.5rem;">Bail Marie Janvier &nbsp;·&nbsp; Réf. CTR-001 &nbsp;·&nbsp; <span style="color:var(--success);">Actif</span></p>
+                            <p class="required-note"><span style="color:var(--danger);">*</span> Champs obligatoires</p>
+                        </div>
+
+                        <form data-redirect="contracts.html" data-success-msg="Contrat enregistré et activé avec succès !">
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-users"></i> Parties signataires</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Locataire titulaire <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Marie Janvier</option>
+                                                <option>Pierre Dupont</option>
+                                                <option>Sophie Martin</option>
+                                                <option>Lucas Bernard</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Bien loué <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Apt. Paris 15e</option>
+                                                <option>Studio Lyon 7e</option>
+                                                <option>Villa Marseille Sud</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-file-contract"></i> Conditions du bail</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Type de bail <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Location vide</option>
+                                                <option>Meublé</option>
+                                                <option>Commercial</option>
+                                                <option>Saisonnier</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date de début <span style="color:var(--danger);">*</span></label>
+                                            <input type="date" class="form-control" value="2022-03-01">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date de fin <span style="color:var(--danger);">*</span></label>
+                                            <input type="date" class="form-control" value="2026-02-28">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Durée</label>
+                                            <select class="form-select">
+                                                <option>1 an</option>
+                                                <option selected>3 ans</option>
+                                                <option>6 ans</option>
+                                                <option>Autre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Préavis locataire</label>
+                                            <select class="form-select">
+                                                <option>1 mois</option>
+                                                <option selected>3 mois</option>
+                                                <option>6 mois</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Statut</label>
+                                            <select class="form-select">
+                                                <option selected>Actif</option>
+                                                <option>Expire bientôt</option>
+                                                <option>Archivé</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-euro-sign"></i> Conditions financières</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Loyer mensuel HC (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" class="form-control" value="1200" placeholder="Ex : 1200">
+                                            <div class="form-text">Hors charges locatives.</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Provision sur charges (€)</label>
+                                            <input type="number" class="form-control" value="120" placeholder="Ex : 120">
+                                            <div class="form-text">Charges mensuelles estimées.</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Dépôt de garantie (€)</label>
+                                            <input type="number" class="form-control" value="2400" placeholder="Généralement 1 à 2 mois HC">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Jour d'échéance mensuel</label>
+                                            <input type="number" class="form-control" value="1" min="1" max="28" placeholder="1 à 28">
+                                            <div class="form-text">Date de prélèvement du loyer.</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Révision loyer</label>
+                                            <select class="form-select">
+                                                <option selected>Annuelle (IRL)</option>
+                                                <option>Aucune</option>
+                                                <option>Autre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Mode de paiement</label>
+                                            <select class="form-select">
+                                                <option selected>Virement bancaire</option>
+                                                <option>Chèque</option>
+                                                <option>Prélèvement auto.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-align-left"></i> Clauses spécifiques & Notes</div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Clauses particulières du bail</label>
+                                        <textarea class="form-control" rows="3" placeholder="Ex : Animaux non autorisés, sous-location interdite, obligation d'entretien du jardin...">Animaux de compagnie non autorisés. Sous-location interdite.</textarea>
+                                        <div class="form-text">Ces clauses s'ajoutent aux conditions légales standard.</div>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Notes internes (confidentielles)</label>
+                                        <textarea class="form-control" rows="2" placeholder="Observations personnelles sur le dossier, relances, accords verbaux...">Renouvellement envisagé. Locataire satisfaite.</textarea>
+                                        <div class="form-text">Visible uniquement par votre équipe.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="footer-actions">
+                                <a href="contracts.html" class="btn btn-outline-secondary px-4">Annuler les modifications</a>
+                                <button type="submit" class="btn btn-save"><i class="fas fa-save me-2"></i>Valider le contrat</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>

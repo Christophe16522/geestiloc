@@ -1,0 +1,71 @@
+<!-- NAVBAR AMÉLIORÉE À COPIER DANS TOUTES LES PAGES -->
+
+<!-- Navbar Améliorée -->
+<nav class="navbar navbar-expand-lg sticky-top" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); border-bottom: none; box-shadow: 0 8px 32px rgba(30, 58, 138, 0.2); padding: 1rem 0; backdrop-filter: blur(10px);">
+    <div class="container-fluid" style="padding: 0 2rem;">
+        <!-- Brand -->
+        <a class="navbar-brand" href="tableau-de-bord.html" style="font-weight: 800; font-size: 1.6rem; color: white !important; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;">
+            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);">
+                <i class="fas fa-chart-line" style="font-size: 1.3rem; color: white;"></i>
+            </div>
+            GestiLoc
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border: none; color: white !important; padding: 0;">
+            <i class="fas fa-bars" style="font-size: 1.5rem; color: white;"></i>
+        </button>
+
+        <!-- Nav Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto" style="gap: 0.5rem;">
+                <li class="nav-item"><a class="nav-link active" href="tableau-de-bord.html" style="color: white !important; font-weight: 600; padding: 0.75rem 1.25rem; border-radius: 8px; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.15);">Tableau de bord</a></li>
+                <li class="nav-item"><a class="nav-link" href="properties.html" style="color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 8px; transition: all 0.3s ease;">Propriétés</a></li>
+                <li class="nav-item"><a class="nav-link" href="tenants.html" style="color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 8px; transition: all 0.3s ease;">Locataires</a></li>
+                <li class="nav-item"><a class="nav-link" href="finances.html" style="color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 8px; transition: all 0.3s ease;">Finances</a></li>
+                <li class="nav-item"><a class="nav-link" href="maintenance.html" style="color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 8px; transition: all 0.3s ease;">Maintenance</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" style="color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 8px; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;" data-bs-toggle="dropdown">
+                        Autres
+                    </a>
+                    <ul class="dropdown-menu" style="background: white; border: none; border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); padding: 0.75rem 0; min-width: 180px; margin-top: 0.5rem;">
+                        <li><a class="dropdown-item" href="contracts.html" style="color: #1e293b; padding: 0.75rem 1.5rem; font-weight: 500; transition: all 0.3s ease;"><i class="fas fa-file-contract" style="margin-right: 0.5rem; color: #1e3a8a;"></i> Contrats</a></li>
+                        <li><a class="dropdown-item" href="documents.html" style="color: #1e293b; padding: 0.75rem 1.5rem; font-weight: 500; transition: all 0.3s ease;"><i class="fas fa-folder" style="margin-right: 0.5rem; color: #1e3a8a;"></i> Documents</a></li>
+                        <li><a class="dropdown-item" href="reports.html" style="color: #1e293b; padding: 0.75rem 1.5rem; font-weight: 500; transition: all 0.3s ease;"><i class="fas fa-chart-pie" style="margin-right: 0.5rem; color: #1e3a8a;"></i> Rapports</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right Actions -->
+        <div class="ms-4 d-flex align-items-center gap-3" style="border-left: 1px solid rgba(255, 255, 255, 0.2); padding-left: 2rem;">
+            <!-- Notifications -->
+            <div style="position: relative;">
+                <button style="background: rgba(255, 255, 255, 0.15); border: none; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; font-size: 1.1rem;" onmouseover="this.style.background='rgba(255, 255, 255, 0.25)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'">
+                    <i class="fas fa-bell"></i>
+                    <span style="position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);"></span>
+                </button>
+            </div>
+
+            <!-- User Menu -->
+            <div class="dropdown">
+                <button style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; font-weight: 700; font-size: 1rem; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);" data-bs-toggle="dropdown" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    A
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); padding: 0.75rem 0; min-width: 200px; margin-top: 0.5rem;">
+                    <li><a class="dropdown-item" href="#" style="color: #1e293b; padding: 0.75rem 1.5rem; font-weight: 500; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='white'"><i class="fas fa-user-circle" style="color: #1e3a8a; font-size: 1.1rem;"></i> Mon Profil</a></li>
+                    <li><a class="dropdown-item" href="#" style="color: #1e293b; padding: 0.75rem 1.5rem; font-weight: 500; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='white'"><i class="fas fa-cog" style="color: #1e3a8a; font-size: 1.1rem;"></i> Paramètres</a></li>
+                    <li><a class="dropdown-item" href="#" style="color: #1e293b; padding: 0.75rem 1.5rem; font-weight: 500; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='white'"><i class="fas fa-headset" style="color: #1e3a8a; font-size: 1.1rem;"></i> Support</a></li>
+                    <li><hr class="dropdown-divider" style="margin: 0.5rem 0;"></li>
+                    <li><a class="dropdown-item" href="#" style="color: #ef4444; padding: 0.75rem 1.5rem; font-weight: 500; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(239, 68, 68, 0.1)'" onmouseout="this.style.background='white'"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .navbar-brand:hover { transform: translateY(-2px); }
+    .nav-link:hover { background: rgba(255, 255, 255, 0.2) !important; color: #06b6d4 !important; }
+    .dropdown-item:hover { background: #f1f5f9 !important; }
+</style>

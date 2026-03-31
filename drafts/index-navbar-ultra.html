@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - GestiLoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e40af;
+            --secondary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --light-2: #f1f5f9;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        html, body {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        /* ==================== NAVBAR ULTRA AMÉLIORÉE ==================== */
+        
+        .navbar-ultra {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-bottom: none;
+            box-shadow: 0 8px 32px rgba(30, 58, 138, 0.2);
+            padding: 1.25rem 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        /* Brand */
+        .navbar-brand-ultra {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .navbar-brand-ultra:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #22d3ee 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: white;
+            box-shadow: 0 8px 16px rgba(6, 182, 212, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand-ultra:hover .brand-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 24px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Nav Links Center */
+        .nav-links-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0;
+            list-style: none;
+        }
+
+        .nav-item-ultra {
+            position: relative;
+        }
+
+        .nav-item-ultra a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item-ultra a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-item-ultra a:hover::before {
+            left: 0;
+        }
+
+        .nav-item-ultra a:hover {
+            color: var(--secondary);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nav-item-ultra a.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+        }
+
+        .nav-item-ultra a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary) 0%, #22d3ee 100%);
+        }
+
+        /* Right Actions */
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: auto;
+            padding-left: 2rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            display: none;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.625rem 1rem 0.625rem 2.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            width: 220px;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--secondary);
+            width: 280px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        /* Notifications */
+        .notification-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .notification-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(6, 182, 212, 0.2);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            border: 2px solid var(--primary);
+        }
+
+        /* User Profile */
+        .user-profile {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #22d3ee 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-profile:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-ultra {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu-ultra {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+            padding: 0.875rem 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 1rem;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown-ultra:hover .dropdown-menu-ultra,
+        .dropdown-ultra.active .dropdown-menu-ultra {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item-ultra {
+            color: var(--text);
+            padding: 0.875rem 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dropdown-item-ultra:hover {
+            background: var(--light-2);
+            padding-left: 2rem;
+            color: var(--primary);
+        }
+
+        .dropdown-item-ultra i {
+            color: var(--primary);
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            margin: 0.5rem 0;
+            border-color: var(--border);
+        }
+
+        .dropdown-item-danger {
+            color: var(--danger);
+        }
+
+        .dropdown-item-danger:hover {
+            background: rgba(239, 68, 68, 0.08);
+            color: var(--danger);
+        }
+
+        .dropdown-item-danger i {
+            color: var(--danger);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .navbar-container {
+                padding: 0 1.5rem;
+                gap: 1rem;
+            }
+
+            .nav-links-center {
+                display: none;
+            }
+
+            .navbar-actions {
+                padding-left: 1rem;
+                border-left: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .search-container {
+                display: none !important;
+            }
+
+            .mobile-menu {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                color: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 1.2rem;
+            }
+
+            .mobile-menu:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand-ultra {
+                font-size: 1.3rem;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .navbar-actions {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-ultra {
+            animation: slideDown 0.6s ease-out;
+        }
+
+        /* Rest du style */
+        .main-container {
+            min-height: calc(100vh - 70px);
+            padding: 2rem 0;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-2);
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .sidebar-item a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-item a:hover {
+            background: var(--light-2);
+            color: var(--primary);
+            padding-left: 1.25rem;
+        }
+
+        .content {
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-new {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-new:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-light) 0%, var(--secondary) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-light);
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--light-2);
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 0 1rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR ULTRA AMÉLIORÉE -->
+    <nav class="navbar-ultra">
+        <div class="navbar-container">
+            <!-- Brand -->
+            <a href="tableau-de-bord.html" class="navbar-brand-ultra">
+                <div class="brand-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span>GestiLoc</span>
+            </a>
+
+            <!-- Center Nav Links -->
+            <ul class="nav-links-center">
+                <li class="nav-item-ultra"><a href="tableau-de-bord.html" class="active">Tableau de bord</a></li>
+                <li class="nav-item-ultra"><a href="properties.html">Propriétés</a></li>
+                <li class="nav-item-ultra"><a href="tenants.html">Locataires</a></li>
+                <li class="nav-item-ultra"><a href="finances.html">Finances</a></li>
+                <li class="nav-item-ultra"><a href="maintenance.html">Maintenance</a></li>
+                <li class="nav-item-ultra dropdown-ultra">
+                    <a href="#">Autres</a>
+                    <div class="dropdown-menu-ultra">
+                        <a href="contracts.html" class="dropdown-item-ultra">
+                            <i class="fas fa-file-contract"></i> Contrats
+                        </a>
+                        <a href="documents.html" class="dropdown-item-ultra">
+                            <i class="fas fa-folder"></i> Documents
+                        </a>
+                        <a href="reports.html" class="dropdown-item-ultra">
+                            <i class="fas fa-chart-pie"></i> Rapports
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Right Actions -->
+            <div class="navbar-actions">
+                <!-- Recherche -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Rechercher...">
+                </div>
+
+                <!-- Notifications -->
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+
+                <!-- User Dropdown -->
+                <div class="dropdown-ultra">
+                    <div class="user-profile">A</div>
+                    <div class="dropdown-menu-ultra">
+                        <a href="#" class="dropdown-item-ultra">
+                            <i class="fas fa-user-circle"></i> Mon Profil
+                        </a>
+                        <a href="#" class="dropdown-item-ultra">
+                            <i class="fas fa-cog"></i> Paramètres
+                        </a>
+                        <a href="#" class="dropdown-item-ultra">
+                            <i class="fas fa-clock"></i> Historique
+                        </a>
+                        <a href="#" class="dropdown-item-ultra">
+                            <i class="fas fa-headset"></i> Support
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item-ultra dropdown-item-danger">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-sliders-h"></i> Filtres rapides</h5>
+                        <div class="sidebar-item"><a href="properties.html"><i class="fas fa-home"></i> Toutes les propriétés</a></div>
+                        <div class="sidebar-item"><a href="properties.html"><i class="fas fa-check-circle"></i> Occupées</a></div>
+                        <div class="sidebar-item"><a href="properties.html"><i class="fas fa-times-circle"></i> Vacantes</a></div>
+                        <div class="sidebar-item"><a href="finances.html"><i class="fas fa-euro-sign"></i> Loyers impayés</a></div>
+
+                        <h5 class="sidebar-title" style="margin-top: 2rem;"><i class="fas fa-wrench"></i> Gestion</h5>
+                        <div class="sidebar-item"><a href="contracts.html"><i class="fas fa-file-contract"></i> Contrats</a></div>
+                        <div class="sidebar-item"><a href="maintenance.html"><i class="fas fa-hammer"></i> Maintenance</a></div>
+                        <div class="sidebar-item"><a href="documents.html"><i class="fas fa-folder"></i> Documents</a></div>
+                        <div class="sidebar-item"><a href="reports.html"><i class="fas fa-chart-pie"></i> Rapports</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <div>
+                                <h1 class="page-title">Tableau de bord</h1>
+                                <p class="page-subtitle">Bienvenue dans votre espace de gestion immobilière</p>
+                            </div>
+                            <a href="#" class="btn btn-new">
+                                <i class="fas fa-plus"></i> Nouvelle propriété
+                            </a>
+                        </div>
+
+                        <div class="row g-3 mb-5">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                                    <div class="stat-label">Propriétés</div>
+                                    <div class="stat-value">12</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                                    <div class="stat-label">Locataires</div>
+                                    <div class="stat-value">18</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-euro-sign"></i></div>
+                                    <div class="stat-label">Revenus</div>
+                                    <div class="stat-value">24.5K €</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-exclamation-circle"></i></div>
+                                    <div class="stat-label">Impayés</div>
+                                    <div class="stat-value">2.8K €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Active nav link
+        document.querySelectorAll('.nav-item-ultra a').forEach(link => {
+            if(link.href === window.location.href) {
+                link.classList.add('active');
+            }
+        });
+
+        // Dropdown on click for mobile
+        document.querySelectorAll('.dropdown-ultra').forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                if(window.innerWidth < 992) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

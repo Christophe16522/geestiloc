@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GestiLoc — Ajouter ou modifier un bien immobilier dans votre portefeuille.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>GestiLoc — Modifier le bien · Apt. Paris 15e</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .card-section-step {
+            display: inline-block; background: var(--primary-light); color: white;
+            border-radius: 50%; width: 22px; height: 22px; text-align: center;
+            line-height: 22px; font-size: 0.72rem; font-weight: 700; margin-right: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .page-header .d-flex.gap-2 { flex-direction: column; width: 100%; }
+            .page-header .d-flex.gap-2 .btn { width: 100%; text-align: center; }
+        }
+        @media (max-width: 576px) {
+            .col-md-3, .col-md-4, .col-md-6 { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="properties.html">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tenants.html">Locataires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="finances.html">Finances</a></li>
+                    <li class="nav-item"><a class="nav-link" href="maintenance.html">Maintenance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contracts.html">Contrats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documents.html">Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
+                </ul>
+            </div>
+            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <h5 class="sidebar-title"><i class="fas fa-arrow-left"></i> Navigation</h5>
+                        <div class="sidebar-item"><a href="properties.html"><i class="fas fa-th-list"></i> Retour au parc</a></div>
+                        <div class="sidebar-item"><a href="property-detail.html"><i class="fas fa-eye"></i> Voir la fiche du bien</a></div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-tasks"></i> Étapes du formulaire</h5>
+                        <div style="font-size:0.85rem;color:var(--text-muted);line-height:2;">
+                            <div><span style="background:var(--primary-light);color:white;border-radius:50%;display:inline-block;width:18px;height:18px;text-align:center;line-height:18px;font-size:0.7rem;font-weight:700;margin-right:0.5rem;">1</span> Localisation</div>
+                            <div><span style="background:var(--primary-light);color:white;border-radius:50%;display:inline-block;width:18px;height:18px;text-align:center;line-height:18px;font-size:0.7rem;font-weight:700;margin-right:0.5rem;">2</span> Caractéristiques</div>
+                            <div><span style="background:var(--primary-light);color:white;border-radius:50%;display:inline-block;width:18px;height:18px;text-align:center;line-height:18px;font-size:0.7rem;font-weight:700;margin-right:0.5rem;">3</span> Données financières</div>
+                            <div><span style="background:var(--primary-light);color:white;border-radius:50%;display:inline-block;width:18px;height:18px;text-align:center;line-height:18px;font-size:0.7rem;font-weight:700;margin-right:0.5rem;">4</span> Description &amp; Notes</div>
+                        </div>
+                        <hr style="border-color:var(--border);">
+                        <h5 class="sidebar-title"><i class="fas fa-info-circle"></i> Conseils</h5>
+                        <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;">Les champs marqués <span style="color:var(--danger);font-weight:700;">*</span> sont obligatoires. Saisissez toujours le loyer <strong>hors charges</strong>. Une description soignée vous aidera à louer plus vite.</p>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="col-lg-9">
+                    <div class="content">
+                        <div class="page-header">
+                            <h1 class="page-title">Modifier la fiche du bien</h1>
+                            <p class="page-subtitle"><i class="fas fa-map-marker-alt me-1"></i>Appartement Paris 15e &nbsp;&bull;&nbsp; <span style="color:var(--primary-light);font-weight:600;">Réf. PROP-001</span> &nbsp;&bull;&nbsp; Dernière modif. : aujourd'hui</p>
+                        </div>
+
+                        <form data-redirect="properties.html" data-success-msg="Modifications enregistrées avec succès !">
+                            <!-- Localisation -->
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-map-marker-alt"></i> <span class="card-section-step">1</span> Localisation du bien</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Adresse <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-control" value="23 Rue de la Convention" placeholder="Ex. : 12 Avenue des Fleurs">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Complément d'adresse</label>
+                                            <input type="text" class="form-control" placeholder="Bât. B, Apt. 14, Esc. 2...">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Code postal <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-control" value="75015" placeholder="75000">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label">Ville <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-control" value="Paris" placeholder="Ex. : Paris, Lyon, Bordeaux...">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Pays</label>
+                                            <select class="form-select">
+                                                <option selected>France</option>
+                                                <option>Belgique</option>
+                                                <option>Suisse</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caractéristiques -->
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-ruler-combined"></i> <span class="card-section-step">2</span> Caractéristiques &amp; Description du bien</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Type de bien <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Appartement</option>
+                                                <option>Studio</option>
+                                                <option>Maison</option>
+                                                <option>Villa</option>
+                                                <option>Local commercial</option>
+                                                <option>Garage / Box</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Surface habitable (m²) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" class="form-control" value="75" placeholder="Ex. : 65" min="1">
+                                            <div class="form-text"><i class="fas fa-info-circle"></i>Surface loi Carrez pour les appartements</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Typologie (nombre de pièces)</label>
+                                            <select class="form-select">
+                                                <option>Studio (1 pièce)</option>
+                                                <option>T2 — 2 pièces</option>
+                                                <option selected>T3 — 3 pièces</option>
+                                                <option>T4 — 4 pièces</option>
+                                                <option>T5 et plus</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Étage du bien</label>
+                                            <input type="number" class="form-control" value="3" placeholder="0 = RDC" min="0">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Nb. total d'étages</label>
+                                            <input type="number" class="form-control" value="6" placeholder="Ex. : 7" min="1">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Exposition principale</label>
+                                            <select class="form-select">
+                                                <option>Nord</option>
+                                                <option>Sud</option>
+                                                <option>Est</option>
+                                                <option>Ouest</option>
+                                                <option selected>Sud-Est</option>
+                                                <option>Sud-Ouest</option>
+                                                <option>Nord-Est</option>
+                                                <option>Nord-Ouest</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Classe énergie DPE <span title="Diagnostic de Performance Énergétique" style="cursor:help;color:var(--text-muted);">?</span></label>
+                                            <select class="form-select">
+                                                <option>A — Très performant</option>
+                                                <option>B — Performant</option>
+                                                <option selected>C — Assez bon</option>
+                                                <option>D — Passable</option>
+                                                <option>E — Peu performant</option>
+                                                <option>F — Passoire thermique</option>
+                                                <option>G — Très énergivore</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Stationnement</label>
+                                            <select class="form-select">
+                                                <option>Aucun</option>
+                                                <option selected>1 place incluse</option>
+                                                <option>2 places incluses</option>
+                                                <option>Box fermé sécurisé</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Cave / Cellier</label>
+                                            <select class="form-select">
+                                                <option selected>Aucun(e)</option>
+                                                <option>Cave incluse</option>
+                                                <option>Cellier inclus</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Type de location</label>
+                                            <select class="form-select">
+                                                <option selected>Non meublé (bail 3 ans)</option>
+                                                <option>Meublé (bail 1 an)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Informations financières -->
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-chart-line"></i> <span class="card-section-step">3</span> Données financières &amp; Rentabilité</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Loyer mensuel hors charges (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" class="form-control" value="1200" placeholder="Ex. : 850" min="0">
+                                            <div class="form-text"><i class="fas fa-info-circle"></i>Saisir le loyer net, hors provisions pour charges</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Charges mensuelles (€)</label>
+                                            <input type="number" class="form-control" value="120" placeholder="Ex. : 100" min="0">
+                                            <div class="form-text"><i class="fas fa-info-circle"></i>Provisions pour charges de copropriété</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Dépôt de garantie (€)</label>
+                                            <input type="number" class="form-control" value="2400" placeholder="Généralement 1 ou 2 mois de loyer HC" min="0">
+                                            <div class="form-text"><i class="fas fa-info-circle"></i>Plafonné à 2 mois HC pour un bien nu</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Prix d'acquisition (€)</label>
+                                            <input type="number" class="form-control" value="280000" placeholder="Ex. : 250 000" min="0">
+                                            <div class="form-text"><i class="fas fa-info-circle"></i>Utilisé pour calculer le rendement locatif brut</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Année d'acquisition</label>
+                                            <input type="number" class="form-control" value="2019" placeholder="Ex. : 2021" min="1900" max="2099">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Statut de location <span style="color:var(--danger);">*</span></label>
+                                            <select class="form-select">
+                                                <option selected>Occupé — loyer en cours</option>
+                                                <option>Vacant — disponible à la location</option>
+                                                <option>En travaux — indisponible</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="card">
+                                <div class="card-header"><i class="fas fa-align-left"></i> <span class="card-section-step">4</span> Description &amp; Notes internes</div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Description valorisante du bien</label>
+                                        <textarea class="form-control" rows="4" placeholder="Décrivez les points forts, les équipements, la luminosité, la proximité des transports, des commerces...">Bel appartement T3 au 3e étage avec ascenseur, lumineux, double vitrage, parquet au sol. Cuisine entièrement équipée, salle de bain avec baignoire. Balcon exposé sud-est. À 2 min. du métro Convention (ligne 12).</textarea>
+                                        <div class="form-text"><i class="fas fa-lightbulb"></i>Une description soignée valorise votre bien et attire de meilleurs locataires</div>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Notes privées <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted);">(visibles uniquement par vous)</span></label>
+                                        <textarea class="form-control" rows="3" placeholder="Rappels, travaux à prévoir, contacts utiles, remarques de suivi...">Chaudière à remplacer avant 2026. Ravalement de façade prévu par la copropriété en 2025. Contacter M. Girard pour clés de secours.</textarea>
+                                        <div class="form-text"><i class="fas fa-lock"></i>Ces notes ne sont pas partagées avec vos locataires</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer actions -->
+                            <div class="footer-actions">
+                                <span class="required-note"><span style="color:var(--danger);">*</span> Champs obligatoires</span>
+                                <div class="d-flex gap-2">
+                                    <a href="properties.html" class="btn btn-outline-secondary px-4"><i class="fas fa-times me-2"></i>Annuler</a>
+                                    <a href="property-detail.html" class="btn btn-outline-primary px-4"><i class="fas fa-eye me-2"></i>Aperçu</a>
+                                    <button type="submit" class="btn btn-save"><i class="fas fa-save me-2"></i>Enregistrer les modifications</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+        Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2025
+    </footer>
+</body>
+</html>
