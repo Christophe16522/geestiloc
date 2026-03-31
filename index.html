@@ -199,10 +199,23 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="tableau-de-bord.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
             <div class="ms-3"><i class="fas fa-user-circle" style="font-size:1.8rem;color:white;"></i></div>
         </div>
     </nav>
+
+    <!-- Bandeau expérience desktop -->
+    <div style="background:linear-gradient(90deg,#0f172a,#1e3a8a,#0891b2);color:white;text-align:center;padding:0.6rem 1rem;font-size:0.82rem;font-weight:500;letter-spacing:0.2px;display:flex;align-items:center;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+        <span style="display:inline-flex;align-items:center;gap:0.45rem;">
+            <i class="fas fa-desktop" style="color:#67e8f9;font-size:0.9rem;"></i>
+            <strong style="color:#67e8f9;">Expérience optimale sur ordinateur.</strong>
+            &nbsp;Pour profiter à 100% du design, des animations et du tableau de bord —&nbsp;<strong>ouvrez cette page sur PC ou Mac.</strong>
+        </span>
+        <span style="opacity:0.45;font-size:0.75rem;">|</span>
+        <span style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;opacity:0.75;">
+            <i class="fas fa-mobile-screen-button" style="color:#f87171;"></i> Mobile supporté mais l'aventure commence vraiment sur grand écran&nbsp;✦
+        </span>
+    </div>
 
     <!-- Bandeau POC -->
     <div style="background:linear-gradient(90deg,#7c3aed,#4f46e5);color:white;text-align:center;padding:0.65rem 1rem;font-size:0.85rem;font-weight:500;letter-spacing:0.2px;">
@@ -1378,138 +1391,116 @@
                 </div>
             </div>
 
-            <!-- Pricing Section — Style Apple/Marketing Premium -->
+            <!-- Pricing Section -->
             <div style="margin-bottom:2.5rem;" id="pricing">
 
-                <!-- Headline section -->
+                <!-- Headline -->
                 <div style="text-align:center;padding:3rem 1rem 2.5rem;">
                     <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:50px;padding:0.4rem 1.1rem;font-size:0.75rem;font-weight:700;color:#7c3aed;letter-spacing:0.5px;margin-bottom:1.25rem;text-transform:uppercase;">
-                        <i class="fas fa-flask"></i> Estimation de développement — POC
+                        <i class="fas fa-handshake"></i> Accompagnement sur mesure
                     </div>
                     <h2 style="font-size:2.6rem;font-weight:800;color:var(--primary);letter-spacing:-1px;line-height:1.1;margin-bottom:1rem;">
-                        Combien coûte<br><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">la version complète ?</span>
+                        Quel niveau<br><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">d'accompagnement vous faut-il ?</span>
                     </h2>
-                    <p style="font-size:1.05rem;color:var(--text-muted);max-width:560px;margin:0 auto 0.75rem;line-height:1.7;">
-                        Ces tarifs sont des <strong>estimations de développement</strong> pour transformer ce POC front-end en application complète avec back-end Laravel, base de données et authentification.
+                    <p style="font-size:1.05rem;color:var(--text-muted);max-width:580px;margin:0 auto 0.75rem;line-height:1.7;">
+                        Toutes les fonctionnalités sont incluses dans chaque formule. Ce qui change, c'est le <strong>niveau de service</strong> : support, délais, suivi et garanties.
                     </p>
-                    <p style="font-size:0.82rem;color:var(--text-muted);opacity:0.7;">Estimations indicatives · Non contractuelles · Données fictives dans la démo</p>
+                    <p style="font-size:0.82rem;color:var(--text-muted);opacity:0.7;">Estimations indicatives · Non contractuelles · Tout le back-end Laravel inclus</p>
                 </div>
 
-                <!-- Grille des packs -->
+                <!-- 3 packs -->
                 <div class="row g-4 align-items-stretch mb-4">
 
-                    <!-- Pack Starter -->
-                    <div class="col-lg-3 col-md-6">
+                    <!-- Pack Autonome -->
+                    <div class="col-lg-4 col-md-6">
                         <div class="pricing-card" style="border:1.5px solid var(--border);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:white;" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.1)';this.style.borderColor='#94a3b8'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--border)'">
-                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">🚀</div>
-                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:0.4rem;">Starter</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:0.2rem;">2 800 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">🛠️</div>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:0.4rem;">Autonome</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:0.2rem;">9 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
                             <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
-                            <div style="font-size:0.82rem;font-style:italic;color:var(--text-muted);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);">"Le premier pas vers la liberté locative."</div>
-                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Interface premium <strong>22 pages</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tableau de bord KPIs & graphiques</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Navbar & Design System</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Gestion propriétés & locataires</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Module Finances & quittances</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Maintenance, Contrats, Documents</span></li>
+                            <div style="font-size:0.82rem;font-style:italic;color:var(--text-muted);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);">"Code livré, vous prenez la main. Simple, propre, documenté."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.65rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Application complète livrée</strong> (front + back Laravel)</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Documentation technique incluse</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Déploiement guidé (1 session)</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Support post-livraison</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Mises à jour & correctifs</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Évolutions fonctionnelles</span></li>
                             </ul>
-                            <div style="margin-top:1.5rem;background:var(--light-2);border-radius:10px;padding:0.6rem;text-align:center;font-size:0.75rem;color:var(--text-muted);font-weight:500;">
-                                <i class="fas fa-bolt me-1" style="color:#94a3b8;"></i> 3 modules · 4 JH de développement
+                            <div style="margin-top:1.5rem;background:var(--light-2);border-radius:10px;padding:0.65rem;text-align:center;font-size:0.78rem;color:var(--text-muted);font-weight:500;">
+                                <i class="fas fa-code me-1"></i> Idéal si vous avez un dev en interne
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pack Essentiel -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="pricing-card" style="border:1.5px solid var(--primary-light);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,rgba(59,130,246,0.03),white);" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(59,130,246,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">🏠</div>
-                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary-light);margin-bottom:0.4rem;">Essentiel</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.2rem;">5 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
-                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
-                            <div style="font-size:0.82rem;font-style:italic;color:var(--primary);opacity:0.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(59,130,246,0.15);">"Gérez vos biens et vos locataires comme un pro."</div>
-                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Starter</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Gestion complète des propriétés</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Suivi locataires & dossiers</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Filtres, recherche, fiches détail</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Module Finances & quittances</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Maintenance, Contrats, Documents</span></li>
-                            </ul>
-                            <div style="margin-top:1.5rem;background:rgba(30,58,138,0.06);border-radius:10px;padding:0.6rem;text-align:center;font-size:0.75rem;color:var(--primary);font-weight:600;">
-                                <i class="fas fa-bolt me-1"></i> 5 modules · 10 JH de développement
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pack Pro — LE PLUS POPULAIRE -->
-                    <div class="col-lg-3 col-md-6">
+                    <!-- Pack Accompagné — LE PLUS POPULAIRE -->
+                    <div class="col-lg-4 col-md-6">
                         <div class="pricing-card" style="border:2.5px solid var(--secondary);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,#e0f9ff,#f0fdff,white);box-shadow:0 8px 30px rgba(6,182,212,0.15);" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 24px 60px rgba(6,182,212,0.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 30px rgba(6,182,212,0.15)'">
-                            <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0891b2,#1e3a8a);color:white;font-size:0.7rem;font-weight:800;padding:0.35rem 1.25rem;border-radius:50px;white-space:nowrap;letter-spacing:1px;box-shadow:0 4px 15px rgba(6,182,212,0.4);">⭐ LE PLUS POPULAIRE</div>
+                            <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0891b2,#1e3a8a);color:white;font-size:0.7rem;font-weight:800;padding:0.35rem 1.25rem;border-radius:50px;white-space:nowrap;letter-spacing:1px;box-shadow:0 4px 15px rgba(6,182,212,0.4);">⭐ LE PLUS CHOISI</div>
                             <div style="font-size:1.6rem;margin-bottom:0.5rem;margin-top:0.5rem;">💎</div>
-                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--secondary);margin-bottom:0.4rem;">Pro</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:#0891b2;line-height:1;margin-bottom:0.2rem;">9 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--secondary);margin-bottom:0.4rem;">Accompagné</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:#0891b2;line-height:1;margin-bottom:0.2rem;">13 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
                             <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
-                            <div style="font-size:0.82rem;font-style:italic;color:#0891b2;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(6,182,212,0.2);">"La solution qu'adoptent 8 propriétaires sur 10."</div>
-                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Essentiel</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Finances, loyers & quittances PDF</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Maintenance & suivi travaux</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Gestion des baux & contrats</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Alertes impayés & expirations</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Documents & Rapports avancés</span></li>
+                            <div style="font-size:0.82rem;font-style:italic;color:#0891b2;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(6,182,212,0.2);">"Lancez sereinement. On reste là pendant 3 mois."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.65rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Autonome</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Support prioritaire 3 mois</strong> (email + visio)</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Correctifs garantis</strong> sous 48h ouvrées</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Déploiement pris en charge (serveur inclus)</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Formation prise en main (2h)</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Évolutions fonctionnelles sur mesure</span></li>
                             </ul>
                             <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(8,145,178,0.08));border-radius:10px;padding:0.7rem;text-align:center;font-size:0.78rem;color:#0891b2;font-weight:700;border:1px solid rgba(6,182,212,0.2);">
-                                <i class="fas fa-star me-1" style="color:#f59e0b;"></i> 8 modules · 17 JH · Le meilleur rapport qualité/prix
+                                <i class="fas fa-star me-1" style="color:#f59e0b;"></i> Le meilleur rapport sérénité / prix
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pack Complet -->
-                    <div class="col-lg-3 col-md-6">
+                    <!-- Pack Partenaire -->
+                    <div class="col-lg-4 col-md-6">
                         <div class="pricing-card" style="border:2px solid var(--primary);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,rgba(30,58,138,0.05),white);" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(30,58,138,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                            <div style="position:absolute;top:-14px;right:1.25rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;font-size:0.68rem;font-weight:800;padding:0.3rem 0.9rem;border-radius:50px;letter-spacing:0.5px;">TOUT INCLUS</div>
+                            <div style="position:absolute;top:-14px;right:1.25rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;font-size:0.68rem;font-weight:800;padding:0.3rem 0.9rem;border-radius:50px;letter-spacing:0.5px;">FULL SERVICE</div>
                             <div style="font-size:1.6rem;margin-bottom:0.5rem;margin-top:0.5rem;">👑</div>
-                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary);margin-bottom:0.4rem;">Complet</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.2rem;">13 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
-                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
-                            <div style="font-size:0.82rem;font-style:italic;color:var(--primary);opacity:0.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(30,58,138,0.12);">"L'arsenal complet du gestionnaire immobilier d'élite."</div>
-                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.6rem;">
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Pro</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Coffre-fort documentaire</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Rapports & analyses avancées</strong></span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Export Excel & PDF annuel</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Upload drag-and-drop sécurisé</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Documentation complète incluse</strong></span></li>
+                            <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary);margin-bottom:0.4rem;">Partenaire</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.2rem;">Sur devis</div>
+                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">Engagement mensuel · Adapté à vos besoins</div>
+                            <div style="font-size:0.82rem;font-style:italic;color:var(--primary);opacity:0.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(30,58,138,0.12);">"Votre CTO externalisé. On construit ensemble, sur le long terme."</div>
+                            <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.65rem;">
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Accompagné</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Évolutions illimitées</strong> selon roadmap</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Astreinte & support 7j/7</strong></span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Hébergement infogéré inclus</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Sauvegardes quotidiennes + monitoring</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Réunion mensuelle de pilotage</strong></span></li>
                             </ul>
                             <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(30,58,138,0.1),rgba(6,182,212,0.06));border-radius:10px;padding:0.7rem;text-align:center;font-size:0.78rem;color:var(--primary);font-weight:700;border:1px solid rgba(30,58,138,0.15);">
-                                <i class="fas fa-crown me-1" style="color:#f59e0b;"></i> 11 modules · 22 pages · Solution clé en main
+                                <i class="fas fa-crown me-1" style="color:#f59e0b;"></i> Pour les agences &amp; investisseurs actifs
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bande de réassurance style Apple -->
+                <!-- Bande de réassurance -->
                 <div style="background:linear-gradient(135deg,#0f172a,#1e3a8a);border-radius:20px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
                     <div style="display:flex;align-items:center;gap:1rem;">
                         <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📦</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Front-end statique inclus</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">22 pages HTML — back-end à développer</div></div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Fonctionnalités identiques</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Les 47 fonctions sont dans chaque formule</div></div>
                     </div>
                     <div style="display:flex;align-items:center;gap:1rem;">
                         <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🔒</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Sans abonnement</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Paiement unique, propriété définitive</div></div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Sans abonnement caché</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Prix clair, propriété définitive du code</div></div>
                     </div>
                     <div style="display:flex;align-items:center;gap:1rem;">
                         <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">⚡</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">43 JH de travail inclus</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Des semaines de développement économisées</div></div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">43 JH de développement</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Des semaines de travail, livrées clé en main</div></div>
                     </div>
                     <div style="display:flex;align-items:center;gap:1rem;">
                         <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🚀</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Laravel-ready</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Connectez votre back-end en quelques jours</div></div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Laravel-ready</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Stack moderne, scalable, maintenable</div></div>
                     </div>
                 </div>
 
-                <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.85rem;margin-bottom:0;text-align:center;"><i class="fas fa-info-circle me-1"></i>Tarifs hors taxes · Front-end statique · Hébergement, domaine et maintenance non inclus · <a href="#laravel" style="color:var(--primary-light);">Voir la dynamisation Laravel ci-dessous →</a></p>
+                <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.85rem;margin-bottom:0;text-align:center;"><i class="fas fa-info-circle me-1"></i>Tarifs hors taxes · Hébergement inclus dans le pack Partenaire uniquement · <a href="#laravel" style="color:var(--primary-light);">Voir le détail technique Laravel →</a></p>
             </div>
 
             <!-- Laravel dynamisation -->
