@@ -31,11 +31,12 @@ GestiLoc est une plateforme complète de gestion locative avec une **interface m
 
 | Module | Description | Contenu |
 |--------|-------------|---------|
+| 🌟 **Fonctionnalités** | Page d'accueil & présentation | 47 fonctionnalités, 8 modules |
 | 🏠 **Tableau de bord** | Vue d'ensemble du patrimoine | 4 stat cards, 2 graphiques, alertes |
 | 🏢 **Propriétés** | Gestion du parc immobilier | 12 biens, filtres, 2 graphiques |
 | 👥 **Locataires** | Suivi des occupants | 18 locataires, statuts, historique |
 | 💶 **Finances** | Revenus & charges | Paiements, impayés, tableau de suivi |
-| 🔧 **Maintenance** | Interventions en cours | 5 travaux avec progression |
+| 🔧 **Maintenance** | Interventions en cours | Travaux avec progression |
 | 📄 **Contrats** | Baux actifs & expirations | 18 contrats, alertes échéances |
 | 📁 **Documents** | Bibliothèque de fichiers | 47 documents, 4 catégories |
 | 📈 **Rapports** | KPIs & statistiques | 4 indicateurs clés |
@@ -71,8 +72,8 @@ Bootstrap 5.3  ·  Chart.js 3.9  ·  Font Awesome 6.4  ·  Google Fonts (Inter) 
 
 ```
 gestiloc/
-├── fonctionnalites.html   ← Page d'accueil
-├── index.html             ← Tableau de bord
+├── index.html             ← Page d'accueil (fonctionnalités)
+├── tableau-de-bord.html   ← Tableau de bord
 ├── properties.html        ← Propriétés
 ├── tenants.html           ← Locataires
 ├── finances.html          ← Finances
@@ -90,7 +91,7 @@ gestiloc/
 git clone https://github.com/Christophe16522/geestiloc.git
 
 # Ouvrir dans le navigateur
-open fonctionnalites.html
+open index.html
 ```
 
 ## 📋 Roadmap Backend
