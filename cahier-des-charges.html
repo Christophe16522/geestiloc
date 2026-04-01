@@ -1419,7 +1419,7 @@
             <div style="margin-bottom:2.5rem;" id="pricing">
 
                 <!-- Headline -->
-                <div style="text-align:center;padding:3rem 1rem 2.5rem;">
+                <div style="text-align:center;padding:3rem 1rem 2rem;">
                     <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:50px;padding:0.4rem 1.1rem;font-size:0.75rem;font-weight:700;color:#7c3aed;letter-spacing:0.5px;margin-bottom:1.25rem;text-transform:uppercase;">
                         <i class="fas fa-handshake"></i> Accompagnement sur mesure
                     </div>
@@ -1429,7 +1429,63 @@
                     <p style="font-size:1.05rem;color:var(--text-muted);max-width:580px;margin:0 auto 0.75rem;line-height:1.7;">
                         Toutes les fonctionnalités sont incluses dans chaque formule. Ce qui change, c'est le <strong>niveau de service</strong> : support, délais, suivi et garanties.
                     </p>
-                    <p style="font-size:0.82rem;color:var(--text-muted);opacity:0.7;">Estimations indicatives · Non contractuelles · Tout le back-end Laravel inclus</p>
+                </div>
+
+                <!-- ═══ BLOC "D'OÙ VIENT CE PRIX ?" ═══ -->
+                <div style="background:linear-gradient(135deg,rgba(30,58,138,0.04),rgba(6,182,212,0.04));border:1.5px solid rgba(30,58,138,0.12);border-radius:20px;padding:1.75rem 2rem;margin-bottom:2rem;">
+                    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--primary);margin-bottom:1rem;"><i class="fas fa-calculator me-2"></i>Comment lire ces tarifs ?</div>
+                    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.75rem 0;margin-bottom:1.25rem;">
+                        <!-- Formule visuelle -->
+                        <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+                            <div style="text-align:center;">
+                                <div style="background:rgba(59,130,246,0.12);border:1.5px solid rgba(59,130,246,0.25);border-radius:12px;padding:0.6rem 1.1rem;display:inline-block;">
+                                    <div style="font-size:1.5rem;font-weight:800;color:var(--primary);line-height:1;">23 <span style="font-size:0.85rem;font-weight:600;">JH</span></div>
+                                    <div style="font-size:0.68rem;color:var(--text-muted);margin-top:2px;">Interface (front)</div>
+                                </div>
+                            </div>
+                            <div style="font-size:1.4rem;color:var(--text-muted);font-weight:300;">+</div>
+                            <div style="text-align:center;">
+                                <div style="background:rgba(234,88,12,0.1);border:1.5px solid rgba(234,88,12,0.25);border-radius:12px;padding:0.6rem 1.1rem;display:inline-block;">
+                                    <div style="font-size:1.5rem;font-weight:800;color:#c2410c;line-height:1;">20 <span style="font-size:0.85rem;font-weight:600;">JH</span></div>
+                                    <div style="font-size:0.68rem;color:var(--text-muted);margin-top:2px;">Back-end (Laravel)</div>
+                                </div>
+                            </div>
+                            <div style="font-size:1.4rem;color:var(--text-muted);font-weight:300;">=</div>
+                            <div style="text-align:center;">
+                                <div style="background:linear-gradient(135deg,rgba(30,58,138,0.1),rgba(6,182,212,0.08));border:2px solid rgba(30,58,138,0.25);border-radius:12px;padding:0.6rem 1.25rem;display:inline-block;">
+                                    <div style="font-size:1.5rem;font-weight:800;color:var(--primary);line-height:1;">43 <span style="font-size:0.85rem;font-weight:600;">JH</span></div>
+                                    <div style="font-size:0.68rem;color:var(--text-muted);margin-top:2px;">Total projet</div>
+                                </div>
+                            </div>
+                            <div style="font-size:1.4rem;color:var(--text-muted);font-weight:300;">×</div>
+                            <div style="text-align:center;">
+                                <div style="background:rgba(124,58,237,0.08);border:1.5px solid rgba(124,58,237,0.2);border-radius:12px;padding:0.6rem 1.1rem;display:inline-block;">
+                                    <div style="font-size:1.5rem;font-weight:800;color:#7c3aed;line-height:1;">TJM</div>
+                                    <div style="font-size:0.68rem;color:var(--text-muted);margin-top:2px;">350–750 €/jour</div>
+                                </div>
+                            </div>
+                            <div style="font-size:1.4rem;color:var(--text-muted);font-weight:300;">=</div>
+                            <div style="text-align:center;">
+                                <div style="background:linear-gradient(135deg,#1e3a8a,#0891b2);border-radius:12px;padding:0.6rem 1.25rem;display:inline-block;box-shadow:0 4px 15px rgba(30,58,138,0.25);">
+                                    <div style="font-size:1.5rem;font-weight:800;color:white;line-height:1;">Budget</div>
+                                    <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);margin-top:2px;">Voir formules ci-dessous</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 3 niveaux TJM -->
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+                        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;justify-content:space-between;align-items:center;">
+                            <div><div style="font-size:0.78rem;font-weight:700;color:var(--text);">👨‍💻 Junior</div><div style="font-size:0.7rem;color:var(--text-muted);">350 €/j → <strong>15 050 € TTC</strong></div></div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,rgba(30,58,138,0.06),rgba(6,182,212,0.04));border:1.5px solid rgba(30,58,138,0.2);border-radius:10px;padding:0.75rem 1rem;display:flex;justify-content:space-between;align-items:center;">
+                            <div><div style="font-size:0.78rem;font-weight:700;color:var(--primary);">🧑‍💻 Confirmé <span style="background:rgba(30,58,138,0.12);font-size:0.62rem;padding:0.1rem 0.45rem;border-radius:6px;">Recommandé</span></div><div style="font-size:0.7rem;color:var(--text-muted);">550 €/j → <strong style="color:var(--primary);">23 650 € TTC</strong></div></div>
+                        </div>
+                        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;justify-content:space-between;align-items:center;">
+                            <div><div style="font-size:0.78rem;font-weight:700;color:var(--text);">👨‍🔬 Senior</div><div style="font-size:0.7rem;color:var(--text-muted);">750 €/j → <strong>32 250 € TTC</strong></div></div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.72rem;color:var(--text-muted);margin-top:0.75rem;margin-bottom:0;"><i class="fas fa-info-circle me-1"></i>Ces tarifs représentent le coût de développement brut. Les formules ci-dessous incluent <strong>également le support, la garantie et le suivi</strong> — c'est leur valeur ajoutée. <a href="#laravel" style="color:var(--primary-light);">Détail Laravel →</a></p>
                 </div>
 
                 <!-- 3 packs -->
@@ -1438,21 +1494,26 @@
                     <!-- Pack Autonome -->
                     <div class="col-lg-4 col-md-6">
                         <div class="pricing-card" style="border:1.5px solid var(--border);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:white;" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.1)';this.style.borderColor='#94a3b8'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--border)'">
+                            <!-- Pour qui -->
+                            <div style="background:var(--light-2);border-radius:8px;padding:0.4rem 0.75rem;font-size:0.7rem;color:var(--text-muted);font-weight:600;margin-bottom:1rem;display:inline-flex;align-items:center;gap:0.4rem;width:fit-content;"><i class="fas fa-user"></i> Vous avez un dev en interne</div>
                             <div style="font-size:1.6rem;margin-bottom:0.5rem;">🛠️</div>
                             <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:0.4rem;">Autonome</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:0.2rem;">9 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
-                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
+                            <div style="display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.15rem;">
+                                <div style="font-size:2.6rem;font-weight:800;color:var(--text);line-height:1;">9 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€ HT</span></div>
+                            </div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.25rem;">Paiement unique · Pas d'abonnement</div>
+                            <div style="font-size:0.72rem;color:#64748b;background:var(--light-2);border-radius:6px;padding:0.3rem 0.6rem;margin-bottom:1rem;display:inline-block;"><i class="fas fa-calendar-alt me-1" style="color:var(--text-muted);"></i>≈ 792 €/mois sur 12 mois</div>
                             <div style="font-size:0.82rem;font-style:italic;color:var(--text-muted);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);">"Code livré, vous prenez la main. Simple, propre, documenté."</div>
                             <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.65rem;">
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Application complète livrée</strong> (front + back Laravel)</span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Documentation technique incluse</span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Déploiement guidé (1 session)</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Support post-livraison</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Mises à jour & correctifs</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Évolutions fonctionnelles</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-times-circle" style="margin-top:2px;flex-shrink:0;"></i><span>Support post-livraison</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-times-circle" style="margin-top:2px;flex-shrink:0;"></i><span>Correctifs & mises à jour</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-times-circle" style="margin-top:2px;flex-shrink:0;"></i><span>Évolutions fonctionnelles</span></li>
                             </ul>
-                            <div style="margin-top:1.5rem;background:var(--light-2);border-radius:10px;padding:0.65rem;text-align:center;font-size:0.78rem;color:var(--text-muted);font-weight:500;">
-                                <i class="fas fa-code me-1"></i> Idéal si vous avez un dev en interne
+                            <div style="margin-top:1.5rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:0.65rem;text-align:center;font-size:0.78rem;color:#15803d;font-weight:600;">
+                                <i class="fas fa-tag me-1"></i> Économisez ~14 150 € vs. freelance confirmé
                             </div>
                         </div>
                     </div>
@@ -1461,18 +1522,23 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="pricing-card" style="border:2.5px solid var(--secondary);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,#e0f9ff,#f0fdff,white);box-shadow:0 8px 30px rgba(6,182,212,0.15);" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 24px 60px rgba(6,182,212,0.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 30px rgba(6,182,212,0.15)'">
                             <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0891b2,#1e3a8a);color:white;font-size:0.7rem;font-weight:800;padding:0.35rem 1.25rem;border-radius:50px;white-space:nowrap;letter-spacing:1px;box-shadow:0 4px 15px rgba(6,182,212,0.4);">⭐ LE PLUS CHOISI</div>
-                            <div style="font-size:1.6rem;margin-bottom:0.5rem;margin-top:0.5rem;">💎</div>
+                            <!-- Pour qui -->
+                            <div style="background:rgba(6,182,212,0.1);border-radius:8px;padding:0.4rem 0.75rem;font-size:0.7rem;color:#0891b2;font-weight:600;margin-bottom:1rem;margin-top:0.5rem;display:inline-flex;align-items:center;gap:0.4rem;width:fit-content;"><i class="fas fa-user"></i> Vous lancez sans équipe tech</div>
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">💎</div>
                             <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--secondary);margin-bottom:0.4rem;">Accompagné</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:#0891b2;line-height:1;margin-bottom:0.2rem;">13 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€</span></div>
-                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">HT · livraison unique</div>
+                            <div style="display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.15rem;">
+                                <div style="font-size:2.6rem;font-weight:800;color:#0891b2;line-height:1;">13 500 <span style="font-size:1.1rem;font-weight:500;color:var(--text-muted);">€ HT</span></div>
+                            </div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.25rem;">Paiement unique · Pas d'abonnement</div>
+                            <div style="font-size:0.72rem;color:#0891b2;background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.2);border-radius:6px;padding:0.3rem 0.6rem;margin-bottom:1rem;display:inline-block;font-weight:600;"><i class="fas fa-calendar-alt me-1"></i>≈ 1 125 €/mois sur 12 mois · 3 mois de support inclus</div>
                             <div style="font-size:0.82rem;font-style:italic;color:#0891b2;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(6,182,212,0.2);">"Lancez sereinement. On reste là pendant 3 mois."</div>
                             <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.65rem;">
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Autonome</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Tout du pack Autonome</strong></span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Support prioritaire 3 mois</strong> (email + visio)</span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Correctifs garantis</strong> sous 48h ouvrées</span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Déploiement pris en charge (serveur inclus)</span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Formation prise en main (2h)</span></li>
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-minus" style="margin-top:3px;flex-shrink:0;"></i><span>Évolutions fonctionnelles sur mesure</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;color:#cbd5e1;"><i class="fas fa-times-circle" style="margin-top:2px;flex-shrink:0;"></i><span>Évolutions fonctionnelles sur mesure</span></li>
                             </ul>
                             <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(8,145,178,0.08));border-radius:10px;padding:0.7rem;text-align:center;font-size:0.78rem;color:#0891b2;font-weight:700;border:1px solid rgba(6,182,212,0.2);">
                                 <i class="fas fa-star me-1" style="color:#f59e0b;"></i> Le meilleur rapport sérénité / prix
@@ -1484,13 +1550,16 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="pricing-card" style="border:2px solid var(--primary);border-radius:24px;padding:2rem 1.75rem;height:100%;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(.34,1.56,.64,1);position:relative;background:linear-gradient(160deg,rgba(30,58,138,0.05),white);" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(30,58,138,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
                             <div style="position:absolute;top:-14px;right:1.25rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;font-size:0.68rem;font-weight:800;padding:0.3rem 0.9rem;border-radius:50px;letter-spacing:0.5px;">FULL SERVICE</div>
-                            <div style="font-size:1.6rem;margin-bottom:0.5rem;margin-top:0.5rem;">👑</div>
+                            <!-- Pour qui -->
+                            <div style="background:rgba(30,58,138,0.07);border-radius:8px;padding:0.4rem 0.75rem;font-size:0.7rem;color:var(--primary);font-weight:600;margin-bottom:1rem;margin-top:0.5rem;display:inline-flex;align-items:center;gap:0.4rem;width:fit-content;"><i class="fas fa-building"></i> Agence ou investisseur actif</div>
+                            <div style="font-size:1.6rem;margin-bottom:0.5rem;">👑</div>
                             <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary);margin-bottom:0.4rem;">Partenaire</div>
-                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.2rem;">Sur devis</div>
-                            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">Engagement mensuel · Adapté à vos besoins</div>
+                            <div style="font-size:2.6rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:0.15rem;">Sur devis</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.25rem;">Engagement mensuel · Adapté à vos besoins</div>
+                            <div style="font-size:0.72rem;color:var(--primary);background:rgba(30,58,138,0.06);border:1px solid rgba(30,58,138,0.15);border-radius:6px;padding:0.3rem 0.6rem;margin-bottom:1rem;display:inline-block;font-weight:600;"><i class="fas fa-headset me-1"></i>CTO externalisé · Astreinte 7j/7</div>
                             <div style="font-size:0.82rem;font-style:italic;color:var(--primary);opacity:0.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(30,58,138,0.12);">"Votre CTO externalisé. On construit ensemble, sur le long terme."</div>
                             <ul style="list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;gap:0.65rem;">
-                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Tout du pack Accompagné</span></li>
+                                <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Tout du pack Accompagné</strong></span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Évolutions illimitées</strong> selon roadmap</span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Astreinte & support 7j/7</strong></span></li>
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span>Hébergement infogéré inclus</span></li>
@@ -1498,33 +1567,108 @@
                                 <li style="font-size:0.84rem;display:flex;align-items:flex-start;gap:0.6rem;"><i class="fas fa-check-circle" style="color:var(--success);margin-top:2px;flex-shrink:0;"></i><span><strong>Réunion mensuelle de pilotage</strong></span></li>
                             </ul>
                             <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(30,58,138,0.1),rgba(6,182,212,0.06));border-radius:10px;padding:0.7rem;text-align:center;font-size:0.78rem;color:var(--primary);font-weight:700;border:1px solid rgba(30,58,138,0.15);">
-                                <i class="fas fa-crown me-1" style="color:#f59e0b;"></i> Pour les agences &amp; investisseurs actifs
+                                <i class="fas fa-crown me-1" style="color:#f59e0b;"></i> Tarif sur mesure — parlons-en
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bande de réassurance -->
-                <div style="background:linear-gradient(135deg,#0f172a,#1e3a8a);border-radius:20px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
-                    <div style="display:flex;align-items:center;gap:1rem;">
-                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📦</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Fonctionnalités identiques</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Les 47 fonctions sont dans chaque formule</div></div>
+                <!-- ═══ TABLEAU COMPARATIF DES FORMULES ═══ -->
+                <div style="border:1.5px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:1.5rem;">
+                    <div style="background:linear-gradient(135deg,var(--light-2),white);padding:1rem 1.5rem;border-bottom:1px solid var(--border);">
+                        <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--primary);"><i class="fas fa-table me-2"></i>Ce qui change entre les formules — en un coup d'œil</div>
                     </div>
-                    <div style="display:flex;align-items:center;gap:1rem;">
-                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🔒</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Sans abonnement caché</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Prix clair, propriété définitive du code</div></div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:1rem;">
-                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">⚡</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">43 JH de développement</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Des semaines de travail, livrées clé en main</div></div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:1rem;">
-                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🚀</div>
-                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Laravel-ready</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Stack moderne, scalable, maintenable</div></div>
+                    <div class="table-responsive">
+                    <table class="table" style="font-size:0.84rem;margin-bottom:0;">
+                        <thead>
+                            <tr style="background:var(--light-2);">
+                                <th style="padding:0.75rem 1.25rem;color:var(--text-muted);font-weight:600;border-bottom:1px solid var(--border);">Service inclus</th>
+                                <th style="padding:0.75rem 1rem;text-align:center;color:var(--text);font-weight:700;border-bottom:1px solid var(--border);">🛠️ Autonome<br><span style="font-size:0.72rem;font-weight:500;color:var(--text-muted);">9 500 €</span></th>
+                                <th style="padding:0.75rem 1rem;text-align:center;color:#0891b2;font-weight:700;border-bottom:1px solid rgba(6,182,212,0.3);background:rgba(6,182,212,0.04);">💎 Accompagné<br><span style="font-size:0.72rem;font-weight:500;color:var(--text-muted);">13 500 €</span></th>
+                                <th style="padding:0.75rem 1rem;text-align:center;color:var(--primary);font-weight:700;border-bottom:1px solid var(--border);">👑 Partenaire<br><span style="font-size:0.72rem;font-weight:500;color:var(--text-muted);">Sur devis</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Application complète livrée (47 fonctions)</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                            </tr>
+                            <tr style="background:var(--light);">
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Documentation technique</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Déploiement guidé</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><span style="font-size:0.75rem;color:var(--text-muted);">1 session guidée</span></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><span style="font-size:0.75rem;font-weight:700;color:#0891b2;">Pris en charge</span></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><span style="font-size:0.75rem;font-weight:700;color:var(--primary);">Pris en charge</span></td>
+                            </tr>
+                            <tr style="background:var(--light);">
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Support post-livraison</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><span style="font-size:0.75rem;font-weight:700;color:#0891b2;">3 mois (email + visio)</span></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><span style="font-size:0.75rem;font-weight:700;color:var(--primary);">7j/7 illimité</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Correctifs garantis</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><span style="font-size:0.75rem;font-weight:700;color:#0891b2;">Sous 48h ouvrées</span></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><span style="font-size:0.75rem;font-weight:700;color:var(--primary);">Priorité absolue</span></td>
+                            </tr>
+                            <tr style="background:var(--light);">
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Formation prise en main</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><span style="font-size:0.75rem;font-weight:700;color:#0891b2;">2h incluses</span></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><span style="font-size:0.75rem;font-weight:700;color:var(--primary);">À la demande</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Hébergement infogéré</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                            </tr>
+                            <tr style="background:var(--light);">
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Évolutions fonctionnelles</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><span style="font-size:0.75rem;font-weight:700;color:var(--primary);">Illimitées</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.7rem 1.25rem;color:var(--text);">Sauvegardes + monitoring</td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;background:rgba(6,182,212,0.03);"><i class="fas fa-times-circle" style="color:#cbd5e1;font-size:1.1rem;"></i></td>
+                                <td style="text-align:center;padding:0.7rem 1rem;"><i class="fas fa-check-circle" style="color:var(--success);font-size:1.1rem;"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
 
-                <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.85rem;margin-bottom:0;text-align:center;"><i class="fas fa-info-circle me-1"></i>Tarifs hors taxes · Hébergement inclus dans le pack Partenaire uniquement · <a href="#laravel" style="color:var(--primary-light);">Voir le détail technique Laravel →</a></p>
+                <!-- Bande de réassurance -->
+                <div style="background:linear-gradient(135deg,#0f172a,#1e3a8a);border-radius:20px;padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem;">
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">📦</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">47 fonctions identiques</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Dans chaque formule, sans exception</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">🔑</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Code source livré</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Propriété définitive, sans dépendance</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">🔒</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">Pas d'abonnement caché</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">Prix clair, une seule fois</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:1rem;">
+                        <div style="width:44px;height:44px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">⚡</div>
+                        <div><div style="font-weight:700;color:white;font-size:0.9rem;">43 JH de dev inclus</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.55);">8+ semaines de travail, clé en main</div></div>
+                    </div>
+                </div>
+
+                <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.85rem;margin-bottom:0;text-align:center;"><i class="fas fa-info-circle me-1"></i>Tarifs hors taxes · Hébergement inclus dans le pack Partenaire uniquement · Estimations non contractuelles · <a href="#laravel" style="color:var(--primary-light);">Voir le détail technique Laravel →</a></p>
             </div>
 
             <!-- Laravel dynamisation -->
