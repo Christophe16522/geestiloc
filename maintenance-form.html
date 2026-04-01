@@ -7,7 +7,7 @@
     <title>Saisie d'Intervention — GestiLoc</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         @media (max-width: 576px) {
@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Ouvrir le menu de navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
@@ -32,7 +32,7 @@
                     <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
                 </ul>
             </div>
-            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+            <div class="ms-3"><a href="#profil" style="color:white;text-decoration:none;" aria-label="Profil utilisateur"><i class="fas fa-user-circle" style="font-size:1.8rem;" aria-hidden="true"></i></a></div>
         </div>
     </nav>
 
@@ -50,7 +50,7 @@
                 <div class="col-lg-9">
                     <div class="content">
                         <div style="margin-bottom:2rem;">
-                            <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin:0;"><i class="fas fa-hammer me-2" style="color:var(--secondary);"></i>Modifier l'intervention</h1>
+                            <h1 style="font-size:2rem;font-weight:800;color:var(--primary);margin:0;"><i class="fas fa-hammer me-2" style="color:var(--secondary);"></i>Modifier l'intervention</h1>
                             <p style="color:var(--text-muted);margin-top:0.5rem;">Ravalement de façade &nbsp;·&nbsp; Réf. INT-001 &nbsp;·&nbsp; <span style="color:var(--warning);">En cours</span></p>
                             <p class="required-note"><span style="color:var(--danger);">*</span> Champs obligatoires</p>
                         </div>
@@ -61,13 +61,13 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-8">
-                                            <label class="form-label">Intitulé de l'intervention <span style="color:var(--danger);">*</span></label>
-                                            <input type="text" class="form-control" value="Ravalement façade" placeholder="Ex : Réparation fuite salle de bain, Remplacement chaudière...">
+                                            <label class="form-label" for="intituleIntervention">Intitulé de l'intervention <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" id="intituleIntervention" class="form-control" value="Ravalement façade" placeholder="Ex : Réparation fuite salle de bain, Remplacement chaudière...">
                                             <div class="form-text">Décrivez brièvement la nature des travaux.</div>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Catégorie</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="categorie">Catégorie</label>
+                                            <select id="categorie" class="form-select">
                                                 <option>Plomberie</option>
                                                 <option>Électricité</option>
                                                 <option selected>Gros œuvre</option>
@@ -79,8 +79,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Propriété concernée <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="proprieteConcernee">Propriété concernée <span style="color:var(--danger);">*</span></label>
+                                            <select id="proprieteConcernee" class="form-select">
                                                 <option>Apt. Paris 15e</option>
                                                 <option selected>Villa Marseille Sud</option>
                                                 <option>Studio Lyon 7e</option>
@@ -88,24 +88,24 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Priorité</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="priorite">Priorité</label>
+                                            <select id="priorite" class="form-select">
                                                 <option selected>Haute</option>
                                                 <option>Moyenne</option>
                                                 <option>Basse</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Statut</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="statutIntervention">Statut</label>
+                                            <select id="statutIntervention" class="form-select">
                                                 <option>À faire</option>
                                                 <option selected>En cours</option>
                                                 <option>Terminé</option>
                                             </select>
                                         </div>
                                         <div class="col-12">
-                                            <label class="form-label">Description détaillée des travaux</label>
-                                            <textarea class="form-control" rows="3" placeholder="Décrivez précisément les travaux à effectuer, les matériaux, les contraintes d'accès...">Ravalement complet de la façade extérieure. Décapage, nettoyage haute-pression, application enduit et peinture. Inclus réparation fissures.</textarea>
+                                            <label class="form-label" for="descriptionTravaux">Description détaillée des travaux</label>
+                                            <textarea id="descriptionTravaux" class="form-control" rows="3" placeholder="Décrivez précisément les travaux à effectuer, les matériaux, les contraintes d'accès...">Ravalement complet de la façade extérieure. Décapage, nettoyage haute-pression, application enduit et peinture. Inclus réparation fissures.</textarea>
                                             <div class="form-text">Plus votre description est précise, plus le devis sera juste.</div>
                                         </div>
                                     </div>
@@ -117,20 +117,20 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Date de signalement</label>
-                                            <input type="date" class="form-control" value="2025-01-10">
+                                            <label class="form-label" for="dateSignalement">Date de signalement</label>
+                                            <input type="date" id="dateSignalement" class="form-control" value="2025-01-10">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Date de début prévue</label>
-                                            <input type="date" class="form-control" value="2025-02-03">
+                                            <label class="form-label" for="dateDebutPrevue">Date de début prévue</label>
+                                            <input type="date" id="dateDebutPrevue" class="form-control" value="2025-02-03">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Date de fin estimée</label>
-                                            <input type="date" class="form-control" value="2025-03-28">
+                                            <label class="form-label" for="dateFinEstimee">Date de fin estimée</label>
+                                            <input type="date" id="dateFinEstimee" class="form-control" value="2025-03-28">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Avancement (%)</label>
-                                            <input type="number" class="form-control" value="60" min="0" max="100" placeholder="0 à 100">
+                                            <label class="form-label" for="avancement">Avancement (%)</label>
+                                            <input type="number" id="avancement" class="form-control" value="60" min="0" max="100" placeholder="0 à 100">
                                             <div class="form-text">Indiquez 100 pour clôturer l'intervention.</div>
                                         </div>
                                     </div>
@@ -142,28 +142,28 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Prestataire</label>
-                                            <input type="text" class="form-control" value="Entreprise Bâtiment Martin">
+                                            <label class="form-label" for="prestataire">Prestataire</label>
+                                            <input type="text" id="prestataire" class="form-control" value="Entreprise Bâtiment Martin">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Téléphone prestataire</label>
-                                            <input type="tel" class="form-control" value="04 91 23 45 67">
+                                            <label class="form-label" for="telephonePrestataire">Téléphone prestataire</label>
+                                            <input type="tel" id="telephonePrestataire" class="form-control" value="04 91 23 45 67">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Email prestataire</label>
-                                            <input type="email" class="form-control" value="martin.batiment@email.fr">
+                                            <label class="form-label" for="emailPrestataire">Email prestataire</label>
+                                            <input type="email" id="emailPrestataire" class="form-control" value="martin.batiment@email.fr">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Coût estimé (€)</label>
-                                            <input type="number" class="form-control" value="3200">
+                                            <label class="form-label" for="coutEstime">Coût estimé (€)</label>
+                                            <input type="number" id="coutEstime" class="form-control" value="3200">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Acompte versé (€)</label>
-                                            <input type="number" class="form-control" value="1000">
+                                            <label class="form-label" for="acompteVerse">Acompte versé (€)</label>
+                                            <input type="number" id="acompteVerse" class="form-control" value="1000">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Coût final réel (€)</label>
-                                            <input type="number" class="form-control" placeholder="À compléter à la clôture">
+                                            <label class="form-label" for="coutFinalReel">Coût final réel (€)</label>
+                                            <input type="number" id="coutFinalReel" class="form-control" placeholder="À compléter à la clôture">
                                             <div class="form-text">Laissez vide tant que les travaux ne sont pas terminés.</div>
                                         </div>
                                     </div>

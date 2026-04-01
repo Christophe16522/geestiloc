@@ -7,7 +7,7 @@
     <title>Saisir un paiement — Enregistrement locatif · GestiLoc</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         /* Finance: green save button */
@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Ouvrir le menu de navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
@@ -38,7 +38,7 @@
                     <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
                 </ul>
             </div>
-            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+            <div class="ms-3"><a href="#profil" style="color:white;text-decoration:none;" aria-label="Profil utilisateur"><i class="fas fa-user-circle" style="font-size:1.8rem;" aria-hidden="true"></i></a></div>
         </div>
     </nav>
 
@@ -59,7 +59,7 @@
                 <div class="col-lg-9">
                     <div class="content">
                         <div style="margin-bottom:2rem;">
-                            <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin:0;"><i class="fas fa-plus-circle" style="color:var(--secondary);margin-right:0.5rem;"></i>Saisir un paiement</h1>
+                            <h1 style="font-size:2rem;font-weight:800;color:var(--primary);margin:0;"><i class="fas fa-plus-circle" style="color:var(--secondary);margin-right:0.5rem;"></i>Saisir un paiement</h1>
                             <p style="color:var(--text-muted);margin-top:0.5rem;">Enregistrez un encaissement — loyer, charges ou régularisation — pour un suivi financier impeccable</p>
                         </div>
 
@@ -69,8 +69,8 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-6">
-                                            <label class="form-label">Locataire <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="locataire">Locataire <span style="color:var(--danger);">*</span></label>
+                                            <select id="locataire" class="form-select">
                                                 <option selected>Marie Janvier</option>
                                                 <option>Pierre Dupont</option>
                                                 <option>Sophie Martin</option>
@@ -80,8 +80,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Propriété <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="propriete">Propriété <span style="color:var(--danger);">*</span></label>
+                                            <select id="propriete" class="form-select">
                                                 <option selected>Apt. Paris 15e</option>
                                                 <option>Studio Lyon 7e</option>
                                                 <option>Villa Marseille Sud</option>
@@ -97,34 +97,34 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-3">
-                                            <label class="form-label">Mois <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="mois">Mois <span style="color:var(--danger);">*</span></label>
+                                            <select id="mois" class="form-select">
                                                 <option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option><option>Mai</option><option selected>Juin</option><option>Juillet</option><option>Août</option><option>Septembre</option><option>Octobre</option><option>Novembre</option><option>Décembre</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Année <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="annee">Année <span style="color:var(--danger);">*</span></label>
+                                            <select id="annee" class="form-select">
                                                 <option>2024</option>
                                                 <option selected>2025</option>
                                                 <option>2026</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Loyer HC (€) <span style="color:var(--danger);">*</span></label>
-                                            <input type="number" class="form-control" value="1200" placeholder="Ex. : 1 200">
+                                            <label class="form-label" for="loyerHc">Loyer HC (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" id="loyerHc" class="form-control" value="1200" placeholder="Ex. : 1 200">
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Charges locatives (€)</label>
-                                            <input type="number" class="form-control" value="120" placeholder="Ex. : 120">
+                                            <label class="form-label" for="chargesLocatives">Charges locatives (€)</label>
+                                            <input type="number" id="chargesLocatives" class="form-control" value="120" placeholder="Ex. : 120">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Date d'encaissement</label>
-                                            <input type="date" class="form-control" value="2025-06-01">
+                                            <label class="form-label" for="dateEncaissement">Date d'encaissement</label>
+                                            <input type="date" id="dateEncaissement" class="form-control" value="2025-06-01">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Moyen de paiement</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="moyenPaiement">Moyen de paiement</label>
+                                            <select id="moyenPaiement" class="form-select">
                                                 <option selected>Virement bancaire</option>
                                                 <option>Chèque</option>
                                                 <option>Espèces</option>
@@ -132,16 +132,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Statut <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="statutPaiement">Statut <span style="color:var(--danger);">*</span></label>
+                                            <select id="statutPaiement" class="form-select">
                                                 <option selected>Payé</option>
                                                 <option>En attente</option>
                                                 <option>Retard</option>
                                             </select>
                                         </div>
                                         <div class="col-12">
-                                            <label class="form-label">Note interne</label>
-                                            <textarea class="form-control" rows="2" placeholder="Ex. : paiement partiel, accord amiable, remise en place d'un prélèvement..."></textarea>
+                                            <label class="form-label" for="noteInterne">Note interne</label>
+                                            <textarea id="noteInterne" class="form-control" rows="2" placeholder="Ex. : paiement partiel, accord amiable, remise en place d'un prélèvement..."></textarea>
                                         </div>
                                     </div>
                                 </div>

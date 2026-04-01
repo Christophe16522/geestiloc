@@ -7,7 +7,7 @@
     <title>Modifier le dossier locataire — Marie Janvier · GestiLoc</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         @media (max-width: 576px) {
@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Ouvrir le menu de navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
@@ -32,7 +32,7 @@
                     <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
                 </ul>
             </div>
-            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+            <div class="ms-3"><a href="#profil" style="color:white;text-decoration:none;" aria-label="Profil utilisateur"><i class="fas fa-user-circle" style="font-size:1.8rem;" aria-hidden="true"></i></a></div>
         </div>
     </nav>
 
@@ -63,40 +63,40 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-3">
-                                            <label class="form-label">Civilité</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="civilite">Civilité</label>
+                                            <select id="civilite" class="form-select">
                                                 <option selected>Mme</option>
                                                 <option>M.</option>
                                                 <option>Autre</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Prénom <span style="color:var(--danger);">*</span></label>
-                                            <input type="text" class="form-control" value="Marie">
+                                            <label class="form-label" for="prenom">Prénom <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" id="prenom" class="form-control" value="Marie">
                                         </div>
                                         <div class="col-md-5">
-                                            <label class="form-label">Nom <span style="color:var(--danger);">*</span></label>
-                                            <input type="text" class="form-control" value="Janvier">
+                                            <label class="form-label" for="nom">Nom <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" id="nom" class="form-control" value="Janvier">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Date de naissance</label>
-                                            <input type="date" class="form-control" value="1988-03-14">
+                                            <label class="form-label" for="dateNaissance">Date de naissance</label>
+                                            <input type="date" id="dateNaissance" class="form-control" value="1988-03-14">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Lieu de naissance</label>
-                                            <input type="text" class="form-control" value="Paris 14e">
+                                            <label class="form-label" for="lieuNaissance">Lieu de naissance</label>
+                                            <input type="text" id="lieuNaissance" class="form-control" value="Paris 14e">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Nationalité</label>
-                                            <input type="text" class="form-control" value="Française">
+                                            <label class="form-label" for="nationalite">Nationalité</label>
+                                            <input type="text" id="nationalite" class="form-control" value="Française">
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Email <span style="color:var(--danger);">*</span></label>
-                                            <input type="email" class="form-control" value="marie.janvier@email.fr">
+                                            <label class="form-label" for="email">Email <span style="color:var(--danger);">*</span></label>
+                                            <input type="email" id="email" class="form-control" value="marie.janvier@email.fr">
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Téléphone <span style="color:var(--danger);">*</span></label>
-                                            <input type="tel" class="form-control" value="06 12 34 56 78">
+                                            <label class="form-label" for="telephone">Téléphone <span style="color:var(--danger);">*</span></label>
+                                            <input type="tel" id="telephone" class="form-control" value="06 12 34 56 78">
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +107,8 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Situation professionnelle</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="situationProfessionnelle">Situation professionnelle</label>
+                                            <select id="situationProfessionnelle" class="form-select">
                                                 <option selected>CDI</option>
                                                 <option>CDD</option>
                                                 <option>Indépendant</option>
@@ -119,16 +119,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Employeur</label>
-                                            <input type="text" class="form-control" value="TechCorp SAS">
+                                            <label class="form-label" for="employeur">Employeur</label>
+                                            <input type="text" id="employeur" class="form-control" value="TechCorp SAS">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Profession</label>
-                                            <input type="text" class="form-control" value="Ingénieure informatique">
+                                            <label class="form-label" for="profession">Profession</label>
+                                            <input type="text" id="profession" class="form-control" value="Ingénieure informatique">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Revenus mensuels nets (€) <span style="color:var(--danger);">*</span></label>
-                                            <input type="number" class="form-control" value="3800" placeholder="Ex. : 3 500">
+                                            <label class="form-label" for="revenus">Revenus mensuels nets (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" id="revenus" class="form-control" value="3800" placeholder="Ex. : 3 500">
                                             <div class="form-text"><i class="fas fa-info-circle me-1"></i>Taux d'effort actuel : <strong>31,6 %</strong> — Seuil recommandé : 33 %</div>
                                         </div>
                                     </div>
@@ -140,8 +140,8 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Type de garantie</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="typeGarantie">Type de garantie</label>
+                                            <select id="typeGarantie" class="form-select">
                                                 <option selected>Garant physique</option>
                                                 <option>Garant moral (société)</option>
                                                 <option>Visale</option>
@@ -150,20 +150,20 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Nom du garant</label>
-                                            <input type="text" class="form-control" value="Jean Janvier">
+                                            <label class="form-label" for="nomGarant">Nom du garant</label>
+                                            <input type="text" id="nomGarant" class="form-control" value="Jean Janvier">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Lien avec le locataire</label>
-                                            <input type="text" class="form-control" value="Père">
+                                            <label class="form-label" for="lienLocataire">Lien avec le locataire</label>
+                                            <input type="text" id="lienLocataire" class="form-control" value="Père">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Téléphone garant</label>
-                                            <input type="tel" class="form-control" value="06 98 76 54 32">
+                                            <label class="form-label" for="telephoneGarant">Téléphone garant</label>
+                                            <input type="tel" id="telephoneGarant" class="form-control" value="06 98 76 54 32">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Email garant</label>
-                                            <input type="email" class="form-control" value="jean.janvier@email.fr">
+                                            <label class="form-label" for="emailGarant">Email garant</label>
+                                            <input type="email" id="emailGarant" class="form-control" value="jean.janvier@email.fr">
                                         </div>
                                     </div>
                                 </div>
@@ -174,8 +174,8 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-6">
-                                            <label class="form-label">Bien immobilier associé <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="bienAsssocie">Bien immobilier associé <span style="color:var(--danger);">*</span></label>
+                                            <select id="bienAsssocie" class="form-select">
                                                 <option selected>Apt. Paris 15e</option>
                                                 <option>Studio Lyon 7e</option>
                                                 <option>Villa Marseille Sud</option>
@@ -183,16 +183,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Statut paiement</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="statutPaiement">Statut paiement</label>
+                                            <select id="statutPaiement" class="form-select">
                                                 <option selected>Payé</option>
                                                 <option>En attente</option>
                                                 <option>En retard</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Date d'entrée</label>
-                                            <input type="date" class="form-control" value="2022-03-01">
+                                            <label class="form-label" for="dateEntree">Date d'entrée</label>
+                                            <input type="date" id="dateEntree" class="form-control" value="2022-03-01">
                                         </div>
                                     </div>
                                 </div>

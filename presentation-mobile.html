@@ -602,8 +602,9 @@ slides.addEventListener('scroll', () => {
 
 // ─── FAB → TOAST ───
 document.getElementById('fab').addEventListener('click', () => {
+  const gitUrl = 'https://christophe16522.github.io/geestiloc/';
   showToast('Lien copié dans le presse-papier !');
-  if (navigator.clipboard) navigator.clipboard.writeText(window.location.href).catch(()=>{});
+  if (navigator.clipboard) navigator.clipboard.writeText(gitUrl).catch(()=>{});
 });
 
 function showToast(msg) {
@@ -613,5 +614,8 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 </script>
+<footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
+    Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2026
+</footer>
 </body>
 </html>

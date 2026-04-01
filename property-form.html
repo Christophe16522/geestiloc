@@ -7,7 +7,7 @@
     <title>GestiLoc — Modifier le bien · Apt. Paris 15e</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         .card-section-step {
@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Ouvrir le menu de navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
@@ -41,7 +41,7 @@
                     <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
                 </ul>
             </div>
-            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+            <div class="ms-3"><a href="#profil" style="color:white;text-decoration:none;" aria-label="Profil utilisateur"><i class="fas fa-user-circle" style="font-size:1.8rem;" aria-hidden="true"></i></a></div>
         </div>
     </nav>
 
@@ -83,24 +83,24 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-8">
-                                            <label class="form-label">Adresse <span style="color:var(--danger);">*</span></label>
-                                            <input type="text" class="form-control" value="23 Rue de la Convention" placeholder="Ex. : 12 Avenue des Fleurs">
+                                            <label class="form-label" for="adresse">Adresse <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" id="adresse" class="form-control" value="23 Rue de la Convention" placeholder="Ex. : 12 Avenue des Fleurs">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Complément d'adresse</label>
-                                            <input type="text" class="form-control" placeholder="Bât. B, Apt. 14, Esc. 2...">
+                                            <label class="form-label" for="complementAdresse">Complément d'adresse</label>
+                                            <input type="text" id="complementAdresse" class="form-control" placeholder="Bât. B, Apt. 14, Esc. 2...">
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Code postal <span style="color:var(--danger);">*</span></label>
-                                            <input type="text" class="form-control" value="75015" placeholder="75000">
+                                            <label class="form-label" for="codePostal">Code postal <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" id="codePostal" class="form-control" value="75015" placeholder="75000">
                                         </div>
                                         <div class="col-md-5">
-                                            <label class="form-label">Ville <span style="color:var(--danger);">*</span></label>
-                                            <input type="text" class="form-control" value="Paris" placeholder="Ex. : Paris, Lyon, Bordeaux...">
+                                            <label class="form-label" for="ville">Ville <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" id="ville" class="form-control" value="Paris" placeholder="Ex. : Paris, Lyon, Bordeaux...">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Pays</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="pays">Pays</label>
+                                            <select id="pays" class="form-select">
                                                 <option selected>France</option>
                                                 <option>Belgique</option>
                                                 <option>Suisse</option>
@@ -116,8 +116,8 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Type de bien <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="typeBien">Type de bien <span style="color:var(--danger);">*</span></label>
+                                            <select id="typeBien" class="form-select">
                                                 <option selected>Appartement</option>
                                                 <option>Studio</option>
                                                 <option>Maison</option>
@@ -127,13 +127,13 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Surface habitable (m²) <span style="color:var(--danger);">*</span></label>
-                                            <input type="number" class="form-control" value="75" placeholder="Ex. : 65" min="1">
+                                            <label class="form-label" for="surfaceHabitable">Surface habitable (m²) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" id="surfaceHabitable" class="form-control" value="75" placeholder="Ex. : 65" min="1">
                                             <div class="form-text"><i class="fas fa-info-circle"></i>Surface loi Carrez pour les appartements</div>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Typologie (nombre de pièces)</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="typologiePieces">Typologie (nombre de pièces)</label>
+                                            <select id="typologiePieces" class="form-select">
                                                 <option>Studio (1 pièce)</option>
                                                 <option>T2 — 2 pièces</option>
                                                 <option selected>T3 — 3 pièces</option>
@@ -142,16 +142,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Étage du bien</label>
-                                            <input type="number" class="form-control" value="3" placeholder="0 = RDC" min="0">
+                                            <label class="form-label" for="etageBien">Étage du bien</label>
+                                            <input type="number" id="etageBien" class="form-control" value="3" placeholder="0 = RDC" min="0">
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Nb. total d'étages</label>
-                                            <input type="number" class="form-control" value="6" placeholder="Ex. : 7" min="1">
+                                            <label class="form-label" for="nbTotalEtages">Nb. total d'étages</label>
+                                            <input type="number" id="nbTotalEtages" class="form-control" value="6" placeholder="Ex. : 7" min="1">
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Exposition principale</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="expositionPrincipale">Exposition principale</label>
+                                            <select id="expositionPrincipale" class="form-select">
                                                 <option>Nord</option>
                                                 <option>Sud</option>
                                                 <option>Est</option>
@@ -163,8 +163,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label">Classe énergie DPE <span title="Diagnostic de Performance Énergétique" style="cursor:help;color:var(--text-muted);">?</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="classeEnergieDpe">Classe énergie DPE <span title="Diagnostic de Performance Énergétique" style="cursor:help;color:var(--text-muted);">?</span></label>
+                                            <select id="classeEnergieDpe" class="form-select">
                                                 <option>A — Très performant</option>
                                                 <option>B — Performant</option>
                                                 <option selected>C — Assez bon</option>
@@ -175,8 +175,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Stationnement</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="stationnement">Stationnement</label>
+                                            <select id="stationnement" class="form-select">
                                                 <option>Aucun</option>
                                                 <option selected>1 place incluse</option>
                                                 <option>2 places incluses</option>
@@ -184,16 +184,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Cave / Cellier</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="caveCellier">Cave / Cellier</label>
+                                            <select id="caveCellier" class="form-select">
                                                 <option selected>Aucun(e)</option>
                                                 <option>Cave incluse</option>
                                                 <option>Cellier inclus</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Type de location</label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="typeLocation">Type de location</label>
+                                            <select id="typeLocation" class="form-select">
                                                 <option selected>Non meublé (bail 3 ans)</option>
                                                 <option>Meublé (bail 1 an)</option>
                                             </select>
@@ -208,32 +208,32 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Loyer mensuel hors charges (€) <span style="color:var(--danger);">*</span></label>
-                                            <input type="number" class="form-control" value="1200" placeholder="Ex. : 850" min="0">
+                                            <label class="form-label" for="loyerMensuelHc">Loyer mensuel hors charges (€) <span style="color:var(--danger);">*</span></label>
+                                            <input type="number" id="loyerMensuelHc" class="form-control" value="1200" placeholder="Ex. : 850" min="0">
                                             <div class="form-text"><i class="fas fa-info-circle"></i>Saisir le loyer net, hors provisions pour charges</div>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Charges mensuelles (€)</label>
-                                            <input type="number" class="form-control" value="120" placeholder="Ex. : 100" min="0">
+                                            <label class="form-label" for="chargesMensuelles">Charges mensuelles (€)</label>
+                                            <input type="number" id="chargesMensuelles" class="form-control" value="120" placeholder="Ex. : 100" min="0">
                                             <div class="form-text"><i class="fas fa-info-circle"></i>Provisions pour charges de copropriété</div>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Dépôt de garantie (€)</label>
-                                            <input type="number" class="form-control" value="2400" placeholder="Généralement 1 ou 2 mois de loyer HC" min="0">
+                                            <label class="form-label" for="depotGarantie">Dépôt de garantie (€)</label>
+                                            <input type="number" id="depotGarantie" class="form-control" value="2400" placeholder="Généralement 1 ou 2 mois de loyer HC" min="0">
                                             <div class="form-text"><i class="fas fa-info-circle"></i>Plafonné à 2 mois HC pour un bien nu</div>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Prix d'acquisition (€)</label>
-                                            <input type="number" class="form-control" value="280000" placeholder="Ex. : 250 000" min="0">
+                                            <label class="form-label" for="prixAcquisition">Prix d'acquisition (€)</label>
+                                            <input type="number" id="prixAcquisition" class="form-control" value="280000" placeholder="Ex. : 250 000" min="0">
                                             <div class="form-text"><i class="fas fa-info-circle"></i>Utilisé pour calculer le rendement locatif brut</div>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Année d'acquisition</label>
-                                            <input type="number" class="form-control" value="2019" placeholder="Ex. : 2021" min="1900" max="2099">
+                                            <label class="form-label" for="anneeAcquisition">Année d'acquisition</label>
+                                            <input type="number" id="anneeAcquisition" class="form-control" value="2019" placeholder="Ex. : 2021" min="1900" max="2099">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="form-label">Statut de location <span style="color:var(--danger);">*</span></label>
-                                            <select class="form-select">
+                                            <label class="form-label" for="statutLocation">Statut de location <span style="color:var(--danger);">*</span></label>
+                                            <select id="statutLocation" class="form-select">
                                                 <option selected>Occupé — loyer en cours</option>
                                                 <option>Vacant — disponible à la location</option>
                                                 <option>En travaux — indisponible</option>
@@ -248,13 +248,13 @@
                                 <div class="card-header"><i class="fas fa-align-left"></i> <span class="card-section-step">4</span> Description &amp; Notes internes</div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label class="form-label">Description valorisante du bien</label>
-                                        <textarea class="form-control" rows="4" placeholder="Décrivez les points forts, les équipements, la luminosité, la proximité des transports, des commerces...">Bel appartement T3 au 3e étage avec ascenseur, lumineux, double vitrage, parquet au sol. Cuisine entièrement équipée, salle de bain avec baignoire. Balcon exposé sud-est. À 2 min. du métro Convention (ligne 12).</textarea>
+                                        <label class="form-label" for="descriptionBien">Description valorisante du bien</label>
+                                        <textarea id="descriptionBien" class="form-control" rows="4" placeholder="Décrivez les points forts, les équipements, la luminosité, la proximité des transports, des commerces...">Bel appartement T3 au 3e étage avec ascenseur, lumineux, double vitrage, parquet au sol. Cuisine entièrement équipée, salle de bain avec baignoire. Balcon exposé sud-est. À 2 min. du métro Convention (ligne 12).</textarea>
                                         <div class="form-text"><i class="fas fa-lightbulb"></i>Une description soignée valorise votre bien et attire de meilleurs locataires</div>
                                     </div>
                                     <div>
-                                        <label class="form-label">Notes privées <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted);">(visibles uniquement par vous)</span></label>
-                                        <textarea class="form-control" rows="3" placeholder="Rappels, travaux à prévoir, contacts utiles, remarques de suivi...">Chaudière à remplacer avant 2026. Ravalement de façade prévu par la copropriété en 2025. Contacter M. Girard pour clés de secours.</textarea>
+                                        <label class="form-label" for="notesPrivees">Notes privées <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted);">(visibles uniquement par vous)</span></label>
+                                        <textarea id="notesPrivees" class="form-control" rows="3" placeholder="Rappels, travaux à prévoir, contacts utiles, remarques de suivi...">Chaudière à remplacer avant 2026. Ravalement de façade prévu par la copropriété en 2025. Contacter M. Girard pour clés de secours.</textarea>
                                         <div class="form-text"><i class="fas fa-lock"></i>Ces notes ne sont pas partagées avec vos locataires</div>
                                     </div>
                                 </div>

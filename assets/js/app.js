@@ -4,22 +4,75 @@
 (function () {
     'use strict';
 
-    /* -- Lien actif dans la navbar -------------------------------- */
+    /* ── Toast notification ───────────────────────────────────── */
+    var s = document.createElement('style');
+    s.textContent = '@keyframes fadeInToast{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}';
+    document.head.appendChild(s);
+
+    function showToast(msg, type) {
+        var t = document.createElement('div');
+        t.textContent = msg;
+        t.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:' +
+            (type === 'success' ? '#10b981' : '#1e3a8a') +
+            ';color:white;padding:.75rem 1.5rem;border-radius:50px;font-size:.88rem;font-weight:600;' +
+            'box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:9999;pointer-events:none;' +
+            'animation:fadeInToast .3s ease;';
+        document.body.appendChild(t);
+        setTimeout(function() { t.remove(); }, 2500);
+    }
+
+    /* ── Scroll progress bar ──────────────────────────────────── */
+    var bar = document.createElement('div');
+    bar.id = 'scroll-progress';
+    document.body.prepend(bar);
+
+    window.addEventListener('scroll', function () {
+        var max = document.body.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        bar.style.width = pct + '%';
+    }, { passive: true });
+
+    /* ── Navbar scroll glass effect ───────────────────────────── */
+    var navbar = document.querySelector('.navbar');
+    if (navbar) {
+        window.addEventListener('scroll', function () {
+            navbar.style.boxShadow = window.scrollY > 30
+                ? '0 4px 40px rgba(0,0,0,0.28)'
+                : '0 2px 30px rgba(0,0,0,0.2)';
+        }, { passive: true });
+    }
+
+    /* ── Scroll reveal (ajoute .reveal aux cartes et sections) ── */
+    function initReveal() {
+        // On révèle les sections qui ont déjà la classe .reveal via CSS
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            observer.observe(el);
+        });
+    }
+    initReveal();
+
+    /* ── Lien actif dans la navbar ──────────────────────────── */
     var currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-link').forEach(function (link) {
         if (link.getAttribute('href') === currentPage) link.classList.add('active');
     });
 
-    /* -- Gestionnaire générique de soumission de formulaire -------
-       Ajouter data-redirect="page.html" (et optionnellement
-       data-success-msg="...") sur la balise <form> pour l'activer.
-    --------------------------------------------------------------- */
+    /* ── Gestionnaire générique de soumission de formulaire ──── */
     document.querySelectorAll('form[data-redirect]').forEach(function (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             var msg = this.dataset.successMsg || 'Enregistrement réussi !';
-            alert(msg);
-            window.location.href = this.dataset.redirect;
+            showToast(msg, 'success');
+            setTimeout(function() { window.location.href = this.dataset.redirect; }.bind(this), 1200);
         });
     });
 }());

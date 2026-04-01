@@ -7,7 +7,7 @@
     <title>Détail Paiement — Juin 2025 · Marie Janvier · GestiLoc</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         .amount-hero {
@@ -21,7 +21,7 @@
         .btn-action-primary {
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             border: none; color: white; font-weight: 600; padding: 0.6rem 1.4rem;
-            border-radius: 8px; text-decoration: none;
+            border-radius: 50px; text-decoration: none;
             display: inline-flex; align-items: center; gap: 0.4rem;
             transition: all 0.3s ease; box-shadow: 0 3px 12px rgba(59,130,246,0.3);
         }
@@ -41,7 +41,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line" aria-hidden="true"></i> GestiLoc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Ouvrir le menu de navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="tableau-de-bord.html">Tableau de bord</a></li>
@@ -54,7 +54,7 @@
                     <li class="nav-item"><a class="nav-link" href="reports.html">Rapports</a></li>
                 </ul>
             </div>
-            <div class="ms-3"><a href="#" style="color:white;text-decoration:none;"><i class="fas fa-user-circle" style="font-size:1.8rem;"></i></a></div>
+            <div class="ms-3"><a href="#profil" style="color:white;text-decoration:none;" aria-label="Profil utilisateur"><i class="fas fa-user-circle" style="font-size:1.8rem;" aria-hidden="true"></i></a></div>
         </div>
     </nav>
 
@@ -172,7 +172,7 @@
                                         <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.25rem;">La quittance officielle pour la période de <strong>juin 2025</strong> est prête. Remettez-la en un clic à votre locataire — par impression ou directement par email.</p>
                                         <div class="d-flex gap-2 flex-wrap">
                                             <button class="btn btn-outline-primary" onclick="window.print();"><i class="fas fa-print me-2"></i>Imprimer la quittance</button>
-                                            <button class="btn btn-success" style="color:white;" onclick="alert('Quittance envoyée par email à marie.janvier@email.fr');"><i class="fas fa-paper-plane me-2"></i>Envoyer par email</button>
+                                            <button class="btn btn-success" style="color:white;" onclick="var b=this;var orig=b.innerHTML;b.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Envoi...';b.disabled=true;setTimeout(function(){b.innerHTML=orig;b.disabled=false;},1800);"><i class="fas fa-paper-plane me-2"></i>Envoyer par email</button>
                                         </div>
                                     </div>
                                 </div>

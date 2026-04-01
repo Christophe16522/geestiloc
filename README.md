@@ -72,16 +72,30 @@ Bootstrap 5.3  ·  Chart.js 3.9  ·  Font Awesome 6.4  ·  Google Fonts (Inter) 
 
 ```
 gestiloc/
-├── index.html             ← Page d'accueil (fonctionnalités)
-├── tableau-de-bord.html   ← Tableau de bord
-├── properties.html        ← Propriétés
-├── tenants.html           ← Locataires
-├── finances.html          ← Finances
-├── maintenance.html       ← Maintenance
-├── contracts.html         ← Contrats
-├── documents.html         ← Documents
-├── reports.html           ← Rapports
-└── assets/                ← CSS & JS
+├── index.html                  ← Page d'accueil (fonctionnalités)
+├── tableau-de-bord.html        ← Tableau de bord
+├── presentation-desktop.html   ← Présentation version desktop
+├── presentation-mobile.html    ← Présentation version mobile
+├── properties.html             ← Propriétés (liste)
+├── property-detail.html        ← Détail d'une propriété
+├── property-form.html          ← Formulaire propriété
+├── tenants.html                ← Locataires (liste)
+├── tenant-detail.html          ← Détail d'un locataire
+├── tenant-form.html            ← Formulaire locataire
+├── finances.html               ← Finances
+├── finance-detail.html         ← Détail d'une transaction
+├── finance-form.html           ← Formulaire transaction
+├── maintenance.html            ← Maintenance (liste)
+├── maintenance-detail.html     ← Détail d'une intervention
+├── maintenance-form.html       ← Formulaire intervention
+├── contracts.html              ← Contrats (liste)
+├── contract-detail.html        ← Détail d'un contrat
+├── contract-form.html          ← Formulaire contrat
+├── documents.html              ← Documents (liste)
+├── document-detail.html        ← Détail d'un document
+├── document-form.html          ← Formulaire document
+├── reports.html                ← Rapports & KPIs
+└── assets/                     ← CSS & JS
 ```
 
 ## 🚀 Lancement rapide
@@ -110,7 +124,7 @@ Pour transformer ce POC en application complète :
 
 <div align="center">
 
-**GestiLoc v3.0 © 2024** — Plateforme de gestion immobilière professionnelle
+**GestiLoc v3.0 © 2026** — Plateforme de gestion immobilière professionnelle
 
 *POC libre d'usage — Éducatif*
 
