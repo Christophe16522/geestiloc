@@ -520,21 +520,21 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',-apple-system,sans-ser
     <div class="sheet-feature-list" id="sheet-features"></div>
   </div>
   <div class="sheet-cta">
-    <a href="tableau-de-bord.html" class="btn-cta-main" style="font-size:.85rem;padding:.85rem;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;background:linear-gradient(135deg,var(--c),#0284c7);color:white;font-weight:700;"><i class="fas fa-arrow-right"></i> Voir dans la démo</a>
+    <a href="#" id="sheet-link" class="btn-cta-main" style="font-size:.85rem;padding:.85rem;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;background:linear-gradient(135deg,var(--c),#0284c7);color:white;font-weight:700;"><i class="fas fa-arrow-right"></i> Ouvrir ce module</a>
   </div>
 </div>
 
 <script>
 // ─── MODULE DATA ───
 const moduleData = {
-  prop:{title:'Propriétés',sub:'Gestion du parc immobilier',features:['Fiche bien complète (surface, type, adresse)','Classe énergétique DPE','Galerie photo par propriété','Statut en temps réel (occupé/vacant)','Calcul du rendement locatif','Historique des locataires','Valeur estimée du bien']},
-  tenant:{title:'Locataires',sub:'Suivi des occupants',features:['Profil complet avec pièces jointes','Historique des paiements','Alertes bail & révision de loyer','Score de fiabilité automatique','Contacts d\'urgence','Documents partagés','Correspondances centralisées']},
-  contract:{title:'Contrats',sub:'Gestion des baux',features:['Baux et avenants centralisés','Renouvellements automatiques','Suivi des signatures','Alertes d\'expiration','Historique complet','Modèles de contrats','Révision de loyer (IRL)']},
-  doc:{title:'Documents',sub:'Gestion électronique',features:['GED intégrée et structurée','Classement automatique','Rappels d\'expiration','Partage sécurisé','Versioning des documents','Tags et recherche full-text','Import par glisser-déposer']},
-  finance:{title:'Finances',sub:'Suivi financier complet',features:['Encaissement des loyers','Suivi des charges locatives','Dépenses par propriété','Calcul du rendement net','Rapports mensuels auto','Exports comptables CSV/PDF','Indicateurs de performance']},
-  maint:{title:'Maintenance',sub:'Interventions et travaux',features:['Tickets d\'intervention','Suivi des prestataires','Devis et factures','Historique par bien','Planification des travaux','Alertes urgence','Coûts par intervention']},
-  report:{title:'Rapports',sub:'Analyses et bilans',features:['Tableaux de bord personnalisés','Bilans mensuels et annuels','Exports PDF & Excel','Graphiques de performance','Comparaisons N-1','Synthèse patrimoniale','Rapports fiscaux']},
-  dash:{title:'Tableau de bord',sub:'Vue globale en temps réel',features:['KPIs en temps réel','Alertes critiques proactives','Synthèse patrimoniale globale','Widget personnalisables','Carte des biens','Agenda des échéances','Feed d\'activité']}
+  prop:    {title:'Propriétés',    sub:'Gestion du parc immobilier',    url:'properties.html',     features:['Fiche bien complète (surface, type, adresse)','Classe énergétique DPE','Galerie photo par propriété','Statut en temps réel (occupé/vacant)','Calcul du rendement locatif','Historique des locataires','Valeur estimée du bien']},
+  tenant:  {title:'Locataires',    sub:'Suivi des occupants',           url:'tenants.html',         features:['Profil complet avec pièces jointes','Historique des paiements','Alertes bail & révision de loyer','Score de fiabilité automatique','Contacts d\'urgence','Documents partagés','Correspondances centralisées']},
+  contract:{title:'Contrats',      sub:'Gestion des baux',              url:'contracts.html',       features:['Baux et avenants centralisés','Renouvellements automatiques','Suivi des signatures','Alertes d\'expiration','Historique complet','Modèles de contrats','Révision de loyer (IRL)']},
+  doc:     {title:'Documents',     sub:'Gestion électronique',          url:'documents.html',       features:['GED intégrée et structurée','Classement automatique','Rappels d\'expiration','Partage sécurisé','Versioning des documents','Tags et recherche full-text','Import par glisser-déposer']},
+  finance: {title:'Finances',      sub:'Suivi financier complet',       url:'finances.html',        features:['Encaissement des loyers','Suivi des charges locatives','Dépenses par propriété','Calcul du rendement net','Rapports mensuels auto','Exports comptables CSV/PDF','Indicateurs de performance']},
+  maint:   {title:'Maintenance',   sub:'Interventions et travaux',      url:'maintenance.html',     features:['Tickets d\'intervention','Suivi des prestataires','Devis et factures','Historique par bien','Planification des travaux','Alertes urgence','Coûts par intervention']},
+  report:  {title:'Rapports',      sub:'Analyses et bilans',            url:'reports.html',         features:['Tableaux de bord personnalisés','Bilans mensuels et annuels','Exports PDF & Excel','Graphiques de performance','Comparaisons N-1','Synthèse patrimoniale','Rapports fiscaux']},
+  dash:    {title:'Tableau de bord',sub:'Vue globale en temps réel',   url:'tableau-de-bord.html', features:['KPIs en temps réel','Alertes critiques proactives','Synthèse patrimoniale globale','Widget personnalisables','Carte des biens','Agenda des échéances','Feed d\'activité']}
 };
 
 // ─── SCREEN SCROLL ───
@@ -581,6 +581,7 @@ document.querySelectorAll('.mod-item').forEach(item => {
     if (!data) return;
     document.getElementById('sheet-title').textContent = data.title;
     document.getElementById('sheet-sub').textContent = data.sub;
+    document.getElementById('sheet-link').href = data.url;
     const fl = document.getElementById('sheet-features');
     fl.innerHTML = data.features.map(f => `<div class="sfl-item"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join('');
     openSheet();
