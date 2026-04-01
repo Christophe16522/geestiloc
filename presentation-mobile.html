@@ -613,6 +613,15 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
+
+// ─── RESIZE → REDIRECT DESKTOP ───
+let resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(()=>{
+    if(window.innerWidth>=768) window.location.replace('presentation-desktop.html');
+  },400);
+});
 </script>
 <footer style="text-align:center;padding:1.25rem 0 1.5rem;font-size:0.78rem;color:#94a3b8;letter-spacing:0.3px;">
     Développé par <strong style="color:#1e3a8a;">Christophe LAI</strong> · GestiLoc &copy; 2026
