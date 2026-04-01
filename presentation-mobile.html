@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#060d1f">
+<title>GestiLoc — Présentation Mobile</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{--p:#1e3a8a;--pl:#3b82f6;--c:#06b6d4;--g:#10b981;--w:#f59e0b;--dark:#060d1f;--mid:#0f172a;--text:#1e293b;--muted:#64748b;}
+html,body{height:100%;overflow:hidden;font-family:'Inter',-apple-system,sans-serif;background:var(--dark);color:white;touch-action:pan-y;}
+
+/* ─── SHELL ─── */
+.app-shell{height:100vh;display:flex;flex-direction:column;position:relative;}
+
+/* ─── HEADER ─── */
+.app-header{background:rgba(6,13,31,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);z-index:100;flex-shrink:0;padding-top:calc(.85rem + env(safe-area-inset-top));}
+.logo-wrap{display:flex;align-items:center;gap:.65rem;}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--c),var(--pl));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.logo-text{font-weight:800;font-size:1.05rem;letter-spacing:-.5px;}
+.header-badge{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);border-radius:50px;padding:.25rem .75rem;font-size:.65rem;font-weight:700;color:#67e8f9;letter-spacing:1px;text-transform:uppercase;}
+
+/* ─── SCREENS CONTAINER ─── */
+.screens{flex:1;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.screens::-webkit-scrollbar{display:none;}
+.screen{height:100%;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;}
+
+/* ─── SCREEN DOTS ─── */
+.screen-dots{position:fixed;right:1rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:200;}
+.sdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s;cursor:pointer;}
+.sdot.active{background:#67e8f9;height:20px;border-radius:3px;}
+
+/* ─── BOTTOM NAV ─── */
+.bottom-nav{background:rgba(6,13,31,.98);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:stretch;padding-bottom:env(safe-area-inset-bottom);flex-shrink:0;z-index:100;}
+.nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;padding:.7rem .5rem;font-size:.6rem;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .25s;text-decoration:none;border:none;background:none;font-family:inherit;}
+.nav-tab i{font-size:1.15rem;}
+.nav-tab.active{color:#67e8f9;}
+.nav-tab.active i{filter:drop-shadow(0 0 6px rgba(6,182,212,.6));}
+
+/* ─── FAB ─── */
+.fab{position:fixed;right:1.25rem;bottom:calc(5.5rem + env(safe-area-inset-bottom));width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--c),#0284c7);display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 20px rgba(6,182,212,.45);z-index:150;cursor:pointer;transition:all .25s;border:none;color:white;}
+.fab:active{transform:scale(.92);}
+
+/* ══════════════════════════════════════
+   SCREEN 1 — HERO
+══════════════════════════════════════ */
+.s-hero{background:var(--dark);}
+.s-hero-bg{position:absolute;inset:0;}
+.s-hero-orb{position:absolute;top:-20%;left:-20%;width:180%;height:180%;background:radial-gradient(ellipse at 60% 30%,rgba(6,182,212,.12) 0%,rgba(30,58,138,.08) 40%,transparent 70%);animation:hero-orb 8s ease-in-out infinite alternate;pointer-events:none;}
+@keyframes hero-orb{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.08) rotate(5deg)}}
+.s-hero-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 1.5rem 1.5rem;}
+.hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#67e8f9;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+.hero-eyebrow::before{content:'';width:20px;height:1.5px;background:#67e8f9;flex-shrink:0;}
+.s-hero h1{font-size:clamp(2.2rem,8vw,3rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:1.25rem;}
+.s-hero h1 .grad{background:linear-gradient(135deg,#67e8f9,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.s-hero p{font-size:.92rem;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:2.5rem;}
+.hero-cta-stack{display:flex;flex-direction:column;gap:.75rem;}
+.btn-hero-primary{display:flex;align-items:center;justify-content:center;gap:.7rem;background:linear-gradient(135deg,var(--c),#0284c7);color:white;font-weight:700;font-size:.95rem;padding:1rem;border-radius:14px;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(6,182,212,.35);}
+.btn-hero-primary:active{transform:scale(.97);}
+.btn-hero-ghost{display:flex;align-items:center;justify-content:center;gap:.7rem;border:1.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.75);font-weight:600;font-size:.9rem;padding:.9rem;border-radius:14px;text-decoration:none;transition:all .2s;}
+.btn-hero-ghost:active{background:rgba(255,255,255,.05);}
+.hero-mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.07);}
+.hms-val{font-size:1.6rem;font-weight:800;color:#67e8f9;line-height:1;}
+.hms-lbl{font-size:.6rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:.2rem;}
+.scroll-hint{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.65rem;color:rgba(255,255,255,.2);letter-spacing:1.5px;text-transform:uppercase;padding:1rem;animation:bounce-hint 2s ease-in-out infinite;}
+@keyframes bounce-hint{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+/* ══════════════════════════════════════
+   SCREEN 2 — STATS
+══════════════════════════════════════ */
+.s-stats{background:linear-gradient(160deg,#0c1a3a 0%,var(--dark) 100%);}
+.s-stats-content{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 1.5rem;}
+.screen-tag{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#67e8f9;margin-bottom:1.5rem;}
+.s-stats h2{font-size:clamp(1.7rem,6vw,2.2rem);font-weight:800;letter-spacing:-1px;margin-bottom:.75rem;}
+.s-stats p{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:2.5rem;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.stat-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;}
+.stat-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-block:nth-child(1)::before{background:linear-gradient(90deg,var(--c),#0284c7);}
+.stat-block:nth-child(2)::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa);}
+.stat-block:nth-child(3)::before{background:linear-gradient(90deg,#10b981,#34d399);}
+.stat-block:nth-child(4)::before{background:linear-gradient(90deg,#f59e0b,#fbbf24);}
+.stat-num{font-size:2.8rem;font-weight:900;line-height:1;letter-spacing:-2px;}
+.stat-num.c1{color:#67e8f9;}
+.stat-num.c2{color:#a78bfa;}
+.stat-num.c3{color:#34d399;}
+.stat-num.c4{color:#fbbf24;}
+.stat-lbl{font-size:.72rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px;margin-top:.5rem;font-weight:600;line-height:1.4;}
+.stat-icon{position:absolute;right:1rem;bottom:.75rem;font-size:2rem;opacity:.08;}
+
+/* ══════════════════════════════════════
+   SCREEN 3 — FEATURE CAROUSEL
+══════════════════════════════════════ */
+.s-features{background:#fff;color:var(--text);}
+.s-features-content{flex:1;display:flex;flex-direction:column;padding:2rem 0 1.5rem;}
+.s-features .screen-tag{color:var(--c);padding:0 1.5rem;}
+.s-features h2{font-size:1.9rem;font-weight:800;letter-spacing:-1px;color:var(--p);padding:0 1.5rem;margin-bottom:.5rem;}
+.s-features p.sub{font-size:.85rem;color:var(--muted);padding:0 1.5rem;margin-bottom:1.75rem;}
+/* Carousel */
+.feat-carousel{flex:1;display:flex;flex-direction:column;}
+.feat-slides{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 1.5rem;gap:1rem;padding-bottom:1rem;}
+.feat-slides::-webkit-scrollbar{display:none;}
+.feat-slide{scroll-snap-align:start;min-width:calc(100vw - 4rem);border-radius:20px;padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;min-height:260px;flex-shrink:0;}
+.fs-1{background:linear-gradient(135deg,#0f172a,#1e3a8a);}
+.fs-2{background:linear-gradient(135deg,#064e3b,#065f46);}
+.fs-3{background:linear-gradient(135deg,#1e1b4b,#3730a3);}
+.fs-4{background:linear-gradient(135deg,#431407,#7c2d12);}
+.feat-slide-icon{font-size:3rem;margin-bottom:.75rem;}
+.feat-slide-title{font-size:1.2rem;font-weight:800;color:white;margin-bottom:.5rem;}
+.feat-slide-desc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.65;flex:1;}
+.feat-slide-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
+.fsp{font-size:.65rem;font-weight:600;padding:.25rem .6rem;border-radius:6px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);}
+/* Carousel indicators */
+.carousel-dots{display:flex;gap:.5rem;justify-content:center;padding:.75rem 0 .25rem;}
+.cdot{width:6px;height:6px;border-radius:50%;background:rgba(30,58,138,.2);transition:all .3s;}
+.cdot.active{background:var(--c);width:18px;border-radius:3px;}
+
+/* ══════════════════════════════════════
+   SCREEN 4 — MODULES LIST
+══════════════════════════════════════ */
+.s-modules{background:var(--mid);}
+.s-modules-content{flex:1;display:flex;flex-direction:column;padding:2rem 1.5rem;overflow-y:auto;}
+.s-modules h2{font-size:1.8rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem;}
+.s-modules p.sub{font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:1.75rem;}
+.module-list{display:flex;flex-direction:column;gap:.75rem;}
+.mod-item{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1rem 1.1rem;transition:all .2s;cursor:pointer;}
+.mod-item:active{background:rgba(255,255,255,.07);transform:scale(.98);}
+.mod-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.mod-info{flex:1;}
+.mod-name{font-size:.92rem;font-weight:700;color:white;margin-bottom:.15rem;}
+.mod-desc{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.4;}
+.mod-badge{font-size:.62rem;font-weight:700;padding:.2rem .55rem;border-radius:5px;letter-spacing:.3px;flex-shrink:0;}
+.mod-badge.done{background:rgba(16,185,129,.15);color:#34d399;}
+.mod-badge.wip{background:rgba(245,158,11,.15);color:#fbbf24;}
+.mod-badge.plan{background:rgba(139,92,246,.15);color:#a78bfa;}
+.mod-arrow{color:rgba(255,255,255,.2);font-size:.8rem;flex-shrink:0;}
+
+/* ══════════════════════════════════════
+   SCREEN 5 — ROADMAP
+══════════════════════════════════════ */
+.s-roadmap{background:linear-gradient(160deg,#0c1a3a,var(--dark));}
+.s-roadmap-content{flex:1;display:flex;flex-direction:column;padding:2rem 1.5rem;overflow-y:auto;}
+.s-roadmap h2{font-size:1.8rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem;}
+.s-roadmap p.sub{font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:2rem;}
+.roadmap-list{display:flex;flex-direction:column;gap:0;position:relative;}
+.roadmap-list::before{content:'';position:absolute;left:1.35rem;top:1.5rem;bottom:1.5rem;width:2px;background:linear-gradient(to bottom,var(--pl),var(--c),#8b5cf6);border-radius:2px;}
+.rm-item{display:flex;gap:1.25rem;align-items:flex-start;padding-bottom:2rem;position:relative;z-index:1;}
+.rm-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:white;flex-shrink:0;border:2px solid var(--dark);margin-top:.1rem;}
+.rm-body{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.1rem;}
+.rm-phase{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;}
+.rm-title{font-size:.95rem;font-weight:700;color:white;margin-bottom:.4rem;}
+.rm-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:.85rem;}
+.rm-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.rm-tag{font-size:.62rem;font-weight:600;padding:.2rem .55rem;border-radius:5px;}
+
+/* ══════════════════════════════════════
+   SCREEN 6 — CTA
+══════════════════════════════════════ */
+.s-cta{background:var(--dark);position:relative;overflow:hidden;}
+.s-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(6,182,212,.1) 0%,transparent 65%);}
+.s-cta-content{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 1.5rem;position:relative;z-index:1;}
+.cta-emoji{font-size:4rem;margin-bottom:1.5rem;display:block;text-align:center;}
+.s-cta h2{font-size:clamp(1.9rem,7vw,2.5rem);font-weight:900;letter-spacing:-1.5px;text-align:center;margin-bottom:1rem;line-height:1.05;}
+.s-cta h2 .grad{background:linear-gradient(135deg,#67e8f9,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.s-cta p{font-size:.88rem;color:rgba(255,255,255,.45);text-align:center;line-height:1.75;margin-bottom:2.5rem;}
+.cta-actions{display:flex;flex-direction:column;gap:.85rem;}
+.btn-cta-main{display:flex;align-items:center;justify-content:center;gap:.7rem;background:linear-gradient(135deg,var(--c),#0284c7);color:white;font-weight:700;font-size:1rem;padding:1.1rem;border-radius:14px;text-decoration:none;box-shadow:0 4px 25px rgba(6,182,212,.4);transition:all .2s;}
+.btn-cta-main:active{transform:scale(.97);}
+.btn-cta-sec{display:flex;align-items:center;justify-content:center;gap:.7rem;border:1.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.75);font-weight:600;font-size:.9rem;padding:1rem;border-radius:14px;text-decoration:none;transition:all .2s;}
+.btn-cta-sec:active{background:rgba(255,255,255,.05);}
+.btn-switch{display:flex;align-items:center;justify-content:center;gap:.5rem;color:rgba(255,255,255,.3);font-size:.78rem;text-decoration:none;padding:.5rem;transition:color .2s;}
+.btn-switch:hover{color:rgba(255,255,255,.6);}
+.cta-check-list{display:flex;flex-direction:column;gap:.65rem;margin-top:2rem;}
+.cta-check{display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.45);}
+.cta-check i{color:#67e8f9;font-size:.75rem;flex-shrink:0;}
+
+/* ─── SLIDE-UP SHEET ─── */
+.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px);}
+.sheet-overlay.open{opacity:1;pointer-events:all;}
+.sheet{position:fixed;bottom:0;left:0;right:0;background:#111827;border-radius:24px 24px 0 0;z-index:301;transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);padding-bottom:env(safe-area-inset-bottom);}
+.sheet.open{transform:translateY(0);}
+.sheet-handle{width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:1rem auto .75rem;}
+.sheet-header{padding:.5rem 1.5rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.sheet-title{font-size:1.05rem;font-weight:700;color:white;}
+.sheet-sub{font-size:.8rem;color:rgba(255,255,255,.4);margin-top:.25rem;}
+.sheet-body{padding:1.25rem 1.5rem;max-height:60vh;overflow-y:auto;}
+.sheet-feature-list{display:flex;flex-direction:column;gap:.6rem;}
+.sfl-item{display:flex;align-items:center;gap:.85rem;font-size:.85rem;color:rgba(255,255,255,.7);padding:.4rem 0;}
+.sfl-item i{color:#67e8f9;font-size:.8rem;flex-shrink:0;}
+.sheet-cta{padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;top:calc(5rem + env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-20px);background:#111827;border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:.75rem 1.1rem;display:flex;align-items:center;gap:.65rem;font-size:.82rem;color:white;z-index:500;opacity:0;transition:all .35s;pointer-events:none;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast i{color:#34d399;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes slide-in-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.screen.active-screen .s-hero-content>*,.screen.active-screen .s-stats-content>*{animation:slide-in-up .5s ease both;}
+.screen.active-screen .s-hero-content>*:nth-child(1){animation-delay:.05s}
+.screen.active-screen .s-hero-content>*:nth-child(2){animation-delay:.15s}
+.screen.active-screen .s-hero-content>*:nth-child(3){animation-delay:.25s}
+.screen.active-screen .s-hero-content>*:nth-child(4){animation-delay:.35s}
+.screen.active-screen .s-hero-content>*:nth-child(5){animation-delay:.45s}
+</style>
+</head>
+<body>
+<!-- Toast -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toast-msg">Action effectuée</span></div>
+
+<!-- App Shell -->
+<div class="app-shell">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="logo-wrap">
+      <div class="logo-icon"><i class="fas fa-house-chimney"></i></div>
+      <span class="logo-text">GestiLoc</span>
+    </div>
+    <div class="header-badge">POC</div>
+  </header>
+
+  <!-- Screen dots -->
+  <div class="screen-dots" id="dots">
+    <div class="sdot active" data-screen="0"></div>
+    <div class="sdot" data-screen="1"></div>
+    <div class="sdot" data-screen="2"></div>
+    <div class="sdot" data-screen="3"></div>
+    <div class="sdot" data-screen="4"></div>
+    <div class="sdot" data-screen="5"></div>
+  </div>
+
+  <!-- Screens -->
+  <div class="screens" id="screens">
+
+    <!-- ══ SCREEN 1: HERO ══ -->
+    <div class="screen s-hero active-screen" id="s0">
+      <div class="s-hero-bg"><div class="s-hero-orb"></div></div>
+      <div class="s-hero-content">
+        <div class="hero-eyebrow"><span>Présentation</span></div>
+        <h1>La gestion<br>locative,<br><span class="grad">enfin maîtrisée.</span></h1>
+        <p>47 fonctionnalités pour centraliser vos biens, locataires, finances et contrats dans une interface pensée pour aller vite.</p>
+        <div class="hero-cta-stack">
+          <a href="tableau-de-bord.html" class="btn-hero-primary"><i class="fas fa-rocket"></i> Explorer la démo live</a>
+          <a href="#" class="btn-hero-ghost" id="btn-details"><i class="fas fa-th-large"></i> Voir les modules</a>
+        </div>
+        <div class="hero-mini-stats">
+          <div><div class="hms-val">47</div><div class="hms-lbl">Fonctions</div></div>
+          <div><div class="hms-val">8</div><div class="hms-lbl">Modules</div></div>
+          <div><div class="hms-val">3</div><div class="hms-lbl">Phases</div></div>
+        </div>
+      </div>
+      <div class="scroll-hint"><i class="fas fa-chevron-down"></i>&nbsp;Glisser pour explorer</div>
+    </div>
+
+    <!-- ══ SCREEN 2: STATS ══ -->
+    <div class="screen s-stats" id="s1">
+      <div class="s-stats-content">
+        <div class="screen-tag"><i class="fas fa-chart-bar" style="margin-right:.4rem;"></i>En chiffres</div>
+        <h2>Tout ce qu'il faut pour piloter votre patrimoine.</h2>
+        <p>Un seul outil, zéro compromis. GestiLoc couvre l'intégralité du cycle de vie locatif.</p>
+        <div class="stats-grid">
+          <div class="stat-block">
+            <div class="stat-num c1" id="cnt-47">47</div>
+            <div class="stat-lbl">Fonctionnalités planifiées</div>
+            <i class="fas fa-list-check stat-icon"></i>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num c2" id="cnt-8">8</div>
+            <div class="stat-lbl">Modules métier intégrés</div>
+            <i class="fas fa-cubes stat-icon"></i>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num c3" id="cnt-3">3</div>
+            <div class="stat-lbl">Phases de développement</div>
+            <i class="fas fa-timeline stat-icon"></i>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num c4">100%</div>
+            <div class="stat-lbl">Front-end complet & fonctionnel</div>
+            <i class="fas fa-code stat-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SCREEN 3: FEATURES ══ -->
+    <div class="screen s-features" id="s2">
+      <div class="s-features-content">
+        <div class="screen-tag"><i class="fas fa-star" style="margin-right:.4rem;"></i>Fonctionnalités clés</div>
+        <h2>Tout ce dont vous avez besoin.</h2>
+        <p class="sub">Glissez pour explorer les domaines couverts par GestiLoc.</p>
+        <div class="feat-carousel">
+          <div class="feat-slides" id="feat-slides">
+            <div class="feat-slide fs-1">
+              <div>
+                <div class="feat-slide-icon">🏠</div>
+                <div class="feat-slide-title">Gestion des biens</div>
+                <div class="feat-slide-desc">Fiche complète par propriété : surface, DPE, charges, galerie photo, valeur estimée et historique des locataires.</div>
+              </div>
+              <div class="feat-slide-pills">
+                <span class="fsp">DPE</span><span class="fsp">Galerie</span><span class="fsp">Rendement</span><span class="fsp">Statut</span>
+              </div>
+            </div>
+            <div class="feat-slide fs-2">
+              <div>
+                <div class="feat-slide-icon">👥</div>
+                <div class="feat-slide-title">Gestion des locataires</div>
+                <div class="feat-slide-desc">Profil complet, historique des paiements, alertes d'expiration de bail et score de fiabilité automatique.</div>
+              </div>
+              <div class="feat-slide-pills">
+                <span class="fsp">Profil</span><span class="fsp">Paiements</span><span class="fsp">Alertes</span><span class="fsp">Score</span>
+              </div>
+            </div>
+            <div class="feat-slide fs-3">
+              <div>
+                <div class="feat-slide-icon">💰</div>
+                <div class="feat-slide-title">Finances & rendement</div>
+                <div class="feat-slide-desc">Loyers, charges, dépenses, rendements — tableau de bord financier avec exports et rapports automatiques.</div>
+              </div>
+              <div class="feat-slide-pills">
+                <span class="fsp">Loyers</span><span class="fsp">Charges</span><span class="fsp">Export</span><span class="fsp">Rapports</span>
+              </div>
+            </div>
+            <div class="feat-slide fs-4">
+              <div>
+                <div class="feat-slide-icon">📄</div>
+                <div class="feat-slide-title">Documents & contrats</div>
+                <div class="feat-slide-desc">GED intégrée, baux, avenants, classement automatique et rappels d'expiration avec signature électronique.</div>
+              </div>
+              <div class="feat-slide-pills">
+                <span class="fsp">GED</span><span class="fsp">Baux</span><span class="fsp">Signature</span><span class="fsp">Rappels</span>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots" id="cdots">
+            <div class="cdot active"></div>
+            <div class="cdot"></div>
+            <div class="cdot"></div>
+            <div class="cdot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SCREEN 4: MODULES ══ -->
+    <div class="screen s-modules" id="s3">
+      <div class="s-modules-content">
+        <div class="screen-tag" style="color:#67e8f9;"><i class="fas fa-cubes" style="margin-right:.4rem;"></i>8 Modules</div>
+        <h2>Une architecture modulaire.</h2>
+        <p class="sub">Chaque module est autonome et s'intègre parfaitement aux autres.</p>
+        <div class="module-list">
+          <div class="mod-item" data-module="prop">
+            <div class="mod-icon" style="background:rgba(30,58,138,.25);color:#93c5fd;"><i class="fas fa-house-chimney"></i></div>
+            <div class="mod-info"><div class="mod-name">Propriétés</div><div class="mod-desc">Parc immobilier, fiches biens, DPE</div></div>
+            <span class="mod-badge done">Actif</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="tenant">
+            <div class="mod-icon" style="background:rgba(6,182,212,.2);color:#67e8f9;"><i class="fas fa-users"></i></div>
+            <div class="mod-info"><div class="mod-name">Locataires</div><div class="mod-desc">Profils, paiements, alertes</div></div>
+            <span class="mod-badge done">Actif</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="contract">
+            <div class="mod-icon" style="background:rgba(139,92,246,.2);color:#a78bfa;"><i class="fas fa-file-contract"></i></div>
+            <div class="mod-info"><div class="mod-name">Contrats</div><div class="mod-desc">Baux, avenants, renouvellements</div></div>
+            <span class="mod-badge done">Actif</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="doc">
+            <div class="mod-icon" style="background:rgba(16,185,129,.2);color:#34d399;"><i class="fas fa-folder-open"></i></div>
+            <div class="mod-info"><div class="mod-name">Documents</div><div class="mod-desc">GED, classement, partage</div></div>
+            <span class="mod-badge done">Actif</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="finance">
+            <div class="mod-icon" style="background:rgba(245,158,11,.2);color:#fbbf24;"><i class="fas fa-chart-line"></i></div>
+            <div class="mod-info"><div class="mod-name">Finances</div><div class="mod-desc">Loyers, charges, rendement</div></div>
+            <span class="mod-badge done">Actif</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="maint">
+            <div class="mod-icon" style="background:rgba(239,68,68,.15);color:#f87171;"><i class="fas fa-wrench"></i></div>
+            <div class="mod-info"><div class="mod-name">Maintenance</div><div class="mod-desc">Tickets, prestataires, travaux</div></div>
+            <span class="mod-badge wip">En cours</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="report">
+            <div class="mod-icon" style="background:rgba(59,130,246,.2);color:#93c5fd;"><i class="fas fa-chart-bar"></i></div>
+            <div class="mod-info"><div class="mod-name">Rapports</div><div class="mod-desc">Analyses, bilans, exports PDF</div></div>
+            <span class="mod-badge wip">En cours</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+          <div class="mod-item" data-module="dash">
+            <div class="mod-icon" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);"><i class="fas fa-gauge-high"></i></div>
+            <div class="mod-info"><div class="mod-name">Tableau de bord</div><div class="mod-desc">KPIs, alertes, synthèse globale</div></div>
+            <span class="mod-badge plan">Planifié</span>
+            <i class="fas fa-chevron-right mod-arrow"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SCREEN 5: ROADMAP ══ -->
+    <div class="screen s-roadmap" id="s4">
+      <div class="s-roadmap-content">
+        <div class="screen-tag" style="color:#67e8f9;"><i class="fas fa-map" style="margin-right:.4rem;"></i>Roadmap</div>
+        <h2>3 phases vers le produit complet.</h2>
+        <p class="sub">De la maquette front-end au SaaS intelligent.</p>
+        <div class="roadmap-list">
+          <div class="rm-item">
+            <div class="rm-dot" style="background:#2563eb;">1</div>
+            <div class="rm-body">
+              <div class="rm-phase" style="color:#93c5fd;">Phase 1 — Terminée</div>
+              <div class="rm-title">Socle fonctionnel</div>
+              <div class="rm-desc">Maquette front-end complète avec les 8 modules, navigation fluide et design system cohérent.</div>
+              <div class="rm-tags">
+                <span class="rm-tag" style="background:rgba(16,185,129,.12);color:#34d399;">✓ Propriétés</span>
+                <span class="rm-tag" style="background:rgba(16,185,129,.12);color:#34d399;">✓ Locataires</span>
+                <span class="rm-tag" style="background:rgba(16,185,129,.12);color:#34d399;">✓ Finance</span>
+              </div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-dot" style="background:#0891b2;">2</div>
+            <div class="rm-body">
+              <div class="rm-phase" style="color:#67e8f9;">Phase 2 — En développement</div>
+              <div class="rm-title">Back-end & données réelles</div>
+              <div class="rm-desc">API REST, authentification, base de données et synchronisation en temps réel.</div>
+              <div class="rm-tags">
+                <span class="rm-tag" style="background:rgba(245,158,11,.12);color:#fbbf24;">⚙ API REST</span>
+                <span class="rm-tag" style="background:rgba(245,158,11,.12);color:#fbbf24;">⚙ Auth JWT</span>
+                <span class="rm-tag" style="background:rgba(245,158,11,.12);color:#fbbf24;">⚙ BDD</span>
+              </div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-dot" style="background:#7c3aed;">3</div>
+            <div class="rm-body">
+              <div class="rm-phase" style="color:#a78bfa;">Phase 3 — Planifiée</div>
+              <div class="rm-title">Intelligence & SaaS</div>
+              <div class="rm-desc">IA prédictive, app mobile native, multi-tenant SaaS et intégrations comptables.</div>
+              <div class="rm-tags">
+                <span class="rm-tag" style="background:rgba(139,92,246,.12);color:#a78bfa;">◷ IA</span>
+                <span class="rm-tag" style="background:rgba(139,92,246,.12);color:#a78bfa;">◷ App native</span>
+                <span class="rm-tag" style="background:rgba(139,92,246,.12);color:#a78bfa;">◷ SaaS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SCREEN 6: CTA ══ -->
+    <div class="screen s-cta" id="s5">
+      <div class="s-cta-content">
+        <span class="cta-emoji">🚀</span>
+        <h2>Transformez votre<br><span class="grad">gestion locative.</span></h2>
+        <p>Explorez la démo interactive ou consultez le cahier des charges complet pour voir la vision derrière GestiLoc.</p>
+        <div class="cta-actions">
+          <a href="tableau-de-bord.html" class="btn-cta-main"><i class="fas fa-play-circle"></i> Explorer la démo live</a>
+          <a href="index.html" class="btn-cta-sec"><i class="fas fa-file-lines"></i> Cahier des charges</a>
+          <a href="presentation-desktop.html" class="btn-switch"><i class="fas fa-desktop"></i>&nbsp; Voir la version desktop</a>
+        </div>
+        <div class="cta-check-list">
+          <div class="cta-check"><i class="fas fa-check"></i> Front-end 100% complet</div>
+          <div class="cta-check"><i class="fas fa-check"></i> 8 modules actifs, données de démo</div>
+          <div class="cta-check"><i class="fas fa-check"></i> Navigation fluide entre toutes les pages</div>
+          <div class="cta-check"><i class="fas fa-check"></i> Design system cohérent</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /screens -->
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a class="nav-tab active" data-goto="0" href="#"><i class="fas fa-house"></i>Accueil</a>
+    <a class="nav-tab" data-goto="2" href="#"><i class="fas fa-star"></i>Fonctions</a>
+    <a class="nav-tab" data-goto="3" href="#"><i class="fas fa-cubes"></i>Modules</a>
+    <a class="nav-tab" data-goto="5" href="#"><i class="fas fa-rocket"></i>Démarrer</a>
+  </nav>
+
+</div><!-- /app-shell -->
+
+<!-- FAB -->
+<button class="fab" id="fab" title="Partager"><i class="fas fa-share-nodes"></i></button>
+
+<!-- Sheet overlay -->
+<div class="sheet-overlay" id="sheet-overlay"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title" id="sheet-title">Module</div>
+    <div class="sheet-sub" id="sheet-sub">Détails du module</div>
+  </div>
+  <div class="sheet-body">
+    <div class="sheet-feature-list" id="sheet-features"></div>
+  </div>
+  <div class="sheet-cta">
+    <a href="tableau-de-bord.html" class="btn-cta-main" style="font-size:.85rem;padding:.85rem;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;background:linear-gradient(135deg,var(--c),#0284c7);color:white;font-weight:700;"><i class="fas fa-arrow-right"></i> Voir dans la démo</a>
+  </div>
+</div>
+
+<script>
+// ─── MODULE DATA ───
+const moduleData = {
+  prop:{title:'Propriétés',sub:'Gestion du parc immobilier',features:['Fiche bien complète (surface, type, adresse)','Classe énergétique DPE','Galerie photo par propriété','Statut en temps réel (occupé/vacant)','Calcul du rendement locatif','Historique des locataires','Valeur estimée du bien']},
+  tenant:{title:'Locataires',sub:'Suivi des occupants',features:['Profil complet avec pièces jointes','Historique des paiements','Alertes bail & révision de loyer','Score de fiabilité automatique','Contacts d\'urgence','Documents partagés','Correspondances centralisées']},
+  contract:{title:'Contrats',sub:'Gestion des baux',features:['Baux et avenants centralisés','Renouvellements automatiques','Suivi des signatures','Alertes d\'expiration','Historique complet','Modèles de contrats','Révision de loyer (IRL)']},
+  doc:{title:'Documents',sub:'Gestion électronique',features:['GED intégrée et structurée','Classement automatique','Rappels d\'expiration','Partage sécurisé','Versioning des documents','Tags et recherche full-text','Import par glisser-déposer']},
+  finance:{title:'Finances',sub:'Suivi financier complet',features:['Encaissement des loyers','Suivi des charges locatives','Dépenses par propriété','Calcul du rendement net','Rapports mensuels auto','Exports comptables CSV/PDF','Indicateurs de performance']},
+  maint:{title:'Maintenance',sub:'Interventions et travaux',features:['Tickets d\'intervention','Suivi des prestataires','Devis et factures','Historique par bien','Planification des travaux','Alertes urgence','Coûts par intervention']},
+  report:{title:'Rapports',sub:'Analyses et bilans',features:['Tableaux de bord personnalisés','Bilans mensuels et annuels','Exports PDF & Excel','Graphiques de performance','Comparaisons N-1','Synthèse patrimoniale','Rapports fiscaux']},
+  dash:{title:'Tableau de bord',sub:'Vue globale en temps réel',features:['KPIs en temps réel','Alertes critiques proactives','Synthèse patrimoniale globale','Widget personnalisables','Carte des biens','Agenda des échéances','Feed d\'activité']}
+};
+
+// ─── SCREEN SCROLL ───
+const screensEl = document.getElementById('screens');
+const dots = document.querySelectorAll('.sdot');
+const navTabs = document.querySelectorAll('.nav-tab');
+let currentScreen = 0;
+
+screensEl.addEventListener('scroll', () => {
+  const idx = Math.round(screensEl.scrollTop / screensEl.clientHeight);
+  if (idx !== currentScreen) {
+    currentScreen = idx;
+    updateScreen(idx);
+  }
+}, {passive: true});
+
+function updateScreen(idx) {
+  dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  navTabs.forEach(t => t.classList.remove('active'));
+  const goto = [0,0,2,3,4,5][idx] ?? idx;
+  navTabs.forEach(t => { if (+t.dataset.goto === goto) t.classList.add('active'); });
+}
+
+dots.forEach(d => {
+  d.addEventListener('click', () => scrollToScreen(+d.dataset.screen));
+});
+
+navTabs.forEach(t => {
+  t.addEventListener('click', e => {
+    e.preventDefault();
+    scrollToScreen(+t.dataset.goto);
+  });
+});
+
+function scrollToScreen(idx) {
+  screensEl.scrollTo({ top: idx * screensEl.clientHeight, behavior: 'smooth' });
+}
+
+// ─── MODULES → SHEET ───
+document.querySelectorAll('.mod-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const key = item.dataset.module;
+    const data = moduleData[key];
+    if (!data) return;
+    document.getElementById('sheet-title').textContent = data.title;
+    document.getElementById('sheet-sub').textContent = data.sub;
+    const fl = document.getElementById('sheet-features');
+    fl.innerHTML = data.features.map(f => `<div class="sfl-item"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join('');
+    openSheet();
+  });
+});
+
+function openSheet() {
+  document.getElementById('sheet').classList.add('open');
+  document.getElementById('sheet-overlay').classList.add('open');
+}
+function closeSheet() {
+  document.getElementById('sheet').classList.remove('open');
+  document.getElementById('sheet-overlay').classList.remove('open');
+}
+document.getElementById('sheet-overlay').addEventListener('click', closeSheet);
+
+// Drag to close sheet
+let sheetStartY = 0;
+const sheet = document.getElementById('sheet');
+sheet.addEventListener('touchstart', e => { sheetStartY = e.touches[0].clientY; }, {passive:true});
+sheet.addEventListener('touchend', e => {
+  if (e.changedTouches[0].clientY - sheetStartY > 60) closeSheet();
+}, {passive:true});
+
+// ─── HERO MODULES BTN ───
+document.getElementById('btn-details').addEventListener('click', e => {
+  e.preventDefault();
+  scrollToScreen(3);
+});
+
+// ─── CAROUSEL ───
+const slides = document.getElementById('feat-slides');
+const cdots = document.querySelectorAll('.cdot');
+slides.addEventListener('scroll', () => {
+  const idx = Math.round(slides.scrollLeft / slides.clientWidth);
+  cdots.forEach((d,i) => d.classList.toggle('active', i === idx));
+}, {passive: true});
+
+// ─── FAB → TOAST ───
+document.getElementById('fab').addEventListener('click', () => {
+  showToast('Lien copié dans le presse-papier !');
+  if (navigator.clipboard) navigator.clipboard.writeText(window.location.href).catch(()=>{});
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>

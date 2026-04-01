@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GestiLoc — Présentation Desktop</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --p:#1e3a8a;--pl:#3b82f6;--pd:#0f172a;
+  --c:#06b6d4;--g:#10b981;--w:#f59e0b;--r:#ef4444;
+  --dark:#060d1f;--mid:#0f172a;
+  --text:#1e293b;--muted:#64748b;
+}
+html{scroll-behavior:smooth;cursor:none;}
+body{background:#fff;font-family:'Inter',-apple-system,sans-serif;color:var(--text);overflow-x:hidden;}
+
+/* ─── CURSOR ─── */
+#cursor{position:fixed;width:12px;height:12px;border-radius:50%;background:var(--c);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(6,182,212,.5);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .1s,width .3s,height .3s,opacity .3s;opacity:.7;}
+body.cursor-hover #cursor{width:20px;height:20px;background:white;}
+body.cursor-hover #cursor-ring{width:60px;height:60px;opacity:.3;}
+
+/* ─── SCROLL PROGRESS ─── */
+#bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--p),var(--c));z-index:10000;transition:width .1s linear;}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease;}
+nav.scrolled{background:rgba(6,13,31,.92);backdrop-filter:blur(20px);padding:.9rem 5vw;border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:white;}
+.nav-logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--c),var(--pl));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:white;}
+.nav-logo-text{font-weight:800;font-size:1.2rem;letter-spacing:-.5px;}
+.nav-links{display:flex;align-items:center;gap:.25rem;}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;font-weight:500;padding:.5rem 1rem;border-radius:8px;transition:all .2s;}
+.nav-links a:hover{color:white;background:rgba(255,255,255,.08);}
+.nav-cta{background:var(--c);color:white!important;border-radius:50px!important;padding:.5rem 1.2rem!important;font-weight:600!important;}
+.nav-cta:hover{background:#0891b2!important;transform:scale(1.04);}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;background:var(--dark);display:flex;align-items:center;position:relative;overflow:hidden;padding:8rem 5vw 5rem;}
+.hero-bg{position:absolute;inset:0;overflow:hidden;}
+.hero-bg canvas{position:absolute;inset:0;width:100%;height:100%;}
+.hero-glow{position:absolute;top:20%;left:55%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.12) 0%,transparent 65%);pointer-events:none;}
+.hero-glow-2{position:absolute;bottom:10%;left:10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(30,58,138,.2) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:2;}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.3);border-radius:50px;padding:.4rem 1rem;font-size:.75rem;font-weight:700;color:#67e8f9;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-tag i{animation:spin 4s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+h1.hero-title{font-size:clamp(2.5rem,4.5vw,4.2rem);font-weight:900;line-height:1.03;letter-spacing:-2.5px;color:white;margin-bottom:1.5rem;}
+h1.hero-title .grad{background:linear-gradient(135deg,#67e8f9,#a78bfa,#67e8f9);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+.hero-sub{font-size:1.08rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:480px;margin-bottom:2.5rem;font-weight:400;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary-cta{display:inline-flex;align-items:center;gap:.65rem;background:linear-gradient(135deg,var(--c),#0284c7);color:white;font-weight:700;font-size:.95rem;padding:.9rem 2rem;border-radius:50px;text-decoration:none;transition:all .3s;box-shadow:0 0 30px rgba(6,182,212,.35);}
+.btn-primary-cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 50px rgba(6,182,212,.55);color:white;}
+.btn-ghost-cta{display:inline-flex;align-items:center;gap:.65rem;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-weight:600;font-size:.95rem;padding:.9rem 2rem;border-radius:50px;text-decoration:none;transition:all .3s;}
+.btn-ghost-cta:hover{background:rgba(255,255,255,.07);color:white;border-color:rgba(255,255,255,.4);}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);}
+.hero-stat-val{font-size:2rem;font-weight:800;color:#67e8f9;line-height:1;}
+.hero-stat-lbl{font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:.25rem;}
+
+/* ─── HERO RIGHT: Dashboard mockup ─── */
+.hero-mockup{perspective:1000px;}
+.mockup-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.75rem;backdrop-filter:blur(10px);transform:rotateY(-8deg) rotateX(4deg);transition:transform .6s ease;box-shadow:0 40px 80px rgba(0,0,0,.5),-30px 0 60px rgba(6,182,212,.05);}
+.hero-mockup:hover .mockup-card{transform:rotateY(-2deg) rotateX(1deg);}
+.mockup-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.mockup-title{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.5px;}
+.mockup-dot{width:8px;height:8px;border-radius:50%;animation:pulse-dot 2s ease-in-out infinite;}
+.mockup-dot.g{background:#10b981;box-shadow:0 0 8px #10b981;}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.mockup-stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1.25rem;}
+.mockup-stat{background:rgba(255,255,255,.04);border-radius:10px;padding:.9rem;border:1px solid rgba(255,255,255,.06);}
+.mockup-stat-n{font-size:1.4rem;font-weight:800;color:white;}
+.mockup-stat-l{font-size:.65rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;margin-top:.2rem;}
+.mockup-bar-row{margin-bottom:.85rem;}
+.mockup-bar-label{display:flex;justify-content:space-between;font-size:.68rem;color:rgba(255,255,255,.45);margin-bottom:.35rem;}
+.mockup-bar-track{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.mockup-bar-fill{height:100%;border-radius:3px;animation:bar-fill 1.5s ease both;}
+@keyframes bar-fill{from{width:0}}
+.mockup-tag-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+.mockup-tag{font-size:.65rem;font-weight:600;padding:.25rem .65rem;border-radius:5px;}
+
+/* ─── NUMBERS STRIP ─── */
+.numbers-strip{background:var(--dark);padding:5rem 5vw;border-top:1px solid rgba(255,255,255,.04);}
+.numbers-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.num-block{text-align:center;padding:1.5rem;}
+.num-val{font-size:clamp(2.5rem,4vw,4rem);font-weight:900;color:#67e8f9;line-height:1;letter-spacing:-2px;}
+.num-label{font-size:.75rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-top:.65rem;font-weight:600;}
+.num-sep{width:1px;background:rgba(255,255,255,.06);margin:auto;}
+
+/* ─── FEATURE STRIPS ─── */
+.feat-strip{padding:8rem 5vw;display:flex;align-items:center;}
+.feat-strip.light{background:#f8fafc;}
+.feat-strip.dark{background:var(--mid);}
+.feat-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center;width:100%;}
+.feat-inner.rev{direction:rtl;}
+.feat-inner.rev>*{direction:ltr;}
+.feat-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;}
+.feat-strip.light .feat-eyebrow{color:var(--c);}
+.feat-strip.dark .feat-eyebrow{color:#67e8f9;}
+.feat-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.08;letter-spacing:-1.5px;margin-bottom:1.25rem;}
+.feat-strip.light .feat-title{color:var(--p);}
+.feat-strip.dark .feat-title{color:#f8fafc;}
+.feat-body{font-size:1rem;line-height:1.8;margin-bottom:2rem;}
+.feat-strip.light .feat-body{color:var(--muted);}
+.feat-strip.dark .feat-body{color:rgba(255,255,255,.45);}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.feat-list li{display:flex;align-items:center;gap:.75rem;font-size:.9rem;font-weight:500;}
+.feat-strip.light .feat-list li{color:var(--text);}
+.feat-strip.dark .feat-list li{color:rgba(255,255,255,.65);}
+.feat-list li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.feat-strip.light .feat-list li::before{background:var(--c);}
+.feat-strip.dark .feat-list li::before{background:#67e8f9;}
+.feat-icon-wrap{display:flex;align-items:center;justify-content:center;}
+.feat-icon-wrap span{font-size:clamp(5rem,10vw,9rem);display:block;filter:drop-shadow(0 20px 40px rgba(6,182,212,.3));animation:icon-float 5s ease-in-out infinite;}
+@keyframes icon-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.feat-card-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;backdrop-filter:blur(8px);}
+.feat-card-preview.light-card{background:white;border:1px solid #e2e8f0;box-shadow:0 8px 30px rgba(0,0,0,.06);}
+
+/* ─── MODULE GRID ─── */
+.modules-section{padding:8rem 5vw;background:#fff;}
+.section-header{text-align:center;max-width:600px;margin:0 auto 3.5rem;}
+.section-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--c);margin-bottom:.75rem;}
+.section-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-1.5px;color:var(--p);line-height:1.1;}
+.section-sub{font-size:1rem;color:var(--muted);margin-top:.75rem;line-height:1.7;}
+.filter-bar{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;}
+.filter-btn{border:none;background:var(--border,#f1f5f9);color:var(--muted);font-size:.82rem;font-weight:600;padding:.55rem 1.2rem;border-radius:50px;cursor:none;transition:all .25s;font-family:inherit;}
+.filter-btn:hover{background:#e2e8f0;color:var(--p);}
+.filter-btn.active{background:var(--p);color:white;}
+.modules-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;max-width:1200px;margin:0 auto;}
+.module-card{background:white;border:1.5px solid #e2e8f0;border-radius:18px;padding:1.75rem;transition:all .35s ease;position:relative;overflow:hidden;cursor:none;}
+.module-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--p),var(--c));opacity:0;transition:opacity .35s;}
+.module-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(30,58,138,.15);border-color:var(--pl);}
+.module-card:hover .mc-icon,.module-card:hover .mc-title,.module-card:hover .mc-sub,.module-card:hover .mc-tag{position:relative;z-index:1;}
+.mc-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem;transition:all .35s;position:relative;z-index:1;}
+.mc-title{font-size:.95rem;font-weight:700;color:var(--p);margin-bottom:.4rem;transition:color .35s;position:relative;z-index:1;}
+.module-card:hover .mc-title{color:white;}
+.mc-sub{font-size:.78rem;color:var(--muted);line-height:1.55;transition:color .35s;position:relative;z-index:1;}
+.module-card:hover .mc-sub{color:rgba(255,255,255,.7);}
+.mc-tag{display:inline-block;font-size:.65rem;font-weight:700;padding:.2rem .6rem;border-radius:4px;margin-top:.75rem;letter-spacing:.5px;text-transform:uppercase;transition:all .35s;position:relative;z-index:1;}
+.module-card[data-status="done"] .mc-tag{background:rgba(16,185,129,.1);color:#059669;}
+.module-card[data-status="wip"] .mc-tag{background:rgba(245,158,11,.1);color:#d97706;}
+.module-card[data-status="planned"] .mc-tag{background:rgba(139,92,246,.1);color:#7c3aed;}
+.module-card:hover .mc-tag{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);}
+
+/* ─── TIMELINE ─── */
+.timeline-section{padding:8rem 5vw;background:#f8fafc;}
+.tl-track{position:relative;max-width:900px;margin:0 auto;}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--p),var(--c));transform:translateX(-50%);border-radius:2px;}
+.tl-item{display:grid;grid-template-columns:1fr 60px 1fr;gap:1.5rem;align-items:center;margin-bottom:4rem;}
+.tl-content{background:white;border:1.5px solid #e2e8f0;border-radius:16px;padding:1.75rem;transition:all .3s;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+.tl-content:hover{box-shadow:0 12px 35px rgba(30,58,138,.1);transform:translateY(-4px);}
+.tl-content.right{grid-column:3;}
+.tl-content.left{grid-column:1;}
+.tl-dot{grid-column:2;display:flex;align-items:center;justify-content:center;}
+.tl-dot-inner{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;border:3px solid white;box-shadow:0 0 0 4px rgba(30,58,138,.15);color:white;}
+.phase-lbl{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem;}
+.phase-title{font-size:1.05rem;font-weight:800;color:var(--p);margin-bottom:.6rem;}
+.phase-desc{font-size:.83rem;color:var(--muted);line-height:1.6;}
+.phase-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
+.phase-pill{font-size:.68rem;font-weight:600;padding:.25rem .65rem;border-radius:5px;}
+
+/* ─── BENEFIT CARDS ─── */
+.benefits-section{padding:8rem 5vw;background:var(--dark);}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:3.5rem auto 0;}
+.benefit-card{border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:2rem;transition:all .35s;position:relative;overflow:hidden;}
+.benefit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p),var(--c));transition:height .35s;}
+.benefit-card:hover{background:rgba(255,255,255,.03);border-color:rgba(6,182,212,.3);transform:translateY(-6px);}
+.benefit-card:hover::before{height:3px;}
+.bc-icon{font-size:2rem;margin-bottom:1.25rem;}
+.bc-title{font-size:1.05rem;font-weight:700;color:white;margin-bottom:.6rem;}
+.bc-desc{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.7;}
+
+/* ─── CTA ─── */
+.cta-section{padding:8rem 5vw;background:var(--dark);text-align:center;position:relative;overflow:hidden;}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.08) 0%,transparent 65%);pointer-events:none;}
+.cta-inner{max-width:680px;margin:0 auto;position:relative;z-index:1;}
+.cta-inner .section-eyebrow{display:block;margin-bottom:1rem;}
+.cta-title{font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;letter-spacing:-2px;color:white;margin-bottom:1.5rem;line-height:1.05;}
+.cta-title .grad{background:linear-gradient(135deg,#67e8f9,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:3rem;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.cta-feats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.cta-feat{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(255,255,255,.35);}
+.cta-feat i{color:#67e8f9;}
+
+/* ─── FOOTER ─── */
+footer{background:#030712;padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.04);}
+footer .nav-logo-text{color:rgba(255,255,255,.7);font-size:1rem;}
+footer p{color:rgba(255,255,255,.25);font-size:.78rem;}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
+.reveal.left{transform:translateX(-50px);}
+.reveal.right{transform:translateX(50px);}
+.reveal.scale{transform:scale(.9);}
+.reveal.visible{opacity:1;transform:none;}
+[data-d="1"]{transition-delay:.1s}
+[data-d="2"]{transition-delay:.2s}
+[data-d="3"]{transition-delay:.3s}
+[data-d="4"]{transition-delay:.45s}
+[data-d="5"]{transition-delay:.6s}
+
+/* hidden filter */
+.module-card.hidden{display:none;}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<!-- Scroll bar -->
+<div id="bar"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon"><i class="fas fa-house-chimney"></i></div>
+    <span class="nav-logo-text">GestiLoc</span>
+  </a>
+  <div class="nav-links">
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#modules">Modules</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="presentation-mobile.html">Version mobile →</a>
+    <a href="tableau-de-bord.html" class="nav-cta">Voir la démo</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"><canvas id="particles"></canvas></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag reveal"><i class="fas fa-flask"></i>&nbsp;Proof of Concept</div>
+      <h1 class="hero-title reveal" data-d="1">
+        La gestion<br>locative,<br><span class="grad">enfin maîtrisée.</span>
+      </h1>
+      <p class="hero-sub reveal" data-d="2">47 fonctionnalités intégrées pour centraliser propriétés, locataires, finances et contrats — dans une interface pensée pour aller vite et ne rien laisser passer.</p>
+      <div class="hero-btns reveal" data-d="3">
+        <a href="#modules" class="btn-primary-cta"><i class="fas fa-th-large"></i> Explorer les modules</a>
+        <a href="tableau-de-bord.html" class="btn-ghost-cta"><i class="fas fa-play-circle"></i> Voir la démo live</a>
+      </div>
+      <div class="hero-stats reveal" data-d="4">
+        <div><div class="hero-stat-val">47</div><div class="hero-stat-lbl">Fonctionnalités</div></div>
+        <div><div class="hero-stat-val">8</div><div class="hero-stat-lbl">Modules</div></div>
+        <div><div class="hero-stat-val">3</div><div class="hero-stat-lbl">Phases</div></div>
+        <div><div class="hero-stat-val">100%</div><div class="hero-stat-lbl">Front-end</div></div>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="hero-mockup reveal right" data-d="2">
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <span class="mockup-title"><i class="fas fa-gauge-high" style="color:#67e8f9;margin-right:.5rem;"></i>Tableau de bord</span>
+          <div class="mockup-dot g"></div>
+        </div>
+        <div class="mockup-stat-row">
+          <div class="mockup-stat"><div class="mockup-stat-n" style="color:#67e8f9;">12</div><div class="mockup-stat-l">Biens</div></div>
+          <div class="mockup-stat"><div class="mockup-stat-n" style="color:#a78bfa;">18</div><div class="mockup-stat-l">Locataires</div></div>
+          <div class="mockup-stat"><div class="mockup-stat-n" style="color:#34d399;">4.2k€</div><div class="mockup-stat-l">/ mois</div></div>
+        </div>
+        <div class="mockup-bar-row"><div class="mockup-bar-label"><span>Taux d'occupation</span><span style="color:#34d399;">91%</span></div><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:91%;background:linear-gradient(90deg,#10b981,#34d399);"></div></div></div>
+        <div class="mockup-bar-row"><div class="mockup-bar-label"><span>Loyers perçus</span><span style="color:#67e8f9;">78%</span></div><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:78%;background:linear-gradient(90deg,#06b6d4,#67e8f9);"></div></div></div>
+        <div class="mockup-bar-row"><div class="mockup-bar-label"><span>Docs à jour</span><span style="color:#a78bfa;">65%</span></div><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:65%;background:linear-gradient(90deg,#8b5cf6,#a78bfa);"></div></div></div>
+        <div class="mockup-tag-row">
+          <div class="mockup-tag" style="background:rgba(16,185,129,.15);color:#34d399;">✓ Loyer encaissé</div>
+          <div class="mockup-tag" style="background:rgba(245,158,11,.15);color:#fbbf24;">⚠ Bail expire</div>
+          <div class="mockup-tag" style="background:rgba(6,182,212,.12);color:#67e8f9;">↑ +3.2% rendement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NUMBERS ══ -->
+<section class="numbers-strip">
+  <div class="numbers-inner">
+    <div class="num-block reveal scale">
+      <div class="num-val" data-count="47">0</div>
+      <div class="num-label">Fonctionnalités planifiées</div>
+    </div>
+    <div class="num-block reveal scale" data-d="1">
+      <div class="num-val" data-count="8">0</div>
+      <div class="num-label">Modules métier</div>
+    </div>
+    <div class="num-block reveal scale" data-d="2">
+      <div class="num-val" data-count="3">0</div>
+      <div class="num-label">Phases de développement</div>
+    </div>
+    <div class="num-block reveal scale" data-d="3">
+      <div class="num-val">100%</div>
+      <div class="num-label">Conçu en France</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURE 1 ══ -->
+<section class="feat-strip light" id="fonctionnalites">
+  <div class="feat-inner">
+    <div class="reveal left">
+      <div class="feat-eyebrow">Gestion du patrimoine</div>
+      <h2 class="feat-title">Vos biens immobiliers, au millimètre.</h2>
+      <p class="feat-body">Chaque propriété dispose de sa fiche complète : surface, DPE, charges, photos, valeur estimée. Le suivi est centralisé, les informations toujours à portée de main.</p>
+      <ul class="feat-list">
+        <li>Fiche bien complète (DPE, surface, type)</li>
+        <li>Galerie photo intégrée</li>
+        <li>Suivi des charges et rendement</li>
+        <li>Historique complet des locataires</li>
+        <li>Statut en temps réel (occupé / vacant)</li>
+      </ul>
+    </div>
+    <div class="feat-icon-wrap reveal right">
+      <span style="animation-delay:0s">🏠</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURE 2 ══ -->
+<section class="feat-strip dark">
+  <div class="feat-inner rev">
+    <div class="feat-icon-wrap reveal left">
+      <span style="animation-delay:.5s">👥</span>
+    </div>
+    <div class="reveal right">
+      <div class="feat-eyebrow">Gestion des locataires</div>
+      <h2 class="feat-title">Chaque locataire mérite un suivi irréprochable.</h2>
+      <p class="feat-body">Profil complet, historique des paiements, alertes d'expiration de bail, communication centralisée. Ne laissez plus rien passer.</p>
+      <ul class="feat-list">
+        <li>Profil locataire enrichi</li>
+        <li>Historique complet des paiements</li>
+        <li>Alertes bail & révision de loyer</li>
+        <li>Score de fiabilité locataire</li>
+        <li>Espace documents partagé</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURE 3 ══ -->
+<section class="feat-strip light">
+  <div class="feat-inner">
+    <div class="reveal left">
+      <div class="feat-eyebrow">Gestion financière</div>
+      <h2 class="feat-title">Vos finances, claires comme de l'eau de roche.</h2>
+      <p class="feat-body">Loyers, charges, dépenses, rendements — tout est consolidé en un tableau de bord financier intelligent, avec exports et rapports automatiques.</p>
+      <ul class="feat-list">
+        <li>Suivi des loyers et retards</li>
+        <li>Charges locatives détaillées</li>
+        <li>Calcul automatique du rendement</li>
+        <li>Rapports mensuels & annuels</li>
+        <li>Export comptable</li>
+      </ul>
+    </div>
+    <div class="feat-icon-wrap reveal right">
+      <span style="animation-delay:1s">💰</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MODULES GRID ══ -->
+<section class="modules-section" id="modules">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">8 modules intégrés</div>
+    <h2 class="section-title">Tout ce dont un propriétaire a besoin.</h2>
+    <p class="section-sub">Chaque module est une brique autonome qui s'intègre parfaitement aux autres.</p>
+  </div>
+
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" data-filter="all">Tous</button>
+    <button class="filter-btn" data-filter="gestion">Gestion</button>
+    <button class="filter-btn" data-filter="finance">Finance</button>
+    <button class="filter-btn" data-filter="admin">Administratif</button>
+    <button class="filter-btn" data-filter="reporting">Reporting</button>
+  </div>
+
+  <div class="modules-grid">
+    <div class="module-card reveal" data-cat="gestion" data-status="done">
+      <div class="mc-icon" style="background:rgba(30,58,138,.08);color:#1e3a8a;"><i class="fas fa-house-chimney"></i></div>
+      <div class="mc-title">Propriétés</div>
+      <div class="mc-sub">Gestion complète du parc immobilier, fiches biens, statuts, DPE et galerie photo.</div>
+      <div class="mc-tag">✓ Disponible</div>
+    </div>
+    <div class="module-card reveal" data-cat="gestion" data-status="done" data-d="1">
+      <div class="mc-icon" style="background:rgba(6,182,212,.08);color:#0891b2;"><i class="fas fa-users"></i></div>
+      <div class="mc-title">Locataires</div>
+      <div class="mc-sub">Profils complets, historique des paiements, alertes et score de fiabilité.</div>
+      <div class="mc-tag">✓ Disponible</div>
+    </div>
+    <div class="module-card reveal" data-cat="admin" data-status="done" data-d="2">
+      <div class="mc-icon" style="background:rgba(139,92,246,.08);color:#7c3aed;"><i class="fas fa-file-contract"></i></div>
+      <div class="mc-title">Contrats</div>
+      <div class="mc-sub">Baux, avenants, renouvellements et signatures avec suivi complet du cycle de vie.</div>
+      <div class="mc-tag">✓ Disponible</div>
+    </div>
+    <div class="module-card reveal" data-cat="admin" data-status="done" data-d="3">
+      <div class="mc-icon" style="background:rgba(16,185,129,.08);color:#059669;"><i class="fas fa-folder-open"></i></div>
+      <div class="mc-title">Documents</div>
+      <div class="mc-sub">GED intégrée, classement automatique, rappels d'expiration et partage sécurisé.</div>
+      <div class="mc-tag">✓ Disponible</div>
+    </div>
+    <div class="module-card reveal" data-cat="finance" data-status="done" data-d="1">
+      <div class="mc-icon" style="background:rgba(245,158,11,.08);color:#d97706;"><i class="fas fa-chart-line"></i></div>
+      <div class="mc-title">Finances</div>
+      <div class="mc-sub">Loyers, charges, dépenses, rendements — tout consolidé avec exports comptables.</div>
+      <div class="mc-tag">✓ Disponible</div>
+    </div>
+    <div class="module-card reveal" data-cat="gestion" data-status="wip" data-d="2">
+      <div class="mc-icon" style="background:rgba(239,68,68,.08);color:#dc2626;"><i class="fas fa-wrench"></i></div>
+      <div class="mc-title">Maintenance</div>
+      <div class="mc-sub">Tickets d'intervention, suivi des prestataires, historique des travaux par bien.</div>
+      <div class="mc-tag">⚙ En cours</div>
+    </div>
+    <div class="module-card reveal" data-cat="reporting" data-status="wip" data-d="3">
+      <div class="mc-icon" style="background:rgba(59,130,246,.08);color:#2563eb;"><i class="fas fa-chart-bar"></i></div>
+      <div class="mc-title">Rapports</div>
+      <div class="mc-sub">Analyses de performance, bilans mensuels, exports PDF & CSV personnalisables.</div>
+      <div class="mc-tag">⚙ En cours</div>
+    </div>
+    <div class="module-card reveal" data-cat="reporting" data-status="planned" data-d="4">
+      <div class="mc-icon" style="background:rgba(30,58,138,.06);color:#475569;"><i class="fas fa-gauge-high"></i></div>
+      <div class="mc-title">Tableau de bord</div>
+      <div class="mc-sub">Vue globale en temps réel : KPIs, alertes critiques et synthèse patrimoniale.</div>
+      <div class="mc-tag">◷ Planifié</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<section class="timeline-section" id="roadmap">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Plan de développement</div>
+    <h2 class="section-title">3 phases pour un produit complet.</h2>
+    <p class="section-sub">De la maquette front-end au produit SaaS intelligent.</p>
+  </div>
+  <div class="tl-track">
+    <div class="tl-line"></div>
+
+    <!-- Phase 1 -->
+    <div class="tl-item">
+      <div class="tl-content left reveal left">
+        <div class="phase-lbl" style="color:#2563eb;">Phase 1</div>
+        <div class="phase-title">Socle fonctionnel</div>
+        <div class="phase-desc">Maquette front-end complète avec les 8 modules, navigation fluide, design system cohérent et données de démonstration.</div>
+        <div class="phase-pills">
+          <span class="phase-pill" style="background:rgba(16,185,129,.1);color:#059669;">✓ Propriétés</span>
+          <span class="phase-pill" style="background:rgba(16,185,129,.1);color:#059669;">✓ Locataires</span>
+          <span class="phase-pill" style="background:rgba(16,185,129,.1);color:#059669;">✓ Contrats</span>
+          <span class="phase-pill" style="background:rgba(16,185,129,.1);color:#059669;">✓ Documents</span>
+        </div>
+      </div>
+      <div class="tl-dot"><div class="tl-dot-inner" style="background:#2563eb;">1</div></div>
+      <div></div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="tl-item">
+      <div></div>
+      <div class="tl-dot"><div class="tl-dot-inner" style="background:#0891b2;">2</div></div>
+      <div class="tl-content right reveal right">
+        <div class="phase-lbl" style="color:#0891b2;">Phase 2</div>
+        <div class="phase-title">Back-end & données réelles</div>
+        <div class="phase-desc">API REST, authentification, base de données, gestion des rôles et synchronisation en temps réel. Le POC devient un vrai produit.</div>
+        <div class="phase-pills">
+          <span class="phase-pill" style="background:rgba(245,158,11,.1);color:#d97706;">⚙ API REST</span>
+          <span class="phase-pill" style="background:rgba(245,158,11,.1);color:#d97706;">⚙ Auth JWT</span>
+          <span class="phase-pill" style="background:rgba(245,158,11,.1);color:#d97706;">⚙ BDD</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="tl-item">
+      <div class="tl-content left reveal left">
+        <div class="phase-lbl" style="color:#7c3aed;">Phase 3</div>
+        <div class="phase-title">Intelligence & SaaS</div>
+        <div class="phase-desc">IA prédictive pour les loyers, app mobile native, multi-tenant SaaS, intégrations comptables et marketplace de prestataires.</div>
+        <div class="phase-pills">
+          <span class="phase-pill" style="background:rgba(139,92,246,.1);color:#7c3aed;">◷ IA prédictive</span>
+          <span class="phase-pill" style="background:rgba(139,92,246,.1);color:#7c3aed;">◷ App mobile</span>
+          <span class="phase-pill" style="background:rgba(139,92,246,.1);color:#7c3aed;">◷ SaaS</span>
+        </div>
+      </div>
+      <div class="tl-dot"><div class="tl-dot-inner" style="background:#7c3aed;">3</div></div>
+      <div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section class="benefits-section">
+  <div class="section-header reveal" style="margin-bottom:0;">
+    <div class="section-eyebrow" style="color:#67e8f9;">Pourquoi GestiLoc</div>
+    <h2 class="section-title" style="color:white;">Conçu pour les propriétaires qui refusent de perdre du temps.</h2>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card reveal" data-d="1">
+      <div class="bc-icon">⚡</div>
+      <div class="bc-title">Tout centralisé</div>
+      <div class="bc-desc">Fini les tableurs Excel, les dossiers papier et les mails éparpillés. Tout est en un seul endroit, structuré et accessible en 2 clics.</div>
+    </div>
+    <div class="benefit-card reveal" data-d="2">
+      <div class="bc-icon">🎯</div>
+      <div class="bc-title">Pensé pour l'action</div>
+      <div class="bc-desc">Interface orientée tâches : chaque écran vous guide vers la prochaine action à effectuer. Aucune fonctionnalité superflue, aucun bruit.</div>
+    </div>
+    <div class="benefit-card reveal" data-d="3">
+      <div class="bc-icon">🔒</div>
+      <div class="bc-title">Données sécurisées</div>
+      <div class="bc-desc">Architecture multi-couche, chiffrement des données sensibles, accès rôle par rôle. Vos informations ne quittent jamais votre contrôle.</div>
+    </div>
+    <div class="benefit-card reveal" data-d="1">
+      <div class="bc-icon">📊</div>
+      <div class="bc-title">Décisions éclairées</div>
+      <div class="bc-desc">Tableau de bord avec KPIs en temps réel, alertes proactives et rapports automatiques pour piloter votre patrimoine avec précision.</div>
+    </div>
+    <div class="benefit-card reveal" data-d="2">
+      <div class="bc-icon">🤝</div>
+      <div class="bc-title">Collaboration native</div>
+      <div class="bc-desc">Partagez l'accès à votre comptable, votre gestionnaire ou votre associé avec des permissions granulaires et un historique d'audit complet.</div>
+    </div>
+    <div class="benefit-card reveal" data-d="3">
+      <div class="bc-icon">🚀</div>
+      <div class="bc-title">Évolutif par design</div>
+      <div class="bc-desc">De 1 à 500 biens, l'architecture scale sans effort. Chaque module peut être activé ou désactivé selon vos besoins réels.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="cta-orb"></div>
+  <div class="cta-inner">
+    <span class="section-eyebrow" style="color:#67e8f9;">Prêt à commencer ?</span>
+    <h2 class="cta-title">Transformez votre<br><span class="grad">gestion locative.</span></h2>
+    <p class="cta-sub">Explorez la démo interactive ou consultez le cahier des charges complet pour comprendre la vision derrière GestiLoc.</p>
+    <div class="cta-btns">
+      <a href="tableau-de-bord.html" class="btn-primary-cta"><i class="fas fa-rocket"></i> Explorer la démo</a>
+      <a href="index.html" class="btn-ghost-cta"><i class="fas fa-file-lines"></i> Cahier des charges</a>
+    </div>
+    <div class="cta-feats">
+      <span class="cta-feat"><i class="fas fa-check"></i> Front-end complet</span>
+      <span class="cta-feat"><i class="fas fa-check"></i> 8 modules actifs</span>
+      <span class="cta-feat"><i class="fas fa-check"></i> Données de démo</span>
+      <span class="cta-feat"><i class="fas fa-check"></i> 100% gratuit</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon"><i class="fas fa-house-chimney"></i></div>
+    <span class="nav-logo-text">GestiLoc</span>
+  </a>
+  <p>Proof of Concept · Maquette front-end statique · 2025</p>
+  <a href="presentation-mobile.html" style="color:rgba(255,255,255,.4);font-size:.82rem;text-decoration:none;">Voir la version mobile →</a>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}animRing();
+document.querySelectorAll('a,button,.module-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+});
+
+// ─── SCROLL BAR ───
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  document.getElementById('bar').style.width=p+'%';
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+});
+
+// ─── REVEAL ───
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ─── COUNTER ───
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    const target=+el.dataset.count;
+    if(!target)return;
+    let start=0;
+    const dur=1200;const step=dur/target;
+    const t=setInterval(()=>{
+      start++;el.textContent=start;
+      if(start>=target)clearInterval(t);
+    },step);
+    countObs.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
+
+// ─── MODULE FILTER ───
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.module-card').forEach(card=>{
+      if(f==='all'||card.dataset.cat===f){card.classList.remove('hidden');}
+      else{card.classList.add('hidden');}
+    });
+  });
+});
+
+// ─── PARTICLES ───
+(function(){
+  const canvas=document.getElementById('particles');
+  const ctx=canvas.getContext('2d');
+  let pts=[];
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;init();}
+  function init(){
+    pts=[];
+    for(let i=0;i<80;i++){
+      pts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+        vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5});
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>canvas.width)p.vx*=-1;
+      if(p.y<0||p.y>canvas.height)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(103,232,249,.4)';ctx.fill();
+    });
+    pts.forEach((a,i)=>{
+      pts.slice(i+1).forEach(b=>{
+        const d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(103,232,249,${.15*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke();}
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();draw();
+  window.addEventListener('resize',resize);
+})();
+
+// ─── HERO PARALLAX ───
+document.querySelector('.hero').addEventListener('mousemove',e=>{
+  const rect=e.currentTarget.getBoundingClientRect();
+  const x=(e.clientX-rect.left)/rect.width-.5;
+  const y=(e.clientY-rect.top)/rect.height-.5;
+  document.querySelector('.hero-glow').style.transform=`translate(${x*30}px,${y*30}px)`;
+});
+</script>
+</body>
+</html>
