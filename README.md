@@ -95,6 +95,7 @@ gestiloc/
 ├── document-detail.html        ← Détail d'un document
 ├── document-form.html          ← Formulaire document
 ├── reports.html                ← Rapports & KPIs
+├── cahier-des-charges.html     ← Cahier des charges
 └── assets/                     ← CSS & JS
 ```
 
