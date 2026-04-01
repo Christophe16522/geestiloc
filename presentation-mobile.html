@@ -112,10 +112,29 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',-apple-system,sans-ser
 .feat-slide-desc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.65;flex:1;}
 .feat-slide-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
 .fsp{font-size:.65rem;font-weight:600;padding:.25rem .6rem;border-radius:6px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);}
+/* Carousel — état actif / inactif */
+.feat-slide{transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .4s ease;transform:scale(.95);opacity:.55;}
+.feat-slide.active{transform:scale(1);opacity:1;}
+
+/* Animations du contenu liées au carousel */
+@keyframes iconDrop{0%{opacity:0;transform:translateY(-18px) scale(.7)}60%{transform:translateY(4px) scale(1.1)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes titleRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pillPop{from{opacity:0;transform:scale(.6) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes descFade{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+
+.feat-slide.active .feat-slide-icon{animation:iconDrop .5s cubic-bezier(.22,1,.36,1) .05s both;}
+.feat-slide.active .feat-slide-title{animation:titleRise .4s ease .15s both;}
+.feat-slide.active .feat-slide-desc{animation:descFade .4s ease .22s both;}
+.feat-slide.active .fsp{animation:pillPop .35s cubic-bezier(.22,1,.36,1) both;}
+.feat-slide.active .fsp:nth-child(1){animation-delay:.28s}
+.feat-slide.active .fsp:nth-child(2){animation-delay:.34s}
+.feat-slide.active .fsp:nth-child(3){animation-delay:.40s}
+.feat-slide.active .fsp:nth-child(4){animation-delay:.46s}
+
 /* Carousel indicators */
 .carousel-dots{display:flex;gap:.5rem;justify-content:center;padding:.75rem 0 .25rem;}
-.cdot{width:6px;height:6px;border-radius:50%;background:rgba(30,58,138,.2);transition:all .3s;}
-.cdot.active{background:var(--c);width:18px;border-radius:3px;}
+.cdot{width:6px;height:6px;border-radius:50%;background:rgba(30,58,138,.2);transition:all .35s cubic-bezier(.22,1,.36,1);}
+.cdot.active{background:var(--c);width:24px;border-radius:3px;box-shadow:0 0 8px rgba(6,182,212,.5);}
 
 /* ══════════════════════════════════════
    SCREEN 4 — MODULES LIST
@@ -595,9 +614,37 @@ document.getElementById('btn-details').addEventListener('click', e => {
 // ─── CAROUSEL ───
 const slides = document.getElementById('feat-slides');
 const cdots = document.querySelectorAll('.cdot');
+const featSlides = document.querySelectorAll('.feat-slide');
+
+function updateCarousel() {
+  const containerCenter = slides.scrollLeft + slides.clientWidth / 2;
+  let activeIdx = 0;
+  let minDist = Infinity;
+
+  featSlides.forEach((slide, i) => {
+    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+    const dist = Math.abs(containerCenter - slideCenter);
+    if (dist < minDist) { minDist = dist; activeIdx = i; }
+
+    // Reset animations en retirant puis rajoutant la classe active
+    if (slide.classList.contains('active')) {
+      slide.classList.remove('active');
+      // Force reflow pour relancer les animations CSS
+      void slide.offsetWidth;
+    }
+  });
+
+  featSlides[activeIdx].classList.add('active');
+  cdots.forEach((d,i) => d.classList.toggle('active', i === activeIdx));
+}
+
+// Init : activer la première carte
+featSlides[0] && featSlides[0].classList.add('active');
+
+let scrollTimer;
 slides.addEventListener('scroll', () => {
-  const idx = Math.round(slides.scrollLeft / slides.clientWidth);
-  cdots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(updateCarousel, 60);
 }, {passive: true});
 
 // ─── FAB → TOAST ───
