@@ -1,50 +1,73 @@
-<nav class="navbar navbar-gestiloc navbar-expand-lg sticky-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <span class="brand-icon"><i class="fas fa-home"></i></span>
-            GestiLoc
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMain">
-            <ul class="navbar-nav me-auto ms-3 gap-1">
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i>{{ __('nav.dashboard') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.index') }}"><i class="fas fa-building me-1"></i>{{ __('nav.properties') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('tenants.*') ? 'active' : '' }}" href="{{ route('tenants.index') }}"><i class="fas fa-users me-1"></i>{{ __('nav.tenants') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('contracts.*') ? 'active' : '' }}" href="{{ route('contracts.index') }}"><i class="fas fa-file-contract me-1"></i>{{ __('nav.contracts') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('payments.*') ? 'active' : '' }}" href="{{ route('payments.index') }}"><i class="fas fa-euro-sign me-1"></i>{{ __('nav.payments') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('documents.*') ? 'active' : '' }}" href="{{ route('documents.index') }}"><i class="fas fa-folder me-1"></i>{{ __('nav.documents') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('maintenances.*') ? 'active' : '' }}" href="{{ route('maintenances.index') }}"><i class="fas fa-wrench me-1"></i>{{ __('nav.maintenances') }}</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('reports.*') ? 'active' : '' }}" href="{{ route('reports.index') }}"><i class="fas fa-chart-bar me-1"></i>{{ __('nav.reports') }}</a></li>
-            </ul>
-            <div class="d-flex align-items-center gap-2">
-                <span class="text-white-50 small">{{ Auth::user()->name }}</span>
-                {{-- Sélecteur de langue --}}
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-light dropdown-toggle" style="font-size:.8rem;padding:.3rem .7rem;" type="button" data-bs-toggle="dropdown">
-                        {{ strtoupper(app()->getLocale()) }}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a class="dropdown-item {{ app()->getLocale() === 'fr' ? 'active' : '' }}" href="{{ route('lang.switch', 'fr') }}">
-                                🇫🇷 Français
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ route('lang.switch', 'en') }}">
-                                🇬🇧 English
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-sm btn-outline-light" style="font-size:.8rem;padding:.3rem .7rem;">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </form>
-            </div>
+@php
+$navItems = [
+    ['route'=>'dashboard','icon'=>'fa-gauge-high','label'=>__('nav.dashboard')],
+    ['route'=>'properties.index','icon'=>'fa-building','label'=>__('nav.properties')],
+    ['route'=>'tenants.index','icon'=>'fa-users','label'=>__('nav.tenants')],
+    ['route'=>'contracts.index','icon'=>'fa-file-contract','label'=>__('nav.contracts')],
+    ['route'=>'payments.index','icon'=>'fa-euro-sign','label'=>__('nav.payments')],
+    ['route'=>'documents.index','icon'=>'fa-folder-open','label'=>__('nav.documents')],
+    ['route'=>'maintenances.index','icon'=>'fa-wrench','label'=>__('nav.maintenances')],
+    ['route'=>'reports.index','icon'=>'fa-chart-bar','label'=>__('nav.reports')],
+];
+@endphp
+<nav class="navbar navbar-expand-lg gestiloc-navbar">
+  <div class="container-fluid px-4">
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('dashboard') }}">
+      <div class="navbar-logo-icon"><i class="fa-solid fa-building"></i></div>
+      <div>
+        <div class="navbar-logo-text">GestiLoc</div>
+        <div class="navbar-logo-sub">Gestion immobilière</div>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mx-auto gap-1">
+        @foreach($navItems as $item)
+        <li class="nav-item">
+          <a class="nav-link-custom {{ request()->routeIs(str_replace('.index', '', $item['route']).'*') ? 'active' : '' }}" href="{{ route($item['route']) }}">
+            <i class="fa-solid {{ $item['icon'] }}"></i>
+            <span>{{ $item['label'] }}</span>
+          </a>
+        </li>
+        @endforeach
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <!-- Language switcher -->
+        <div class="lang-switcher">
+          <a href="{{ route('lang.switch', 'fr') }}" class="lang-btn {{ app()->getLocale() === 'fr' ? 'active' : '' }}">🇫🇷 FR</a>
+          <a href="{{ route('lang.switch', 'en') }}" class="lang-btn {{ app()->getLocale() === 'en' ? 'active' : '' }}">🇬🇧 EN</a>
         </div>
+        <!-- User dropdown -->
+        <div class="dropdown">
+          <button class="user-avatar-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" style="min-width:180px;border-radius:10px;">
+            <li>
+              <div class="px-3 py-2 border-bottom">
+                <div class="fw-semibold small">{{ Auth::user()->name }}</div>
+                <div class="text-muted" style="font-size:.75rem;">{{ Auth::user()->email }}</div>
+              </div>
+            </li>
+            <li>
+              <a class="dropdown-item py-2" href="{{ route('profile.edit') }}">
+                <i class="fa-solid fa-user me-2 text-muted"></i>{{ __('nav.profile') }}
+              </a>
+            </li>
+            <li>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="dropdown-item py-2 text-danger">
+                  <i class="fa-solid fa-right-from-bracket me-2"></i>{{ __('nav.logout') }}
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </nav>

@@ -1,11 +1,19 @@
-@props(['label', 'value', 'icon', 'variant' => 'primary', 'subtitle' => null])
-<div class="stat-card h-100">
-    <div class="stat-icon stat-icon-{{ $variant }}">
-        <i class="fas fa-{{ $icon }}"></i>
+@props(['label','value','icon'=>'fa-chart-bar','variant'=>'primary','trend'=>null,'trendLabel'=>null])
+<div class="stat-card stat-card--{{ $variant }}">
+  <div class="stat-card__body">
+    <div class="stat-card__icon">
+      <i class="fa-solid fa-{{ $icon }}"></i>
     </div>
-    <div class="stat-value text-{{ $variant === 'accent' ? 'info' : $variant }}">{{ $value }}</div>
-    <div class="stat-label">{{ $label }}</div>
-    @if($subtitle)
-        <small class="text-muted mt-1 d-block">{{ $subtitle }}</small>
-    @endif
+    <div class="stat-card__content">
+      <div class="stat-card__value">{{ $value }}</div>
+      <div class="stat-card__label">{{ $label }}</div>
+      @if($trend !== null)
+      <div class="stat-card__trend {{ $trend >= 0 ? 'stat-card__trend--up' : 'stat-card__trend--down' }}">
+        <i class="fa-solid fa-arrow-{{ $trend >= 0 ? 'up' : 'down' }}"></i>
+        {{ abs($trend) }}% {{ $trendLabel }}
+      </div>
+      @endif
+    </div>
+  </div>
+  <div class="stat-card__bar"></div>
 </div>

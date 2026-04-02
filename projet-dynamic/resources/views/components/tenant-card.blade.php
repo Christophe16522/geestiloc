@@ -1,26 +1,25 @@
 @props(['tenant'])
-<div class="prop-card p-3">
-    <div class="d-flex align-items-center gap-3 mb-3">
-        <div class="tenant-initials">{{ $tenant->initials }}</div>
-        <div class="flex-grow-1 min-width-0">
-            <div class="fw-700">{{ $tenant->full_name }}</div>
-            <small class="text-muted">{{ $tenant->email }}</small>
-        </div>
-        <x-status-badge :status="$tenant->payment_status" type="payment" />
+@php
+$colors=['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899'];
+$color=$colors[abs(crc32($tenant->getFullNameAttribute()))%count($colors)];
+@endphp
+<div class="tenant-card">
+  <div class="tenant-card__header">
+    <div class="tenant-card__avatar" style="background:{{ $color }};">{{ $tenant->getInitialsAttribute() }}</div>
+    <div class="tenant-card__info">
+      <h6 class="tenant-card__name">{{ $tenant->getFullNameAttribute() }}</h6>
+      <p class="tenant-card__email">{{ $tenant->email }}</p>
     </div>
+    <x-status-badge :status="$tenant->payment_status" type="payment" />
+  </div>
+  <div class="tenant-card__body">
     @if($tenant->property)
-    <div class="text-muted small mb-2">
-        <i class="fas fa-building me-1"></i>{{ $tenant->property->name }}
-    </div>
+    <div class="tenant-card__property"><i class="fa-solid fa-building me-1 text-muted"></i>{{ $tenant->property->name }}</div>
     @endif
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted small">Loyer mensuel</span>
-        <span class="fw-700" style="color:var(--primary)">{{ number_format($tenant->monthly_rent, 0, ',', ' ') }} €</span>
-    </div>
-    <div class="d-flex gap-2">
-        <a href="{{ route('tenants.show', $tenant) }}" class="btn btn-sm btn-outline-primary flex-grow-1">Voir</a>
-        <a href="{{ route('tenants.edit', $tenant) }}" class="btn btn-sm btn-outline-secondary">
-            <i class="fas fa-edit"></i>
-        </a>
-    </div>
+    <div class="tenant-card__rent">{{ number_format($tenant->monthly_rent, 0, ',', ' ') }} €<span>/mois</span></div>
+  </div>
+  <div class="tenant-card__footer">
+    <a href="{{ route('tenants.show', $tenant) }}" class="btn btn-sm btn-outline-primary rounded-pill flex-fill">Voir</a>
+    <a href="{{ route('tenants.edit', $tenant) }}" class="btn btn-sm btn-ghost-custom rounded-pill flex-fill">Modifier</a>
+  </div>
 </div>

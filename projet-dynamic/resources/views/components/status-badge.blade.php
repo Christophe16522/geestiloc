@@ -1,21 +1,21 @@
-@props(['status', 'type' => 'payment'])
+@props(['status','type'=>'payment'])
 @php
-$labels = [
-    'paye'     => 'Payé',
-    'attente'  => 'En attente',
-    'retard'   => 'En retard',
-    'actif'    => 'Actif',
-    'expire'   => 'Expiré',
-    'archive'  => 'Archivé',
-    'occupee'  => 'Occupée',
-    'vacante'  => 'Vacante',
-    'a_faire'  => 'À faire',
-    'en_cours' => 'En cours',
-    'termine'  => 'Terminé',
-    'haute'    => 'Haute',
-    'moyenne'  => 'Moyenne',
-    'basse'    => 'Basse',
+$map = [
+  'paye'     => ['paye',     __('common.status_paye')],
+  'attente'  => ['attente',  __('common.status_attente')],
+  'retard'   => ['retard',   __('common.status_retard')],
+  'actif'    => ['actif',    __('common.status_actif')],
+  'expire'   => ['expire',   __('common.status_expire')],
+  'archive'  => ['archive',  __('common.status_archive')],
+  'a_faire'  => ['a_faire',  __('common.status_a_faire')],
+  'en_cours' => ['en_cours', __('common.status_en_cours')],
+  'termine'  => ['termine',  __('common.status_termine')],
+  'vacant'   => ['vacant',   __('common.status_vacant')],
+  'occupee'  => ['occupee',  __('common.status_occupee')],
+  'haute'    => ['retard',   __('common.priority_haute')],
+  'moyenne'  => ['attente',  __('common.priority_moyenne')],
+  'basse'    => ['termine',  __('common.priority_basse')],
 ];
-$label = $labels[$status] ?? $status;
+[$cls, $lbl] = $map[$status] ?? ['attente', $status];
 @endphp
-<span class="badge rounded-pill badge-{{ $status }} px-3 py-2">{{ $label }}</span>
+<span class="status-badge status-badge--{{ $cls }}">{{ $lbl }}</span>

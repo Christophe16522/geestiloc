@@ -1,26 +1,27 @@
 @props(['property'])
-<div class="prop-card">
-    <div class="prop-card-header">
-        <div>
-            <div class="fw-700" style="font-size:.95rem;">{{ $property->name }}</div>
-            <small style="opacity:.8">{{ $property->reference }}</small>
-        </div>
-        <x-status-badge :status="$property->status" type="property" />
+@php
+$typeColors = ['appartement'=>'#3b82f6','maison'=>'#10b981','garage'=>'#f59e0b','commercial'=>'#8b5cf6','terrain'=>'#06b6d4'];
+$color = $typeColors[$property->type] ?? '#64748b';
+@endphp
+<div class="property-card">
+  <div class="property-card__swatch" style="background:linear-gradient(135deg, {{ $color }}22 0%, {{ $color }}44 100%); border-bottom:3px solid {{ $color }};">
+    <i class="fa-solid fa-building" style="color:{{ $color }};font-size:2rem;"></i>
+    <span class="property-card__ref">{{ $property->reference }}</span>
+  </div>
+  <div class="property-card__body">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <h6 class="property-card__name">{{ $property->name }}</h6>
+      <x-status-badge :status="$property->status" type="property" />
     </div>
-    <div class="prop-card-body">
-        <div class="d-flex align-items-center gap-2 text-muted small mb-2">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>{{ $property->city }}</span>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted small"><i class="fas fa-ruler-combined me-1"></i>{{ $property->surface_m2 ?? '—' }} m²</span>
-            <span class="fw-700" style="color:var(--primary)">{{ number_format($property->monthly_rent, 0, ',', ' ') }} €/mois</span>
-        </div>
-        <div class="d-flex gap-2">
-            <a href="{{ route('properties.show', $property) }}" class="btn btn-sm btn-outline-primary flex-grow-1">Voir</a>
-            <a href="{{ route('properties.edit', $property) }}" class="btn btn-sm btn-outline-secondary">
-                <i class="fas fa-edit"></i>
-            </a>
-        </div>
+    <p class="property-card__address"><i class="fa-solid fa-location-dot me-1"></i>{{ $property->address }}, {{ $property->city }}</p>
+    <div class="property-card__chips">
+      <span class="prop-chip"><i class="fa-solid fa-tag me-1"></i>{{ ucfirst($property->type) }}</span>
+      <span class="prop-chip"><i class="fa-solid fa-ruler-combined me-1"></i>{{ $property->surface_m2 }} m²</span>
     </div>
+    <div class="property-card__price">{{ number_format($property->monthly_rent, 0, ',', ' ') }} €<span>/mois</span></div>
+    <div class="property-card__actions">
+      <a href="{{ route('properties.show', $property) }}" class="btn btn-sm btn-outline-primary rounded-pill">Voir</a>
+      <a href="{{ route('properties.edit', $property) }}" class="btn btn-sm btn-ghost-custom rounded-pill">Modifier</a>
+    </div>
+  </div>
 </div>
