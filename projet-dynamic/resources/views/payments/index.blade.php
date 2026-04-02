@@ -10,13 +10,13 @@
         <x-stat-card :label="__('common.status_paye')" :value="number_format($stats['paid'] ?? 0, 0, ',', ' ').' €'" icon="circle-check" variant="success" />
     </div>
     <div class="col-6 col-lg-3">
-        <x-stat-card :label="__('common.status_attente')" :value="number_format($stats['pending'] ?? 0, 0, ',', ' ').' €'" icon="clock" variant="accent" />
+        <x-stat-card :label="__('common.status_attente')" :value="number_format($stats['pending'] ?? 0, 0, ',', ' ').' €'" icon="hourglass-half" variant="accent" />
     </div>
     <div class="col-6 col-lg-3">
-        <x-stat-card :label="__('common.status_retard')" :value="number_format($stats['late'] ?? 0, 0, ',', ' ').' €'" icon="triangle-exclamation" variant="danger" />
+        <x-stat-card :label="__('common.status_retard')" :value="number_format($stats['late'] ?? 0, 0, ',', ' ').' €'" icon="circle-exclamation" variant="danger" />
     </div>
     <div class="col-6 col-lg-3">
-        <x-stat-card :label="__('payments.total')" :value="number_format(($stats['paid']??0)+($stats['pending']??0)+($stats['late']??0), 0, ',', ' ').' €'" icon="euro-sign" variant="primary" />
+        <x-stat-card :label="__('payments.total')" :value="number_format(($stats['paid']??0)+($stats['pending']??0)+($stats['late']??0), 0, ',', ' ').' €'" icon="coins" variant="primary" />
     </div>
 </div>
 
@@ -25,7 +25,7 @@
     <form method="GET">
         <div class="d-flex flex-wrap gap-3 align-items-end">
             <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <span class="filter-label"><i class="fa-solid fa-sliders me-1"></i>{{ __('common.status') }}</span>
                 <select name="status" class="form-select">
                     <option value="">{{ __('payments.all_statuses') }}</option>
                     <option value="paye"    @selected(request('status')==='paye')>{{ __('common.status_paye') }}</option>
@@ -34,7 +34,7 @@
                 </select>
             </div>
             <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-calendar me-1"></i>{{ __('payments.period') }}</span>
+                <span class="filter-label"><i class="fa-solid fa-calendar-week me-1"></i>{{ __('payments.period') }}</span>
                 <select name="month" class="form-select">
                     <option value="">{{ __('payments.all_months') }}</option>
                     @foreach(range(1,12) as $m)
@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div class="filter-group" style="min-width:90px;">
-                <span class="filter-label"><i class="fa-solid fa-calendar-days me-1"></i>{{ __('reports.year') }}</span>
+                <span class="filter-label"><i class="fa-solid fa-calendar-alt me-1"></i>{{ __('reports.year') }}</span>
                 <select name="year" class="form-select">
                     @foreach(range(now()->year, now()->year-3) as $y)
                     <option value="{{ $y }}" @selected(request('year')==(string)$y || (!request('year') && $y===now()->year))>{{ $y }}</option>

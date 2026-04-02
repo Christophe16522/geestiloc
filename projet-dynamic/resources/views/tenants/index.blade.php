@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <span class="filter-label"><i class="fa-solid fa-sliders me-1"></i>{{ __('common.status') }}</span>
                 <select name="status" class="form-select">
                     <option value="">{{ __('tenants.all_statuses') }}</option>
                     <option value="paye"    @selected(request('status')==='paye')>{{ __('common.status_paye') }}</option>

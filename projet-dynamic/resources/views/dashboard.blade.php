@@ -7,16 +7,16 @@
 {{-- KPI Cards --}}
 <div class="row g-3 mb-4">
     <div class="col-6 col-xl-3">
-        <x-stat-card :label="__('dashboard.total_properties')" :value="$stats['total_properties']" icon="building" variant="primary" />
+        <x-stat-card :label="__('dashboard.total_properties')" :value="$stats['total_properties']" icon="city" variant="primary" />
     </div>
     <div class="col-6 col-xl-3">
-        <x-stat-card :label="__('dashboard.occupancy_rate')" :value="$stats['occupancy_rate'].'%'" icon="house-circle-check" variant="success" />
+        <x-stat-card :label="__('dashboard.occupancy_rate')" :value="$stats['occupancy_rate'].'%'" icon="chart-pie" variant="success" />
     </div>
     <div class="col-6 col-xl-3">
-        <x-stat-card :label="__('dashboard.monthly_revenue')" :value="number_format($stats['monthly_revenue'], 0, ',', ' ').' €'" icon="euro-sign" variant="accent" />
+        <x-stat-card :label="__('dashboard.monthly_revenue')" :value="number_format($stats['monthly_revenue'], 0, ',', ' ').' €'" icon="coins" variant="accent" />
     </div>
     <div class="col-6 col-xl-3">
-        <x-stat-card :label="__('dashboard.late_rents')" :value="$stats['late_tenants']" icon="triangle-exclamation" variant="danger" />
+        <x-stat-card :label="__('dashboard.late_rents')" :value="$stats['late_tenants']" icon="clock-rotate-left" variant="danger" />
     </div>
 </div>
 
@@ -65,10 +65,10 @@
     <h6 class="fw-600 mb-3">{{ __('dashboard.quick_access') }}</h6>
     <div class="row g-3">
         @foreach([
-            ['route'=>'properties.create','icon'=>'fa-plus','label'=>__('dashboard.add_property'),'color'=>'#3b82f6'],
-            ['route'=>'tenants.create','icon'=>'fa-user-plus','label'=>__('dashboard.add_tenant'),'color'=>'#10b981'],
-            ['route'=>'payments.index','icon'=>'fa-euro-sign','label'=>__('nav.payments'),'color'=>'#f59e0b'],
-            ['route'=>'reports.index','icon'=>'fa-chart-bar','label'=>__('nav.reports'),'color'=>'#8b5cf6'],
+            ['route'=>'properties.create','icon'=>'fa-building-circle-arrow-right','label'=>__('dashboard.add_property'),'color'=>'#3b82f6'],
+            ['route'=>'tenants.create',  'icon'=>'fa-user-plus',                 'label'=>__('dashboard.add_tenant'),  'color'=>'#10b981'],
+            ['route'=>'payments.index',  'icon'=>'fa-coins',                     'label'=>__('nav.payments'),           'color'=>'#f59e0b'],
+            ['route'=>'reports.index',   'icon'=>'fa-chart-line',                'label'=>__('nav.reports'),            'color'=>'#8b5cf6'],
         ] as $action)
         <div class="col-6 col-md-3">
             <a href="{{ route($action['route']) }}" class="quick-action-card" style="--qa-color:{{ $action['color'] }};">

@@ -1,20 +1,20 @@
 @php
 $navItems = [
-    ['route'=>'dashboard','icon'=>'fa-gauge-high','label'=>__('nav.dashboard')],
-    ['route'=>'properties.index','icon'=>'fa-building','label'=>__('nav.properties')],
-    ['route'=>'tenants.index','icon'=>'fa-users','label'=>__('nav.tenants')],
-    ['route'=>'contracts.index','icon'=>'fa-file-contract','label'=>__('nav.contracts')],
-    ['route'=>'payments.index','icon'=>'fa-euro-sign','label'=>__('nav.payments')],
-    ['route'=>'documents.index','icon'=>'fa-folder-open','label'=>__('nav.documents')],
-    ['route'=>'maintenances.index','icon'=>'fa-wrench','label'=>__('nav.maintenances')],
-    ['route'=>'reports.index','icon'=>'fa-chart-bar','label'=>__('nav.reports')],
+    ['route'=>'dashboard',          'icon'=>'fa-house-chimney',      'label'=>__('nav.dashboard')],
+    ['route'=>'properties.index',   'icon'=>'fa-city',               'label'=>__('nav.properties')],
+    ['route'=>'tenants.index',      'icon'=>'fa-user-tie',           'label'=>__('nav.tenants')],
+    ['route'=>'contracts.index',    'icon'=>'fa-file-signature',     'label'=>__('nav.contracts')],
+    ['route'=>'payments.index',     'icon'=>'fa-coins',              'label'=>__('nav.payments')],
+    ['route'=>'documents.index',    'icon'=>'fa-folder-tree',        'label'=>__('nav.documents')],
+    ['route'=>'maintenances.index', 'icon'=>'fa-screwdriver-wrench', 'label'=>__('nav.maintenances')],
+    ['route'=>'reports.index',      'icon'=>'fa-chart-line',         'label'=>__('nav.reports')],
 ];
 @endphp
 <nav class="navbar navbar-expand-lg gestiloc-navbar">
   <div class="container-fluid px-4">
     <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('dashboard') }}">
-      <div class="navbar-logo-icon"><i class="fa-solid fa-building"></i></div>
+      <div class="navbar-logo-icon"><i class="fa-solid fa-key"></i></div>
       <div>
         <div class="navbar-logo-text">GestiLoc</div>
         <div class="navbar-logo-sub">Gestion immobilière</div>
@@ -54,7 +54,7 @@ $navItems = [
             </li>
             <li>
               <a class="dropdown-item py-2" href="{{ route('profile.edit') }}">
-                <i class="fa-solid fa-user me-2 text-muted"></i>{{ __('nav.profile') }}
+                <i class="fa-solid fa-circle-user me-2 text-muted"></i>{{ __('nav.profile') }}
               </a>
             </li>
             <li>

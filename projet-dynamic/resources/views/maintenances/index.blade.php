@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <span class="filter-label"><i class="fa-solid fa-sliders me-1"></i>{{ __('common.status') }}</span>
                 <select name="status" class="form-select">
                     <option value="">{{ __('maintenances.all_statuses') }}</option>
                     <option value="a_faire"  @selected(request('status')==='a_faire')>{{ __('common.status_a_faire') }}</option>
@@ -24,7 +24,7 @@
                 </select>
             </div>
             <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-arrow-up-wide-short me-1"></i>{{ __('maintenances.priority') }}</span>
+                <span class="filter-label"><i class="fa-solid fa-bars-staggered me-1"></i>{{ __('maintenances.priority') }}</span>
                 <select name="priority" class="form-select">
                     <option value="">{{ __('maintenances.all_priorities') }}</option>
                     <option value="haute"   @selected(request('priority')==='haute')>{{ __('common.priority_haute') }}</option>
