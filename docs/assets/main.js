@@ -257,27 +257,27 @@ const NAV = [
   const breadcrumbEl = document.getElementById('breadcrumb');
   if (breadcrumbEl) buildBreadcrumb(breadcrumbEl, lang);
 
-  // Sélecteur de langue en bas de la sidebar nav
-  if (sidebarNavEl) {
-    const hr = document.createElement('hr');
-    hr.className = 'nav-divider';
-    sidebarNavEl.appendChild(hr);
-
+  // Sélecteur de langue dans le header (toujours visible)
+  const headerEl = document.querySelector('.sidebar-header');
+  if (headerEl) {
     const picker = document.createElement('div');
     picker.className = 'lang-picker';
+
+    var flags = { fr: '🇫🇷', en: '🇬🇧' };
+    var labels = { fr: 'Français', en: 'English' };
 
     ['fr', 'en'].forEach(function (l) {
       const btn = document.createElement('button');
       btn.className = 'lang-btn' + (l === lang ? ' active' : '');
-      btn.textContent = l.toUpperCase();
-      btn.title = l === 'fr' ? 'Français' : 'English';
+      btn.innerHTML = flags[l] + ' <span>' + l.toUpperCase() + '</span>';
+      btn.title = labels[l];
       btn.addEventListener('click', function () {
         if (l !== lang) { setLang(l); location.reload(); }
       });
       picker.appendChild(btn);
     });
 
-    sidebarNavEl.appendChild(picker);
+    headerEl.appendChild(picker);
   }
 
   // Crédit développeur en bas de la sidebar
