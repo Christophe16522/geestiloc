@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GestiLoc</title>
+<style>
+  body { margin:0; background:#060d1f; display:flex; align-items:center; justify-content:center; min-height:100vh; font-family:'Inter',-apple-system,sans-serif; }
+  .loader { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+  .logo { width:52px; height:52px; background:linear-gradient(135deg,#06b6d4,#3b82f6); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:white; }
+  .dots { display:flex; gap:.5rem; }
+  .dot { width:6px; height:6px; border-radius:50%; background:rgba(103,232,249,.4); animation:pulse 1.2s ease-in-out infinite; }
+  .dot:nth-child(2) { animation-delay:.2s; }
+  .dot:nth-child(3) { animation-delay:.4s; }
+  @keyframes pulse { 0%,100%{opacity:.3;transform:scale(.8)} 50%{opacity:1;transform:scale(1);background:#67e8f9} }
+</style>
+</head>
+<body>
+<div class="loader">
+  <div class="logo">🏠</div>
+  <div class="dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+<script>
+  // Détection immédiate avant rendu
+  var mobile = window.innerWidth < 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  // Redirection sans laisser de trace dans l'historique
+  window.location.replace(mobile ? 'presentation-mobile.html' : 'presentation-desktop.html');
+</script>
+</body>
+</html>
