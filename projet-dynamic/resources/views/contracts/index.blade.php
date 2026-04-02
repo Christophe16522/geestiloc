@@ -5,27 +5,44 @@
 <x-page-header :title="__('contracts.title')" :subtitle="__('contracts.subtitle')" :createRoute="'contracts.create'" :createLabel="__('contracts.add')" />
 
 <div class="filters-bar mb-4">
-    <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
-        <div class="search-input-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="search" class="form-control form-control-sm search-input" placeholder="{{ __('common.search') }}" value="{{ request('search') }}">
+    <form method="GET">
+        <div class="d-flex flex-wrap gap-3 align-items-end">
+            <div class="filter-group filter-group--search">
+                <span class="filter-label"><i class="fa-solid fa-magnifying-glass me-1"></i>{{ __('common.search') }}</span>
+                <div class="search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" class="form-control search-input" placeholder="{{ __('common.search') }}…" value="{{ request('search') }}">
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <select name="status" class="form-select">
+                    <option value="">{{ __('contracts.all_statuses') }}</option>
+                    <option value="actif"   @selected(request('status')==='actif')>{{ __('common.status_actif') }}</option>
+                    <option value="expire"  @selected(request('status')==='expire')>{{ __('common.status_expire') }}</option>
+                    <option value="archive" @selected(request('status')==='archive')>{{ __('common.status_archive') }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-tag me-1"></i>{{ __('contracts.type') }}</span>
+                <select name="type" class="form-select">
+                    <option value="">{{ __('contracts.all_types') }}</option>
+                    <option value="vide"       @selected(request('type')==='vide')>{{ __('contracts.type_vide') }}</option>
+                    <option value="meuble"     @selected(request('type')==='meuble')>{{ __('contracts.type_meuble') }}</option>
+                    <option value="commercial" @selected(request('type')==='commercial')>{{ __('contracts.type_commercial') }}</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fa-solid fa-filter"></i> {{ __('common.filter') }}
+                </button>
+                @if(request()->anyFilled(['search','status','type']))
+                <a href="{{ route('contracts.index') }}" class="btn btn-ghost-custom">
+                    <i class="fa-solid fa-xmark"></i> {{ __('common.reset') }}
+                </a>
+                @endif
+            </div>
         </div>
-        <select name="status" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('contracts.all_statuses') }}</option>
-            <option value="actif" @selected(request('status')==='actif')>{{ __('common.status_actif') }}</option>
-            <option value="expire" @selected(request('status')==='expire')>{{ __('common.status_expire') }}</option>
-            <option value="archive" @selected(request('status')==='archive')>{{ __('common.status_archive') }}</option>
-        </select>
-        <select name="type" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('contracts.all_types') }}</option>
-            <option value="vide" @selected(request('type')==='vide')>{{ __('contracts.type_vide') }}</option>
-            <option value="meuble" @selected(request('type')==='meuble')>{{ __('contracts.type_meuble') }}</option>
-            <option value="commercial" @selected(request('type')==='commercial')>{{ __('contracts.type_commercial') }}</option>
-        </select>
-        <button type="submit" class="btn btn-primary-custom btn-sm">{{ __('common.filter') }}</button>
-        @if(request()->anyFilled(['search','status','type']))
-        <a href="{{ route('contracts.index') }}" class="btn btn-ghost-custom btn-sm">{{ __('common.reset') }}</a>
-        @endif
     </form>
 </div>
 

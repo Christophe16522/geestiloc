@@ -302,33 +302,101 @@ a:hover { color: var(--primary-light); }
 .filters-bar {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: .65rem 1rem;
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
   box-shadow: var(--shadow-sm);
 }
+
+.filters-bar form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+/* Each labeled filter group */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  min-width: 140px;
+}
+.filter-group--search { flex: 1; min-width: 200px; max-width: 300px; }
+.filter-group--wide   { min-width: 160px; }
+
+.filter-label {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* Inputs / selects inside filter groups */
+.filter-group .form-control,
+.filter-group .form-select,
 .filter-select {
-  min-width: 130px;
+  height: 36px;
   border-radius: var(--radius-sm) !important;
   border-color: var(--border) !important;
-  font-size: .82rem !important;
-  height: 32px;
+  font-size: .83rem !important;
+  background-color: var(--gray-50) !important;
+  color: var(--text) !important;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
 }
+.filter-group .form-control:focus,
+.filter-group .form-select:focus,
+.filter-select:focus {
+  border-color: var(--primary-light) !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(30,58,138,.08) !important;
+}
+
+/* Search with icon */
 .search-input-wrap {
-  position: relative; flex: 1;
-  min-width: 160px; max-width: 260px;
+  position: relative;
 }
 .search-input-wrap > i {
-  position: absolute; left: .6rem; top: 50%;
+  position: absolute; left: .7rem; top: 50%;
   transform: translateY(-50%);
   color: var(--gray-400); font-size: .78rem; pointer-events: none;
+  z-index: 1;
 }
 .search-input {
-  padding-left: 1.8rem !important;
-  border-radius: var(--radius-sm) !important;
-  border-color: var(--border) !important;
-  font-size: .82rem !important;
-  height: 32px;
+  padding-left: 2rem !important;
 }
+
+/* Action buttons at the bottom of the filter bar */
+.filter-actions {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  padding-top: 1.3rem; /* align with labeled inputs */
+}
+
+/* Active filter chips shown below the bar */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .75rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--border);
+}
+.filter-chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .22rem .65rem;
+  background: var(--primary-bg);
+  border: 1px solid #c7d7fc;
+  border-radius: var(--radius-full);
+  font-size: .72rem; font-weight: 600; color: var(--primary);
+}
+.filter-chip a {
+  color: var(--primary); opacity: .6; line-height: 1; font-size: .7rem;
+  text-decoration: none;
+}
+.filter-chip a:hover { opacity: 1; }
+
 .form-control:focus, .form-select:focus {
   border-color: var(--primary-light) !important;
   box-shadow: 0 0 0 3px rgba(30,58,138,.08) !important;

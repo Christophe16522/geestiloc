@@ -5,21 +5,35 @@
 <x-page-header :title="__('tenants.title')" :subtitle="$tenants->total().' '.__('tenants.subtitle')" :createRoute="'tenants.create'" :createLabel="__('tenants.add')" />
 
 <div class="filters-bar mb-4">
-    <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
-        <div class="search-input-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="search" class="form-control form-control-sm search-input" placeholder="{{ __('common.search') }}" value="{{ request('search') }}">
+    <form method="GET">
+        <div class="d-flex flex-wrap gap-3 align-items-end">
+            <div class="filter-group filter-group--search">
+                <span class="filter-label"><i class="fa-solid fa-magnifying-glass me-1"></i>{{ __('common.search') }}</span>
+                <div class="search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" class="form-control search-input" placeholder="{{ __('common.search') }}…" value="{{ request('search') }}">
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <select name="status" class="form-select">
+                    <option value="">{{ __('tenants.all_statuses') }}</option>
+                    <option value="paye"    @selected(request('status')==='paye')>{{ __('common.status_paye') }}</option>
+                    <option value="attente" @selected(request('status')==='attente')>{{ __('common.status_attente') }}</option>
+                    <option value="retard"  @selected(request('status')==='retard')>{{ __('common.status_retard') }}</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fa-solid fa-filter"></i> {{ __('common.filter') }}
+                </button>
+                @if(request()->anyFilled(['search','status']))
+                <a href="{{ route('tenants.index') }}" class="btn btn-ghost-custom">
+                    <i class="fa-solid fa-xmark"></i> {{ __('common.reset') }}
+                </a>
+                @endif
+            </div>
         </div>
-        <select name="status" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('tenants.all_statuses') }}</option>
-            <option value="paye" @selected(request('status')==='paye')>{{ __('common.status_paye') }}</option>
-            <option value="attente" @selected(request('status')==='attente')>{{ __('common.status_attente') }}</option>
-            <option value="retard" @selected(request('status')==='retard')>{{ __('common.status_retard') }}</option>
-        </select>
-        <button type="submit" class="btn btn-primary-custom btn-sm">{{ __('common.filter') }}</button>
-        @if(request()->anyFilled(['search','status']))
-        <a href="{{ route('tenants.index') }}" class="btn btn-ghost-custom btn-sm">{{ __('common.reset') }}</a>
-        @endif
     </form>
 </div>
 

@@ -6,26 +6,43 @@
 
 {{-- Filters --}}
 <div class="filters-bar mb-4">
-    <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
-        <div class="search-input-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="search" class="form-control form-control-sm search-input" placeholder="{{ __('common.search') }}" value="{{ request('search') }}">
+    <form method="GET">
+        <div class="d-flex flex-wrap gap-3 align-items-end">
+            <div class="filter-group filter-group--search">
+                <span class="filter-label"><i class="fa-solid fa-magnifying-glass me-1"></i>{{ __('common.search') }}</span>
+                <div class="search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" class="form-control search-input" placeholder="{{ __('common.search') }}…" value="{{ request('search') }}">
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <select name="status" class="form-select">
+                    <option value="">{{ __('properties.all_statuses') }}</option>
+                    <option value="occupee" @selected(request('status')==='occupee')>{{ __('common.status_occupee') }}</option>
+                    <option value="vacante" @selected(request('status')==='vacante')>{{ __('common.status_vacant') }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-tag me-1"></i>{{ __('properties.type') }}</span>
+                <select name="type" class="form-select">
+                    <option value="">{{ __('properties.all_types') }}</option>
+                    @foreach(['appartement','maison','garage','commercial','terrain'] as $t)
+                    <option value="{{ $t }}" @selected(request('type')===$t)>{{ ucfirst($t) }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fa-solid fa-filter"></i> {{ __('common.filter') }}
+                </button>
+                @if(request()->anyFilled(['search','status','type']))
+                <a href="{{ route('properties.index') }}" class="btn btn-ghost-custom">
+                    <i class="fa-solid fa-xmark"></i> {{ __('common.reset') }}
+                </a>
+                @endif
+            </div>
         </div>
-        <select name="status" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('properties.all_statuses') }}</option>
-            <option value="occupee" @selected(request('status')==='occupee')>{{ __('common.status_occupee') }}</option>
-            <option value="vacante" @selected(request('status')==='vacante')>{{ __('common.status_vacant') }}</option>
-        </select>
-        <select name="type" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('properties.all_types') }}</option>
-            @foreach(['appartement','maison','garage','commercial','terrain'] as $t)
-            <option value="{{ $t }}" @selected(request('type')===$t)>{{ ucfirst($t) }}</option>
-            @endforeach
-        </select>
-        <button type="submit" class="btn btn-primary-custom btn-sm">{{ __('common.filter') }}</button>
-        @if(request()->anyFilled(['search','status','type']))
-        <a href="{{ route('properties.index') }}" class="btn btn-ghost-custom btn-sm">{{ __('common.reset') }}</a>
-        @endif
     </form>
 </div>
 

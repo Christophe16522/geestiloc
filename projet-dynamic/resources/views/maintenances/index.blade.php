@@ -5,27 +5,44 @@
 <x-page-header :title="__('maintenances.title')" :subtitle="__('maintenances.empty_text')" :createRoute="'maintenances.create'" :createLabel="__('maintenances.add')" />
 
 <div class="filters-bar mb-4">
-    <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
-        <div class="search-input-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="search" class="form-control form-control-sm search-input" placeholder="{{ __('common.search') }}" value="{{ request('search') }}">
+    <form method="GET">
+        <div class="d-flex flex-wrap gap-3 align-items-end">
+            <div class="filter-group filter-group--search">
+                <span class="filter-label"><i class="fa-solid fa-magnifying-glass me-1"></i>{{ __('common.search') }}</span>
+                <div class="search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" class="form-control search-input" placeholder="{{ __('common.search') }}…" value="{{ request('search') }}">
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <select name="status" class="form-select">
+                    <option value="">{{ __('maintenances.all_statuses') }}</option>
+                    <option value="a_faire"  @selected(request('status')==='a_faire')>{{ __('common.status_a_faire') }}</option>
+                    <option value="en_cours" @selected(request('status')==='en_cours')>{{ __('common.status_en_cours') }}</option>
+                    <option value="termine"  @selected(request('status')==='termine')>{{ __('common.status_termine') }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-arrow-up-wide-short me-1"></i>{{ __('maintenances.priority') }}</span>
+                <select name="priority" class="form-select">
+                    <option value="">{{ __('maintenances.all_priorities') }}</option>
+                    <option value="haute"   @selected(request('priority')==='haute')>{{ __('common.priority_haute') }}</option>
+                    <option value="moyenne" @selected(request('priority')==='moyenne')>{{ __('common.priority_moyenne') }}</option>
+                    <option value="basse"   @selected(request('priority')==='basse')>{{ __('common.priority_basse') }}</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fa-solid fa-filter"></i> {{ __('common.filter') }}
+                </button>
+                @if(request()->anyFilled(['search','status','priority']))
+                <a href="{{ route('maintenances.index') }}" class="btn btn-ghost-custom">
+                    <i class="fa-solid fa-xmark"></i> {{ __('common.reset') }}
+                </a>
+                @endif
+            </div>
         </div>
-        <select name="status" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('maintenances.all_statuses') }}</option>
-            <option value="a_faire" @selected(request('status')==='a_faire')>{{ __('common.status_a_faire') }}</option>
-            <option value="en_cours" @selected(request('status')==='en_cours')>{{ __('common.status_en_cours') }}</option>
-            <option value="termine" @selected(request('status')==='termine')>{{ __('common.status_termine') }}</option>
-        </select>
-        <select name="priority" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('maintenances.all_priorities') }}</option>
-            <option value="haute" @selected(request('priority')==='haute')>{{ __('common.priority_haute') }}</option>
-            <option value="moyenne" @selected(request('priority')==='moyenne')>{{ __('common.priority_moyenne') }}</option>
-            <option value="basse" @selected(request('priority')==='basse')>{{ __('common.priority_basse') }}</option>
-        </select>
-        <button type="submit" class="btn btn-primary-custom btn-sm">{{ __('common.filter') }}</button>
-        @if(request()->anyFilled(['search','status','priority']))
-        <a href="{{ route('maintenances.index') }}" class="btn btn-ghost-custom btn-sm">{{ __('common.reset') }}</a>
-        @endif
     </form>
 </div>
 

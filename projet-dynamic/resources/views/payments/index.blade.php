@@ -22,28 +22,45 @@
 
 {{-- Filters --}}
 <div class="filters-bar mb-3">
-    <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
-        <select name="status" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('payments.all_statuses') }}</option>
-            <option value="paye" @selected(request('status')==='paye')>{{ __('common.status_paye') }}</option>
-            <option value="attente" @selected(request('status')==='attente')>{{ __('common.status_attente') }}</option>
-            <option value="retard" @selected(request('status')==='retard')>{{ __('common.status_retard') }}</option>
-        </select>
-        <select name="month" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('payments.all_months') }}</option>
-            @foreach(range(1,12) as $m)
-            <option value="{{ $m }}" @selected(request('month')==(string)$m)>{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
-            @endforeach
-        </select>
-        <select name="year" class="form-select form-select-sm filter-select">
-            @foreach(range(now()->year, now()->year-3) as $y)
-            <option value="{{ $y }}" @selected(request('year')==(string)$y || (!request('year') && $y===now()->year))>{{ $y }}</option>
-            @endforeach
-        </select>
-        <button type="submit" class="btn btn-primary-custom btn-sm">{{ __('common.filter') }}</button>
-        @if(request()->anyFilled(['status','month','year']))
-        <a href="{{ route('payments.index') }}" class="btn btn-ghost-custom btn-sm">{{ __('common.reset') }}</a>
-        @endif
+    <form method="GET">
+        <div class="d-flex flex-wrap gap-3 align-items-end">
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-circle-dot me-1"></i>{{ __('common.status') }}</span>
+                <select name="status" class="form-select">
+                    <option value="">{{ __('payments.all_statuses') }}</option>
+                    <option value="paye"    @selected(request('status')==='paye')>{{ __('common.status_paye') }}</option>
+                    <option value="attente" @selected(request('status')==='attente')>{{ __('common.status_attente') }}</option>
+                    <option value="retard"  @selected(request('status')==='retard')>{{ __('common.status_retard') }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-calendar me-1"></i>{{ __('payments.period') }}</span>
+                <select name="month" class="form-select">
+                    <option value="">{{ __('payments.all_months') }}</option>
+                    @foreach(range(1,12) as $m)
+                    <option value="{{ $m }}" @selected(request('month')==(string)$m)>{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-group" style="min-width:90px;">
+                <span class="filter-label"><i class="fa-solid fa-calendar-days me-1"></i>{{ __('reports.year') }}</span>
+                <select name="year" class="form-select">
+                    @foreach(range(now()->year, now()->year-3) as $y)
+                    <option value="{{ $y }}" @selected(request('year')==(string)$y || (!request('year') && $y===now()->year))>{{ $y }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fa-solid fa-filter"></i> {{ __('common.filter') }}
+                </button>
+                @if(request()->anyFilled(['status','month','year']))
+                <a href="{{ route('payments.index') }}" class="btn btn-ghost-custom">
+                    <i class="fa-solid fa-xmark"></i> {{ __('common.reset') }}
+                </a>
+                @endif
+            </div>
+        </div>
     </form>
 </div>
 

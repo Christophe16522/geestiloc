@@ -5,17 +5,28 @@
 <x-page-header :title="__('documents.title')" :subtitle="__('documents.subtitle')" :createRoute="'documents.create'" :createLabel="__('documents.add')" />
 
 <div class="filters-bar mb-4">
-    <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
-        <select name="category" class="form-select form-select-sm filter-select">
-            <option value="">{{ __('documents.all_categories') }}</option>
-            @foreach(['contrat','diagnostic','quittance','assurance','autre'] as $cat)
-            <option value="{{ $cat }}" @selected(request('category')===$cat)>{{ ucfirst($cat) }}</option>
-            @endforeach
-        </select>
-        <button type="submit" class="btn btn-primary-custom btn-sm">{{ __('common.filter') }}</button>
-        @if(request()->filled('category'))
-        <a href="{{ route('documents.index') }}" class="btn btn-ghost-custom btn-sm">{{ __('common.reset') }}</a>
-        @endif
+    <form method="GET">
+        <div class="d-flex flex-wrap gap-3 align-items-end">
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-folder me-1"></i>{{ __('documents.category') }}</span>
+                <select name="category" class="form-select">
+                    <option value="">{{ __('documents.all_categories') }}</option>
+                    @foreach(['contrat','diagnostic','quittance','assurance','autre'] as $cat)
+                    <option value="{{ $cat }}" @selected(request('category')===$cat)>{{ ucfirst($cat) }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fa-solid fa-filter"></i> {{ __('common.filter') }}
+                </button>
+                @if(request()->filled('category'))
+                <a href="{{ route('documents.index') }}" class="btn btn-ghost-custom">
+                    <i class="fa-solid fa-xmark"></i> {{ __('common.reset') }}
+                </a>
+                @endif
+            </div>
+        </div>
     </form>
 </div>
 
