@@ -13,24 +13,32 @@ class ReportService
     {
         $userId = Auth::id();
         $months = [];
+        $monthNames = [
+            1=>'Janvier',2=>'Février',3=>'Mars',4=>'Avril',5=>'Mai',6=>'Juin',
+            7=>'Juillet',8=>'Août',9=>'Septembre',10=>'Octobre',11=>'Novembre',12=>'Décembre',
+        ];
 
         for ($m = 1; $m <= 12; $m++) {
-            $paid    = Payment::where('user_id', $userId)->paye()->byMonth($m)->byYear($year)->sum('amount');
-            $pending = Payment::where('user_id', $userId)->attente()->byMonth($m)->byYear($year)->sum('amount');
-            $late    = Payment::where('user_id', $userId)->retard()->byMonth($m)->byYear($year)->sum('amount');
+            $paid    = (float) Payment::where('user_id', $userId)->paye()->byMonth($m)->byYear($year)->sum('amount');
+            $pending = (float) Payment::where('user_id', $userId)->attente()->byMonth($m)->byYear($year)->sum('amount');
+            $late    = (float) Payment::where('user_id', $userId)->retard()->byMonth($m)->byYear($year)->sum('amount');
 
-            $months[$m] = [
-                'paid'    => (float) $paid,
-                'pending' => (float) $pending,
-                'late'    => (float) $late,
-                'total'   => (float) ($paid + $pending + $late),
+            $months[] = [
+                'label'   => $monthNames[$m],
+                'paid'    => $paid,
+                'pending' => $pending,
+                'late'    => $late,
+                'total'   => $paid + $pending + $late,
             ];
         }
 
         return [
-            'year'         => $year,
-            'monthly'      => $months,
-            'annual_total' => array_sum(array_column($months, 'paid')),
+            'year'           => $year,
+            'monthly'        => $months,
+            'annual_paid'    => array_sum(array_column($months, 'paid')),
+            'annual_pending' => array_sum(array_column($months, 'pending')),
+            'annual_late'    => array_sum(array_column($months, 'late')),
+            'annual_total'   => array_sum(array_column($months, 'total')),
         ];
     }
 

@@ -16,7 +16,7 @@
         <x-stat-card :label="__('dashboard.monthly_revenue')" :value="number_format($stats['monthly_revenue'], 0, ',', ' ').' €'" icon="euro-sign" variant="accent" />
     </div>
     <div class="col-6 col-xl-3">
-        <x-stat-card :label="__('dashboard.late_rents')" :value="$stats['late_rents']" icon="triangle-exclamation" variant="danger" />
+        <x-stat-card :label="__('dashboard.late_rents')" :value="$stats['late_tenants']" icon="triangle-exclamation" variant="danger" />
     </div>
 </div>
 
@@ -88,7 +88,7 @@ const chartData = @json($monthlyRevenue ?? []);
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: chartData.map(d => d.month),
+        labels: chartData.map(d => d.label),
         datasets: [{
             label: '{{ __("dashboard.revenue") }}',
             data: chartData.map(d => d.amount),

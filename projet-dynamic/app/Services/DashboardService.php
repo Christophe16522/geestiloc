@@ -50,22 +50,22 @@ class DashboardService
 
         $latePayments = Tenant::where('user_id', $userId)->retard()->count();
         if ($latePayments > 0) {
-            $alerts[] = ['type' => 'danger', 'message' => "{$latePayments} locataire(s) en retard de paiement"];
+            $alerts[] = ['type' => 'danger', 'icon' => 'triangle-exclamation', 'message' => "{$latePayments} locataire(s) en retard de paiement"];
         }
 
         $expiringContracts = Contract::where('user_id', $userId)->expirant(30)->count();
         if ($expiringContracts > 0) {
-            $alerts[] = ['type' => 'warning', 'message' => "{$expiringContracts} contrat(s) expirant dans 30 jours"];
+            $alerts[] = ['type' => 'warning', 'icon' => 'file-contract', 'message' => "{$expiringContracts} contrat(s) expirant dans 30 jours"];
         }
 
         $expiringDocs = Document::where('user_id', $userId)->expiringSoon(30)->count();
         if ($expiringDocs > 0) {
-            $alerts[] = ['type' => 'warning', 'message' => "{$expiringDocs} document(s) expirant prochainement"];
+            $alerts[] = ['type' => 'warning', 'icon' => 'folder-open', 'message' => "{$expiringDocs} document(s) expirant prochainement"];
         }
 
         $urgentMaintenances = Maintenance::where('user_id', $userId)->urgent()->count();
         if ($urgentMaintenances > 0) {
-            $alerts[] = ['type' => 'danger', 'message' => "{$urgentMaintenances} maintenance(s) urgente(s) en attente"];
+            $alerts[] = ['type' => 'danger', 'icon' => 'wrench', 'message' => "{$urgentMaintenances} maintenance(s) urgente(s) en attente"];
         }
 
         return $alerts;

@@ -13,12 +13,15 @@ class ReportController extends Controller
     public function index(Request $request): View
     {
         $year = (int) $request->get('year', now()->year);
+        $currentYear = now()->year;
+        $availableYears = range($currentYear, $currentYear - 4);
 
         return view('reports.index', [
-            'financial'   => $this->service->getFinancialReport($year),
-            'occupancy'   => $this->service->getOccupancyReport(),
-            'maintenance' => $this->service->getMaintenanceReport(),
-            'year'        => $year,
+            'financials'      => $this->service->getFinancialReport($year),
+            'occupancy'       => $this->service->getOccupancyReport(),
+            'maintenanceStats'=> $this->service->getMaintenanceReport(),
+            'year'            => $year,
+            'availableYears'  => $availableYears,
         ]);
     }
 }
