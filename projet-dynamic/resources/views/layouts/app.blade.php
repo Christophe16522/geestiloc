@@ -16,7 +16,7 @@
     <x-navbar />
     <x-toast />
     <main class="main-content">
-        <div class="container-fluid px-4 py-4">
+        <div class="container py-4">
             @yield('content')
         </div>
     </main>
