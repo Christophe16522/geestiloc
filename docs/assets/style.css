@@ -101,6 +101,19 @@ body  {
 
 .sidebar-nav { padding: 0.75rem; flex: 1; }
 
+/* --- Crédit développeur ---------------------------------- */
+.sidebar-credit {
+  padding: 0.75rem 1.5rem 1rem;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sidebar-credit strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
 /* Nav — link simple */
 .nav-link {
   display: block;

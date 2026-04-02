@@ -280,6 +280,15 @@ const NAV = [
     sidebarNavEl.appendChild(picker);
   }
 
+  // Crédit développeur en bas de la sidebar
+  const sidebarEl = document.getElementById('sidebar');
+  if (sidebarEl) {
+    const credit = document.createElement('div');
+    credit.className = 'sidebar-credit';
+    credit.innerHTML = 'Developed by <strong>Christophe LAI</strong>';
+    sidebarEl.appendChild(credit);
+  }
+
   // Traductions du contenu de la page
   applyTranslations(lang);
 
