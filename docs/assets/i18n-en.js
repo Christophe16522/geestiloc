@@ -627,7 +627,7 @@ window.I18N_EN = {
       "All stories below correspond to real actions implemented in <code>projet-dynamic/routes/web.php</code> and the associated controllers."
     ],
     "ul": [
-      "<li>As a landlord, I can register with an email and password.</li><li>As a landlord, I can log in and log out.</li><li>As a landlord, I can edit my profile (name, email, password).</li><li>As a landlord, I can delete my account.</li>",
+      "<li>As a landlord, I can register with an email and password.</li><li>As a landlord, I can log in with my Google account via <code>GET /auth/google</code>.</li><li>As a landlord, I can log in and log out.</li><li>As a landlord, I can edit my profile (name, email, password).</li><li>As a landlord, I can delete my account.</li><li>As a landlord, I can switch the interface language (FR/EN) via <code>GET /lang/{locale}</code>.</li>",
       "<li>As a landlord, I can see a summary of my portfolio: number of properties, number of tenants, this month's rent, current alerts.</li>",
       "<li>As a landlord, I can add a property (type, address, rent, charges, security deposit).</li><li>As a landlord, I can view my property list with their status (occupied / vacant).</li><li>As a landlord, I can edit a property's information.</li><li>As a landlord, I can delete a property (along with all associated data in cascade).</li><li>As a landlord, a unique reference is auto-generated for each property (e.g., <code>PROP-001</code>).</li>",
       "<li>As a landlord, I can add a tenant and associate them with a property.</li><li>As a landlord, I can view my tenant list with their payment status.</li><li>As a landlord, I can search for a tenant by name or email.</li><li>As a landlord, I can edit a tenant's information.</li><li>As a landlord, I can delete a tenant.</li>",
@@ -640,16 +640,18 @@ window.I18N_EN = {
   },
   "technique_architecture": {
     "h1": "Technical Architecture",
-    "subtitle": "Technology stack, folder structure and authentication flow.",
+    "subtitle": "Technology stack, folder structure, services and authentication flow.",
     "h2": [
       "Stack",
       "Folder Structure",
       "Authentication Flow",
       "Controllers",
+      "Services",
+      "Middleware",
       "Applied Principles"
     ],
     "ol": [
-      "<li>The user accesses <code>/</code> → automatic redirect to <code>/dashboard</code></li><li>If not authenticated → redirect to <code>/login</code> (middleware <code>auth</code>)</li><li>Registration via <code>/register</code> (Laravel Breeze)</li><li>After login → access to all routes in the <code>auth</code> group</li><li>All data is filtered by <code>user_id</code> (multi-user isolation)</li>"
+      "<li>The user accesses `/` → automatic redirect to `/dashboard`</li><li>If not authenticated → redirect to `/login` (middleware `auth`)</li><li>Registration via `/register` (Laravel Breeze) or Google login via `/auth/google`</li><li>After login → access to all routes in the `auth` group</li><li>All data is filtered by `user_id` (multi-user isolation)</li><li>Language switch via `GET /lang/{locale}` → stored in session</li>"
     ],
     "ul": [
       "<li><strong>SOLID</strong> — one controller per resource, single responsibility</li><li><strong>DRY</strong> — reusable Blade components for all recurring UI elements</li><li><strong>Scoped data</strong> — every query filters on <code>user_id</code> to isolate data per landlord</li>"
@@ -695,6 +697,9 @@ window.I18N_EN = {
       "Aggregated reports page",
       "<code>ProfileController</code>",
       "User profile management"
+    ],
+    "p": [
+      "Each module has a dedicated service in `app/Services/` that encapsulates business logic, separating responsibilities from controllers."
     ]
   },
   "technique_installation": {
@@ -900,6 +905,29 @@ window.I18N_EN = {
       "Maintenance",
       "Static list",
       "CRUD + progress bar + cost tracking"
+    ]
+  },
+  "technique_base_de_donnees": {
+    "h1": "Database",
+    "subtitle": "Schema for business tables, users table and Eloquent relationships.",
+    "h2": [
+      "Overview",
+      "users table",
+      "properties table",
+      "tenants table",
+      "contracts table",
+      "payments table",
+      "documents table",
+      "maintenances table",
+      "Eloquent Relationships — Summary"
+    ],
+    "th": [
+      "Column",
+      "Type",
+      "Constraints",
+      "Model",
+      "hasMany",
+      "belongsTo"
     ]
   }
 };

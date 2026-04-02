@@ -28,7 +28,7 @@
 
         <article>
           <h1>Architecture technique</h1>
-          <p class="page-subtitle">Stack technologique, structure des dossiers et flux d'authentification.</p>
+          <p class="page-subtitle">Stack technologique, structure des dossiers, services et flux d'authentification.</p>
 
           <h2>Stack</h2>
           <div class="table-wrap">
@@ -41,7 +41,7 @@
                 <tr><td>CSS</td><td>Tailwind CSS (via Vite)</td></tr>
                 <tr><td>JS interactivité</td><td>Alpine.js</td></tr>
                 <tr><td>Build tool</td><td>Vite</td></tr>
-                <tr><td>Authentification</td><td>Laravel Breeze</td></tr>
+                <tr><td>Authentification</td><td>Laravel Breeze + Google OAuth (Socialite)</td></tr>
                 <tr><td>Base de données</td><td>SQLite (dev) / MySQL (prod)</td></tr>
               </tbody>
             </table>
@@ -50,15 +50,18 @@
           <h2>Structure des dossiers</h2>
           <pre><code>projet-dynamic/
 ├── app/
-│   ├── Http/Controllers/      ← contrôleurs (un par module)
-│   └── Models/                ← modèles Eloquent
+│   ├── Http/
+│   │   ├── Controllers/       ← contrôleurs (un par module)
+│   │   └── Middleware/        ← SetLocale (langue session)
+│   ├── Models/                ← modèles Eloquent
+│   └── Services/              ← logique métier (un service par module)
 ├── database/
 │   └── migrations/            ← schéma BDD versionné
 ├── resources/
 │   └── views/
 │       ├── components/        ← composants Blade réutilisables
 │       ├── layouts/           ← layouts (app, guest)
-│       ├── properties/        ← vues du module propriétés
+│       ├── properties/
 │       ├── tenants/
 │       ├── contracts/
 │       ├── payments/
@@ -67,7 +70,7 @@
 │       ├── dashboard.blade.php
 │       └── reports/
 ├── routes/
-│   ├── web.php                ← routes protégées (auth)
+│   ├── web.php                ← routes protégées (auth) + Google OAuth + lang
 │   └── auth.php               ← routes Breeze (login, register…)
 ├── public/                    ← point d'entrée web
 ├── .env                       ← configuration locale
@@ -77,9 +80,10 @@
           <ol>
             <li>L'utilisateur accède à <code>/</code> → redirection automatique vers <code>/dashboard</code></li>
             <li>Si non authentifié → redirection vers <code>/login</code> (middleware <code>auth</code>)</li>
-            <li>Inscription via <code>/register</code> (Laravel Breeze)</li>
+            <li>Inscription via <code>/register</code> (Laravel Breeze) ou connexion Google via <code>/auth/google</code></li>
             <li>Après login → accès à toutes les routes du groupe <code>auth</code></li>
             <li>Toutes les données sont filtrées par <code>user_id</code> (isolation multi-utilisateurs)</li>
+            <li>Changement de langue via <code>GET /lang/{locale}</code> → stocké en session</li>
           </ol>
 
           <h2>Contrôleurs</h2>
@@ -96,13 +100,43 @@
                 <tr><td><code>MaintenanceController</code></td><td>CRUD maintenance + progression</td></tr>
                 <tr><td><code>ReportController</code></td><td>Page de rapports agrégés</td></tr>
                 <tr><td><code>ProfileController</code></td><td>Modification du profil utilisateur</td></tr>
+                <tr><td><code>GoogleController</code></td><td>Authentification OAuth via Google (Socialite)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Services</h2>
+          <p>Chaque module dispose d'un service dédié dans <code>app/Services/</code> qui encapsule la logique métier, séparant les responsabilités des contrôleurs.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Service</th><th>Méthodes clés</th></tr></thead>
+              <tbody>
+                <tr><td><code>DashboardService</code></td><td><code>getKpiStats()</code>, <code>getAlerts()</code>, <code>getMonthlyRevenueChart()</code>, <code>getPaymentStatusChart()</code>, <code>getOccupancyChart()</code></td></tr>
+                <tr><td><code>PropertyService</code></td><td><code>store()</code>, <code>update()</code>, <code>destroy()</code>, <code>getFiltered()</code>, <code>updateStatus()</code></td></tr>
+                <tr><td><code>TenantService</code></td><td><code>store()</code>, <code>update()</code>, <code>destroy()</code>, <code>getFiltered()</code>, <code>syncPaymentStatus()</code></td></tr>
+                <tr><td><code>ContractService</code></td><td><code>store()</code>, <code>update()</code>, <code>archive()</code>, <code>getExpiring()</code>, <code>getFiltered()</code></td></tr>
+                <tr><td><code>PaymentService</code></td><td><code>store()</code>, <code>update()</code>, <code>markAsPaid()</code>, <code>getMonthlyStats()</code>, <code>getFiltered()</code></td></tr>
+                <tr><td><code>DocumentService</code></td><td><code>store()</code>, <code>destroy()</code>, <code>getExpiring()</code>, <code>getFiltered()</code></td></tr>
+                <tr><td><code>MaintenanceService</code></td><td><code>store()</code>, <code>update()</code>, <code>updateProgress()</code>, <code>close()</code>, <code>getFiltered()</code></td></tr>
+                <tr><td><code>ReportService</code></td><td><code>getFinancialReport()</code>, <code>getOccupancyReport()</code>, <code>getMaintenanceReport()</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Middleware</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Middleware</th><th>Groupe</th><th>Rôle</th></tr></thead>
+              <tbody>
+                <tr><td><code>SetLocale</code></td><td>web</td><td>Applique la langue stockée en session à <code>App::setLocale()</code></td></tr>
+                <tr><td><code>auth</code></td><td>route</td><td>Redirige vers <code>/login</code> si non authentifié</td></tr>
               </tbody>
             </table>
           </div>
 
           <h2>Principes appliqués</h2>
           <ul>
-            <li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique</li>
+            <li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique ; logique métier déléguée aux Services</li>
             <li><strong>DRY</strong> — composants Blade réutilisables pour tous les éléments d'UI récurrents</li>
             <li><strong>Scoped data</strong> — chaque query filtre sur <code>user_id</code> pour isoler les données par bailleur</li>
           </ul>

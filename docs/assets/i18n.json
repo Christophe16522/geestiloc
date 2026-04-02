@@ -625,7 +625,7 @@
         "Toutes les stories ci-dessous correspondent à des actions réelles implémentées dans <code>projet-dynamic/routes/web.php</code> et les controllers associés."
       ],
       "ul": [
-        "<li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li><li>En tant que bailleur, je peux me connecter et me déconnecter.</li><li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li><li>En tant que bailleur, je peux supprimer mon compte.</li>",
+        "<li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li><li>En tant que bailleur, je peux me connecter avec mon compte Google via <code>GET /auth/google</code>.</li><li>En tant que bailleur, je peux me connecter et me déconnecter.</li><li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li><li>En tant que bailleur, je peux supprimer mon compte.</li><li>En tant que bailleur, je peux changer la langue de l'interface (FR/EN) via <code>GET /lang/{locale}</code>.</li>",
         "<li>En tant que bailleur, je peux voir un résumé de mon parc : nombre de biens, nombre de locataires, loyers du mois, alertes en cours.</li>",
         "<li>En tant que bailleur, je peux ajouter un bien immobilier (type, adresse, loyer, charges, dépôt de garantie).</li><li>En tant que bailleur, je peux consulter la liste de mes biens avec leur statut (occupé / vacant).</li><li>En tant que bailleur, je peux modifier les informations d'un bien.</li><li>En tant que bailleur, je peux supprimer un bien (et toutes ses données associées en cascade).</li><li>En tant que bailleur, une référence unique est auto-générée pour chaque bien (ex : <code>PROP-001</code>).</li>",
         "<li>En tant que bailleur, je peux ajouter un locataire et l'associer à un bien.</li><li>En tant que bailleur, je peux consulter la liste de mes locataires avec leur statut de paiement.</li><li>En tant que bailleur, je peux rechercher un locataire par nom ou email.</li><li>En tant que bailleur, je peux modifier les informations d'un locataire.</li><li>En tant que bailleur, je peux supprimer un locataire.</li>",
@@ -638,16 +638,18 @@
     },
     "technique_architecture": {
       "h1": "Architecture technique",
-      "subtitle": "Stack technologique, structure des dossiers et flux d'authentification.",
+      "subtitle": "Stack technologique, structure des dossiers, services et flux d'authentification.",
       "h2": [
         "Stack",
         "Structure des dossiers",
         "Flux d'authentification",
         "Contrôleurs",
+        "Services",
+        "Middleware",
         "Principes appliqués"
       ],
       "ol": [
-        "<li>L'utilisateur accède à <code>/</code> → redirection automatique vers <code>/dashboard</code></li><li>Si non authentifié → redirection vers <code>/login</code> (middleware <code>auth</code>)</li><li>Inscription via <code>/register</code> (Laravel Breeze)</li><li>Après login → accès à toutes les routes du groupe <code>auth</code></li><li>Toutes les données sont filtrées par <code>user_id</code> (isolation multi-utilisateurs)</li>"
+        "<li>L'utilisateur accède à `/` → redirection automatique vers `/dashboard`</li><li>Si non authentifié → redirection vers `/login` (middleware `auth`)</li><li>Inscription via `/register` (Laravel Breeze) ou connexion Google via `/auth/google`</li><li>Après login → accès à toutes les routes du groupe `auth`</li><li>Toutes les données sont filtrées par `user_id` (isolation multi-utilisateurs)</li><li>Changement de langue via `GET /lang/{locale}` → stocké en session</li>"
       ],
       "ul": [
         "<li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique</li><li><strong>DRY</strong> — composants Blade réutilisables pour tous les éléments d'UI récurrents</li><li><strong>Scoped data</strong> — chaque query filtre sur <code>user_id</code> pour isoler les données par bailleur</li>"
@@ -693,6 +695,9 @@
         "Page de rapports agrégés",
         "<code>ProfileController</code>",
         "Modification du profil utilisateur"
+      ],
+      "p": [
+        "Chaque module dispose d'un service dédié dans `app/Services/` qui encapsule la logique métier, séparant les responsabilités des contrôleurs."
       ]
     },
     "technique_installation": {
@@ -898,6 +903,29 @@
         "Maintenance",
         "Liste statique",
         "CRUD + barre de progression + suivi des coûts"
+      ]
+    },
+    "technique_base_de_donnees": {
+      "h1": "Base de données",
+      "subtitle": "Schéma des tables métier, table users et relations Eloquent.",
+      "h2": [
+        "Vue d'ensemble",
+        "Table users",
+        "Table properties",
+        "Table tenants",
+        "Table contracts",
+        "Table payments",
+        "Table documents",
+        "Table maintenances",
+        "Relations Eloquent — résumé"
+      ],
+      "th": [
+        "Colonne",
+        "Type",
+        "Contraintes",
+        "Modèle",
+        "hasMany",
+        "belongsTo"
       ]
     }
   },
@@ -1529,7 +1557,7 @@
         "All stories below correspond to real actions implemented in <code>projet-dynamic/routes/web.php</code> and the associated controllers."
       ],
       "ul": [
-        "<li>As a landlord, I can register with an email and password.</li><li>As a landlord, I can log in and log out.</li><li>As a landlord, I can edit my profile (name, email, password).</li><li>As a landlord, I can delete my account.</li>",
+        "<li>As a landlord, I can register with an email and password.</li><li>As a landlord, I can log in with my Google account via <code>GET /auth/google</code>.</li><li>As a landlord, I can log in and log out.</li><li>As a landlord, I can edit my profile (name, email, password).</li><li>As a landlord, I can delete my account.</li><li>As a landlord, I can switch the interface language (FR/EN) via <code>GET /lang/{locale}</code>.</li>",
         "<li>As a landlord, I can see a summary of my portfolio: number of properties, number of tenants, this month's rent, current alerts.</li>",
         "<li>As a landlord, I can add a property (type, address, rent, charges, security deposit).</li><li>As a landlord, I can view my property list with their status (occupied / vacant).</li><li>As a landlord, I can edit a property's information.</li><li>As a landlord, I can delete a property (along with all associated data in cascade).</li><li>As a landlord, a unique reference is auto-generated for each property (e.g., <code>PROP-001</code>).</li>",
         "<li>As a landlord, I can add a tenant and associate them with a property.</li><li>As a landlord, I can view my tenant list with their payment status.</li><li>As a landlord, I can search for a tenant by name or email.</li><li>As a landlord, I can edit a tenant's information.</li><li>As a landlord, I can delete a tenant.</li>",
@@ -1542,16 +1570,18 @@
     },
     "technique_architecture": {
       "h1": "Technical Architecture",
-      "subtitle": "Technology stack, folder structure and authentication flow.",
+      "subtitle": "Technology stack, folder structure, services and authentication flow.",
       "h2": [
         "Stack",
         "Folder Structure",
         "Authentication Flow",
         "Controllers",
+        "Services",
+        "Middleware",
         "Applied Principles"
       ],
       "ol": [
-        "<li>The user accesses <code>/</code> → automatic redirect to <code>/dashboard</code></li><li>If not authenticated → redirect to <code>/login</code> (middleware <code>auth</code>)</li><li>Registration via <code>/register</code> (Laravel Breeze)</li><li>After login → access to all routes in the <code>auth</code> group</li><li>All data is filtered by <code>user_id</code> (multi-user isolation)</li>"
+        "<li>The user accesses `/` → automatic redirect to `/dashboard`</li><li>If not authenticated → redirect to `/login` (middleware `auth`)</li><li>Registration via `/register` (Laravel Breeze) or Google login via `/auth/google`</li><li>After login → access to all routes in the `auth` group</li><li>All data is filtered by `user_id` (multi-user isolation)</li><li>Language switch via `GET /lang/{locale}` → stored in session</li>"
       ],
       "ul": [
         "<li><strong>SOLID</strong> — one controller per resource, single responsibility</li><li><strong>DRY</strong> — reusable Blade components for all recurring UI elements</li><li><strong>Scoped data</strong> — every query filters on <code>user_id</code> to isolate data per landlord</li>"
@@ -1597,6 +1627,9 @@
         "Aggregated reports page",
         "<code>ProfileController</code>",
         "User profile management"
+      ],
+      "p": [
+        "Each module has a dedicated service in `app/Services/` that encapsulates business logic, separating responsibilities from controllers."
       ]
     },
     "technique_installation": {
@@ -1802,6 +1835,29 @@
         "Maintenance",
         "Static list",
         "CRUD + progress bar + cost tracking"
+      ]
+    },
+    "technique_base_de_donnees": {
+      "h1": "Database",
+      "subtitle": "Schema for business tables, users table and Eloquent relationships.",
+      "h2": [
+        "Overview",
+        "users table",
+        "properties table",
+        "tenants table",
+        "contracts table",
+        "payments table",
+        "documents table",
+        "maintenances table",
+        "Eloquent Relationships — Summary"
+      ],
+      "th": [
+        "Column",
+        "Type",
+        "Constraints",
+        "Model",
+        "hasMany",
+        "belongsTo"
       ]
     }
   }

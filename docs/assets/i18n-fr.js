@@ -625,7 +625,7 @@ window.I18N_FR = {
       "Toutes les stories ci-dessous correspondent à des actions réelles implémentées dans <code>projet-dynamic/routes/web.php</code> et les controllers associés."
     ],
     "ul": [
-      "<li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li><li>En tant que bailleur, je peux me connecter et me déconnecter.</li><li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li><li>En tant que bailleur, je peux supprimer mon compte.</li>",
+      "<li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li><li>En tant que bailleur, je peux me connecter avec mon compte Google via <code>GET /auth/google</code>.</li><li>En tant que bailleur, je peux me connecter et me déconnecter.</li><li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li><li>En tant que bailleur, je peux supprimer mon compte.</li><li>En tant que bailleur, je peux changer la langue de l'interface (FR/EN) via <code>GET /lang/{locale}</code>.</li>",
       "<li>En tant que bailleur, je peux voir un résumé de mon parc : nombre de biens, nombre de locataires, loyers du mois, alertes en cours.</li>",
       "<li>En tant que bailleur, je peux ajouter un bien immobilier (type, adresse, loyer, charges, dépôt de garantie).</li><li>En tant que bailleur, je peux consulter la liste de mes biens avec leur statut (occupé / vacant).</li><li>En tant que bailleur, je peux modifier les informations d'un bien.</li><li>En tant que bailleur, je peux supprimer un bien (et toutes ses données associées en cascade).</li><li>En tant que bailleur, une référence unique est auto-générée pour chaque bien (ex : <code>PROP-001</code>).</li>",
       "<li>En tant que bailleur, je peux ajouter un locataire et l'associer à un bien.</li><li>En tant que bailleur, je peux consulter la liste de mes locataires avec leur statut de paiement.</li><li>En tant que bailleur, je peux rechercher un locataire par nom ou email.</li><li>En tant que bailleur, je peux modifier les informations d'un locataire.</li><li>En tant que bailleur, je peux supprimer un locataire.</li>",
@@ -638,16 +638,18 @@ window.I18N_FR = {
   },
   "technique_architecture": {
     "h1": "Architecture technique",
-    "subtitle": "Stack technologique, structure des dossiers et flux d'authentification.",
+    "subtitle": "Stack technologique, structure des dossiers, services et flux d'authentification.",
     "h2": [
       "Stack",
       "Structure des dossiers",
       "Flux d'authentification",
       "Contrôleurs",
+      "Services",
+      "Middleware",
       "Principes appliqués"
     ],
     "ol": [
-      "<li>L'utilisateur accède à <code>/</code> → redirection automatique vers <code>/dashboard</code></li><li>Si non authentifié → redirection vers <code>/login</code> (middleware <code>auth</code>)</li><li>Inscription via <code>/register</code> (Laravel Breeze)</li><li>Après login → accès à toutes les routes du groupe <code>auth</code></li><li>Toutes les données sont filtrées par <code>user_id</code> (isolation multi-utilisateurs)</li>"
+      "<li>L'utilisateur accède à `/` → redirection automatique vers `/dashboard`</li><li>Si non authentifié → redirection vers `/login` (middleware `auth`)</li><li>Inscription via `/register` (Laravel Breeze) ou connexion Google via `/auth/google`</li><li>Après login → accès à toutes les routes du groupe `auth`</li><li>Toutes les données sont filtrées par `user_id` (isolation multi-utilisateurs)</li><li>Changement de langue via `GET /lang/{locale}` → stocké en session</li>"
     ],
     "ul": [
       "<li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique</li><li><strong>DRY</strong> — composants Blade réutilisables pour tous les éléments d'UI récurrents</li><li><strong>Scoped data</strong> — chaque query filtre sur <code>user_id</code> pour isoler les données par bailleur</li>"
@@ -693,6 +695,9 @@ window.I18N_FR = {
       "Page de rapports agrégés",
       "<code>ProfileController</code>",
       "Modification du profil utilisateur"
+    ],
+    "p": [
+      "Chaque module dispose d'un service dédié dans `app/Services/` qui encapsule la logique métier, séparant les responsabilités des contrôleurs."
     ]
   },
   "technique_installation": {
@@ -898,6 +903,29 @@ window.I18N_FR = {
       "Maintenance",
       "Liste statique",
       "CRUD + barre de progression + suivi des coûts"
+    ]
+  },
+  "technique_base_de_donnees": {
+    "h1": "Base de données",
+    "subtitle": "Schéma des tables métier, table users et relations Eloquent.",
+    "h2": [
+      "Vue d'ensemble",
+      "Table users",
+      "Table properties",
+      "Table tenants",
+      "Table contracts",
+      "Table payments",
+      "Table documents",
+      "Table maintenances",
+      "Relations Eloquent — résumé"
+    ],
+    "th": [
+      "Colonne",
+      "Type",
+      "Contraintes",
+      "Modèle",
+      "hasMany",
+      "belongsTo"
     ]
   }
 };

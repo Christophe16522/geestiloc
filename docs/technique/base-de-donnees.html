@@ -28,7 +28,7 @@
 
         <article>
           <h1>Base de données</h1>
-          <p class="page-subtitle">Schéma des 6 tables métier et relations Eloquent.</p>
+          <p class="page-subtitle">Schéma des tables métier, table users et relations Eloquent.</p>
 
           <h2>Vue d'ensemble</h2>
           <pre><code>users
@@ -38,6 +38,24 @@
   │     ├── payments   (user_id → users, tenant_id → tenants, property_id → properties)
   │     ├── documents  (user_id → users, property_id → properties)
   │     └── maintenances (user_id → users, property_id → properties)</code></pre>
+
+          <h2>Table <code>users</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK auto-increment</td></tr>
+                <tr><td><code>google_id</code></td><td>string</td><td>nullable, unique</td></tr>
+                <tr><td><code>avatar</code></td><td>string</td><td>nullable</td></tr>
+                <tr><td><code>name</code></td><td>string</td><td></td></tr>
+                <tr><td><code>email</code></td><td>string</td><td>unique</td></tr>
+                <tr><td><code>email_verified_at</code></td><td>timestamp</td><td>nullable</td></tr>
+                <tr><td><code>password</code></td><td>string</td><td>nullable (null pour les comptes Google)</td></tr>
+                <tr><td><code>remember_token</code></td><td>string</td><td>nullable</td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
 
           <h2>Table <code>properties</code></h2>
           <div class="table-wrap">
