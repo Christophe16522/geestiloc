@@ -263,13 +263,16 @@ const NAV = [
     const picker = document.createElement('div');
     picker.className = 'lang-picker';
 
-    var flags = { fr: '🇫🇷', en: '🇬🇧' };
+    var flags = {
+      fr: 'https://flagcdn.com/20x15/fr.png',
+      en: 'https://flagcdn.com/20x15/gb.png'
+    };
     var labels = { fr: 'Français', en: 'English' };
 
     ['fr', 'en'].forEach(function (l) {
       const btn = document.createElement('button');
       btn.className = 'lang-btn' + (l === lang ? ' active' : '');
-      btn.innerHTML = flags[l] + ' <span>' + l.toUpperCase() + '</span>';
+      btn.innerHTML = '<img src="' + flags[l] + '" width="20" height="15" alt="' + l + '"> <span>' + l.toUpperCase() + '</span>';
       btn.title = labels[l];
       btn.addEventListener('click', function () {
         if (l !== lang) { setLang(l); location.reload(); }
