@@ -54,7 +54,7 @@
                     <div class="fw-700">{{ $contract->tenant->full_name }}</div>
                     <div class="small text-muted">{{ $contract->tenant->email }}</div>
                     <div class="small text-muted">{{ $contract->tenant->phone }}</div>
-                    <a href="{{ route('tenants.show', $contract->tenant) }}" class="btn btn-xs btn-outline-primary btn-sm mt-2 py-0 px-2" style="font-size:.75rem;">
+                    <a href="{{ route('tenants.show', $contract->tenant) }}" class="btn btn-sm btn-outline-primary mt-2">
                         {{ __('contracts.view_tenant') }}
                     </a>
                 </div>
@@ -77,7 +77,7 @@
                     <span class="ms-2">{{ $contract->property->surface_m2 }} m²</span>
                     @endif
                 </div>
-                <a href="{{ route('properties.show', $contract->property) }}" class="btn btn-xs btn-outline-primary btn-sm mt-2 py-0 px-2" style="font-size:.75rem;">
+                <a href="{{ route('properties.show', $contract->property) }}" class="btn btn-sm btn-outline-primary mt-2">
                     {{ __('contracts.view_property') }}
                 </a>
             </div>

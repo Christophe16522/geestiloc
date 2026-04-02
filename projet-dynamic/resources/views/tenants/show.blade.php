@@ -80,8 +80,8 @@
                                 @if($payment->status !== 'paye')
                                 <form method="POST" action="{{ route('payments.markPaid', $payment) }}">
                                     @csrf @method('PATCH')
-                                    <button class="btn btn-xs btn-outline-success btn-sm py-0 px-2" style="font-size:.75rem;">
-                                        <i class="fas fa-check me-1"></i>Marquer payé
+                                    <button class="action-btn action-btn--success" title="{{ __('payments.mark_paid') }}">
+                                        <i class="fas fa-check"></i>
                                     </button>
                                 </form>
                                 @endif
@@ -114,7 +114,7 @@
                 </div>
                 <div class="small fw-600 mt-1">{{ number_format($contract->monthly_rent, 0, ',', ' ') }} €/mois</div>
                 <div class="mt-2">
-                    <a href="{{ route('contracts.show', $contract) }}" class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2" style="font-size:.75rem;">
+                    <a href="{{ route('contracts.show', $contract) }}" class="btn btn-sm btn-outline-secondary mt-2">
                         <i class="fas fa-eye me-1"></i>Voir
                     </a>
                 </div>

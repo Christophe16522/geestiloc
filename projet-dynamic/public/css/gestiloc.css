@@ -271,6 +271,10 @@ a:hover { color: var(--primary-light); }
 .action-btn--delete:hover { background: var(--danger-bg); }
 .action-btn--download { color: var(--success-dark); }
 .action-btn--download:hover { background: var(--success-bg); }
+.action-btn--archive  { color: var(--text-muted); }
+.action-btn--archive:hover { background: var(--gray-100); color: var(--text); }
+.action-btn--success  { color: var(--success-dark); }
+.action-btn--success:hover { background: var(--success-bg); }
 
 /* ── 10. DATA TABLE WRAP ─────────────────────────────────────────── */
 .data-table-wrap {

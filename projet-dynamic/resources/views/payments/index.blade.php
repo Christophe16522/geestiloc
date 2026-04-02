@@ -94,8 +94,8 @@
                             @if($payment->status !== 'paye')
                             <form method="POST" action="{{ route('payments.markPaid', $payment) }}">
                                 @csrf @method('PATCH')
-                                <button type="submit" class="btn btn-sm btn-success rounded-pill px-2 py-1" style="font-size:.7rem;" title="{{ __('payments.mark_paid') }}">
-                                    <i class="fa-solid fa-check me-1"></i>{{ __('payments.mark_paid') }}
+                                <button type="submit" class="action-btn action-btn--success" title="{{ __('payments.mark_paid') }}">
+                                    <i class="fa-solid fa-check"></i>
                                 </button>
                             </form>
                             @endif

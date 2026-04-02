@@ -80,7 +80,7 @@
                             @if($contract->status === 'actif')
                             <form method="POST" action="{{ route('contracts.archive', $contract) }}">
                                 @csrf @method('PATCH')
-                                <button class="action-btn" title="{{ __('contracts.archive') }}" style="color:#64748b;"><i class="fa-solid fa-box-archive"></i></button>
+                                <button class="action-btn action-btn--archive" title="{{ __('contracts.archive') }}" onclick="return confirm('{{ __('contracts.archive_confirm') }}')"><i class="fa-solid fa-box-archive"></i></button>
                             </form>
                             @endif
                             <x-action-buttons :showRoute="route('contracts.show', $contract)" :editRoute="route('contracts.edit', $contract)" :deleteRoute="route('contracts.destroy', $contract)" :confirmMessage="__('contracts.delete_confirm')" />

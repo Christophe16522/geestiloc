@@ -40,7 +40,7 @@
                 <div>
                     <div class="fw-700">{{ $payment->tenant->full_name }}</div>
                     <small class="text-muted">{{ $payment->tenant->email }}</small><br>
-                    <a href="{{ route('tenants.show', $payment->tenant) }}" class="small">{{ __('payments.view_tenant') }}</a>
+                    <a href="{{ route('tenants.show', $payment->tenant) }}" class="btn btn-sm btn-outline-primary mt-2">{{ __('payments.view_tenant') }}</a>
                 </div>
             </div>
             @else
@@ -55,7 +55,7 @@
             <div>
                 <div class="fw-700">{{ $payment->property->name }}</div>
                 <small class="text-muted">{{ $payment->property->full_address }}</small><br>
-                <a href="{{ route('properties.show', $payment->property) }}" class="small">{{ __('payments.view_property') }}</a>
+                <a href="{{ route('properties.show', $payment->property) }}" class="btn btn-sm btn-outline-primary mt-2">{{ __('payments.view_property') }}</a>
             </div>
             @else
             <p class="text-muted small">{{ __('payments.no_property') }}</p>
@@ -68,7 +68,7 @@
 <div class="mt-4">
     <form method="POST" action="{{ route('payments.markPaid', $payment) }}">
         @csrf @method('PATCH')
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-outline-success btn-sm">
             <i class="fas fa-check me-2"></i>{{ __('payments.mark_paid') }}
         </button>
     </form>
