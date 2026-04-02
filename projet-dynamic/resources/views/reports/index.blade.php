@@ -9,14 +9,11 @@
     <form method="GET" class="row g-2 align-items-end">
         <div class="col-md-3">
             <label class="form-label-custom">{{ __('reports.year') }}</label>
-            <select name="year" class="form-select">
+            <select name="year" class="form-select" onchange="this.form.submit()">
                 @foreach($availableYears as $y)
                 <option value="{{ $y }}" @selected($year==$y)>{{ $y }}</option>
                 @endforeach
             </select>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-primary-custom w-100">{{ __('reports.refresh') }}</button>
         </div>
     </form>
 </div>
