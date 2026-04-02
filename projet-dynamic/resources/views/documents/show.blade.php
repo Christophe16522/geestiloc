@@ -12,7 +12,7 @@
     <x-status-badge :status="$document->is_expired ? 'expire' : 'actif'" type="contract" />
     <form method="POST" action="{{ route('documents.destroy', $document) }}" onsubmit="return confirm('{{ __('documents.delete_confirm') }}')">
         @csrf @method('DELETE')
-        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+        <button type="submit" class="btn btn-sm btn-outline-danger" title="{{ __('common.delete') }}"><i class="fas fa-trash"></i></button>
     </form>
 </div>
 

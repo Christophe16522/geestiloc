@@ -143,32 +143,124 @@ a:hover { color: var(--primary-light); }
 .user-avatar-btn:hover  { opacity: .9; }
 
 /* ── 5. BUTTONS ──────────────────────────────────────────────────── */
+
+/* Base enhancements for all .btn */
+.btn {
+  border-radius: var(--radius-sm) !important;
+  font-size: .85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+.btn:active { transform: scale(.97); }
+
+/* Primary CTA — create, save, filter */
 .btn-primary-custom {
   background: var(--primary-grad);
   color: #fff !important;
   border: none;
-  border-radius: var(--radius-sm);
-  font-weight: 600; font-size: .85rem;
-  padding: .45rem 1.1rem;
+  font-weight: 600;
+  padding: .48rem 1.15rem;
   box-shadow: var(--shadow-primary);
-  transition: var(--transition);
-  display: inline-flex; align-items: center; gap: .4rem;
-  cursor: pointer;
 }
-.btn-primary-custom:hover { opacity: .9; transform: translateY(-1px); }
+.btn-primary-custom:hover {
+  opacity: .92;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(30,58,138,.35);
+  color: #fff !important;
+}
+.btn-primary-custom:active {
+  transform: translateY(0) scale(.97);
+  box-shadow: var(--shadow-primary);
+  opacity: 1;
+}
 
+/* Ghost — reset filters, secondary actions */
 .btn-ghost-custom {
   background: transparent;
   color: var(--text-muted) !important;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-weight: 500; font-size: .85rem;
-  padding: .45rem 1.1rem;
-  transition: var(--transition);
-  display: inline-flex; align-items: center; gap: .4rem;
-  cursor: pointer;
+  font-weight: 500;
+  padding: .48rem 1.15rem;
 }
-.btn-ghost-custom:hover { background: var(--gray-100); color: var(--text) !important; }
+.btn-ghost-custom:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--text) !important;
+}
+
+/* Outline secondary — back, cancel */
+.btn-outline-secondary {
+  --bs-btn-color:              var(--gray-600);
+  --bs-btn-border-color:       var(--border);
+  --bs-btn-hover-color:        var(--gray-700);
+  --bs-btn-hover-bg:           var(--gray-100);
+  --bs-btn-hover-border-color: var(--gray-300);
+  --bs-btn-active-color:       var(--text);
+  --bs-btn-active-bg:          var(--gray-200);
+  --bs-btn-active-border-color:var(--gray-400);
+  --bs-btn-focus-shadow-rgb:   100,116,139;
+}
+
+/* Outline primary — edit, view link */
+.btn-outline-primary {
+  --bs-btn-color:              var(--primary);
+  --bs-btn-border-color:       #93c5fd;
+  --bs-btn-hover-color:        var(--primary);
+  --bs-btn-hover-bg:           var(--primary-bg);
+  --bs-btn-hover-border-color: var(--primary-light);
+  --bs-btn-active-color:       var(--primary);
+  --bs-btn-active-bg:          #dbeafe;
+  --bs-btn-active-border-color:var(--primary);
+  --bs-btn-focus-shadow-rgb:   30,58,138;
+}
+
+/* Outline danger — delete */
+.btn-outline-danger {
+  --bs-btn-color:              var(--danger-dark);
+  --bs-btn-border-color:       #fca5a5;
+  --bs-btn-hover-color:        var(--danger-dark);
+  --bs-btn-hover-bg:           var(--danger-bg);
+  --bs-btn-hover-border-color: var(--danger);
+  --bs-btn-active-color:       var(--danger-dark);
+  --bs-btn-active-bg:          #fee2e2;
+  --bs-btn-active-border-color:var(--danger-dark);
+  --bs-btn-focus-shadow-rgb:   220,38,38;
+}
+
+/* Outline warning — archive */
+.btn-outline-warning {
+  --bs-btn-color:              var(--warning-dark);
+  --bs-btn-border-color:       #fcd34d;
+  --bs-btn-hover-color:        var(--warning-dark);
+  --bs-btn-hover-bg:           var(--warning-bg);
+  --bs-btn-hover-border-color: var(--warning);
+  --bs-btn-active-color:       var(--warning-dark);
+  --bs-btn-active-bg:          #fef3c7;
+  --bs-btn-active-border-color:var(--warning-dark);
+  --bs-btn-focus-shadow-rgb:   217,119,6;
+}
+
+/* Outline success — mark paid */
+.btn-outline-success {
+  --bs-btn-color:              var(--success-dark);
+  --bs-btn-border-color:       #86efac;
+  --bs-btn-hover-color:        var(--success-dark);
+  --bs-btn-hover-bg:           var(--success-bg);
+  --bs-btn-hover-border-color: var(--success);
+  --bs-btn-active-color:       var(--success-dark);
+  --bs-btn-active-bg:          #dcfce7;
+  --bs-btn-active-border-color:var(--success-dark);
+  --bs-btn-focus-shadow-rgb:   22,163,74;
+}
 
 /* ── 6. PAGE HEADER ──────────────────────────────────────────────── */
 .page-header-custom {
@@ -254,27 +346,37 @@ a:hover { color: var(--primary-light); }
 .status-badge--occupee { background: var(--emerald-bg);  color: var(--emerald);      }
 
 /* ── 9. ACTION BUTTONS ───────────────────────────────────────────── */
-.action-btn-group { display: flex; align-items: center; gap: .25rem; }
+.action-btn-group { display: flex; align-items: center; gap: .3rem; }
 .action-btn {
-  width: 28px; height: 28px;
+  width: 30px; height: 30px;
   border-radius: var(--radius-sm);
   display: inline-flex; align-items: center; justify-content: center;
-  font-size: .76rem; border: none; background: transparent;
-  cursor: pointer; transition: background var(--transition), color var(--transition);
+  font-size: .78rem;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition);
   text-decoration: none; padding: 0; line-height: 1;
 }
-.action-btn--view     { color: var(--primary); }
-.action-btn--view:hover { background: var(--primary-bg); }
-.action-btn--edit     { color: var(--warning-dark); }
-.action-btn--edit:hover { background: var(--warning-bg); }
-.action-btn--delete   { color: var(--danger); }
-.action-btn--delete:hover { background: var(--danger-bg); }
-.action-btn--download { color: var(--success-dark); }
-.action-btn--download:hover { background: var(--success-bg); }
-.action-btn--archive  { color: var(--text-muted); }
-.action-btn--archive:hover { background: var(--gray-100); color: var(--text); }
-.action-btn--success  { color: var(--success-dark); }
-.action-btn--success:hover { background: var(--success-bg); }
+.action-btn:active { transform: scale(.88); }
+
+.action-btn--view         { color: var(--primary); }
+.action-btn--view:hover   { background: var(--primary-bg); border-color: #c7d7fc; }
+
+.action-btn--edit         { color: var(--warning-dark); }
+.action-btn--edit:hover   { background: var(--warning-bg); border-color: #fde68a; }
+
+.action-btn--delete       { color: var(--danger); }
+.action-btn--delete:hover { background: var(--danger-bg); border-color: #fecaca; }
+
+.action-btn--download         { color: var(--success-dark); }
+.action-btn--download:hover   { background: var(--success-bg); border-color: #bbf7d0; }
+
+.action-btn--archive        { color: var(--text-muted); }
+.action-btn--archive:hover  { background: var(--gray-100); border-color: var(--border); color: var(--text); }
+
+.action-btn--success        { color: var(--success-dark); }
+.action-btn--success:hover  { background: var(--success-bg); border-color: #bbf7d0; }
 
 /* ── 10. DATA TABLE WRAP ─────────────────────────────────────────── */
 .data-table-wrap {

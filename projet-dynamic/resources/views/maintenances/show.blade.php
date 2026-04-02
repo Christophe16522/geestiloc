@@ -20,7 +20,7 @@
     </a>
     <form method="POST" action="{{ route('maintenances.destroy', $maintenance) }}" onsubmit="return confirm('{{ __('maintenances.delete_confirm') }}')">
         @csrf @method('DELETE')
-        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+        <button type="submit" class="btn btn-sm btn-outline-danger" title="{{ __('common.delete') }}"><i class="fas fa-trash"></i></button>
     </form>
 </div>
 
