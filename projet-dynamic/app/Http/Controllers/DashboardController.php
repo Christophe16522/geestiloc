@@ -12,9 +12,14 @@ class DashboardController extends Controller
     public function index(): View
     {
         return view('dashboard', [
-            'stats'          => $this->service->getKpiStats(),
-            'alerts'         => $this->service->getAlerts(),
-            'monthlyRevenue' => $this->service->getMonthlyRevenueChart(),
+            'stats'              => $this->service->getKpiStats(),
+            'alerts'             => $this->service->getAlerts(),
+            'monthlyRevenue'     => $this->service->getMonthlyRevenueChart(),
+            'paymentStatus'      => $this->service->getPaymentStatusChart(),
+            'occupancy'          => $this->service->getOccupancyChart(),
+            'propertiesByType'   => $this->service->getPropertiesByTypeChart(),
+            'maintenanceStatus'  => $this->service->getMaintenanceStatusChart(),
+            'revenueVsExpected'  => $this->service->getRevenueVsExpectedChart(),
         ]);
     }
 }
