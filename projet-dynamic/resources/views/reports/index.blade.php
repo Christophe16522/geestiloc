@@ -6,7 +6,7 @@
 
 {{-- Year Selector --}}
 <div class="data-table-wrap p-3 mb-4">
-    <form method="GET" class="row g-2 align-items-end">
+    <form method="GET" class="row g-2 align-items-center">
         <div class="col-md-3">
             <label class="form-label-custom">{{ __('reports.year') }}</label>
             <select name="year" class="form-select" onchange="this.form.submit()">

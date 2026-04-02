@@ -417,7 +417,10 @@ a:hover { color: var(--primary-light); }
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: flex-end;
+  align-items: center;
+}
+.filters-bar form > div {
+  align-items: center !important; /* override Bootstrap align-items-end */
 }
 
 /* Each labeled filter group */
@@ -472,12 +475,11 @@ a:hover { color: var(--primary-light); }
   padding-left: 2rem !important;
 }
 
-/* Action buttons at the bottom of the filter bar */
+/* Action buttons in the filter bar */
 .filter-actions {
   display: flex;
   gap: .5rem;
   align-items: center;
-  padding-top: 1.3rem; /* align with labeled inputs */
 }
 
 /* Active filter chips shown below the bar */
