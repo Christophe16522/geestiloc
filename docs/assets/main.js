@@ -54,8 +54,10 @@ const NAV = [
   const root        = body.dataset.root || '.';
   const currentPage = body.dataset.page || '';
 
-  /* --- Données de traduction (chargées via i18n.js) ------- */
-  const I18N = window.I18N || null;
+  /* --- Données de traduction (chargées via i18n-fr.js / i18n-en.js) --- */
+  const I18N = (window.I18N_FR || window.I18N_EN)
+    ? { fr: window.I18N_FR || {}, en: window.I18N_EN || {} }
+    : null;
 
   /* --- Helpers i18n --------------------------------------- */
   function getLang()  { return localStorage.getItem('docs_lang') || 'fr'; }
