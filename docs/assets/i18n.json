@@ -2,7 +2,6 @@
   "fr": {
     "nav": {
       "home": "Accueil",
-      "user_guide": "Guide utilisateur",
       "ug_start": "Premiers pas",
       "ug_dashboard": "Tableau de bord",
       "ug_properties": "Mes biens",
@@ -11,7 +10,6 @@
       "ug_payments": "Paiements",
       "ug_documents": "Documents",
       "ug_maintenance": "Maintenance",
-      "functional": "Fonctionnel",
       "fn_overview": "Aperçu métier",
       "fn_user_stories": "User Stories",
       "fn_modules": "Modules",
@@ -21,12 +19,14 @@
       "fn_payments": "Paiements",
       "fn_documents": "Documents",
       "fn_maintenance": "Maintenance",
-      "technical": "Technique",
       "tc_architecture": "Architecture",
       "tc_database": "Base de données",
       "tc_installation": "Installation",
       "tc_blade": "Composants Blade",
-      "tc_poc": "POC vs Dynamic"
+      "tc_poc": "POC vs Dynamic",
+      "ug": "Guide utilisateur",
+      "fn": "Fonctionnel",
+      "tc": "Technique"
     },
     "ui": {
       "breadcrumb_docs": "Docs",
@@ -36,146 +36,874 @@
     "index": {
       "h1": "GestiLoc — Documentation",
       "subtitle": "Documentation technique et fonctionnelle du projet de gestion locative.",
-      "h2": ["Structure du projet", "Guide utilisateur", "Documentation fonctionnelle", "Documentation technique"],
-      "h3": ["Modules"],
-      "th": ["Dossier", "Description"],
-      "td": ["<code>poc/</code>", "Prototype statique HTML/CSS/JS (maquette fonctionnelle)", "<code>projet-dynamic/</code>", "Application Laravel dynamique", "<code>docs/</code>", "Documentation technique et fonctionnelle"],
-      "card_label": ["Guide utilisateur","Guide utilisateur","Guide utilisateur","Guide utilisateur","Guide utilisateur","Guide utilisateur","Guide utilisateur","Guide utilisateur","Fonctionnel","Fonctionnel","Module","Module","Module","Module","Module","Module","Technique","Technique","Technique","Technique","Technique"],
-      "card_title": ["Premiers pas","Tableau de bord","Mes biens","Mes locataires","Mes contrats","Paiements","Documents","Maintenance","Aperçu métier","User Stories","Propriétés","Locataires","Contrats","Paiements","Documents","Maintenance","Architecture","Base de données","Installation","Composants Blade","POC vs Dynamic"],
-      "card_desc": ["Créer un compte, se connecter, modifier son profil.","Comprendre les indicateurs et les alertes automatiques.","Ajouter, modifier et gérer votre parc immobilier.","Gérer vos locataires et suivre leur statut de paiement.","Créer des baux, gérer les échéances et archiver.","Enregistrer les loyers et marquer les paiements reçus.","Uploader et retrouver vos fichiers (baux, diagnostics, assurances…).","Planifier et suivre vos interventions et travaux.","Présentation de GestiLoc, modules disponibles et rôles utilisateurs.","Cas d'usage par module, basés sur les routes et controllers Laravel.","Gestion du parc immobilier, types, statuts et références auto-générées.","Gestion des locataires, statuts de paiement et recherche.","Baux de location, archivage et alertes d'expiration.","Suivi des loyers mensuels et marquage comme payé.","Upload et gestion des fichiers liés aux biens.","Suivi des interventions, priorités, coûts et avancement.","Stack, structure des dossiers et flux d'authentification.","Schéma des 6 tables métier et relations Eloquent.","Setup Laravel pas à pas : clone, .env, migrate, serve.","Liste et description des 26 composants réutilisables.","Différences entre le prototype statique et l'application Laravel."]
+      "h2": [
+        "Structure du projet",
+        "Guide utilisateur",
+        "Documentation fonctionnelle",
+        "Documentation technique"
+      ],
+      "h3": [
+        "Modules"
+      ],
+      "th": [
+        "Dossier",
+        "Description"
+      ],
+      "td": [
+        "<code>poc/</code>",
+        "Prototype statique HTML/CSS/JS (maquette fonctionnelle)",
+        "<code>projet-dynamic/</code>",
+        "Application Laravel dynamique",
+        "<code>docs/</code>",
+        "Documentation technique et fonctionnelle"
+      ],
+      "card_label": [
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Guide utilisateur",
+        "Fonctionnel",
+        "Fonctionnel",
+        "Module",
+        "Module",
+        "Module",
+        "Module",
+        "Module",
+        "Module",
+        "Technique",
+        "Technique",
+        "Technique",
+        "Technique",
+        "Technique"
+      ],
+      "card_title": [
+        "Premiers pas",
+        "Tableau de bord",
+        "Mes biens",
+        "Mes locataires",
+        "Mes contrats",
+        "Paiements",
+        "Documents",
+        "Maintenance",
+        "Aperçu métier",
+        "User Stories",
+        "Propriétés",
+        "Locataires",
+        "Contrats",
+        "Paiements",
+        "Documents",
+        "Maintenance",
+        "Architecture",
+        "Base de données",
+        "Installation",
+        "Composants Blade",
+        "POC vs Dynamic"
+      ],
+      "card_desc": [
+        "Créer un compte, se connecter, modifier son profil.",
+        "Comprendre les indicateurs et les alertes automatiques.",
+        "Ajouter, modifier et gérer votre parc immobilier.",
+        "Gérer vos locataires et suivre leur statut de paiement.",
+        "Créer des baux, gérer les échéances et archiver.",
+        "Enregistrer les loyers et marquer les paiements reçus.",
+        "Uploader et retrouver vos fichiers (baux, diagnostics, assurances…).",
+        "Planifier et suivre vos interventions et travaux.",
+        "Présentation de GestiLoc, modules disponibles et rôles utilisateurs.",
+        "Cas d'usage par module, basés sur les routes et controllers Laravel.",
+        "Gestion du parc immobilier, types, statuts et références auto-générées.",
+        "Gestion des locataires, statuts de paiement et recherche.",
+        "Baux de location, archivage et alertes d'expiration.",
+        "Suivi des loyers mensuels et marquage comme payé.",
+        "Upload et gestion des fichiers liés aux biens.",
+        "Suivi des interventions, priorités, coûts et avancement.",
+        "Stack, structure des dossiers et flux d'authentification.",
+        "Schéma des 6 tables métier et relations Eloquent.",
+        "Setup Laravel pas à pas : clone, .env, migrate, serve.",
+        "Liste et description des 26 composants réutilisables.",
+        "Différences entre le prototype statique et l'application Laravel."
+      ]
     },
     "utilisateur_demarrage": {
       "h1": "Premiers pas",
       "subtitle": "Créer votre compte, vous connecter et configurer votre profil.",
-      "h2": ["Créer un compte","Se connecter","Se déconnecter","Modifier votre profil","Supprimer votre compte","Étape suivante"],
-      "p": ["Si vous n'avez pas encore de compte, rendez-vous sur la page d'inscription accessible depuis la page de connexion.","Si vous avez oublié votre mot de passe, utilisez le lien <strong>Mot de passe oublié\u00a0?</strong> présent sur la page de connexion.","Cliquez sur votre nom en haut à droite de la navigation, puis sur <strong>Se déconnecter</strong>.","Pour changer votre nom, votre adresse email ou votre mot de passe\u00a0:","Cette option se trouve en bas de la page <strong>Profil</strong>, dans la section <em>Supprimer le compte</em>. Une confirmation par mot de passe est requise.","Une fois connecté, commencez par ajouter vos biens immobiliers. Consultez la section <a href=\"proprietes.html\">Mes biens</a> pour savoir comment procéder."],
-      "ol": ["<li>Cliquez sur <strong>S'inscrire</strong> depuis la page de connexion.</li><li>Renseignez votre nom, votre adresse email et un mot de passe.</li><li>Cliquez sur <strong>S'inscrire</strong> pour valider.</li><li>Vous êtes automatiquement connecté et redirigé vers le tableau de bord.</li>","<li>Accédez à l'application dans votre navigateur.</li><li>Saisissez votre adresse email et votre mot de passe.</li><li>Cliquez sur <strong>Se connecter</strong>.</li>","<li>Cliquez sur votre nom en haut à droite.</li><li>Sélectionnez <strong>Profil</strong>.</li><li>Modifiez les informations souhaitées.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>"],
-      "callout": ["Chaque compte est indépendant\u00a0: vos biens, locataires et données ne sont visibles que par vous. Plusieurs bailleurs peuvent utiliser la même application sans se voir.","La suppression de votre compte est définitive. Toutes vos données (biens, locataires, contrats, paiements, documents, maintenances) seront effacées sans possibilité de récupération."]
+      "h2": [
+        "Créer un compte",
+        "Se connecter",
+        "Se déconnecter",
+        "Modifier votre profil",
+        "Supprimer votre compte",
+        "Étape suivante"
+      ],
+      "p": [
+        "Si vous n'avez pas encore de compte, rendez-vous sur la page d'inscription accessible depuis la page de connexion.",
+        "Si vous avez oublié votre mot de passe, utilisez le lien <strong>Mot de passe oublié ?</strong> présent sur la page de connexion.",
+        "Cliquez sur votre nom en haut à droite de la navigation, puis sur <strong>Se déconnecter</strong>.",
+        "Pour changer votre nom, votre adresse email ou votre mot de passe :",
+        "Cette option se trouve en bas de la page <strong>Profil</strong>, dans la section <em>Supprimer le compte</em>. Une confirmation par mot de passe est requise.",
+        "Une fois connecté, commencez par ajouter vos biens immobiliers. Consultez la section <a href=\"proprietes.html\">Mes biens</a> pour savoir comment procéder."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>S'inscrire</strong> depuis la page de connexion.</li><li>Renseignez votre nom, votre adresse email et un mot de passe.</li><li>Cliquez sur <strong>S'inscrire</strong> pour valider.</li><li>Vous êtes automatiquement connecté et redirigé vers le tableau de bord.</li>",
+        "<li>Accédez à l'application dans votre navigateur.</li><li>Saisissez votre adresse email et votre mot de passe.</li><li>Cliquez sur <strong>Se connecter</strong>.</li>",
+        "<li>Cliquez sur votre nom en haut à droite.</li><li>Sélectionnez <strong>Profil</strong>.</li><li>Modifiez les informations souhaitées.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>"
+      ],
+      "callout": [
+        "Chaque compte est indépendant : vos biens, locataires et données ne sont visibles que par vous. Plusieurs bailleurs peuvent utiliser la même application sans se voir.",
+        "La suppression de votre compte est définitive. Toutes vos données (biens, locataires, contrats, paiements, documents, maintenances) seront effacées sans possibilité de récupération."
+      ]
     },
     "utilisateur_tableau_de_bord": {
       "h1": "Tableau de bord",
       "subtitle": "Vue d'ensemble de votre patrimoine locatif en un coup d'œil.",
-      "h2": ["Ce que vous voyez","Les cartes de statistiques","Les alertes","Navigation rapide"],
-      "p": ["Le tableau de bord est la première page que vous voyez après la connexion. Il résume l'état de votre parc locatif à la date du jour.","En haut du tableau de bord, quatre indicateurs clés s'affichent\u00a0:","Le tableau de bord signale automatiquement les situations nécessitant votre attention\u00a0:","Depuis le tableau de bord, vous pouvez accéder directement à chaque module via le menu latéral ou les liens dans les cartes d'alertes."],
-      "ul": ["<li><strong>Contrats expirant bientôt</strong> — contrats dont la date de fin est dans les 30 jours.</li><li><strong>Paiements en retard</strong> — loyers dont le statut est «\u00a0en retard\u00a0».</li><li><strong>Interventions urgentes</strong> — travaux de maintenance à priorité haute non encore terminés.</li>"],
-      "callout": ["Consultez le tableau de bord chaque début de mois pour identifier rapidement les loyers non encaissés et planifier vos relances."],
-      "th": ["Indicateur","Ce qu'il mesure"],
-      "td": ["<strong>Biens</strong>","Nombre total de biens enregistrés, avec le nombre de biens occupés et vacants.","<strong>Locataires</strong>","Nombre total de locataires actifs.","<strong>Loyers du mois</strong>","Montant total attendu pour le mois en cours, et part déjà encaissée.","<strong>Paiements en retard</strong>","Nombre de loyers non réglés dont l'échéance est dépassée."]
+      "h2": [
+        "Ce que vous voyez",
+        "Les cartes de statistiques",
+        "Les alertes",
+        "Navigation rapide"
+      ],
+      "p": [
+        "Le tableau de bord est la première page que vous voyez après la connexion. Il résume l'état de votre parc locatif à la date du jour.",
+        "En haut du tableau de bord, quatre indicateurs clés s'affichent :",
+        "Le tableau de bord signale automatiquement les situations nécessitant votre attention :",
+        "Depuis le tableau de bord, vous pouvez accéder directement à chaque module via le menu latéral ou les liens dans les cartes d'alertes."
+      ],
+      "ul": [
+        "<li><strong>Contrats expirant bientôt</strong> — contrats dont la date de fin est dans les 30 jours.</li><li><strong>Paiements en retard</strong> — loyers dont le statut est « en retard ».</li><li><strong>Interventions urgentes</strong> — travaux de maintenance à priorité haute non encore terminés.</li>"
+      ],
+      "callout": [
+        "Consultez le tableau de bord chaque début de mois pour identifier rapidement les loyers non encaissés et planifier vos relances."
+      ],
+      "th": [
+        "Indicateur",
+        "Ce qu'il mesure"
+      ],
+      "td": [
+        "<strong>Biens</strong>",
+        "Nombre total de biens enregistrés, avec le nombre de biens occupés et vacants.",
+        "<strong>Locataires</strong>",
+        "Nombre total de locataires actifs.",
+        "<strong>Loyers du mois</strong>",
+        "Montant total attendu pour le mois en cours, et part déjà encaissée.",
+        "<strong>Paiements en retard</strong>",
+        "Nombre de loyers non réglés dont l'échéance est dépassée."
+      ]
     },
     "utilisateur_proprietes": {
       "h1": "Mes biens",
       "subtitle": "Ajouter, consulter et gérer vos biens immobiliers.",
-      "h2": ["Ajouter un bien","Consulter la liste de vos biens","Modifier un bien","Supprimer un bien","Statut d'un bien","Étape suivante"],
-      "p": ["La page <strong>Propriétés</strong> affiche l'ensemble de vos biens avec pour chacun\u00a0: sa référence, son adresse, son type, son loyer mensuel et son statut (occupé\u00a0/ vacant).","Le statut est mis à jour automatiquement selon les contrats actifs associés au bien.","Une fois vos biens enregistrés, ajoutez vos locataires. Consultez la section <a href=\"locataires.html\">Mes locataires</a>."],
-      "ol": ["<li>Cliquez sur <strong>Propriétés</strong> dans le menu latéral.</li><li>Cliquez sur le bouton <strong>Ajouter un bien</strong>.</li><li>Remplissez le formulaire\u00a0:</li>","<li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Dans la liste des biens, cliquez sur le bouton <strong>Modifier</strong> du bien souhaité.</li><li>Mettez à jour les informations.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Dans la liste des biens, cliquez sur <strong>Supprimer</strong>.</li><li>Confirmez la suppression dans la fenêtre qui s'affiche.</li>"],
-      "ul": ["<li><strong>Occupé</strong> — un locataire est en cours de location.</li><li><strong>Vacant</strong> — le bien est disponible à la location.</li>"],
-      "callout": ["Une référence unique est attribuée automatiquement à chaque bien (ex\u00a0: <strong>PROP-001</strong>). Vous n'avez pas à la saisir manuellement.","La suppression d'un bien entraîne la suppression de toutes ses données associées\u00a0: locataires rattachés, contrats, paiements, documents et interventions de maintenance. Cette action est irréversible."],
-      "th": ["Champ","Description","Obligatoire"],
-      "td": ["<strong>Nom</strong>","Libellé du bien (ex\u00a0: «\u00a0Appartement Paris 11e\u00a0»)","Oui","<strong>Type</strong>","Appartement, maison, studio, commercial ou autre","Oui","<strong>Adresse</strong>","Adresse complète du bien","Oui","<strong>Ville</strong>","Ville","Oui","<strong>Code postal</strong>","Code postal","Non","<strong>Surface</strong>","Surface en m²","Non","<strong>Loyer mensuel</strong>","Montant du loyer hors charges","Oui","<strong>Charges</strong>","Montant des charges mensuelles","Non (défaut\u00a0: 0)","<strong>Dépôt de garantie</strong>","Montant du dépôt de garantie","Non (défaut\u00a0: 0)","<strong>Description</strong>","Notes libres sur le bien","Non"]
+      "h2": [
+        "Ajouter un bien",
+        "Consulter la liste de vos biens",
+        "Modifier un bien",
+        "Supprimer un bien",
+        "Statut d'un bien",
+        "Étape suivante"
+      ],
+      "p": [
+        "La page <strong>Propriétés</strong> affiche l'ensemble de vos biens avec pour chacun : sa référence, son adresse, son type, son loyer mensuel et son statut (occupé / vacant).",
+        "Le statut est mis à jour automatiquement selon les contrats actifs associés au bien.",
+        "Une fois vos biens enregistrés, ajoutez vos locataires. Consultez la section <a href=\"locataires.html\">Mes locataires</a>."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>Propriétés</strong> dans le menu latéral.</li><li>Cliquez sur le bouton <strong>Ajouter un bien</strong>.</li><li>Remplissez le formulaire :</li>",
+        "<li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Dans la liste des biens, cliquez sur le bouton <strong>Modifier</strong> du bien souhaité.</li><li>Mettez à jour les informations.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Dans la liste des biens, cliquez sur <strong>Supprimer</strong>.</li><li>Confirmez la suppression dans la fenêtre qui s'affiche.</li>"
+      ],
+      "ul": [
+        "<li><strong>Occupé</strong> — un locataire est en cours de location.</li><li><strong>Vacant</strong> — le bien est disponible à la location.</li>"
+      ],
+      "callout": [
+        "Une référence unique est attribuée automatiquement à chaque bien (ex : <strong>PROP-001</strong>). Vous n'avez pas à la saisir manuellement.",
+        "La suppression d'un bien entraîne la suppression de toutes ses données associées : locataires rattachés, contrats, paiements, documents et interventions de maintenance. Cette action est irréversible."
+      ],
+      "th": [
+        "Champ",
+        "Description",
+        "Obligatoire"
+      ],
+      "td": [
+        "<strong>Nom</strong>",
+        "Libellé du bien (ex : « Appartement Paris 11e »)",
+        "Oui",
+        "<strong>Type</strong>",
+        "Appartement, maison, studio, commercial ou autre",
+        "Oui",
+        "<strong>Adresse</strong>",
+        "Adresse complète du bien",
+        "Oui",
+        "<strong>Ville</strong>",
+        "Ville",
+        "Oui",
+        "<strong>Code postal</strong>",
+        "Code postal",
+        "Non",
+        "<strong>Surface</strong>",
+        "Surface en m²",
+        "Non",
+        "<strong>Loyer mensuel</strong>",
+        "Montant du loyer hors charges",
+        "Oui",
+        "<strong>Charges</strong>",
+        "Montant des charges mensuelles",
+        "Non (défaut : 0)",
+        "<strong>Dépôt de garantie</strong>",
+        "Montant du dépôt de garantie",
+        "Non (défaut : 0)",
+        "<strong>Description</strong>",
+        "Notes libres sur le bien",
+        "Non"
+      ]
     },
     "utilisateur_locataires": {
       "h1": "Mes locataires",
       "subtitle": "Ajouter et gérer vos locataires, suivre leur statut de paiement.",
-      "h2": ["Ajouter un locataire","Comprendre les statuts de paiement","Rechercher un locataire","Modifier un locataire","Supprimer un locataire","Étape suivante"],
-      "p": ["La barre de recherche en haut de la liste permet de filtrer les locataires par prénom, nom ou adresse email. La recherche s'effectue en temps réel.","Après avoir ajouté vos locataires, créez les contrats de bail. Consultez la section <a href=\"contrats.html\">Mes contrats</a>.","Le statut de paiement d'un locataire se met à jour via le module <a href=\"paiements.html\">Paiements</a> lorsque vous marquez un loyer comme payé."],
-      "ol": ["<li>Cliquez sur <strong>Locataires</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Ajouter un locataire</strong>.</li><li>Remplissez le formulaire\u00a0:</li>","<li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Dans la liste, cliquez sur <strong>Modifier</strong> à côté du locataire.</li><li>Mettez à jour les informations.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Cliquez sur <strong>Supprimer</strong> dans la liste.</li><li>Confirmez la suppression.</li>"],
-      "callout": ["La suppression d'un locataire supprime également tous ses paiements et contrats associés."],
-      "th": ["Champ","Description","Obligatoire"],
-      "td": ["<strong>Prénom</strong>","Prénom du locataire","Oui","<strong>Nom</strong>","Nom de famille","Oui","<strong>Email</strong>","Adresse email de contact","Non","<strong>Téléphone</strong>","Numéro de téléphone","Non","<strong>Bien associé</strong>","Bien occupé par ce locataire","Non","<strong>Loyer mensuel</strong>","Montant du loyer de ce locataire","Non","<strong>Date de début de bail</strong>","Date d'entrée dans le logement","Non","<strong>Payé</strong>","Le loyer du mois en cours a été encaissé.","<strong>En attente</strong>","Le paiement n'a pas encore été reçu pour ce mois.","<strong>En retard</strong>","Le paiement est dû mais n'a pas été encaissé après l'échéance."]
+      "h2": [
+        "Ajouter un locataire",
+        "Comprendre les statuts de paiement",
+        "Rechercher un locataire",
+        "Modifier un locataire",
+        "Supprimer un locataire",
+        "Étape suivante"
+      ],
+      "p": [
+        "La barre de recherche en haut de la liste permet de filtrer les locataires par prénom, nom ou adresse email. La recherche s'effectue en temps réel.",
+        "Après avoir ajouté vos locataires, créez les contrats de bail. Consultez la section <a href=\"contrats.html\">Mes contrats</a>.",
+        "Le statut de paiement d'un locataire se met à jour via le module <a href=\"paiements.html\">Paiements</a> lorsque vous marquez un loyer comme payé."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>Locataires</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Ajouter un locataire</strong>.</li><li>Remplissez le formulaire :</li>",
+        "<li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Dans la liste, cliquez sur <strong>Modifier</strong> à côté du locataire.</li><li>Mettez à jour les informations.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Cliquez sur <strong>Supprimer</strong> dans la liste.</li><li>Confirmez la suppression.</li>"
+      ],
+      "callout": [
+        "La suppression d'un locataire supprime également tous ses paiements et contrats associés."
+      ],
+      "th": [
+        "Champ",
+        "Description",
+        "Obligatoire"
+      ],
+      "td": [
+        "<strong>Prénom</strong>",
+        "Prénom du locataire",
+        "Oui",
+        "<strong>Nom</strong>",
+        "Nom de famille",
+        "Oui",
+        "<strong>Email</strong>",
+        "Adresse email de contact",
+        "Non",
+        "<strong>Téléphone</strong>",
+        "Numéro de téléphone",
+        "Non",
+        "<strong>Bien associé</strong>",
+        "Bien occupé par ce locataire",
+        "Non",
+        "<strong>Loyer mensuel</strong>",
+        "Montant du loyer de ce locataire",
+        "Non",
+        "<strong>Date de début de bail</strong>",
+        "Date d'entrée dans le logement",
+        "Non",
+        "<strong>Payé</strong>",
+        "Le loyer du mois en cours a été encaissé.",
+        "<strong>En attente</strong>",
+        "Le paiement n'a pas encore été reçu pour ce mois.",
+        "<strong>En retard</strong>",
+        "Le paiement est dû mais n'a pas été encaissé après l'échéance."
+      ]
     },
     "utilisateur_contrats": {
       "h1": "Mes contrats",
       "subtitle": "Créer et gérer vos baux de location, archiver les contrats terminés.",
-      "h2": ["Créer un contrat","Statuts d'un contrat","Archiver un contrat","Alerte d'expiration","Modifier ou supprimer un contrat"],
-      "p": ["Avant de créer un contrat, assurez-vous d'avoir ajouté le bien et le locataire concernés.","GestiLoc vous alerte automatiquement sur le tableau de bord lorsqu'un contrat arrive à échéance dans moins de <strong>30 jours</strong>. Pensez à renouveler ou archiver ces contrats en temps voulu.","Les contrats archivés restent accessibles via le filtre <strong>Archivés</strong> en haut de la liste des contrats."],
-      "ol": ["<li>Cliquez sur <strong>Contrats</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Nouveau contrat</strong>.</li><li>Remplissez le formulaire\u00a0:</li>","<li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Depuis la liste des contrats, cliquez sur <strong>Archiver</strong> sur le contrat concerné.</li><li>Le contrat passe en statut <strong>Archivé</strong> et n'apparaît plus dans la liste principale.</li>"],
-      "ul": ["<li><strong>Modifier</strong> — cliquez sur le bouton <strong>Modifier</strong> dans la liste pour corriger les informations d'un contrat actif.</li><li><strong>Supprimer</strong> — supprime définitivement le contrat. Préférez l'archivage pour conserver l'historique.</li>"],
-      "th": ["Champ","Description","Obligatoire","Statut","Signification"],
-      "td": ["<strong>Locataire</strong>","Locataire concerné par ce bail","Oui","<strong>Bien</strong>","Bien faisant l'objet du bail","Oui","<strong>Type de bail</strong>","Vide, meublé ou commercial","Oui","<strong>Date de début</strong>","Date d'entrée dans les lieux","Oui","<strong>Date de fin</strong>","Date d'échéance du bail (laisser vide pour un bail à durée indéterminée)","Non","<strong>Loyer mensuel</strong>","Montant du loyer hors charges","Oui","<strong>Charges</strong>","Charges mensuelles","Non","<strong>Dépôt de garantie</strong>","Montant du dépôt de garantie versé","Non","<strong>Actif</strong>","Le bail est en cours. Le locataire occupe le bien.","<strong>Expiré</strong>","La date de fin est dépassée mais le contrat n'a pas été archivé.","<strong>Archivé</strong>","Le bail est terminé et classé dans les archives."]
+      "h2": [
+        "Créer un contrat",
+        "Statuts d'un contrat",
+        "Archiver un contrat",
+        "Alerte d'expiration",
+        "Modifier ou supprimer un contrat"
+      ],
+      "p": [
+        "Avant de créer un contrat, assurez-vous d'avoir ajouté le bien et le locataire concernés.",
+        "GestiLoc vous alerte automatiquement sur le tableau de bord lorsqu'un contrat arrive à échéance dans moins de <strong>30 jours</strong>. Pensez à renouveler ou archiver ces contrats en temps voulu.",
+        "Les contrats archivés restent accessibles via le filtre <strong>Archivés</strong> en haut de la liste des contrats."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>Contrats</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Nouveau contrat</strong>.</li><li>Remplissez le formulaire :</li>",
+        "<li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Depuis la liste des contrats, cliquez sur <strong>Archiver</strong> sur le contrat concerné.</li><li>Le contrat passe en statut <strong>Archivé</strong> et n'apparaît plus dans la liste principale.</li>"
+      ],
+      "ul": [
+        "<li><strong>Modifier</strong> — cliquez sur le bouton <strong>Modifier</strong> dans la liste pour corriger les informations d'un contrat actif.</li><li><strong>Supprimer</strong> — supprime définitivement le contrat. Préférez l'archivage pour conserver l'historique.</li>"
+      ],
+      "th": [
+        "Champ",
+        "Description",
+        "Obligatoire",
+        "Statut",
+        "Signification"
+      ],
+      "td": [
+        "<strong>Locataire</strong>",
+        "Locataire concerné par ce bail",
+        "Oui",
+        "<strong>Bien</strong>",
+        "Bien faisant l'objet du bail",
+        "Oui",
+        "<strong>Type de bail</strong>",
+        "Vide, meublé ou commercial",
+        "Oui",
+        "<strong>Date de début</strong>",
+        "Date d'entrée dans les lieux",
+        "Oui",
+        "<strong>Date de fin</strong>",
+        "Date d'échéance du bail (laisser vide pour un bail à durée indéterminée)",
+        "Non",
+        "<strong>Loyer mensuel</strong>",
+        "Montant du loyer hors charges",
+        "Oui",
+        "<strong>Charges</strong>",
+        "Charges mensuelles",
+        "Non",
+        "<strong>Dépôt de garantie</strong>",
+        "Montant du dépôt de garantie versé",
+        "Non",
+        "<strong>Actif</strong>",
+        "Le bail est en cours. Le locataire occupe le bien.",
+        "<strong>Expiré</strong>",
+        "La date de fin est dépassée mais le contrat n'a pas été archivé.",
+        "<strong>Archivé</strong>",
+        "Le bail est terminé et classé dans les archives."
+      ]
     },
     "utilisateur_paiements": {
       "h1": "Paiements",
       "subtitle": "Enregistrer les loyers mensuels et suivre leur encaissement.",
-      "h2": ["Enregistrer un paiement","Marquer un paiement comme payé","Statuts des paiements","Workflow mensuel recommandé","Filtrer les paiements"],
-      "p": ["Lorsque vous recevez un loyer, vous pouvez le valider rapidement sans passer par le formulaire de modification\u00a0:","La liste des paiements peut être filtrée par statut, par locataire ou par période (mois\u00a0/ année) grâce aux filtres disponibles en haut de page.","Utilisez ce bouton chaque mois au moment où vous recevez les virements. C'est plus rapide que d'ouvrir le formulaire complet."],
-      "ol": ["<li>Cliquez sur <strong>Paiements</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Nouveau paiement</strong>.</li><li>Remplissez le formulaire\u00a0:</li>","<li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Dans la liste des paiements, repérez le paiement concerné (statut\u00a0: <strong>En attente</strong>).</li><li>Cliquez sur le bouton <strong>Marquer comme payé</strong>.</li><li>Le statut passe à <strong>Payé</strong> et la date du jour est enregistrée automatiquement.</li>","<li>En début de mois, créez un paiement <strong>En attente</strong> pour chaque locataire.</li><li>À réception de chaque virement, cliquez sur <strong>Marquer comme payé</strong>.</li><li>En milieu de mois, vérifiez le tableau de bord pour identifier les paiements encore en attente et les passer en <strong>Retard</strong> si nécessaire.</li>"],
-      "th": ["Champ","Description","Obligatoire","Statut","Signification"],
-      "td": ["<strong>Locataire</strong>","Locataire concerné","Oui","<strong>Bien</strong>","Bien concerné","Oui","<strong>Montant</strong>","Montant du loyer à encaisser","Oui","<strong>Mois</strong>","Mois concerné (1 à 12)","Oui","<strong>Année</strong>","Année concernée","Oui","<strong>Date de paiement</strong>","Date effective du versement (si déjà reçu)","Non","<strong>Statut</strong>","En attente, payé ou en retard","Oui","<strong>En attente</strong>","Loyer attendu mais pas encore encaissé.","<strong>Payé</strong>","Loyer reçu. La date de paiement est enregistrée.","<strong>En retard</strong>","Loyer non encaissé après l'échéance prévue."]
+      "h2": [
+        "Enregistrer un paiement",
+        "Marquer un paiement comme payé",
+        "Statuts des paiements",
+        "Workflow mensuel recommandé",
+        "Filtrer les paiements"
+      ],
+      "p": [
+        "Lorsque vous recevez un loyer, vous pouvez le valider rapidement sans passer par le formulaire de modification :",
+        "La liste des paiements peut être filtrée par statut, par locataire ou par période (mois / année) grâce aux filtres disponibles en haut de page.",
+        "Utilisez ce bouton chaque mois au moment où vous recevez les virements. C'est plus rapide que d'ouvrir le formulaire complet."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>Paiements</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Nouveau paiement</strong>.</li><li>Remplissez le formulaire :</li>",
+        "<li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Dans la liste des paiements, repérez le paiement concerné (statut : <strong>En attente</strong>).</li><li>Cliquez sur le bouton <strong>Marquer comme payé</strong>.</li><li>Le statut passe à <strong>Payé</strong> et la date du jour est enregistrée automatiquement.</li>",
+        "<li>En début de mois, créez un paiement <strong>En attente</strong> pour chaque locataire.</li><li>À réception de chaque virement, cliquez sur <strong>Marquer comme payé</strong>.</li><li>En milieu de mois, vérifiez le tableau de bord pour identifier les paiements encore en attente et les passer en <strong>Retard</strong> si nécessaire.</li>"
+      ],
+      "th": [
+        "Champ",
+        "Description",
+        "Obligatoire",
+        "Statut",
+        "Signification"
+      ],
+      "td": [
+        "<strong>Locataire</strong>",
+        "Locataire concerné",
+        "Oui",
+        "<strong>Bien</strong>",
+        "Bien concerné",
+        "Oui",
+        "<strong>Montant</strong>",
+        "Montant du loyer à encaisser",
+        "Oui",
+        "<strong>Mois</strong>",
+        "Mois concerné (1 à 12)",
+        "Oui",
+        "<strong>Année</strong>",
+        "Année concernée",
+        "Oui",
+        "<strong>Date de paiement</strong>",
+        "Date effective du versement (si déjà reçu)",
+        "Non",
+        "<strong>Statut</strong>",
+        "En attente, payé ou en retard",
+        "Oui",
+        "<strong>En attente</strong>",
+        "Loyer attendu mais pas encore encaissé.",
+        "<strong>Payé</strong>",
+        "Loyer reçu. La date de paiement est enregistrée.",
+        "<strong>En retard</strong>",
+        "Loyer non encaissé après l'échéance prévue."
+      ]
     },
     "utilisateur_documents": {
       "h1": "Documents",
       "subtitle": "Centraliser et retrouver tous les fichiers liés à vos biens.",
-      "h2": ["À quoi sert ce module\u00a0?","Uploader un document","Catégories de documents","Télécharger un document","Supprimer un document","Bonne pratique\u00a0: les diagnostics"],
-      "p": ["Le module Documents vous permet de stocker en ligne tous les fichiers liés à votre activité de bailleur\u00a0: contrats de bail signés, diagnostics obligatoires (DPE, électricité…), quittances de loyer, attestations d'assurance, et tout autre document utile.","Dans la liste des documents, cliquez sur le nom ou le bouton <strong>Télécharger</strong> pour récupérer le fichier sur votre appareil.","Cliquez sur <strong>Supprimer</strong> dans la liste. La suppression est définitive. Si vous avez uploadé un mauvais fichier, supprimez-le et ré-uploadez le bon.","Il n'est pas possible de modifier un document déjà uploadé. Pour remplacer un fichier, supprimez l'ancienne version puis uploadez la nouvelle.","Renseignez la <strong>date d'expiration</strong> pour vos diagnostics obligatoires (DPE valable 10 ans, diagnostic électricité 6 ans, etc.). Cela vous permettra de suivre leur validité et d'anticiper leur renouvellement."],
-      "ol": ["<li>Cliquez sur <strong>Documents</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Ajouter un document</strong>.</li><li>Remplissez le formulaire\u00a0:</li>","<li>Cliquez sur <strong>Uploader</strong>.</li>"],
-      "th": ["Champ","Description","Obligatoire","Catégorie","Exemples"],
-      "td": ["<strong>Nom</strong>","Nom du document (ex\u00a0: «\u00a0DPE appartement Lyon\u00a0»)","Oui","<strong>Catégorie</strong>","Contrat, diagnostic, quittance, assurance ou autre","Oui","<strong>Bien associé</strong>","Bien auquel ce document se rattache","Non","<strong>Date d'upload</strong>","Date de dépôt du document","Oui","<strong>Date d'expiration</strong>","Date de validité (ex\u00a0: pour un DPE ou une assurance)","Non","<strong>Fichier</strong>","Le fichier à uploader (PDF, image, etc.)","Oui","<strong>Contrat</strong>","Bail de location signé, avenant au bail","<strong>Diagnostic</strong>","DPE, diagnostic électricité, amiante, plomb, gaz","<strong>Quittance</strong>","Quittance de loyer mensuelle","<strong>Assurance</strong>","Attestation assurance propriétaire non occupant (PNO), attestation locataire","<strong>Autre</strong>","Photos, relevés de charges, factures de travaux"]
+      "h2": [
+        "À quoi sert ce module ?",
+        "Uploader un document",
+        "Catégories de documents",
+        "Télécharger un document",
+        "Supprimer un document",
+        "Bonne pratique : les diagnostics"
+      ],
+      "p": [
+        "Le module Documents vous permet de stocker en ligne tous les fichiers liés à votre activité de bailleur : contrats de bail signés, diagnostics obligatoires (DPE, électricité…), quittances de loyer, attestations d'assurance, et tout autre document utile.",
+        "Dans la liste des documents, cliquez sur le nom ou le bouton <strong>Télécharger</strong> pour récupérer le fichier sur votre appareil.",
+        "Cliquez sur <strong>Supprimer</strong> dans la liste. La suppression est définitive. Si vous avez uploadé un mauvais fichier, supprimez-le et ré-uploadez le bon.",
+        "Il n'est pas possible de modifier un document déjà uploadé. Pour remplacer un fichier, supprimez l'ancienne version puis uploadez la nouvelle.",
+        "Renseignez la <strong>date d'expiration</strong> pour vos diagnostics obligatoires (DPE valable 10 ans, diagnostic électricité 6 ans, etc.). Cela vous permettra de suivre leur validité et d'anticiper leur renouvellement."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>Documents</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Ajouter un document</strong>.</li><li>Remplissez le formulaire :</li>",
+        "<li>Cliquez sur <strong>Uploader</strong>.</li>"
+      ],
+      "th": [
+        "Champ",
+        "Description",
+        "Obligatoire",
+        "Catégorie",
+        "Exemples"
+      ],
+      "td": [
+        "<strong>Nom</strong>",
+        "Nom du document (ex : « DPE appartement Lyon »)",
+        "Oui",
+        "<strong>Catégorie</strong>",
+        "Contrat, diagnostic, quittance, assurance ou autre",
+        "Oui",
+        "<strong>Bien associé</strong>",
+        "Bien auquel ce document se rattache",
+        "Non",
+        "<strong>Date d'upload</strong>",
+        "Date de dépôt du document",
+        "Oui",
+        "<strong>Date d'expiration</strong>",
+        "Date de validité (ex : pour un DPE ou une assurance)",
+        "Non",
+        "<strong>Fichier</strong>",
+        "Le fichier à uploader (PDF, image, etc.)",
+        "Oui",
+        "<strong>Contrat</strong>",
+        "Bail de location signé, avenant au bail",
+        "<strong>Diagnostic</strong>",
+        "DPE, diagnostic électricité, amiante, plomb, gaz",
+        "<strong>Quittance</strong>",
+        "Quittance de loyer mensuelle",
+        "<strong>Assurance</strong>",
+        "Attestation assurance propriétaire non occupant (PNO), attestation locataire",
+        "<strong>Autre</strong>",
+        "Photos, relevés de charges, factures de travaux"
+      ]
     },
     "utilisateur_maintenance": {
       "h1": "Maintenance",
       "subtitle": "Planifier et suivre les travaux et interventions sur vos biens.",
-      "h2": ["À quoi sert ce module\u00a0?","Créer une intervention","Niveaux de priorité","Suivre l'avancement d'une intervention","Statuts d'une intervention","Enregistrer le coût réel","Interventions urgentes"],
-      "p": ["Le module Maintenance vous permet de tracer toutes les interventions sur vos biens\u00a0: réparations urgentes signalées par un locataire, travaux de rénovation, entretien courant, sinistres… Chaque intervention est suivie avec sa priorité, son avancement et ses coûts.","Au fur et à mesure que les travaux avancent, mettez à jour la progression\u00a0:","Une fois l'intervention terminée, renseignez le <strong>coût réel</strong> dans le formulaire de modification. Cela vous permet de comparer le budget prévu avec la dépense effective, et de constituer un historique de vos dépenses par bien.","Passez une intervention en statut <strong>Terminé</strong> plutôt que de la supprimer. Vous conservez ainsi l'historique complet des travaux réalisés sur chaque bien, utile notamment lors d'une revente ou d'un litige.","Les interventions à priorité <strong>Haute</strong> non encore terminées apparaissent automatiquement dans les alertes du <a href=\"tableau-de-bord.html\">tableau de bord</a>."],
-      "ol": ["<li>Cliquez sur <strong>Maintenance</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Nouvelle intervention</strong>.</li><li>Remplissez le formulaire\u00a0:</li>","<li>Cliquez sur <strong>Enregistrer</strong>.</li>","<li>Dans la liste des interventions, cliquez sur <strong>Mettre à jour</strong>.</li><li>Ajustez le <strong>pourcentage d'avancement</strong> (0\u00a0% à 100\u00a0%).</li><li>Mettez à jour le <strong>statut</strong> si nécessaire.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>"],
-      "th": ["Champ","Description","Obligatoire","Priorité","Usage recommandé","Statut","Signification"],
-      "td": ["<strong>Bien</strong>","Bien concerné par l'intervention","Oui","<strong>Titre</strong>","Résumé court (ex\u00a0: «\u00a0Fuite robinet cuisine\u00a0»)","Oui","<strong>Description</strong>","Détail de l'intervention","Non","<strong>Priorité</strong>","Haute, moyenne ou basse","Oui","<strong>Coût estimé</strong>","Montant prévu pour l'intervention","Non","<strong>Haute</strong>","Urgence\u00a0: fuite d'eau, panne de chauffage en hiver, problème de sécurité. Apparaît dans les alertes du tableau de bord.","<strong>Moyenne</strong>","Intervention à planifier rapidement mais sans urgence immédiate.","<strong>Basse</strong>","Entretien courant ou amélioration à réaliser à terme.","<strong>À faire</strong>","L'intervention est planifiée mais n'a pas encore commencé.","<strong>En cours</strong>","Les travaux ont démarré.","<strong>Terminé</strong>","L'intervention est clôturée."]
+      "h2": [
+        "À quoi sert ce module ?",
+        "Créer une intervention",
+        "Niveaux de priorité",
+        "Suivre l'avancement d'une intervention",
+        "Statuts d'une intervention",
+        "Enregistrer le coût réel",
+        "Interventions urgentes"
+      ],
+      "p": [
+        "Le module Maintenance vous permet de tracer toutes les interventions sur vos biens : réparations urgentes signalées par un locataire, travaux de rénovation, entretien courant, sinistres… Chaque intervention est suivie avec sa priorité, son avancement et ses coûts.",
+        "Au fur et à mesure que les travaux avancent, mettez à jour la progression :",
+        "Une fois l'intervention terminée, renseignez le <strong>coût réel</strong> dans le formulaire de modification. Cela vous permet de comparer le budget prévu avec la dépense effective, et de constituer un historique de vos dépenses par bien.",
+        "Passez une intervention en statut <strong>Terminé</strong> plutôt que de la supprimer. Vous conservez ainsi l'historique complet des travaux réalisés sur chaque bien, utile notamment lors d'une revente ou d'un litige.",
+        "Les interventions à priorité <strong>Haute</strong> non encore terminées apparaissent automatiquement dans les alertes du <a href=\"tableau-de-bord.html\">tableau de bord</a>."
+      ],
+      "ol": [
+        "<li>Cliquez sur <strong>Maintenance</strong> dans le menu latéral.</li><li>Cliquez sur <strong>Nouvelle intervention</strong>.</li><li>Remplissez le formulaire :</li>",
+        "<li>Cliquez sur <strong>Enregistrer</strong>.</li>",
+        "<li>Dans la liste des interventions, cliquez sur <strong>Mettre à jour</strong>.</li><li>Ajustez le <strong>pourcentage d'avancement</strong> (0 % à 100 %).</li><li>Mettez à jour le <strong>statut</strong> si nécessaire.</li><li>Cliquez sur <strong>Enregistrer</strong>.</li>"
+      ],
+      "th": [
+        "Champ",
+        "Description",
+        "Obligatoire",
+        "Priorité",
+        "Usage recommandé",
+        "Statut",
+        "Signification"
+      ],
+      "td": [
+        "<strong>Bien</strong>",
+        "Bien concerné par l'intervention",
+        "Oui",
+        "<strong>Titre</strong>",
+        "Résumé court (ex : « Fuite robinet cuisine »)",
+        "Oui",
+        "<strong>Description</strong>",
+        "Détail de l'intervention",
+        "Non",
+        "<strong>Priorité</strong>",
+        "Haute, moyenne ou basse",
+        "Oui",
+        "<strong>Coût estimé</strong>",
+        "Montant prévu pour l'intervention",
+        "Non",
+        "<strong>Haute</strong>",
+        "Urgence : fuite d'eau, panne de chauffage en hiver, problème de sécurité. Apparaît dans les alertes du tableau de bord.",
+        "<strong>Moyenne</strong>",
+        "Intervention à planifier rapidement mais sans urgence immédiate.",
+        "<strong>Basse</strong>",
+        "Entretien courant ou amélioration à réaliser à terme.",
+        "<strong>À faire</strong>",
+        "L'intervention est planifiée mais n'a pas encore commencé.",
+        "<strong>En cours</strong>",
+        "Les travaux ont démarré.",
+        "<strong>Terminé</strong>",
+        "L'intervention est clôturée."
+      ]
     },
     "fonctionnel_apercu": {
       "h1": "Aperçu fonctionnel",
       "subtitle": "Présentation métier de GestiLoc, ses modules et ses rôles utilisateurs.",
-      "h2": ["Présentation","Objectifs","Modules disponibles","Rôles utilisateurs"],
-      "p": ["GestiLoc est une application web de gestion locative destinée aux bailleurs privés. Elle centralise la gestion des biens immobiliers, des locataires, des contrats de location, des paiements de loyer, des documents et des interventions de maintenance.","L'authentification est gérée par <strong>Laravel Breeze</strong> (email + mot de passe).","La gestion multi-rôles (propriétaire, gestionnaire, locataire) n'est pas implémentée dans la version actuelle mais peut être ajoutée via un package comme Spatie Laravel Permission."],
-      "ul": ["<li>Offrir une vue d'ensemble du parc immobilier (biens occupés\u00a0/ vacants)</li><li>Suivre les locataires et leur statut de paiement</li><li>Gérer les contrats de location (création, archivage, alertes d'expiration)</li><li>Enregistrer et suivre les paiements mensuels</li><li>Centraliser les documents liés aux biens (contrats, diagnostics, quittances, assurances)</li><li>Planifier et suivre les travaux de maintenance</li>"],
-      "th": ["Module","Description","Rôle","Description"],
-      "td": ["<strong>Tableau de bord</strong>","Statistiques globales, alertes, vue synthétique","<strong>Propriétés</strong>","CRUD des biens immobiliers","<strong>Locataires</strong>","CRUD des locataires, statut de paiement","<strong>Contrats</strong>","Gestion des baux, archivage, alertes d'expiration","<strong>Paiements</strong>","Suivi des loyers mensuels, marquage comme payé","<strong>Documents</strong>","Upload et gestion des fichiers liés aux biens","<strong>Maintenance</strong>","Suivi des interventions avec progression et coûts","<strong>Rapports</strong>","Vue agrégée financière et opérationnelle","<strong>Bailleur (utilisateur authentifié)</strong>","Accès complet à toutes les fonctionnalités. Toutes les données sont cloisonnées par <code>user_id</code> — chaque bailleur ne voit que ses propres biens, locataires, contrats, etc."]
+      "h2": [
+        "Présentation",
+        "Objectifs",
+        "Modules disponibles",
+        "Rôles utilisateurs"
+      ],
+      "p": [
+        "GestiLoc est une application web de gestion locative destinée aux bailleurs privés. Elle centralise la gestion des biens immobiliers, des locataires, des contrats de location, des paiements de loyer, des documents et des interventions de maintenance.",
+        "L'authentification est gérée par <strong>Laravel Breeze</strong> (email + mot de passe).",
+        "La gestion multi-rôles (propriétaire, gestionnaire, locataire) n'est pas implémentée dans la version actuelle mais peut être ajoutée via un package comme Spatie Laravel Permission."
+      ],
+      "ul": [
+        "<li>Offrir une vue d'ensemble du parc immobilier (biens occupés / vacants)</li><li>Suivre les locataires et leur statut de paiement</li><li>Gérer les contrats de location (création, archivage, alertes d'expiration)</li><li>Enregistrer et suivre les paiements mensuels</li><li>Centraliser les documents liés aux biens (contrats, diagnostics, quittances, assurances)</li><li>Planifier et suivre les travaux de maintenance</li>"
+      ],
+      "th": [
+        "Module",
+        "Description",
+        "Rôle",
+        "Description"
+      ],
+      "td": [
+        "<strong>Tableau de bord</strong>",
+        "Statistiques globales, alertes, vue synthétique",
+        "<strong>Propriétés</strong>",
+        "CRUD des biens immobiliers",
+        "<strong>Locataires</strong>",
+        "CRUD des locataires, statut de paiement",
+        "<strong>Contrats</strong>",
+        "Gestion des baux, archivage, alertes d'expiration",
+        "<strong>Paiements</strong>",
+        "Suivi des loyers mensuels, marquage comme payé",
+        "<strong>Documents</strong>",
+        "Upload et gestion des fichiers liés aux biens",
+        "<strong>Maintenance</strong>",
+        "Suivi des interventions avec progression et coûts",
+        "<strong>Rapports</strong>",
+        "Vue agrégée financière et opérationnelle",
+        "<strong>Bailleur (utilisateur authentifié)</strong>",
+        "Accès complet à toutes les fonctionnalités. Toutes les données sont cloisonnées par <code>user_id</code> — chaque bailleur ne voit que ses propres biens, locataires, contrats, etc."
+      ]
     },
     "fonctionnel_user_stories": {
       "h1": "User Stories",
       "subtitle": "Cas d'usage par module, basés sur les routes et controllers Laravel.",
-      "h2": ["Authentification","Tableau de bord","Propriétés","Locataires","Contrats","Paiements","Documents","Maintenance","Rapports"],
-      "callout": ["Toutes les stories ci-dessous correspondent à des actions réelles implémentées dans <code>projet-dynamic/routes/web.php</code> et les controllers associés."],
-      "ul": ["<li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li><li>En tant que bailleur, je peux me connecter et me déconnecter.</li><li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li><li>En tant que bailleur, je peux supprimer mon compte.</li>","<li>En tant que bailleur, je peux voir un résumé de mon parc\u00a0: nombre de biens, nombre de locataires, loyers du mois, alertes en cours.</li>","<li>En tant que bailleur, je peux ajouter un bien immobilier (type, adresse, loyer, charges, dépôt de garantie).</li><li>En tant que bailleur, je peux consulter la liste de mes biens avec leur statut (occupé\u00a0/ vacant).</li><li>En tant que bailleur, je peux modifier les informations d'un bien.</li><li>En tant que bailleur, je peux supprimer un bien (et toutes ses données associées en cascade).</li><li>En tant que bailleur, une référence unique est auto-générée pour chaque bien (ex\u00a0: <code>PROP-001</code>).</li>","<li>En tant que bailleur, je peux ajouter un locataire et l'associer à un bien.</li><li>En tant que bailleur, je peux consulter la liste de mes locataires avec leur statut de paiement.</li><li>En tant que bailleur, je peux rechercher un locataire par nom ou email.</li><li>En tant que bailleur, je peux modifier les informations d'un locataire.</li><li>En tant que bailleur, je peux supprimer un locataire.</li>","<li>En tant que bailleur, je peux créer un contrat de location (type vide/meublé/commercial, dates, loyer).</li><li>En tant que bailleur, je peux consulter la liste de mes contrats et leur statut (actif, expiré, archivé).</li><li>En tant que bailleur, je peux archiver un contrat actif via <code>PATCH /contracts/{id}/archive</code>.</li><li>En tant que bailleur, je suis alerté lorsqu'un contrat expire dans les 30 jours.</li><li>En tant que bailleur, je peux modifier ou supprimer un contrat.</li>","<li>En tant que bailleur, je peux enregistrer un paiement mensuel pour un locataire.</li><li>En tant que bailleur, je peux consulter l'historique des paiements par locataire ou par bien.</li><li>En tant que bailleur, je peux marquer un paiement comme «\u00a0payé\u00a0» en un clic via <code>PATCH /payments/{id}/mark-paid</code>.</li><li>En tant que bailleur, je peux voir les paiements en retard.</li>","<li>En tant que bailleur, je peux uploader un document et le rattacher à un bien (contrat, diagnostic, quittance, assurance).</li><li>En tant que bailleur, je peux consulter la liste de mes documents avec leur catégorie et date d'expiration.</li><li>En tant que bailleur, je peux télécharger ou supprimer un document.</li>","<li>En tant que bailleur, je peux créer une intervention de maintenance pour un bien (titre, description, priorité, coût estimé).</li><li>En tant que bailleur, je peux consulter la liste des interventions et leur avancement.</li><li>En tant que bailleur, je peux mettre à jour la progression d'une intervention via <code>PATCH /maintenances/{id}/progress</code>.</li><li>En tant que bailleur, je peux voir les interventions urgentes (priorité haute, non terminées).</li>","<li>En tant que bailleur, je peux accéder à une page de rapports pour visualiser les données financières et opérationnelles agrégées.</li>"]
+      "h2": [
+        "Authentification",
+        "Tableau de bord",
+        "Propriétés",
+        "Locataires",
+        "Contrats",
+        "Paiements",
+        "Documents",
+        "Maintenance",
+        "Rapports"
+      ],
+      "callout": [
+        "Toutes les stories ci-dessous correspondent à des actions réelles implémentées dans <code>projet-dynamic/routes/web.php</code> et les controllers associés."
+      ],
+      "ul": [
+        "<li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li><li>En tant que bailleur, je peux me connecter et me déconnecter.</li><li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li><li>En tant que bailleur, je peux supprimer mon compte.</li>",
+        "<li>En tant que bailleur, je peux voir un résumé de mon parc : nombre de biens, nombre de locataires, loyers du mois, alertes en cours.</li>",
+        "<li>En tant que bailleur, je peux ajouter un bien immobilier (type, adresse, loyer, charges, dépôt de garantie).</li><li>En tant que bailleur, je peux consulter la liste de mes biens avec leur statut (occupé / vacant).</li><li>En tant que bailleur, je peux modifier les informations d'un bien.</li><li>En tant que bailleur, je peux supprimer un bien (et toutes ses données associées en cascade).</li><li>En tant que bailleur, une référence unique est auto-générée pour chaque bien (ex : <code>PROP-001</code>).</li>",
+        "<li>En tant que bailleur, je peux ajouter un locataire et l'associer à un bien.</li><li>En tant que bailleur, je peux consulter la liste de mes locataires avec leur statut de paiement.</li><li>En tant que bailleur, je peux rechercher un locataire par nom ou email.</li><li>En tant que bailleur, je peux modifier les informations d'un locataire.</li><li>En tant que bailleur, je peux supprimer un locataire.</li>",
+        "<li>En tant que bailleur, je peux créer un contrat de location (type vide/meublé/commercial, dates, loyer).</li><li>En tant que bailleur, je peux consulter la liste de mes contrats et leur statut (actif, expiré, archivé).</li><li>En tant que bailleur, je peux archiver un contrat actif via <code>PATCH /contracts/{id}/archive</code>.</li><li>En tant que bailleur, je suis alerté lorsqu'un contrat expire dans les 30 jours.</li><li>En tant que bailleur, je peux modifier ou supprimer un contrat.</li>",
+        "<li>En tant que bailleur, je peux enregistrer un paiement mensuel pour un locataire.</li><li>En tant que bailleur, je peux consulter l'historique des paiements par locataire ou par bien.</li><li>En tant que bailleur, je peux marquer un paiement comme « payé » en un clic via <code>PATCH /payments/{id}/mark-paid</code>.</li><li>En tant que bailleur, je peux voir les paiements en retard.</li>",
+        "<li>En tant que bailleur, je peux uploader un document et le rattacher à un bien (contrat, diagnostic, quittance, assurance).</li><li>En tant que bailleur, je peux consulter la liste de mes documents avec leur catégorie et date d'expiration.</li><li>En tant que bailleur, je peux télécharger ou supprimer un document.</li>",
+        "<li>En tant que bailleur, je peux créer une intervention de maintenance pour un bien (titre, description, priorité, coût estimé).</li><li>En tant que bailleur, je peux consulter la liste des interventions et leur avancement.</li><li>En tant que bailleur, je peux mettre à jour la progression d'une intervention via <code>PATCH /maintenances/{id}/progress</code>.</li><li>En tant que bailleur, je peux voir les interventions urgentes (priorité haute, non terminées).</li>",
+        "<li>En tant que bailleur, je peux accéder à une page de rapports pour visualiser les données financières et opérationnelles agrégées.</li>"
+      ]
     },
     "technique_architecture": {
       "h1": "Architecture technique",
       "subtitle": "Stack technologique, structure des dossiers et flux d'authentification.",
-      "h2": ["Stack","Structure des dossiers","Flux d'authentification","Contrôleurs","Principes appliqués"],
-      "ol": ["<li>L'utilisateur accède à <code>/</code> → redirection automatique vers <code>/dashboard</code></li><li>Si non authentifié → redirection vers <code>/login</code> (middleware <code>auth</code>)</li><li>Inscription via <code>/register</code> (Laravel Breeze)</li><li>Après login → accès à toutes les routes du groupe <code>auth</code></li><li>Toutes les données sont filtrées par <code>user_id</code> (isolation multi-utilisateurs)</li>"],
-      "ul": ["<li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique</li><li><strong>DRY</strong> — composants Blade réutilisables pour tous les éléments d'UI récurrents</li><li><strong>Scoped data</strong> — chaque query filtre sur <code>user_id</code> pour isoler les données par bailleur</li>"],
-      "th": ["Couche","Technologie","Contrôleur","Responsabilité"],
-      "td": ["Framework backend","Laravel 10","Langage","PHP 8.1+","Templating","Blade (composants réutilisables)","CSS","Tailwind CSS (via Vite)","JS interactivité","Alpine.js","Build tool","Vite","Authentification","Laravel Breeze","Base de données","SQLite (dev) / MySQL (prod)","<code>DashboardController</code>","Statistiques globales du tableau de bord","<code>PropertyController</code>","CRUD biens","<code>TenantController</code>","CRUD locataires","<code>ContractController</code>","CRUD contrats + archivage","<code>PaymentController</code>","CRUD paiements + mark-paid","<code>DocumentController</code>","Upload / suppression documents","<code>MaintenanceController</code>","CRUD maintenance + progression","<code>ReportController</code>","Page de rapports agrégés","<code>ProfileController</code>","Modification du profil utilisateur"]
+      "h2": [
+        "Stack",
+        "Structure des dossiers",
+        "Flux d'authentification",
+        "Contrôleurs",
+        "Principes appliqués"
+      ],
+      "ol": [
+        "<li>L'utilisateur accède à <code>/</code> → redirection automatique vers <code>/dashboard</code></li><li>Si non authentifié → redirection vers <code>/login</code> (middleware <code>auth</code>)</li><li>Inscription via <code>/register</code> (Laravel Breeze)</li><li>Après login → accès à toutes les routes du groupe <code>auth</code></li><li>Toutes les données sont filtrées par <code>user_id</code> (isolation multi-utilisateurs)</li>"
+      ],
+      "ul": [
+        "<li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique</li><li><strong>DRY</strong> — composants Blade réutilisables pour tous les éléments d'UI récurrents</li><li><strong>Scoped data</strong> — chaque query filtre sur <code>user_id</code> pour isoler les données par bailleur</li>"
+      ],
+      "th": [
+        "Couche",
+        "Technologie",
+        "Contrôleur",
+        "Responsabilité"
+      ],
+      "td": [
+        "Framework backend",
+        "Laravel 10",
+        "Langage",
+        "PHP 8.1+",
+        "Templating",
+        "Blade (composants réutilisables)",
+        "CSS",
+        "Tailwind CSS (via Vite)",
+        "JS interactivité",
+        "Alpine.js",
+        "Build tool",
+        "Vite",
+        "Authentification",
+        "Laravel Breeze",
+        "Base de données",
+        "SQLite (dev) / MySQL (prod)",
+        "<code>DashboardController</code>",
+        "Statistiques globales du tableau de bord",
+        "<code>PropertyController</code>",
+        "CRUD biens",
+        "<code>TenantController</code>",
+        "CRUD locataires",
+        "<code>ContractController</code>",
+        "CRUD contrats + archivage",
+        "<code>PaymentController</code>",
+        "CRUD paiements + mark-paid",
+        "<code>DocumentController</code>",
+        "Upload / suppression documents",
+        "<code>MaintenanceController</code>",
+        "CRUD maintenance + progression",
+        "<code>ReportController</code>",
+        "Page de rapports agrégés",
+        "<code>ProfileController</code>",
+        "Modification du profil utilisateur"
+      ]
     },
     "technique_installation": {
       "h1": "Installation",
       "subtitle": "Setup de l'application Laravel pas à pas.",
-      "h2": ["Prérequis","1. Cloner le dépôt","2. Installer les dépendances PHP","3. Configurer l'environnement","4. Créer la base de données SQLite","5. Exécuter les migrations","6. Installer les dépendances front-end","7. Compiler les assets","8. Lancer le serveur","Récapitulatif rapide"],
-      "p": ["Éditer <code>.env</code> selon votre environnement\u00a0:","L'application est accessible sur <code>http://localhost:8000</code>.","Optionnel — peupler avec des données de test\u00a0:"],
-      "ul": ["<li>PHP 8.1+</li><li>Composer</li><li>Node.js 18+ et npm</li><li>SQLite (inclus dans PHP) ou MySQL</li>"],
-      "callout": ["Cette étape est uniquement nécessaire pour SQLite. Sur MySQL, créer la base via votre interface habituelle.","Pour le développement, laissez <code>npm run dev</code> tourner dans un terminal séparé afin de bénéficier du hot module replacement (HMR) de Vite."]
+      "h2": [
+        "Prérequis",
+        "1. Cloner le dépôt",
+        "2. Installer les dépendances PHP",
+        "3. Configurer l'environnement",
+        "4. Créer la base de données SQLite",
+        "5. Exécuter les migrations",
+        "6. Installer les dépendances front-end",
+        "7. Compiler les assets",
+        "8. Lancer le serveur",
+        "Récapitulatif rapide"
+      ],
+      "p": [
+        "Éditer <code>.env</code> selon votre environnement :",
+        "L'application est accessible sur <code>http://localhost:8000</code>.",
+        "Optionnel — peupler avec des données de test :"
+      ],
+      "ul": [
+        "<li>PHP 8.1+</li><li>Composer</li><li>Node.js 18+ et npm</li><li>SQLite (inclus dans PHP) ou MySQL</li>"
+      ],
+      "callout": [
+        "Cette étape est uniquement nécessaire pour SQLite. Sur MySQL, créer la base via votre interface habituelle.",
+        "Pour le développement, laissez <code>npm run dev</code> tourner dans un terminal séparé afin de bénéficier du hot module replacement (HMR) de Vite."
+      ]
     },
     "technique_composants_blade": {
       "h1": "Composants Blade",
       "subtitle": "Tous les composants sont dans <code>projet-dynamic/resources/views/components/</code>. Ils s'utilisent avec la syntaxe <code>&lt;x-nom-du-composant /&gt;</code>.",
-      "h2": ["Composants génériques (Breeze)","Composants métier GestiLoc","Principe d'utilisation"],
-      "p": ["Ces composants proviennent de Laravel Breeze et sont utilisés dans les formulaires et l'authentification.","Ces composants ont été créés spécifiquement pour l'application, selon le principe DRY.","Les composants métier acceptent des <code>props</code> pour être configurables sans duplication. Exemples\u00a0:","Pour ajouter un composant\u00a0: créer le fichier dans <code>resources/views/components/</code>. Laravel le détecte automatiquement via la convention de nommage — aucune déclaration manuelle requise."],
-      "th": ["Composant","Fichier","Description"],
-      "td": ["<code>&lt;x-primary-button&gt;</code>","<code>primary-button.blade.php</code>","Bouton principal (action principale)","<code>&lt;x-secondary-button&gt;</code>","<code>secondary-button.blade.php</code>","Bouton secondaire","<code>&lt;x-danger-button&gt;</code>","<code>danger-button.blade.php</code>","Bouton destructif (suppression)","<code>&lt;x-text-input&gt;</code>","<code>text-input.blade.php</code>","Champ texte standard","<code>&lt;x-input-label&gt;</code>","<code>input-label.blade.php</code>","Label de formulaire","<code>&lt;x-input-error&gt;</code>","<code>input-error.blade.php</code>","Affichage des erreurs de validation","<code>&lt;x-dropdown&gt;</code>","<code>dropdown.blade.php</code>","Menu déroulant Alpine.js","<code>&lt;x-dropdown-link&gt;</code>","<code>dropdown-link.blade.php</code>","Lien dans un dropdown","<code>&lt;x-modal&gt;</code>","<code>modal.blade.php</code>","Modale Alpine.js","<code>&lt;x-nav-link&gt;</code>","<code>nav-link.blade.php</code>","Lien de navigation (actif / inactif)","<code>&lt;x-responsive-nav-link&gt;</code>","<code>responsive-nav-link.blade.php</code>","Lien nav mobile","<code>&lt;x-auth-session-status&gt;</code>","<code>auth-session-status.blade.php</code>","Message de statut session","<code>&lt;x-application-logo&gt;</code>","<code>application-logo.blade.php</code>","Logo de l'application","<code>&lt;x-navbar&gt;</code>","<code>navbar.blade.php</code>","Barre de navigation principale","<code>&lt;x-sidebar&gt;</code>","<code>sidebar.blade.php</code>","Menu latéral de navigation","<code>&lt;x-page-header&gt;</code>","<code>page-header.blade.php</code>","En-tête de page (titre + bouton d'action)","<code>&lt;x-stat-card&gt;</code>","<code>stat-card.blade.php</code>","Carte de statistique pour le dashboard","<code>&lt;x-status-badge&gt;</code>","<code>status-badge.blade.php</code>","Badge coloré pour afficher un statut","<code>&lt;x-action-buttons&gt;</code>","<code>action-buttons.blade.php</code>","Boutons d'action (éditer, supprimer)","<code>&lt;x-data-table&gt;</code>","<code>data-table.blade.php</code>","Tableau de données réutilisable","<code>&lt;x-empty-state&gt;</code>","<code>empty-state.blade.php</code>","Message quand une liste est vide","<code>&lt;x-progress-bar&gt;</code>","<code>progress-bar.blade.php</code>","Barre de progression (maintenance)","<code>&lt;x-form-section&gt;</code>","<code>form-section.blade.php</code>","Section de formulaire avec titre","<code>&lt;x-toast&gt;</code>","<code>toast.blade.php</code>","Notification flash (succès, erreur)","<code>&lt;x-property-card&gt;</code>","<code>property-card.blade.php</code>","Carte d'affichage d'un bien","<code>&lt;x-tenant-card&gt;</code>","<code>tenant-card.blade.php</code>","Carte d'affichage d'un locataire"]
+      "h2": [
+        "Composants génériques (Breeze)",
+        "Composants métier GestiLoc",
+        "Principe d'utilisation"
+      ],
+      "p": [
+        "Ces composants proviennent de Laravel Breeze et sont utilisés dans les formulaires et l'authentification.",
+        "Ces composants ont été créés spécifiquement pour l'application, selon le principe DRY.",
+        "Les composants métier acceptent des <code>props</code> pour être configurables sans duplication. Exemples :",
+        "Pour ajouter un composant : créer le fichier dans <code>resources/views/components/</code>. Laravel le détecte automatiquement via la convention de nommage — aucune déclaration manuelle requise."
+      ],
+      "th": [
+        "Composant",
+        "Fichier",
+        "Description"
+      ],
+      "td": [
+        "<code>&lt;x-primary-button&gt;</code>",
+        "<code>primary-button.blade.php</code>",
+        "Bouton principal (action principale)",
+        "<code>&lt;x-secondary-button&gt;</code>",
+        "<code>secondary-button.blade.php</code>",
+        "Bouton secondaire",
+        "<code>&lt;x-danger-button&gt;</code>",
+        "<code>danger-button.blade.php</code>",
+        "Bouton destructif (suppression)",
+        "<code>&lt;x-text-input&gt;</code>",
+        "<code>text-input.blade.php</code>",
+        "Champ texte standard",
+        "<code>&lt;x-input-label&gt;</code>",
+        "<code>input-label.blade.php</code>",
+        "Label de formulaire",
+        "<code>&lt;x-input-error&gt;</code>",
+        "<code>input-error.blade.php</code>",
+        "Affichage des erreurs de validation",
+        "<code>&lt;x-dropdown&gt;</code>",
+        "<code>dropdown.blade.php</code>",
+        "Menu déroulant Alpine.js",
+        "<code>&lt;x-dropdown-link&gt;</code>",
+        "<code>dropdown-link.blade.php</code>",
+        "Lien dans un dropdown",
+        "<code>&lt;x-modal&gt;</code>",
+        "<code>modal.blade.php</code>",
+        "Modale Alpine.js",
+        "<code>&lt;x-nav-link&gt;</code>",
+        "<code>nav-link.blade.php</code>",
+        "Lien de navigation (actif / inactif)",
+        "<code>&lt;x-responsive-nav-link&gt;</code>",
+        "<code>responsive-nav-link.blade.php</code>",
+        "Lien nav mobile",
+        "<code>&lt;x-auth-session-status&gt;</code>",
+        "<code>auth-session-status.blade.php</code>",
+        "Message de statut session",
+        "<code>&lt;x-application-logo&gt;</code>",
+        "<code>application-logo.blade.php</code>",
+        "Logo de l'application",
+        "<code>&lt;x-navbar&gt;</code>",
+        "<code>navbar.blade.php</code>",
+        "Barre de navigation principale",
+        "<code>&lt;x-sidebar&gt;</code>",
+        "<code>sidebar.blade.php</code>",
+        "Menu latéral de navigation",
+        "<code>&lt;x-page-header&gt;</code>",
+        "<code>page-header.blade.php</code>",
+        "En-tête de page (titre + bouton d'action)",
+        "<code>&lt;x-stat-card&gt;</code>",
+        "<code>stat-card.blade.php</code>",
+        "Carte de statistique pour le dashboard",
+        "<code>&lt;x-status-badge&gt;</code>",
+        "<code>status-badge.blade.php</code>",
+        "Badge coloré pour afficher un statut",
+        "<code>&lt;x-action-buttons&gt;</code>",
+        "<code>action-buttons.blade.php</code>",
+        "Boutons d'action (éditer, supprimer)",
+        "<code>&lt;x-data-table&gt;</code>",
+        "<code>data-table.blade.php</code>",
+        "Tableau de données réutilisable",
+        "<code>&lt;x-empty-state&gt;</code>",
+        "<code>empty-state.blade.php</code>",
+        "Message quand une liste est vide",
+        "<code>&lt;x-progress-bar&gt;</code>",
+        "<code>progress-bar.blade.php</code>",
+        "Barre de progression (maintenance)",
+        "<code>&lt;x-form-section&gt;</code>",
+        "<code>form-section.blade.php</code>",
+        "Section de formulaire avec titre",
+        "<code>&lt;x-toast&gt;</code>",
+        "<code>toast.blade.php</code>",
+        "Notification flash (succès, erreur)",
+        "<code>&lt;x-property-card&gt;</code>",
+        "<code>property-card.blade.php</code>",
+        "Carte d'affichage d'un bien",
+        "<code>&lt;x-tenant-card&gt;</code>",
+        "<code>tenant-card.blade.php</code>",
+        "Carte d'affichage d'un locataire"
+      ]
     },
     "technique_poc_vs_dynamic": {
       "h1": "POC vs Projet Dynamic",
       "subtitle": "Comparaison entre le prototype statique (<code>poc/</code>) et l'application Laravel (<code>projet-dynamic/</code>).",
-      "h2": ["Vue d'ensemble","Objectif du POC","Ce que le projet dynamic ajoute","Correspondance des modules"],
-      "p": ["Le dossier <code>poc/</code> est une maquette haute-fidélité destinée à\u00a0:"],
-      "ul": ["<li>Valider l'interface et la navigation avant le développement</li><li>Présenter le projet sans infrastructure back-end</li><li>Servir de référence visuelle pendant le développement</li>"],
-      "ol": ["<li><strong>Persistance</strong> — les données survivent au rechargement de page</li><li><strong>Authentification</strong> — chaque bailleur a ses propres données cloisonnées</li><li><strong>Validation serveur</strong> — les formulaires sont validés côté Laravel</li><li><strong>Actions métier</strong> — mark-paid, archivage contrat, progression maintenance</li><li><strong>Composants réutilisables</strong> — zéro duplication HTML grâce aux composants Blade</li><li><strong>Rapports</strong> — agrégation de données réelles</li><li><strong>Upload de fichiers</strong> — stockage des documents sur le serveur</li>"],
-      "th": ["Critère","<code>poc/</code>","<code>projet-dynamic/</code>","Module","POC","Projet dynamic"],
-      "td": ["Type","Prototype statique","Application Laravel complète","Données","Fictives / codées en dur","Persistées en base de données","Authentification","Aucune","Laravel Breeze (email + mot de passe)","Backend","Aucun","Laravel 10 / PHP 8.1","Templating","HTML brut","Blade + composants réutilisables","CSS","Tailwind CDN","Tailwind compilé via Vite","JS","Alpine.js CDN","Alpine.js via npm","Multi-utilisateurs","Non","Oui (isolation par <code>user_id</code>)","CRUD réel","Non","Oui (tous les modules)","Dashboard","Page statique avec chiffres fictifs","<code>DashboardController</code> + données réelles","Propriétés","Liste HTML fixe","CRUD complet + référence auto-générée","Locataires","Liste HTML fixe","CRUD + recherche + statut de paiement","Contrats","Affiché statiquement","CRUD + archivage + alertes expiration 30j","Paiements","Tableau statique","CRUD + mark-paid + filtres par période","Documents","Liste statique","Upload réel + téléchargement + catégories","Maintenance","Liste statique","CRUD + barre de progression + suivi des coûts"]
+      "h2": [
+        "Vue d'ensemble",
+        "Objectif du POC",
+        "Ce que le projet dynamic ajoute",
+        "Correspondance des modules"
+      ],
+      "p": [
+        "Le dossier <code>poc/</code> est une maquette haute-fidélité destinée à :"
+      ],
+      "ul": [
+        "<li>Valider l'interface et la navigation avant le développement</li><li>Présenter le projet sans infrastructure back-end</li><li>Servir de référence visuelle pendant le développement</li>"
+      ],
+      "ol": [
+        "<li><strong>Persistance</strong> — les données survivent au rechargement de page</li><li><strong>Authentification</strong> — chaque bailleur a ses propres données cloisonnées</li><li><strong>Validation serveur</strong> — les formulaires sont validés côté Laravel</li><li><strong>Actions métier</strong> — mark-paid, archivage contrat, progression maintenance</li><li><strong>Composants réutilisables</strong> — zéro duplication HTML grâce aux composants Blade</li><li><strong>Rapports</strong> — agrégation de données réelles</li><li><strong>Upload de fichiers</strong> — stockage des documents sur le serveur</li>"
+      ],
+      "th": [
+        "Critère",
+        "<code>poc/</code>",
+        "<code>projet-dynamic/</code>",
+        "Module",
+        "POC",
+        "Projet dynamic"
+      ],
+      "td": [
+        "Type",
+        "Prototype statique",
+        "Application Laravel complète",
+        "Données",
+        "Fictives / codées en dur",
+        "Persistées en base de données",
+        "Authentification",
+        "Aucune",
+        "Laravel Breeze (email + mot de passe)",
+        "Backend",
+        "Aucun",
+        "Laravel 10 / PHP 8.1",
+        "Templating",
+        "HTML brut",
+        "Blade + composants réutilisables",
+        "CSS",
+        "Tailwind CDN",
+        "Tailwind compilé via Vite",
+        "JS",
+        "Alpine.js CDN",
+        "Alpine.js via npm",
+        "Multi-utilisateurs",
+        "Non",
+        "Oui (isolation par <code>user_id</code>)",
+        "CRUD réel",
+        "Non",
+        "Oui (tous les modules)",
+        "Dashboard",
+        "Page statique avec chiffres fictifs",
+        "<code>DashboardController</code> + données réelles",
+        "Propriétés",
+        "Liste HTML fixe",
+        "CRUD complet + référence auto-générée",
+        "Locataires",
+        "Liste HTML fixe",
+        "CRUD + recherche + statut de paiement",
+        "Contrats",
+        "Affiché statiquement",
+        "CRUD + archivage + alertes expiration 30j",
+        "Paiements",
+        "Tableau statique",
+        "CRUD + mark-paid + filtres par période",
+        "Documents",
+        "Liste statique",
+        "Upload réel + téléchargement + catégories",
+        "Maintenance",
+        "Liste statique",
+        "CRUD + barre de progression + suivi des coûts"
+      ]
     }
   },
   "en": {
     "nav": {
       "home": "Home",
-      "user_guide": "User Guide",
       "ug_start": "Getting Started",
       "ug_dashboard": "Dashboard",
       "ug_properties": "My Properties",
@@ -184,7 +912,6 @@
       "ug_payments": "Payments",
       "ug_documents": "Documents",
       "ug_maintenance": "Maintenance",
-      "functional": "Functional",
       "fn_overview": "Business Overview",
       "fn_user_stories": "User Stories",
       "fn_modules": "Modules",
@@ -194,12 +921,14 @@
       "fn_payments": "Payments",
       "fn_documents": "Documents",
       "fn_maintenance": "Maintenance",
-      "technical": "Technical",
       "tc_architecture": "Architecture",
       "tc_database": "Database",
       "tc_installation": "Installation",
       "tc_blade": "Blade Components",
-      "tc_poc": "POC vs Dynamic"
+      "tc_poc": "POC vs Dynamic",
+      "ug": "User Guide",
+      "fn": "Functional",
+      "tc": "Technical"
     },
     "ui": {
       "breadcrumb_docs": "Docs",
@@ -209,140 +938,871 @@
     "index": {
       "h1": "GestiLoc — Documentation",
       "subtitle": "Technical and functional documentation for the rental management project.",
-      "h2": ["Project Structure", "User Guide", "Functional Documentation", "Technical Documentation"],
-      "h3": ["Modules"],
-      "th": ["Folder", "Description"],
-      "td": ["<code>poc/</code>", "Static HTML/CSS/JS prototype (functional mockup)", "<code>projet-dynamic/</code>", "Dynamic Laravel application", "<code>docs/</code>", "Technical and functional documentation"],
-      "card_label": ["User Guide","User Guide","User Guide","User Guide","User Guide","User Guide","User Guide","User Guide","Functional","Functional","Module","Module","Module","Module","Module","Module","Technical","Technical","Technical","Technical","Technical"],
-      "card_title": ["Getting Started","Dashboard","My Properties","My Tenants","My Contracts","Payments","Documents","Maintenance","Business Overview","User Stories","Properties","Tenants","Contracts","Payments","Documents","Maintenance","Architecture","Database","Installation","Blade Components","POC vs Dynamic"],
-      "card_desc": ["Create an account, log in, edit your profile.","Understand the metrics and automatic alerts.","Add, edit and manage your property portfolio.","Manage your tenants and track their payment status.","Create leases, manage deadlines and archive.","Record rent payments and mark received payments.","Upload and retrieve your files (leases, reports, insurance…).","Plan and track your maintenance tasks and repairs.","Presentation of GestiLoc, available modules and user roles.","Use cases by module, based on Laravel routes and controllers.","Property portfolio management, types, statuses and auto-generated references.","Tenant management, payment statuses and search.","Rental leases, archiving and expiration alerts.","Monthly rent tracking and payment marking.","File upload and management linked to properties.","Maintenance tracking, priorities, costs and progress.","Tech stack, folder structure and authentication flow.","Schema for the 6 business tables and Eloquent relationships.","Step-by-step Laravel setup: clone, .env, migrate, serve.","List and description of the 26 reusable components.","Differences between the static prototype and the Laravel application."]
+      "h2": [
+        "Project Structure",
+        "User Guide",
+        "Functional Documentation",
+        "Technical Documentation"
+      ],
+      "h3": [
+        "Modules"
+      ],
+      "th": [
+        "Folder",
+        "Description"
+      ],
+      "td": [
+        "<code>poc/</code>",
+        "Static HTML/CSS/JS prototype (functional mockup)",
+        "<code>projet-dynamic/</code>",
+        "Dynamic Laravel application",
+        "<code>docs/</code>",
+        "Technical and functional documentation"
+      ],
+      "card_label": [
+        "User Guide",
+        "User Guide",
+        "User Guide",
+        "User Guide",
+        "User Guide",
+        "User Guide",
+        "User Guide",
+        "User Guide",
+        "Functional",
+        "Functional",
+        "Module",
+        "Module",
+        "Module",
+        "Module",
+        "Module",
+        "Module",
+        "Technical",
+        "Technical",
+        "Technical",
+        "Technical",
+        "Technical"
+      ],
+      "card_title": [
+        "Getting Started",
+        "Dashboard",
+        "My Properties",
+        "My Tenants",
+        "My Contracts",
+        "Payments",
+        "Documents",
+        "Maintenance",
+        "Business Overview",
+        "User Stories",
+        "Properties",
+        "Tenants",
+        "Contracts",
+        "Payments",
+        "Documents",
+        "Maintenance",
+        "Architecture",
+        "Database",
+        "Installation",
+        "Blade Components",
+        "POC vs Dynamic"
+      ],
+      "card_desc": [
+        "Create an account, log in, edit your profile.",
+        "Understand the metrics and automatic alerts.",
+        "Add, edit and manage your property portfolio.",
+        "Manage your tenants and track their payment status.",
+        "Create leases, manage deadlines and archive.",
+        "Record rent payments and mark received payments.",
+        "Upload and retrieve your files (leases, reports, insurance…).",
+        "Plan and track your maintenance tasks and repairs.",
+        "Presentation of GestiLoc, available modules and user roles.",
+        "Use cases by module, based on Laravel routes and controllers.",
+        "Property portfolio management, types, statuses and auto-generated references.",
+        "Tenant management, payment statuses and search.",
+        "Rental leases, archiving and expiration alerts.",
+        "Monthly rent tracking and payment marking.",
+        "File upload and management linked to properties.",
+        "Maintenance tracking, priorities, costs and progress.",
+        "Tech stack, folder structure and authentication flow.",
+        "Schema for the 6 business tables and Eloquent relationships.",
+        "Step-by-step Laravel setup: clone, .env, migrate, serve.",
+        "List and description of the 26 reusable components.",
+        "Differences between the static prototype and the Laravel application."
+      ]
     },
     "utilisateur_demarrage": {
       "h1": "Getting Started",
       "subtitle": "Create your account, log in and configure your profile.",
-      "h2": ["Create an Account","Log In","Log Out","Edit Your Profile","Delete Your Account","Next Step"],
-      "p": ["If you don't have an account yet, go to the registration page accessible from the login page.","If you forgot your password, use the <strong>Forgot password?</strong> link on the login page.","Click your name in the top-right navigation, then click <strong>Log out</strong>.","To change your name, email address or password:","This option is at the bottom of the <strong>Profile</strong> page, in the <em>Delete account</em> section. A password confirmation is required.","Once logged in, start by adding your properties. See the <a href=\"proprietes.html\">My Properties</a> section for details."],
-      "ol": ["<li>Click <strong>Register</strong> from the login page.</li><li>Enter your name, email address and a password.</li><li>Click <strong>Register</strong> to confirm.</li><li>You are automatically logged in and redirected to the dashboard.</li>","<li>Open the application in your browser.</li><li>Enter your email address and password.</li><li>Click <strong>Log in</strong>.</li>","<li>Click your name in the top-right corner.</li><li>Select <strong>Profile</strong>.</li><li>Update the desired information.</li><li>Click <strong>Save</strong>.</li>"],
-      "callout": ["Each account is independent: your properties, tenants and data are only visible to you. Multiple landlords can use the same application without seeing each other's data.","Deleting your account is permanent. All your data (properties, tenants, contracts, payments, documents, maintenance records) will be erased with no possibility of recovery."]
+      "h2": [
+        "Create an Account",
+        "Log In",
+        "Log Out",
+        "Edit Your Profile",
+        "Delete Your Account",
+        "Next Step"
+      ],
+      "p": [
+        "If you don't have an account yet, go to the registration page accessible from the login page.",
+        "If you forgot your password, use the <strong>Forgot password?</strong> link on the login page.",
+        "Click your name in the top-right navigation, then click <strong>Log out</strong>.",
+        "To change your name, email address or password:",
+        "This option is at the bottom of the <strong>Profile</strong> page, in the <em>Delete account</em> section. A password confirmation is required.",
+        "Once logged in, start by adding your properties. See the <a href=\"proprietes.html\">My Properties</a> section for details."
+      ],
+      "ol": [
+        "<li>Click <strong>Register</strong> from the login page.</li><li>Enter your name, email address and a password.</li><li>Click <strong>Register</strong> to confirm.</li><li>You are automatically logged in and redirected to the dashboard.</li>",
+        "<li>Open the application in your browser.</li><li>Enter your email address and password.</li><li>Click <strong>Log in</strong>.</li>",
+        "<li>Click your name in the top-right corner.</li><li>Select <strong>Profile</strong>.</li><li>Update the desired information.</li><li>Click <strong>Save</strong>.</li>"
+      ],
+      "callout": [
+        "Each account is independent: your properties, tenants and data are only visible to you. Multiple landlords can use the same application without seeing each other's data.",
+        "Deleting your account is permanent. All your data (properties, tenants, contracts, payments, documents, maintenance records) will be erased with no possibility of recovery."
+      ]
     },
     "utilisateur_tableau_de_bord": {
       "h1": "Dashboard",
       "subtitle": "An overview of your rental portfolio at a glance.",
-      "h2": ["What You See","Stat Cards","Alerts","Quick Navigation"],
-      "p": ["The dashboard is the first page you see after logging in. It summarizes the current state of your rental portfolio.","At the top of the dashboard, four key metrics are displayed:","The dashboard automatically flags situations requiring your attention:","From the dashboard, you can navigate directly to any module via the sidebar or the links in the alert cards."],
-      "ul": ["<li><strong>Expiring contracts</strong> — contracts whose end date is within 30 days.</li><li><strong>Overdue payments</strong> — rent payments with an \"overdue\" status.</li><li><strong>Urgent maintenance</strong> — high-priority maintenance tasks not yet completed.</li>"],
-      "callout": ["Check the dashboard at the start of each month to quickly identify uncollected rent and plan your follow-up actions."],
-      "th": ["Metric", "What it measures"],
-      "td": ["<strong>Properties</strong>","Total number of registered properties, including occupied and vacant counts.","<strong>Tenants</strong>","Total number of active tenants.","<strong>Monthly Rent</strong>","Total rent expected for the current month, and the portion already collected.","<strong>Overdue Payments</strong>","Number of overdue rent payments past their due date."]
+      "h2": [
+        "What You See",
+        "Stat Cards",
+        "Alerts",
+        "Quick Navigation"
+      ],
+      "p": [
+        "The dashboard is the first page you see after logging in. It summarizes the current state of your rental portfolio.",
+        "At the top of the dashboard, four key metrics are displayed:",
+        "The dashboard automatically flags situations requiring your attention:",
+        "From the dashboard, you can navigate directly to any module via the sidebar or the links in the alert cards."
+      ],
+      "ul": [
+        "<li><strong>Expiring contracts</strong> — contracts whose end date is within 30 days.</li><li><strong>Overdue payments</strong> — rent payments with an \"overdue\" status.</li><li><strong>Urgent maintenance</strong> — high-priority maintenance tasks not yet completed.</li>"
+      ],
+      "callout": [
+        "Check the dashboard at the start of each month to quickly identify uncollected rent and plan your follow-up actions."
+      ],
+      "th": [
+        "Metric",
+        "What it measures"
+      ],
+      "td": [
+        "<strong>Properties</strong>",
+        "Total number of registered properties, including occupied and vacant counts.",
+        "<strong>Tenants</strong>",
+        "Total number of active tenants.",
+        "<strong>Monthly Rent</strong>",
+        "Total rent expected for the current month, and the portion already collected.",
+        "<strong>Overdue Payments</strong>",
+        "Number of overdue rent payments past their due date."
+      ]
     },
     "utilisateur_proprietes": {
       "h1": "My Properties",
       "subtitle": "Add, view and manage your property portfolio.",
-      "h2": ["Add a Property","View Your Property List","Edit a Property","Delete a Property","Property Status","Next Step"],
-      "p": ["The <strong>Properties</strong> page displays all your properties with their reference, address, type, monthly rent and status (occupied / vacant).","The status is automatically updated based on active contracts associated with the property.","Once your properties are added, add your tenants. See the <a href=\"locataires.html\">My Tenants</a> section."],
-      "ol": ["<li>Click <strong>Properties</strong> in the sidebar.</li><li>Click the <strong>Add a property</strong> button.</li><li>Fill in the form:</li>","<li>Click <strong>Save</strong>.</li>","<li>In the property list, click the <strong>Edit</strong> button next to the property.</li><li>Update the information.</li><li>Click <strong>Save</strong>.</li>","<li>In the property list, click <strong>Delete</strong>.</li><li>Confirm the deletion in the dialog that appears.</li>"],
-      "ul": ["<li><strong>Occupied</strong> — a tenant is currently renting.</li><li><strong>Vacant</strong> — the property is available for rent.</li>"],
-      "callout": ["A unique reference is automatically assigned to each property (e.g., <strong>PROP-001</strong>). You don't need to enter it manually.","Deleting a property also deletes all associated data: linked tenants, contracts, payments, documents and maintenance records. This action cannot be undone."],
-      "th": ["Field","Description","Required"],
-      "td": ["<strong>Name</strong>","Property label (e.g., \"Paris 11th apartment\")","Yes","<strong>Type</strong>","Apartment, house, studio, commercial or other","Yes","<strong>Address</strong>","Full address of the property","Yes","<strong>City</strong>","City","Yes","<strong>Postal Code</strong>","Postal code","No","<strong>Area</strong>","Floor area in m²","No","<strong>Monthly Rent</strong>","Rent amount excluding charges","Yes","<strong>Charges</strong>","Monthly utility charges","No (default: 0)","<strong>Security Deposit</strong>","Security deposit amount","No (default: 0)","<strong>Description</strong>","Free notes about the property","No"]
+      "h2": [
+        "Add a Property",
+        "View Your Property List",
+        "Edit a Property",
+        "Delete a Property",
+        "Property Status",
+        "Next Step"
+      ],
+      "p": [
+        "The <strong>Properties</strong> page displays all your properties with their reference, address, type, monthly rent and status (occupied / vacant).",
+        "The status is automatically updated based on active contracts associated with the property.",
+        "Once your properties are added, add your tenants. See the <a href=\"locataires.html\">My Tenants</a> section."
+      ],
+      "ol": [
+        "<li>Click <strong>Properties</strong> in the sidebar.</li><li>Click the <strong>Add a property</strong> button.</li><li>Fill in the form:</li>",
+        "<li>Click <strong>Save</strong>.</li>",
+        "<li>In the property list, click the <strong>Edit</strong> button next to the property.</li><li>Update the information.</li><li>Click <strong>Save</strong>.</li>",
+        "<li>In the property list, click <strong>Delete</strong>.</li><li>Confirm the deletion in the dialog that appears.</li>"
+      ],
+      "ul": [
+        "<li><strong>Occupied</strong> — a tenant is currently renting.</li><li><strong>Vacant</strong> — the property is available for rent.</li>"
+      ],
+      "callout": [
+        "A unique reference is automatically assigned to each property (e.g., <strong>PROP-001</strong>). You don't need to enter it manually.",
+        "Deleting a property also deletes all associated data: linked tenants, contracts, payments, documents and maintenance records. This action cannot be undone."
+      ],
+      "th": [
+        "Field",
+        "Description",
+        "Required"
+      ],
+      "td": [
+        "<strong>Name</strong>",
+        "Property label (e.g., \"Paris 11th apartment\")",
+        "Yes",
+        "<strong>Type</strong>",
+        "Apartment, house, studio, commercial or other",
+        "Yes",
+        "<strong>Address</strong>",
+        "Full address of the property",
+        "Yes",
+        "<strong>City</strong>",
+        "City",
+        "Yes",
+        "<strong>Postal Code</strong>",
+        "Postal code",
+        "No",
+        "<strong>Area</strong>",
+        "Floor area in m²",
+        "No",
+        "<strong>Monthly Rent</strong>",
+        "Rent amount excluding charges",
+        "Yes",
+        "<strong>Charges</strong>",
+        "Monthly utility charges",
+        "No (default: 0)",
+        "<strong>Security Deposit</strong>",
+        "Security deposit amount",
+        "No (default: 0)",
+        "<strong>Description</strong>",
+        "Free notes about the property",
+        "No"
+      ]
     },
     "utilisateur_locataires": {
       "h1": "My Tenants",
       "subtitle": "Add and manage your tenants, track their payment status.",
-      "h2": ["Add a Tenant","Understanding Payment Statuses","Search for a Tenant","Edit a Tenant","Delete a Tenant","Next Step"],
-      "p": ["The search bar at the top of the list filters tenants by first name, last name or email address. Results update in real time.","Once your tenants are added, create the rental contracts. See the <a href=\"contrats.html\">My Contracts</a> section.","A tenant's payment status is updated via the <a href=\"paiements.html\">Payments</a> module when you mark a rent payment as paid."],
-      "ol": ["<li>Click <strong>Tenants</strong> in the sidebar.</li><li>Click <strong>Add a tenant</strong>.</li><li>Fill in the form:</li>","<li>Click <strong>Save</strong>.</li>","<li>In the list, click <strong>Edit</strong> next to the tenant.</li><li>Update the information.</li><li>Click <strong>Save</strong>.</li>","<li>Click <strong>Delete</strong> in the list.</li><li>Confirm the deletion.</li>"],
-      "callout": ["Deleting a tenant also deletes all their associated payments and contracts."],
-      "th": ["Field","Description","Required","Status","Meaning"],
-      "td": ["<strong>First Name</strong>","Tenant's first name","Yes","<strong>Last Name</strong>","Last name","Yes","<strong>Email</strong>","Contact email address","No","<strong>Phone</strong>","Phone number","No","<strong>Associated Property</strong>","Property occupied by this tenant","No","<strong>Monthly Rent</strong>","Tenant's rent amount","No","<strong>Lease Start Date</strong>","Move-in date","No","<strong>Paid</strong>","The current month's rent has been collected.","<strong>Pending</strong>","The payment has not yet been received for this month.","<strong>Overdue</strong>","The payment was due but has not been collected after the deadline."]
+      "h2": [
+        "Add a Tenant",
+        "Understanding Payment Statuses",
+        "Search for a Tenant",
+        "Edit a Tenant",
+        "Delete a Tenant",
+        "Next Step"
+      ],
+      "p": [
+        "The search bar at the top of the list filters tenants by first name, last name or email address. Results update in real time.",
+        "Once your tenants are added, create the rental contracts. See the <a href=\"contrats.html\">My Contracts</a> section.",
+        "A tenant's payment status is updated via the <a href=\"paiements.html\">Payments</a> module when you mark a rent payment as paid."
+      ],
+      "ol": [
+        "<li>Click <strong>Tenants</strong> in the sidebar.</li><li>Click <strong>Add a tenant</strong>.</li><li>Fill in the form:</li>",
+        "<li>Click <strong>Save</strong>.</li>",
+        "<li>In the list, click <strong>Edit</strong> next to the tenant.</li><li>Update the information.</li><li>Click <strong>Save</strong>.</li>",
+        "<li>Click <strong>Delete</strong> in the list.</li><li>Confirm the deletion.</li>"
+      ],
+      "callout": [
+        "Deleting a tenant also deletes all their associated payments and contracts."
+      ],
+      "th": [
+        "Field",
+        "Description",
+        "Required",
+        "Status",
+        "Meaning"
+      ],
+      "td": [
+        "<strong>First Name</strong>",
+        "Tenant's first name",
+        "Yes",
+        "<strong>Last Name</strong>",
+        "Last name",
+        "Yes",
+        "<strong>Email</strong>",
+        "Contact email address",
+        "No",
+        "<strong>Phone</strong>",
+        "Phone number",
+        "No",
+        "<strong>Associated Property</strong>",
+        "Property occupied by this tenant",
+        "No",
+        "<strong>Monthly Rent</strong>",
+        "Tenant's rent amount",
+        "No",
+        "<strong>Lease Start Date</strong>",
+        "Move-in date",
+        "No",
+        "<strong>Paid</strong>",
+        "The current month's rent has been collected.",
+        "<strong>Pending</strong>",
+        "The payment has not yet been received for this month.",
+        "<strong>Overdue</strong>",
+        "The payment was due but has not been collected after the deadline."
+      ]
     },
     "utilisateur_contrats": {
       "h1": "My Contracts",
       "subtitle": "Create and manage your rental leases, archive completed contracts.",
-      "h2": ["Create a Contract","Contract Statuses","Archive a Contract","Expiration Alert","Edit or Delete a Contract"],
-      "p": ["Before creating a contract, make sure you have already added the property and tenant concerned.","GestiLoc automatically alerts you on the dashboard when a contract expires within <strong>30 days</strong>. Remember to renew or archive these contracts in time.","Archived contracts remain accessible via the <strong>Archived</strong> filter at the top of the contract list."],
-      "ol": ["<li>Click <strong>Contracts</strong> in the sidebar.</li><li>Click <strong>New contract</strong>.</li><li>Fill in the form:</li>","<li>Click <strong>Save</strong>.</li>","<li>In the contract list, click <strong>Archive</strong> on the relevant contract.</li><li>The contract status changes to <strong>Archived</strong> and it no longer appears in the main list.</li>"],
-      "ul": ["<li><strong>Edit</strong> — click the <strong>Edit</strong> button in the list to correct the information of an active contract.</li><li><strong>Delete</strong> — permanently deletes the contract. Prefer archiving to keep the history.</li>"],
-      "th": ["Field","Description","Required","Status","Meaning"],
-      "td": ["<strong>Tenant</strong>","Tenant concerned by this lease","Yes","<strong>Property</strong>","Property subject to the lease","Yes","<strong>Lease Type</strong>","Unfurnished, furnished or commercial","Yes","<strong>Start Date</strong>","Move-in date","Yes","<strong>End Date</strong>","Lease expiration date (leave empty for open-ended lease)","No","<strong>Monthly Rent</strong>","Rent amount excluding charges","Yes","<strong>Charges</strong>","Monthly charges","No","<strong>Security Deposit</strong>","Security deposit paid","No","<strong>Active</strong>","The lease is ongoing. The tenant occupies the property.","<strong>Expired</strong>","The end date has passed but the contract has not been archived.","<strong>Archived</strong>","The lease is over and filed in the archive."]
+      "h2": [
+        "Create a Contract",
+        "Contract Statuses",
+        "Archive a Contract",
+        "Expiration Alert",
+        "Edit or Delete a Contract"
+      ],
+      "p": [
+        "Before creating a contract, make sure you have already added the property and tenant concerned.",
+        "GestiLoc automatically alerts you on the dashboard when a contract expires within <strong>30 days</strong>. Remember to renew or archive these contracts in time.",
+        "Archived contracts remain accessible via the <strong>Archived</strong> filter at the top of the contract list."
+      ],
+      "ol": [
+        "<li>Click <strong>Contracts</strong> in the sidebar.</li><li>Click <strong>New contract</strong>.</li><li>Fill in the form:</li>",
+        "<li>Click <strong>Save</strong>.</li>",
+        "<li>In the contract list, click <strong>Archive</strong> on the relevant contract.</li><li>The contract status changes to <strong>Archived</strong> and it no longer appears in the main list.</li>"
+      ],
+      "ul": [
+        "<li><strong>Edit</strong> — click the <strong>Edit</strong> button in the list to correct the information of an active contract.</li><li><strong>Delete</strong> — permanently deletes the contract. Prefer archiving to keep the history.</li>"
+      ],
+      "th": [
+        "Field",
+        "Description",
+        "Required",
+        "Status",
+        "Meaning"
+      ],
+      "td": [
+        "<strong>Tenant</strong>",
+        "Tenant concerned by this lease",
+        "Yes",
+        "<strong>Property</strong>",
+        "Property subject to the lease",
+        "Yes",
+        "<strong>Lease Type</strong>",
+        "Unfurnished, furnished or commercial",
+        "Yes",
+        "<strong>Start Date</strong>",
+        "Move-in date",
+        "Yes",
+        "<strong>End Date</strong>",
+        "Lease expiration date (leave empty for open-ended lease)",
+        "No",
+        "<strong>Monthly Rent</strong>",
+        "Rent amount excluding charges",
+        "Yes",
+        "<strong>Charges</strong>",
+        "Monthly charges",
+        "No",
+        "<strong>Security Deposit</strong>",
+        "Security deposit paid",
+        "No",
+        "<strong>Active</strong>",
+        "The lease is ongoing. The tenant occupies the property.",
+        "<strong>Expired</strong>",
+        "The end date has passed but the contract has not been archived.",
+        "<strong>Archived</strong>",
+        "The lease is over and filed in the archive."
+      ]
     },
     "utilisateur_paiements": {
       "h1": "Payments",
       "subtitle": "Record monthly rent payments and track collections.",
-      "h2": ["Record a Payment","Mark a Payment as Paid","Payment Statuses","Recommended Monthly Workflow","Filter Payments"],
-      "p": ["When you receive a rent payment, you can validate it quickly without opening the edit form:","The payment list can be filtered by status, tenant or period (month / year) using the filters at the top of the page.","Use this button each month when you receive bank transfers. It's faster than opening the full edit form."],
-      "ol": ["<li>Click <strong>Payments</strong> in the sidebar.</li><li>Click <strong>New payment</strong>.</li><li>Fill in the form:</li>","<li>Click <strong>Save</strong>.</li>","<li>In the payment list, find the relevant payment (status: <strong>Pending</strong>).</li><li>Click the <strong>Mark as paid</strong> button.</li><li>The status changes to <strong>Paid</strong> and today's date is recorded automatically.</li>","<li>At the start of the month, create a <strong>Pending</strong> payment for each tenant.</li><li>When you receive each bank transfer, click <strong>Mark as paid</strong>.</li><li>Mid-month, check the dashboard to identify still-pending payments and set them to <strong>Overdue</strong> if needed.</li>"],
-      "th": ["Field","Description","Required","Status","Meaning"],
-      "td": ["<strong>Tenant</strong>","Tenant concerned","Yes","<strong>Property</strong>","Property concerned","Yes","<strong>Amount</strong>","Rent amount to collect","Yes","<strong>Month</strong>","Month concerned (1 to 12)","Yes","<strong>Year</strong>","Year concerned","Yes","<strong>Payment Date</strong>","Effective date of payment (if already received)","No","<strong>Status</strong>","Pending, paid or overdue","Yes","<strong>Pending</strong>","Rent expected but not yet collected.","<strong>Paid</strong>","Rent received. Payment date is recorded.","<strong>Overdue</strong>","Rent not collected after the expected due date."]
+      "h2": [
+        "Record a Payment",
+        "Mark a Payment as Paid",
+        "Payment Statuses",
+        "Recommended Monthly Workflow",
+        "Filter Payments"
+      ],
+      "p": [
+        "When you receive a rent payment, you can validate it quickly without opening the edit form:",
+        "The payment list can be filtered by status, tenant or period (month / year) using the filters at the top of the page.",
+        "Use this button each month when you receive bank transfers. It's faster than opening the full edit form."
+      ],
+      "ol": [
+        "<li>Click <strong>Payments</strong> in the sidebar.</li><li>Click <strong>New payment</strong>.</li><li>Fill in the form:</li>",
+        "<li>Click <strong>Save</strong>.</li>",
+        "<li>In the payment list, find the relevant payment (status: <strong>Pending</strong>).</li><li>Click the <strong>Mark as paid</strong> button.</li><li>The status changes to <strong>Paid</strong> and today's date is recorded automatically.</li>",
+        "<li>At the start of the month, create a <strong>Pending</strong> payment for each tenant.</li><li>When you receive each bank transfer, click <strong>Mark as paid</strong>.</li><li>Mid-month, check the dashboard to identify still-pending payments and set them to <strong>Overdue</strong> if needed.</li>"
+      ],
+      "th": [
+        "Field",
+        "Description",
+        "Required",
+        "Status",
+        "Meaning"
+      ],
+      "td": [
+        "<strong>Tenant</strong>",
+        "Tenant concerned",
+        "Yes",
+        "<strong>Property</strong>",
+        "Property concerned",
+        "Yes",
+        "<strong>Amount</strong>",
+        "Rent amount to collect",
+        "Yes",
+        "<strong>Month</strong>",
+        "Month concerned (1 to 12)",
+        "Yes",
+        "<strong>Year</strong>",
+        "Year concerned",
+        "Yes",
+        "<strong>Payment Date</strong>",
+        "Effective date of payment (if already received)",
+        "No",
+        "<strong>Status</strong>",
+        "Pending, paid or overdue",
+        "Yes",
+        "<strong>Pending</strong>",
+        "Rent expected but not yet collected.",
+        "<strong>Paid</strong>",
+        "Rent received. Payment date is recorded.",
+        "<strong>Overdue</strong>",
+        "Rent not collected after the expected due date."
+      ]
     },
     "utilisateur_documents": {
       "h1": "Documents",
       "subtitle": "Centralise and retrieve all files related to your properties.",
-      "h2": ["What Is This Module For?","Upload a Document","Document Categories","Download a Document","Delete a Document","Best Practice: Compliance Reports"],
-      "p": ["The Documents module lets you store all files related to your landlord activity online: signed lease agreements, mandatory compliance reports (EPC, electrical…), rent receipts, insurance certificates, and any other useful documents.","In the document list, click the name or the <strong>Download</strong> button to retrieve the file on your device.","Click <strong>Delete</strong> in the list. Deletion is permanent. If you uploaded the wrong file, delete it and re-upload the correct one.","It is not possible to edit an already uploaded document. To replace a file, delete the old version and upload the new one.","Enter the <strong>expiry date</strong> for mandatory compliance reports (EPC valid for 10 years, electrical report for 6 years, etc.). This lets you track their validity and plan renewals in advance."],
-      "ol": ["<li>Click <strong>Documents</strong> in the sidebar.</li><li>Click <strong>Add a document</strong>.</li><li>Fill in the form:</li>","<li>Click <strong>Upload</strong>.</li>"],
-      "th": ["Field","Description","Required","Category","Examples"],
-      "td": ["<strong>Name</strong>","Document name (e.g., \"EPC Lyon apartment\")","Yes","<strong>Category</strong>","Contract, report, receipt, insurance or other","Yes","<strong>Associated Property</strong>","Property this document relates to","No","<strong>Upload Date</strong>","Date the document was uploaded","Yes","<strong>Expiry Date</strong>","Validity date (e.g., for an EPC or insurance)","No","<strong>File</strong>","File to upload (PDF, image, etc.)","Yes","<strong>Contract</strong>","Signed lease agreement, lease addendum","<strong>Report</strong>","EPC, electrical report, asbestos, lead, gas","<strong>Receipt</strong>","Monthly rent receipt","<strong>Insurance</strong>","Non-occupying landlord insurance certificate, tenant certificate","<strong>Other</strong>","Photos, utility charge statements, repair invoices"]
+      "h2": [
+        "What Is This Module For?",
+        "Upload a Document",
+        "Document Categories",
+        "Download a Document",
+        "Delete a Document",
+        "Best Practice: Compliance Reports"
+      ],
+      "p": [
+        "The Documents module lets you store all files related to your landlord activity online: signed lease agreements, mandatory compliance reports (EPC, electrical…), rent receipts, insurance certificates, and any other useful documents.",
+        "In the document list, click the name or the <strong>Download</strong> button to retrieve the file on your device.",
+        "Click <strong>Delete</strong> in the list. Deletion is permanent. If you uploaded the wrong file, delete it and re-upload the correct one.",
+        "It is not possible to edit an already uploaded document. To replace a file, delete the old version and upload the new one.",
+        "Enter the <strong>expiry date</strong> for mandatory compliance reports (EPC valid for 10 years, electrical report for 6 years, etc.). This lets you track their validity and plan renewals in advance."
+      ],
+      "ol": [
+        "<li>Click <strong>Documents</strong> in the sidebar.</li><li>Click <strong>Add a document</strong>.</li><li>Fill in the form:</li>",
+        "<li>Click <strong>Upload</strong>.</li>"
+      ],
+      "th": [
+        "Field",
+        "Description",
+        "Required",
+        "Category",
+        "Examples"
+      ],
+      "td": [
+        "<strong>Name</strong>",
+        "Document name (e.g., \"EPC Lyon apartment\")",
+        "Yes",
+        "<strong>Category</strong>",
+        "Contract, report, receipt, insurance or other",
+        "Yes",
+        "<strong>Associated Property</strong>",
+        "Property this document relates to",
+        "No",
+        "<strong>Upload Date</strong>",
+        "Date the document was uploaded",
+        "Yes",
+        "<strong>Expiry Date</strong>",
+        "Validity date (e.g., for an EPC or insurance)",
+        "No",
+        "<strong>File</strong>",
+        "File to upload (PDF, image, etc.)",
+        "Yes",
+        "<strong>Contract</strong>",
+        "Signed lease agreement, lease addendum",
+        "<strong>Report</strong>",
+        "EPC, electrical report, asbestos, lead, gas",
+        "<strong>Receipt</strong>",
+        "Monthly rent receipt",
+        "<strong>Insurance</strong>",
+        "Non-occupying landlord insurance certificate, tenant certificate",
+        "<strong>Other</strong>",
+        "Photos, utility charge statements, repair invoices"
+      ]
     },
     "utilisateur_maintenance": {
       "h1": "Maintenance",
       "subtitle": "Plan and track maintenance tasks and repairs on your properties.",
-      "h2": ["What Is This Module For?","Create a Maintenance Task","Priority Levels","Track Task Progress","Task Statuses","Record Actual Cost","Urgent Tasks"],
-      "p": ["The Maintenance module lets you track all work on your properties: urgent repairs reported by a tenant, renovation work, routine maintenance, insurance claims… Each task is tracked with its priority, progress and costs.","As the work progresses, update the progress:","Once the task is complete, enter the <strong>actual cost</strong> in the edit form. This lets you compare the estimated budget with the actual spend, and build a cost history for each property.","Mark a task as <strong>Completed</strong> rather than deleting it. This preserves the full maintenance history for each property, which is useful when selling or in case of a dispute.","High-priority tasks that are not yet completed automatically appear in the <a href=\"tableau-de-bord.html\">dashboard</a> alerts."],
-      "ol": ["<li>Click <strong>Maintenance</strong> in the sidebar.</li><li>Click <strong>New task</strong>.</li><li>Fill in the form:</li>","<li>Click <strong>Save</strong>.</li>","<li>In the task list, click <strong>Update</strong>.</li><li>Adjust the <strong>progress percentage</strong> (0% to 100%).</li><li>Update the <strong>status</strong> if needed.</li><li>Click <strong>Save</strong>.</li>"],
-      "th": ["Field","Description","Required","Priority","Recommended Usage","Status","Meaning"],
-      "td": ["<strong>Property</strong>","Property concerned by the task","Yes","<strong>Title</strong>","Short summary (e.g., \"Kitchen tap leak\")","Yes","<strong>Description</strong>","Task details","No","<strong>Priority</strong>","High, medium or low","Yes","<strong>Estimated Cost</strong>","Planned budget for the task","No","<strong>High</strong>","Emergency: water leak, heating failure in winter, safety issue. Appears in dashboard alerts.","<strong>Medium</strong>","Task to plan soon but not an immediate emergency.","<strong>Low</strong>","Routine maintenance or long-term improvement.","<strong>To Do</strong>","The task is planned but has not started yet.","<strong>In Progress</strong>","Work has started.","<strong>Completed</strong>","The task is closed."]
+      "h2": [
+        "What Is This Module For?",
+        "Create a Maintenance Task",
+        "Priority Levels",
+        "Track Task Progress",
+        "Task Statuses",
+        "Record Actual Cost",
+        "Urgent Tasks"
+      ],
+      "p": [
+        "The Maintenance module lets you track all work on your properties: urgent repairs reported by a tenant, renovation work, routine maintenance, insurance claims… Each task is tracked with its priority, progress and costs.",
+        "As the work progresses, update the progress:",
+        "Once the task is complete, enter the <strong>actual cost</strong> in the edit form. This lets you compare the estimated budget with the actual spend, and build a cost history for each property.",
+        "Mark a task as <strong>Completed</strong> rather than deleting it. This preserves the full maintenance history for each property, which is useful when selling or in case of a dispute.",
+        "High-priority tasks that are not yet completed automatically appear in the <a href=\"tableau-de-bord.html\">dashboard</a> alerts."
+      ],
+      "ol": [
+        "<li>Click <strong>Maintenance</strong> in the sidebar.</li><li>Click <strong>New task</strong>.</li><li>Fill in the form:</li>",
+        "<li>Click <strong>Save</strong>.</li>",
+        "<li>In the task list, click <strong>Update</strong>.</li><li>Adjust the <strong>progress percentage</strong> (0% to 100%).</li><li>Update the <strong>status</strong> if needed.</li><li>Click <strong>Save</strong>.</li>"
+      ],
+      "th": [
+        "Field",
+        "Description",
+        "Required",
+        "Priority",
+        "Recommended Usage",
+        "Status",
+        "Meaning"
+      ],
+      "td": [
+        "<strong>Property</strong>",
+        "Property concerned by the task",
+        "Yes",
+        "<strong>Title</strong>",
+        "Short summary (e.g., \"Kitchen tap leak\")",
+        "Yes",
+        "<strong>Description</strong>",
+        "Task details",
+        "No",
+        "<strong>Priority</strong>",
+        "High, medium or low",
+        "Yes",
+        "<strong>Estimated Cost</strong>",
+        "Planned budget for the task",
+        "No",
+        "<strong>High</strong>",
+        "Emergency: water leak, heating failure in winter, safety issue. Appears in dashboard alerts.",
+        "<strong>Medium</strong>",
+        "Task to plan soon but not an immediate emergency.",
+        "<strong>Low</strong>",
+        "Routine maintenance or long-term improvement.",
+        "<strong>To Do</strong>",
+        "The task is planned but has not started yet.",
+        "<strong>In Progress</strong>",
+        "Work has started.",
+        "<strong>Completed</strong>",
+        "The task is closed."
+      ]
     },
     "fonctionnel_apercu": {
       "h1": "Business Overview",
       "subtitle": "Business presentation of GestiLoc, its modules and user roles.",
-      "h2": ["Presentation","Objectives","Available Modules","User Roles"],
-      "p": ["GestiLoc is a web-based rental management application designed for private landlords. It centralises the management of properties, tenants, rental contracts, rent payments, documents and maintenance tasks.","Authentication is handled by <strong>Laravel Breeze</strong> (email + password).","Multi-role management (owner, manager, tenant) is not implemented in the current version but can be added via a package such as Spatie Laravel Permission."],
-      "ul": ["<li>Provide an overview of the property portfolio (occupied / vacant)</li><li>Track tenants and their payment status</li><li>Manage rental contracts (creation, archiving, expiration alerts)</li><li>Record and track monthly payments</li><li>Centralise documents linked to properties (contracts, reports, receipts, insurance)</li><li>Plan and track maintenance work</li>"],
-      "th": ["Module","Description","Role","Description"],
-      "td": ["<strong>Dashboard</strong>","Global statistics, alerts, summary view","<strong>Properties</strong>","Property CRUD","<strong>Tenants</strong>","Tenant CRUD, payment status","<strong>Contracts</strong>","Lease management, archiving, expiration alerts","<strong>Payments</strong>","Monthly rent tracking, mark as paid","<strong>Documents</strong>","Upload and management of property-linked files","<strong>Maintenance</strong>","Task tracking with progress and costs","<strong>Reports</strong>","Aggregated financial and operational view","<strong>Landlord (authenticated user)</strong>","Full access to all features. All data is scoped by <code>user_id</code> — each landlord only sees their own properties, tenants, contracts, etc."]
+      "h2": [
+        "Presentation",
+        "Objectives",
+        "Available Modules",
+        "User Roles"
+      ],
+      "p": [
+        "GestiLoc is a web-based rental management application designed for private landlords. It centralises the management of properties, tenants, rental contracts, rent payments, documents and maintenance tasks.",
+        "Authentication is handled by <strong>Laravel Breeze</strong> (email + password).",
+        "Multi-role management (owner, manager, tenant) is not implemented in the current version but can be added via a package such as Spatie Laravel Permission."
+      ],
+      "ul": [
+        "<li>Provide an overview of the property portfolio (occupied / vacant)</li><li>Track tenants and their payment status</li><li>Manage rental contracts (creation, archiving, expiration alerts)</li><li>Record and track monthly payments</li><li>Centralise documents linked to properties (contracts, reports, receipts, insurance)</li><li>Plan and track maintenance work</li>"
+      ],
+      "th": [
+        "Module",
+        "Description",
+        "Role",
+        "Description"
+      ],
+      "td": [
+        "<strong>Dashboard</strong>",
+        "Global statistics, alerts, summary view",
+        "<strong>Properties</strong>",
+        "Property CRUD",
+        "<strong>Tenants</strong>",
+        "Tenant CRUD, payment status",
+        "<strong>Contracts</strong>",
+        "Lease management, archiving, expiration alerts",
+        "<strong>Payments</strong>",
+        "Monthly rent tracking, mark as paid",
+        "<strong>Documents</strong>",
+        "Upload and management of property-linked files",
+        "<strong>Maintenance</strong>",
+        "Task tracking with progress and costs",
+        "<strong>Reports</strong>",
+        "Aggregated financial and operational view",
+        "<strong>Landlord (authenticated user)</strong>",
+        "Full access to all features. All data is scoped by <code>user_id</code> — each landlord only sees their own properties, tenants, contracts, etc."
+      ]
     },
     "fonctionnel_user_stories": {
       "h1": "User Stories",
       "subtitle": "Use cases by module, based on Laravel routes and controllers.",
-      "h2": ["Authentication","Dashboard","Properties","Tenants","Contracts","Payments","Documents","Maintenance","Reports"],
-      "callout": ["All stories below correspond to real actions implemented in <code>projet-dynamic/routes/web.php</code> and the associated controllers."],
-      "ul": ["<li>As a landlord, I can register with an email and password.</li><li>As a landlord, I can log in and log out.</li><li>As a landlord, I can edit my profile (name, email, password).</li><li>As a landlord, I can delete my account.</li>","<li>As a landlord, I can see a summary of my portfolio: number of properties, number of tenants, this month's rent, current alerts.</li>","<li>As a landlord, I can add a property (type, address, rent, charges, security deposit).</li><li>As a landlord, I can view my property list with their status (occupied / vacant).</li><li>As a landlord, I can edit a property's information.</li><li>As a landlord, I can delete a property (along with all associated data in cascade).</li><li>As a landlord, a unique reference is auto-generated for each property (e.g., <code>PROP-001</code>).</li>","<li>As a landlord, I can add a tenant and associate them with a property.</li><li>As a landlord, I can view my tenant list with their payment status.</li><li>As a landlord, I can search for a tenant by name or email.</li><li>As a landlord, I can edit a tenant's information.</li><li>As a landlord, I can delete a tenant.</li>","<li>As a landlord, I can create a rental contract (type: unfurnished/furnished/commercial, dates, rent).</li><li>As a landlord, I can view my contract list and their status (active, expired, archived).</li><li>As a landlord, I can archive an active contract via <code>PATCH /contracts/{id}/archive</code>.</li><li>As a landlord, I am alerted when a contract expires within 30 days.</li><li>As a landlord, I can edit or delete a contract.</li>","<li>As a landlord, I can record a monthly payment for a tenant.</li><li>As a landlord, I can view payment history by tenant or by property.</li><li>As a landlord, I can mark a payment as \"paid\" in one click via <code>PATCH /payments/{id}/mark-paid</code>.</li><li>As a landlord, I can view overdue payments.</li>","<li>As a landlord, I can upload a document and link it to a property (contract, report, receipt, insurance).</li><li>As a landlord, I can view my document list with their category and expiry date.</li><li>As a landlord, I can download or delete a document.</li>","<li>As a landlord, I can create a maintenance task for a property (title, description, priority, estimated cost).</li><li>As a landlord, I can view the task list and their progress.</li><li>As a landlord, I can update task progress via <code>PATCH /maintenances/{id}/progress</code>.</li><li>As a landlord, I can view urgent tasks (high priority, not yet completed).</li>","<li>As a landlord, I can access a reports page to visualise aggregated financial and operational data.</li>"]
+      "h2": [
+        "Authentication",
+        "Dashboard",
+        "Properties",
+        "Tenants",
+        "Contracts",
+        "Payments",
+        "Documents",
+        "Maintenance",
+        "Reports"
+      ],
+      "callout": [
+        "All stories below correspond to real actions implemented in <code>projet-dynamic/routes/web.php</code> and the associated controllers."
+      ],
+      "ul": [
+        "<li>As a landlord, I can register with an email and password.</li><li>As a landlord, I can log in and log out.</li><li>As a landlord, I can edit my profile (name, email, password).</li><li>As a landlord, I can delete my account.</li>",
+        "<li>As a landlord, I can see a summary of my portfolio: number of properties, number of tenants, this month's rent, current alerts.</li>",
+        "<li>As a landlord, I can add a property (type, address, rent, charges, security deposit).</li><li>As a landlord, I can view my property list with their status (occupied / vacant).</li><li>As a landlord, I can edit a property's information.</li><li>As a landlord, I can delete a property (along with all associated data in cascade).</li><li>As a landlord, a unique reference is auto-generated for each property (e.g., <code>PROP-001</code>).</li>",
+        "<li>As a landlord, I can add a tenant and associate them with a property.</li><li>As a landlord, I can view my tenant list with their payment status.</li><li>As a landlord, I can search for a tenant by name or email.</li><li>As a landlord, I can edit a tenant's information.</li><li>As a landlord, I can delete a tenant.</li>",
+        "<li>As a landlord, I can create a rental contract (type: unfurnished/furnished/commercial, dates, rent).</li><li>As a landlord, I can view my contract list and their status (active, expired, archived).</li><li>As a landlord, I can archive an active contract via <code>PATCH /contracts/{id}/archive</code>.</li><li>As a landlord, I am alerted when a contract expires within 30 days.</li><li>As a landlord, I can edit or delete a contract.</li>",
+        "<li>As a landlord, I can record a monthly payment for a tenant.</li><li>As a landlord, I can view payment history by tenant or by property.</li><li>As a landlord, I can mark a payment as \"paid\" in one click via <code>PATCH /payments/{id}/mark-paid</code>.</li><li>As a landlord, I can view overdue payments.</li>",
+        "<li>As a landlord, I can upload a document and link it to a property (contract, report, receipt, insurance).</li><li>As a landlord, I can view my document list with their category and expiry date.</li><li>As a landlord, I can download or delete a document.</li>",
+        "<li>As a landlord, I can create a maintenance task for a property (title, description, priority, estimated cost).</li><li>As a landlord, I can view the task list and their progress.</li><li>As a landlord, I can update task progress via <code>PATCH /maintenances/{id}/progress</code>.</li><li>As a landlord, I can view urgent tasks (high priority, not yet completed).</li>",
+        "<li>As a landlord, I can access a reports page to visualise aggregated financial and operational data.</li>"
+      ]
     },
     "technique_architecture": {
       "h1": "Technical Architecture",
       "subtitle": "Technology stack, folder structure and authentication flow.",
-      "h2": ["Stack","Folder Structure","Authentication Flow","Controllers","Applied Principles"],
-      "ol": ["<li>The user accesses <code>/</code> → automatic redirect to <code>/dashboard</code></li><li>If not authenticated → redirect to <code>/login</code> (middleware <code>auth</code>)</li><li>Registration via <code>/register</code> (Laravel Breeze)</li><li>After login → access to all routes in the <code>auth</code> group</li><li>All data is filtered by <code>user_id</code> (multi-user isolation)</li>"],
-      "ul": ["<li><strong>SOLID</strong> — one controller per resource, single responsibility</li><li><strong>DRY</strong> — reusable Blade components for all recurring UI elements</li><li><strong>Scoped data</strong> — every query filters on <code>user_id</code> to isolate data per landlord</li>"],
-      "th": ["Layer","Technology","Controller","Responsibility"],
-      "td": ["Backend framework","Laravel 10","Language","PHP 8.1+","Templating","Blade (reusable components)","CSS","Tailwind CSS (via Vite)","JS interactivity","Alpine.js","Build tool","Vite","Authentication","Laravel Breeze","Database","SQLite (dev) / MySQL (prod)","<code>DashboardController</code>","Global dashboard statistics","<code>PropertyController</code>","Property CRUD","<code>TenantController</code>","Tenant CRUD","<code>ContractController</code>","Contract CRUD + archiving","<code>PaymentController</code>","Payment CRUD + mark-paid","<code>DocumentController</code>","Document upload / deletion","<code>MaintenanceController</code>","Maintenance CRUD + progress","<code>ReportController</code>","Aggregated reports page","<code>ProfileController</code>","User profile management"]
+      "h2": [
+        "Stack",
+        "Folder Structure",
+        "Authentication Flow",
+        "Controllers",
+        "Applied Principles"
+      ],
+      "ol": [
+        "<li>The user accesses <code>/</code> → automatic redirect to <code>/dashboard</code></li><li>If not authenticated → redirect to <code>/login</code> (middleware <code>auth</code>)</li><li>Registration via <code>/register</code> (Laravel Breeze)</li><li>After login → access to all routes in the <code>auth</code> group</li><li>All data is filtered by <code>user_id</code> (multi-user isolation)</li>"
+      ],
+      "ul": [
+        "<li><strong>SOLID</strong> — one controller per resource, single responsibility</li><li><strong>DRY</strong> — reusable Blade components for all recurring UI elements</li><li><strong>Scoped data</strong> — every query filters on <code>user_id</code> to isolate data per landlord</li>"
+      ],
+      "th": [
+        "Layer",
+        "Technology",
+        "Controller",
+        "Responsibility"
+      ],
+      "td": [
+        "Backend framework",
+        "Laravel 10",
+        "Language",
+        "PHP 8.1+",
+        "Templating",
+        "Blade (reusable components)",
+        "CSS",
+        "Tailwind CSS (via Vite)",
+        "JS interactivity",
+        "Alpine.js",
+        "Build tool",
+        "Vite",
+        "Authentication",
+        "Laravel Breeze",
+        "Database",
+        "SQLite (dev) / MySQL (prod)",
+        "<code>DashboardController</code>",
+        "Global dashboard statistics",
+        "<code>PropertyController</code>",
+        "Property CRUD",
+        "<code>TenantController</code>",
+        "Tenant CRUD",
+        "<code>ContractController</code>",
+        "Contract CRUD + archiving",
+        "<code>PaymentController</code>",
+        "Payment CRUD + mark-paid",
+        "<code>DocumentController</code>",
+        "Document upload / deletion",
+        "<code>MaintenanceController</code>",
+        "Maintenance CRUD + progress",
+        "<code>ReportController</code>",
+        "Aggregated reports page",
+        "<code>ProfileController</code>",
+        "User profile management"
+      ]
     },
     "technique_installation": {
       "h1": "Installation",
       "subtitle": "Step-by-step Laravel application setup.",
-      "h2": ["Prerequisites","1. Clone the Repository","2. Install PHP Dependencies","3. Configure the Environment","4. Create the SQLite Database","5. Run Migrations","6. Install Front-end Dependencies","7. Compile Assets","8. Start the Server","Quick Summary"],
-      "p": ["Edit <code>.env</code> according to your environment:","The application is accessible at <code>http://localhost:8000</code>.","Optional — seed with test data:"],
-      "ul": ["<li>PHP 8.1+</li><li>Composer</li><li>Node.js 18+ and npm</li><li>SQLite (included in PHP) or MySQL</li>"],
-      "callout": ["This step is only required for SQLite. For MySQL, create the database using your usual interface.","For development, keep <code>npm run dev</code> running in a separate terminal to benefit from Vite's hot module replacement (HMR)."]
+      "h2": [
+        "Prerequisites",
+        "1. Clone the Repository",
+        "2. Install PHP Dependencies",
+        "3. Configure the Environment",
+        "4. Create the SQLite Database",
+        "5. Run Migrations",
+        "6. Install Front-end Dependencies",
+        "7. Compile Assets",
+        "8. Start the Server",
+        "Quick Summary"
+      ],
+      "p": [
+        "Edit <code>.env</code> according to your environment:",
+        "The application is accessible at <code>http://localhost:8000</code>.",
+        "Optional — seed with test data:"
+      ],
+      "ul": [
+        "<li>PHP 8.1+</li><li>Composer</li><li>Node.js 18+ and npm</li><li>SQLite (included in PHP) or MySQL</li>"
+      ],
+      "callout": [
+        "This step is only required for SQLite. For MySQL, create the database using your usual interface.",
+        "For development, keep <code>npm run dev</code> running in a separate terminal to benefit from Vite's hot module replacement (HMR)."
+      ]
     },
     "technique_composants_blade": {
       "h1": "Blade Components",
       "subtitle": "All components are in <code>projet-dynamic/resources/views/components/</code>. Use them with the <code>&lt;x-component-name /&gt;</code> syntax.",
-      "h2": ["Generic Components (Breeze)","GestiLoc Business Components","Usage"],
-      "p": ["These components come from Laravel Breeze and are used in forms and authentication.","These components were created specifically for the application, following the DRY principle.","Business components accept <code>props</code> to be configurable without duplication. Examples:","To add a component: create the file in <code>resources/views/components/</code>. Laravel detects it automatically via naming convention — no manual registration required."],
-      "th": ["Component","File","Description"],
-      "td": ["<code>&lt;x-primary-button&gt;</code>","<code>primary-button.blade.php</code>","Primary button (main action)","<code>&lt;x-secondary-button&gt;</code>","<code>secondary-button.blade.php</code>","Secondary button","<code>&lt;x-danger-button&gt;</code>","<code>danger-button.blade.php</code>","Destructive button (delete)","<code>&lt;x-text-input&gt;</code>","<code>text-input.blade.php</code>","Standard text input","<code>&lt;x-input-label&gt;</code>","<code>input-label.blade.php</code>","Form label","<code>&lt;x-input-error&gt;</code>","<code>input-error.blade.php</code>","Validation error display","<code>&lt;x-dropdown&gt;</code>","<code>dropdown.blade.php</code>","Alpine.js dropdown menu","<code>&lt;x-dropdown-link&gt;</code>","<code>dropdown-link.blade.php</code>","Link inside a dropdown","<code>&lt;x-modal&gt;</code>","<code>modal.blade.php</code>","Alpine.js modal","<code>&lt;x-nav-link&gt;</code>","<code>nav-link.blade.php</code>","Navigation link (active / inactive)","<code>&lt;x-responsive-nav-link&gt;</code>","<code>responsive-nav-link.blade.php</code>","Mobile nav link","<code>&lt;x-auth-session-status&gt;</code>","<code>auth-session-status.blade.php</code>","Session status message","<code>&lt;x-application-logo&gt;</code>","<code>application-logo.blade.php</code>","Application logo","<code>&lt;x-navbar&gt;</code>","<code>navbar.blade.php</code>","Main navigation bar","<code>&lt;x-sidebar&gt;</code>","<code>sidebar.blade.php</code>","Sidebar navigation menu","<code>&lt;x-page-header&gt;</code>","<code>page-header.blade.php</code>","Page header (title + action button)","<code>&lt;x-stat-card&gt;</code>","<code>stat-card.blade.php</code>","Stat card for the dashboard","<code>&lt;x-status-badge&gt;</code>","<code>status-badge.blade.php</code>","Coloured status badge","<code>&lt;x-action-buttons&gt;</code>","<code>action-buttons.blade.php</code>","Action buttons (edit, delete)","<code>&lt;x-data-table&gt;</code>","<code>data-table.blade.php</code>","Reusable data table","<code>&lt;x-empty-state&gt;</code>","<code>empty-state.blade.php</code>","Empty list message","<code>&lt;x-progress-bar&gt;</code>","<code>progress-bar.blade.php</code>","Progress bar (maintenance)","<code>&lt;x-form-section&gt;</code>","<code>form-section.blade.php</code>","Form section with title","<code>&lt;x-toast&gt;</code>","<code>toast.blade.php</code>","Flash notification (success, error)","<code>&lt;x-property-card&gt;</code>","<code>property-card.blade.php</code>","Property display card","<code>&lt;x-tenant-card&gt;</code>","<code>tenant-card.blade.php</code>","Tenant display card"]
+      "h2": [
+        "Generic Components (Breeze)",
+        "GestiLoc Business Components",
+        "Usage"
+      ],
+      "p": [
+        "These components come from Laravel Breeze and are used in forms and authentication.",
+        "These components were created specifically for the application, following the DRY principle.",
+        "Business components accept <code>props</code> to be configurable without duplication. Examples:",
+        "To add a component: create the file in <code>resources/views/components/</code>. Laravel detects it automatically via naming convention — no manual registration required."
+      ],
+      "th": [
+        "Component",
+        "File",
+        "Description"
+      ],
+      "td": [
+        "<code>&lt;x-primary-button&gt;</code>",
+        "<code>primary-button.blade.php</code>",
+        "Primary button (main action)",
+        "<code>&lt;x-secondary-button&gt;</code>",
+        "<code>secondary-button.blade.php</code>",
+        "Secondary button",
+        "<code>&lt;x-danger-button&gt;</code>",
+        "<code>danger-button.blade.php</code>",
+        "Destructive button (delete)",
+        "<code>&lt;x-text-input&gt;</code>",
+        "<code>text-input.blade.php</code>",
+        "Standard text input",
+        "<code>&lt;x-input-label&gt;</code>",
+        "<code>input-label.blade.php</code>",
+        "Form label",
+        "<code>&lt;x-input-error&gt;</code>",
+        "<code>input-error.blade.php</code>",
+        "Validation error display",
+        "<code>&lt;x-dropdown&gt;</code>",
+        "<code>dropdown.blade.php</code>",
+        "Alpine.js dropdown menu",
+        "<code>&lt;x-dropdown-link&gt;</code>",
+        "<code>dropdown-link.blade.php</code>",
+        "Link inside a dropdown",
+        "<code>&lt;x-modal&gt;</code>",
+        "<code>modal.blade.php</code>",
+        "Alpine.js modal",
+        "<code>&lt;x-nav-link&gt;</code>",
+        "<code>nav-link.blade.php</code>",
+        "Navigation link (active / inactive)",
+        "<code>&lt;x-responsive-nav-link&gt;</code>",
+        "<code>responsive-nav-link.blade.php</code>",
+        "Mobile nav link",
+        "<code>&lt;x-auth-session-status&gt;</code>",
+        "<code>auth-session-status.blade.php</code>",
+        "Session status message",
+        "<code>&lt;x-application-logo&gt;</code>",
+        "<code>application-logo.blade.php</code>",
+        "Application logo",
+        "<code>&lt;x-navbar&gt;</code>",
+        "<code>navbar.blade.php</code>",
+        "Main navigation bar",
+        "<code>&lt;x-sidebar&gt;</code>",
+        "<code>sidebar.blade.php</code>",
+        "Sidebar navigation menu",
+        "<code>&lt;x-page-header&gt;</code>",
+        "<code>page-header.blade.php</code>",
+        "Page header (title + action button)",
+        "<code>&lt;x-stat-card&gt;</code>",
+        "<code>stat-card.blade.php</code>",
+        "Stat card for the dashboard",
+        "<code>&lt;x-status-badge&gt;</code>",
+        "<code>status-badge.blade.php</code>",
+        "Coloured status badge",
+        "<code>&lt;x-action-buttons&gt;</code>",
+        "<code>action-buttons.blade.php</code>",
+        "Action buttons (edit, delete)",
+        "<code>&lt;x-data-table&gt;</code>",
+        "<code>data-table.blade.php</code>",
+        "Reusable data table",
+        "<code>&lt;x-empty-state&gt;</code>",
+        "<code>empty-state.blade.php</code>",
+        "Empty list message",
+        "<code>&lt;x-progress-bar&gt;</code>",
+        "<code>progress-bar.blade.php</code>",
+        "Progress bar (maintenance)",
+        "<code>&lt;x-form-section&gt;</code>",
+        "<code>form-section.blade.php</code>",
+        "Form section with title",
+        "<code>&lt;x-toast&gt;</code>",
+        "<code>toast.blade.php</code>",
+        "Flash notification (success, error)",
+        "<code>&lt;x-property-card&gt;</code>",
+        "<code>property-card.blade.php</code>",
+        "Property display card",
+        "<code>&lt;x-tenant-card&gt;</code>",
+        "<code>tenant-card.blade.php</code>",
+        "Tenant display card"
+      ]
     },
     "technique_poc_vs_dynamic": {
       "h1": "POC vs Dynamic Project",
       "subtitle": "Comparison between the static prototype (<code>poc/</code>) and the Laravel application (<code>projet-dynamic/</code>).",
-      "h2": ["Overview","Purpose of the POC","What the Dynamic Project Adds","Module Mapping"],
-      "p": ["The <code>poc/</code> folder is a high-fidelity mockup designed to:"],
-      "ul": ["<li>Validate the interface and navigation before development</li><li>Present the project without a back-end infrastructure</li><li>Serve as a visual reference during development</li>"],
-      "ol": ["<li><strong>Persistence</strong> — data survives page reloads</li><li><strong>Authentication</strong> — each landlord has their own scoped data</li><li><strong>Server validation</strong> — forms are validated server-side by Laravel</li><li><strong>Business actions</strong> — mark-paid, contract archiving, maintenance progress</li><li><strong>Reusable components</strong> — zero HTML duplication thanks to Blade components</li><li><strong>Reports</strong> — real data aggregation</li><li><strong>File uploads</strong> — document storage on the server</li>"],
-      "th": ["Criterion","<code>poc/</code>","<code>projet-dynamic/</code>","Module","POC","Dynamic project"],
-      "td": ["Type","Static prototype","Full Laravel application","Data","Hardcoded / fictitious","Persisted in database","Authentication","None","Laravel Breeze (email + password)","Backend","None","Laravel 10 / PHP 8.1","Templating","Raw HTML","Blade + reusable components","CSS","Tailwind CDN","Tailwind compiled via Vite","JS","Alpine.js CDN","Alpine.js via npm","Multi-user","No","Yes (scoped by <code>user_id</code>)","Real CRUD","No","Yes (all modules)","Dashboard","Static page with fictitious data","<code>DashboardController</code> + real data","Properties","Fixed HTML list","Full CRUD + auto-generated reference","Tenants","Fixed HTML list","CRUD + search + payment status","Contracts","Displayed statically","CRUD + archiving + 30-day expiration alerts","Payments","Static table","CRUD + mark-paid + period filters","Documents","Static list","Real upload + download + categories","Maintenance","Static list","CRUD + progress bar + cost tracking"]
+      "h2": [
+        "Overview",
+        "Purpose of the POC",
+        "What the Dynamic Project Adds",
+        "Module Mapping"
+      ],
+      "p": [
+        "The <code>poc/</code> folder is a high-fidelity mockup designed to:"
+      ],
+      "ul": [
+        "<li>Validate the interface and navigation before development</li><li>Present the project without a back-end infrastructure</li><li>Serve as a visual reference during development</li>"
+      ],
+      "ol": [
+        "<li><strong>Persistence</strong> — data survives page reloads</li><li><strong>Authentication</strong> — each landlord has their own scoped data</li><li><strong>Server validation</strong> — forms are validated server-side by Laravel</li><li><strong>Business actions</strong> — mark-paid, contract archiving, maintenance progress</li><li><strong>Reusable components</strong> — zero HTML duplication thanks to Blade components</li><li><strong>Reports</strong> — real data aggregation</li><li><strong>File uploads</strong> — document storage on the server</li>"
+      ],
+      "th": [
+        "Criterion",
+        "<code>poc/</code>",
+        "<code>projet-dynamic/</code>",
+        "Module",
+        "POC",
+        "Dynamic project"
+      ],
+      "td": [
+        "Type",
+        "Static prototype",
+        "Full Laravel application",
+        "Data",
+        "Hardcoded / fictitious",
+        "Persisted in database",
+        "Authentication",
+        "None",
+        "Laravel Breeze (email + password)",
+        "Backend",
+        "None",
+        "Laravel 10 / PHP 8.1",
+        "Templating",
+        "Raw HTML",
+        "Blade + reusable components",
+        "CSS",
+        "Tailwind CDN",
+        "Tailwind compiled via Vite",
+        "JS",
+        "Alpine.js CDN",
+        "Alpine.js via npm",
+        "Multi-user",
+        "No",
+        "Yes (scoped by <code>user_id</code>)",
+        "Real CRUD",
+        "No",
+        "Yes (all modules)",
+        "Dashboard",
+        "Static page with fictitious data",
+        "<code>DashboardController</code> + real data",
+        "Properties",
+        "Fixed HTML list",
+        "Full CRUD + auto-generated reference",
+        "Tenants",
+        "Fixed HTML list",
+        "CRUD + search + payment status",
+        "Contracts",
+        "Displayed statically",
+        "CRUD + archiving + 30-day expiration alerts",
+        "Payments",
+        "Static table",
+        "CRUD + mark-paid + period filters",
+        "Documents",
+        "Static list",
+        "Real upload + download + categories",
+        "Maintenance",
+        "Static list",
+        "CRUD + progress bar + cost tracking"
+      ]
     }
   }
 }

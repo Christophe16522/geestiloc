@@ -6,7 +6,7 @@
 const NAV = [
   { type: 'link', labelKey: 'home', path: 'index.html' },
   {
-    type: 'section', labelKey: 'user_guide',
+    type: 'section', labelKey: 'ug',
     items: [
       { type: 'link', labelKey: 'ug_start',       path: 'utilisateur/demarrage.html' },
       { type: 'link', labelKey: 'ug_dashboard',   path: 'utilisateur/tableau-de-bord.html' },
@@ -19,7 +19,7 @@ const NAV = [
     ]
   },
   {
-    type: 'section', labelKey: 'functional',
+    type: 'section', labelKey: 'fn',
     items: [
       { type: 'link', labelKey: 'fn_overview',     path: 'fonctionnel/apercu.html' },
       { type: 'link', labelKey: 'fn_user_stories', path: 'fonctionnel/user-stories.html' },
@@ -37,7 +37,7 @@ const NAV = [
     ]
   },
   {
-    type: 'section', labelKey: 'technical',
+    type: 'section', labelKey: 'tc',
     items: [
       { type: 'link', labelKey: 'tc_architecture', path: 'technique/architecture.html' },
       { type: 'link', labelKey: 'tc_database',     path: 'technique/base-de-donnees.html' },
