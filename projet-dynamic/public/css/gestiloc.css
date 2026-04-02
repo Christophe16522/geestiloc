@@ -151,9 +151,11 @@ a:hover { color: var(--primary-light); }
   font-weight: 500;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: .4rem;
   transition: all var(--transition);
   cursor: pointer;
+  text-align: center;
 }
 .btn:focus-visible {
   outline: 2px solid var(--primary-light);
