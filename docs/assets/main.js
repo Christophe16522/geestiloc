@@ -49,17 +49,13 @@ const NAV = [
 ];
 
 /* ---------------------------------------------------------- */
-(async function () {
+(function () {
   const body        = document.body;
   const root        = body.dataset.root || '.';
   const currentPage = body.dataset.page || '';
 
-  /* --- Chargement des traductions (i18n.json) ------------- */
-  let I18N = null;
-  try {
-    const res = await fetch(root + '/assets/i18n.json');
-    if (res.ok) I18N = await res.json();
-  } catch (e) { /* fallback : pas de traduction */ }
+  /* --- Données de traduction (chargées via i18n.js) ------- */
+  const I18N = window.I18N || null;
 
   /* --- Helpers i18n --------------------------------------- */
   function getLang()  { return localStorage.getItem('docs_lang') || 'fr'; }
