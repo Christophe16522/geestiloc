@@ -1,83 +1,112 @@
 @extends('layouts.app')
 @section('title', __('dashboard.title'))
-
 @section('content')
+
 <x-page-header :title="__('dashboard.title')" :subtitle="__('dashboard.subtitle')" />
 
-{{-- Alerts --}}
-@if(count($alerts))
-<div class="mb-4">
-    @foreach($alerts as $alert)
-    <div class="alert alert-{{ $alert['type'] }} alert-gestiloc d-flex align-items-center gap-2 mb-2">
-        <i class="fas fa-{{ $alert['type'] === 'danger' ? 'exclamation-circle' : 'exclamation-triangle' }}"></i>
-        {{ $alert['message'] }}
-    </div>
-    @endforeach
-</div>
-@endif
-
 {{-- KPI Cards --}}
-<div class="row g-4 mb-4">
-    <div class="col-6 col-lg-3">
+<div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
         <x-stat-card :label="__('dashboard.total_properties')" :value="$stats['total_properties']" icon="building" variant="primary" />
     </div>
-    <div class="col-6 col-lg-3">
-        <x-stat-card :label="__('dashboard.occupancy_rate')" :value="$stats['occupancy_rate'] . '%'" icon="chart-pie" variant="success" :subtitle="$stats['occupied_count'] . ' ' . __('dashboard.occupied') . ' / ' . $stats['vacant_count'] . ' ' . __('dashboard.vacant')" />
+    <div class="col-6 col-xl-3">
+        <x-stat-card :label="__('dashboard.occupancy_rate')" :value="$stats['occupancy_rate'].'%'" icon="house-circle-check" variant="success" />
     </div>
-    <div class="col-6 col-lg-3">
-        <x-stat-card :label="__('dashboard.monthly_revenue')" :value="number_format($stats['monthly_revenue'], 0, ',', ' ') . ' €'" icon="euro-sign" variant="accent" />
+    <div class="col-6 col-xl-3">
+        <x-stat-card :label="__('dashboard.monthly_revenue')" :value="number_format($stats['monthly_revenue'], 0, ',', ' ').' €'" icon="euro-sign" variant="accent" />
     </div>
-    <div class="col-6 col-lg-3">
-        <x-stat-card :label="__('dashboard.late_rents')" :value="$stats['late_tenants']" icon="exclamation-triangle" variant="danger" />
+    <div class="col-6 col-xl-3">
+        <x-stat-card :label="__('dashboard.late_rents')" :value="$stats['late_rents']" icon="triangle-exclamation" variant="danger" />
     </div>
 </div>
 
-{{-- Revenue Chart --}}
 <div class="row g-4 mb-4">
+    {{-- Revenue Chart --}}
     <div class="col-lg-8">
-        <div class="data-table-wrap p-3">
-            <h6 class="fw-700 mb-3">{{ __('dashboard.revenue_chart') }}</h6>
-            <canvas id="revenueChart" height="120"></canvas>
+        <div class="chart-card">
+            <div class="chart-card__header">
+                <div>
+                    <h6 class="chart-card__title">{{ __('dashboard.revenue_chart') }}</h6>
+                    <p class="chart-card__subtitle">{{ now()->year }}</p>
+                </div>
+            </div>
+            <div class="chart-card__body">
+                <canvas id="revenueChart" height="90"></canvas>
+            </div>
         </div>
     </div>
+
+    {{-- Alerts --}}
     <div class="col-lg-4">
-        <div class="data-table-wrap p-3 h-100">
-            <h6 class="fw-700 mb-3">{{ __('dashboard.quick_access') }}</h6>
-            <div class="d-grid gap-2">
-                <a href="{{ route('properties.create') }}" class="btn btn-outline-primary btn-sm text-start"><i class="fas fa-plus me-2"></i>{{ __('dashboard.add_property') }}</a>
-                <a href="{{ route('tenants.create') }}" class="btn btn-outline-primary btn-sm text-start"><i class="fas fa-user-plus me-2"></i>{{ __('dashboard.add_tenant') }}</a>
-                <a href="{{ route('payments.index') }}" class="btn btn-outline-success btn-sm text-start"><i class="fas fa-euro-sign me-2"></i>{{ __('dashboard.view_payments') }}</a>
-                <a href="{{ route('maintenances.index') }}" class="btn btn-outline-warning btn-sm text-start"><i class="fas fa-wrench me-2"></i>{{ __('dashboard.active_maintenances') }}</a>
-                <a href="{{ route('reports.index') }}" class="btn btn-outline-secondary btn-sm text-start"><i class="fas fa-chart-bar me-2"></i>{{ __('dashboard.reports') }}</a>
+        <div class="data-table-wrap h-100">
+            <div class="p-3 border-bottom d-flex align-items-center gap-2">
+                <i class="fa-solid fa-bell text-warning"></i>
+                <h6 class="fw-600 mb-0">{{ __('dashboard.alerts') }}</h6>
+            </div>
+            <div class="p-2">
+                @forelse($alerts as $alert)
+                <div class="alert-item alert-item--{{ $alert['type'] }}">
+                    <i class="fa-solid fa-{{ $alert['icon'] }}"></i>
+                    <span>{{ $alert['message'] }}</span>
+                </div>
+                @empty
+                <div class="text-center py-4 text-muted">
+                    <i class="fa-solid fa-circle-check fa-2x mb-2 text-success"></i>
+                    <p class="small mb-0">{{ __('dashboard.no_alerts') }}</p>
+                </div>
+                @endforelse
             </div>
         </div>
     </div>
 </div>
-@endsection
 
+{{-- Quick Actions --}}
+<div class="data-table-wrap p-3">
+    <h6 class="fw-600 mb-3">{{ __('dashboard.quick_access') }}</h6>
+    <div class="row g-3">
+        @foreach([
+            ['route'=>'properties.create','icon'=>'fa-plus','label'=>__('dashboard.add_property'),'color'=>'#3b82f6'],
+            ['route'=>'tenants.create','icon'=>'fa-user-plus','label'=>__('dashboard.add_tenant'),'color'=>'#10b981'],
+            ['route'=>'payments.index','icon'=>'fa-euro-sign','label'=>__('nav.payments'),'color'=>'#f59e0b'],
+            ['route'=>'reports.index','icon'=>'fa-chart-bar','label'=>__('nav.reports'),'color'=>'#8b5cf6'],
+        ] as $action)
+        <div class="col-6 col-md-3">
+            <a href="{{ route($action['route']) }}" class="quick-action-card" style="--qa-color:{{ $action['color'] }};">
+                <i class="fa-solid {{ $action['icon'] }}"></i>
+                <span>{{ $action['label'] }}</span>
+            </a>
+        </div>
+        @endforeach
+    </div>
+</div>
+
+@endsection
 @push('scripts')
 <script>
 const ctx = document.getElementById('revenueChart');
-const data = @json($chart);
+const chartData = @json($monthlyRevenue ?? []);
 new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
-        labels: data.map(d => d.label),
+        labels: chartData.map(d => d.month),
         datasets: [{
-            label: 'Revenus (€)',
-            data: data.map(d => d.amount),
-            backgroundColor: 'rgba(30,58,138,.15)',
+            label: '{{ __("dashboard.revenue") }}',
+            data: chartData.map(d => d.amount),
             borderColor: '#1e3a8a',
-            borderWidth: 2,
-            borderRadius: 6,
+            backgroundColor: 'rgba(30,58,138,.08)',
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#1e3a8a',
+            pointRadius: 4,
         }]
     },
     options: {
         responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-            y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
-            x: { grid: { display: false } }
+            x: { grid: { display: false } },
+            y: { beginAtZero: true, grid: { color: '#f1f5f9' } }
         }
     }
 });
