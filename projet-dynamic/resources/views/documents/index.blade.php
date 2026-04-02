@@ -1,23 +1,23 @@
 @extends('layouts.app')
-@section('title', 'Documents')
+@section('title', __('documents.title'))
 @section('content')
 
 <x-page-header
-    title="Documents"
-    subtitle="{{ $documents->total() }} document(s) enregistré(s)"
+    :title="__('documents.title')"
+    :subtitle="__('documents.subtitle', ['count' => $documents->total()])"
     :createRoute="route('documents.create')"
-    createLabel="Ajouter un document"
+    :createLabel="__('documents.add')"
 />
 
 {{-- Filters --}}
 <div class="data-table-wrap p-3 mb-4">
     <form method="GET" class="row g-2 align-items-end">
         <div class="col-md-4">
-            <input type="text" name="search" class="form-control" placeholder="Rechercher par nom..." value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="{{ __('common.search') }}..." value="{{ request('search') }}">
         </div>
         <div class="col-md-2">
             <select name="category" class="form-select">
-                <option value="">Toutes catégories</option>
+                <option value="">{{ __('documents.all_categories') }}</option>
                 @foreach(['contrat','quittance','attestation','assurance','facture','autre'] as $cat)
                 <option value="{{ $cat }}" @selected(request('category')==$cat)>{{ ucfirst($cat) }}</option>
                 @endforeach
@@ -25,38 +25,38 @@
         </div>
         <div class="col-md-2">
             <select name="property_id" class="form-select">
-                <option value="">Tous les biens</option>
+                <option value="">{{ __('documents.all_properties') }}</option>
                 @foreach($properties as $property)
                 <option value="{{ $property->id }}" @selected(request('property_id')==$property->id)>{{ $property->name }}</option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-primary-custom w-100">Filtrer</button>
+            <button type="submit" class="btn btn-primary-custom w-100">{{ __('common.filter') }}</button>
         </div>
         @if(request()->hasAny(['search','category','property_id']))
         <div class="col-md-2">
-            <a href="{{ route('documents.index') }}" class="btn btn-outline-secondary w-100">Réinitialiser</a>
+            <a href="{{ route('documents.index') }}" class="btn btn-outline-secondary w-100">{{ __('common.reset') }}</a>
         </div>
         @endif
     </form>
 </div>
 
 @if($documents->isEmpty())
-    <x-empty-state icon="folder-open" title="Aucun document trouvé" text="Commencez par ajouter votre premier document." :actionRoute="route('documents.create')" actionLabel="Ajouter un document" />
+    <x-empty-state icon="folder-open" :title="__('documents.empty_title')" :text="__('documents.empty_text')" :actionRoute="route('documents.create')" :actionLabel="__('documents.add')" />
 @else
 <div class="data-table-wrap">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>Nom</th>
-                    <th>Catégorie</th>
-                    <th>Bien</th>
-                    <th>Date d'ajout</th>
-                    <th>Expiration</th>
-                    <th>Taille</th>
-                    <th class="text-end">Actions</th>
+                    <th>{{ __('documents.name') }}</th>
+                    <th>{{ __('documents.category') }}</th>
+                    <th>{{ __('documents.property') }}</th>
+                    <th>{{ __('documents.upload_date') }}</th>
+                    <th>{{ __('documents.expiration') }}</th>
+                    <th>{{ __('documents.size') }}</th>
+                    <th class="text-end">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,16 +102,16 @@
                     <td class="text-end">
                         <div class="d-flex gap-1 justify-content-end">
                             @if($document->file_path)
-                            <a href="{{ route('documents.download', $document) }}" class="btn btn-xs btn-outline-success btn-sm py-0 px-2" title="Télécharger">
+                            <a href="{{ route('documents.download', $document) }}" class="btn btn-xs btn-outline-success btn-sm py-0 px-2" title="{{ __('documents.download') }}">
                                 <i class="fas fa-download"></i>
                             </a>
                             @endif
-                            <a href="{{ route('documents.edit', $document) }}" class="btn btn-xs btn-outline-primary btn-sm py-0 px-2" title="Modifier">
+                            <a href="{{ route('documents.edit', $document) }}" class="btn btn-xs btn-outline-primary btn-sm py-0 px-2" title="{{ __('common.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form method="POST" action="{{ route('documents.destroy', $document) }}" onsubmit="return confirm('Supprimer ce document ?')">
+                            <form method="POST" action="{{ route('documents.destroy', $document) }}" onsubmit="return confirm('{{ __('documents.delete_confirm') }}')">
                                 @csrf @method('DELETE')
-                                <button class="btn btn-xs btn-outline-danger btn-sm py-0 px-2" title="Supprimer">
+                                <button class="btn btn-xs btn-outline-danger btn-sm py-0 px-2" title="{{ __('common.delete') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

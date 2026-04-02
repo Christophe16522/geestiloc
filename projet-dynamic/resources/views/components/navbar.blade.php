@@ -9,17 +9,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navMain">
             <ul class="navbar-nav me-auto ms-3 gap-1">
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i>Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.index') }}"><i class="fas fa-building me-1"></i>Biens</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('tenants.*') ? 'active' : '' }}" href="{{ route('tenants.index') }}"><i class="fas fa-users me-1"></i>Locataires</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('contracts.*') ? 'active' : '' }}" href="{{ route('contracts.index') }}"><i class="fas fa-file-contract me-1"></i>Contrats</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('payments.*') ? 'active' : '' }}" href="{{ route('payments.index') }}"><i class="fas fa-euro-sign me-1"></i>Finances</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('documents.*') ? 'active' : '' }}" href="{{ route('documents.index') }}"><i class="fas fa-folder me-1"></i>Documents</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('maintenances.*') ? 'active' : '' }}" href="{{ route('maintenances.index') }}"><i class="fas fa-wrench me-1"></i>Maintenance</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('reports.*') ? 'active' : '' }}" href="{{ route('reports.index') }}"><i class="fas fa-chart-bar me-1"></i>Rapports</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i>{{ __('nav.dashboard') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.index') }}"><i class="fas fa-building me-1"></i>{{ __('nav.properties') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('tenants.*') ? 'active' : '' }}" href="{{ route('tenants.index') }}"><i class="fas fa-users me-1"></i>{{ __('nav.tenants') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('contracts.*') ? 'active' : '' }}" href="{{ route('contracts.index') }}"><i class="fas fa-file-contract me-1"></i>{{ __('nav.contracts') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('payments.*') ? 'active' : '' }}" href="{{ route('payments.index') }}"><i class="fas fa-euro-sign me-1"></i>{{ __('nav.payments') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('documents.*') ? 'active' : '' }}" href="{{ route('documents.index') }}"><i class="fas fa-folder me-1"></i>{{ __('nav.documents') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('maintenances.*') ? 'active' : '' }}" href="{{ route('maintenances.index') }}"><i class="fas fa-wrench me-1"></i>{{ __('nav.maintenances') }}</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('reports.*') ? 'active' : '' }}" href="{{ route('reports.index') }}"><i class="fas fa-chart-bar me-1"></i>{{ __('nav.reports') }}</a></li>
             </ul>
             <div class="d-flex align-items-center gap-2">
                 <span class="text-white-50 small">{{ Auth::user()->name }}</span>
+                {{-- Sélecteur de langue --}}
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-light dropdown-toggle" style="font-size:.8rem;padding:.3rem .7rem;" type="button" data-bs-toggle="dropdown">
+                        {{ strtoupper(app()->getLocale()) }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item {{ app()->getLocale() === 'fr' ? 'active' : '' }}" href="{{ route('lang.switch', 'fr') }}">
+                                🇫🇷 Français
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ route('lang.switch', 'en') }}">
+                                🇬🇧 English
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn btn-sm btn-outline-light" style="font-size:.8rem;padding:.3rem .7rem;">

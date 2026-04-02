@@ -5,13 +5,13 @@
         @csrf
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('auth.email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Mot de passe')" />
+            <x-input-label for="password" :value="__('auth.password')" />
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -19,19 +19,19 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
+                <span class="ms-2 text-sm text-gray-600">{{ __('auth.remember_me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Mot de passe oublié ?') }}
+                    {{ __('auth.forgot_password') }}
                 </a>
             @endif
 
             <x-primary-button class="ms-3">
-                {{ __('Se connecter') }}
+                {{ __('auth.sign_in') }}
             </x-primary-button>
         </div>
     </form>
@@ -39,7 +39,7 @@
     {{-- Séparateur --}}
     <div class="mt-6 flex items-center gap-3">
         <div class="flex-grow border-t border-gray-200"></div>
-        <span class="text-sm text-gray-400">ou</span>
+        <span class="text-sm text-gray-400">{{ __('auth.or') }}</span>
         <div class="flex-grow border-t border-gray-200"></div>
     </div>
 
@@ -52,6 +52,6 @@
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
         </svg>
-        Se connecter avec Google
+        {{ __('auth.google_login') }}
     </a>
 </x-guest-layout>

@@ -10,9 +10,9 @@
     </div>
     <x-status-badge :status="$property->status" type="property" />
     <a href="{{ route('properties.edit', $property) }}" class="btn btn-sm btn-outline-primary">
-        <i class="fas fa-edit me-1"></i>Modifier
+        <i class="fas fa-edit me-1"></i>{{ __('common.edit') }}
     </a>
-    <form method="POST" action="{{ route('properties.destroy', $property) }}" onsubmit="return confirm('Supprimer ce bien ?')">
+    <form method="POST" action="{{ route('properties.destroy', $property) }}" onsubmit="return confirm('{{ __('properties.delete_confirm') }}')">
         @csrf @method('DELETE')
         <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
     </form>
@@ -28,7 +28,7 @@
 <div class="row g-4">
     <div class="col-lg-6">
         <div class="data-table-wrap p-3">
-            <h6 class="fw-700 mb-3">Locataires ({{ $property->tenants->count() }})</h6>
+            <h6 class="fw-700 mb-3">{{ __('properties.tenants_count') }} ({{ $property->tenants->count() }})</h6>
             @forelse($property->tenants as $tenant)
             <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                 <div class="d-flex align-items-center gap-2">
@@ -41,13 +41,13 @@
                 <x-status-badge :status="$tenant->payment_status" type="payment" />
             </div>
             @empty
-            <p class="text-muted small">Aucun locataire</p>
+            <p class="text-muted small">{{ __('properties.no_tenants') }}</p>
             @endforelse
         </div>
     </div>
     <div class="col-lg-6">
         <div class="data-table-wrap p-3">
-            <h6 class="fw-700 mb-3">Maintenances ({{ $property->maintenances->count() }})</h6>
+            <h6 class="fw-700 mb-3">{{ __('nav.maintenances') }} ({{ $property->maintenances->count() }})</h6>
             @forelse($property->maintenances->take(5) as $m)
             <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                 <div>
@@ -57,7 +57,7 @@
                 <x-progress-bar :percentage="$m->progress_percentage" :showLabel="true" />
             </div>
             @empty
-            <p class="text-muted small">Aucune maintenance</p>
+            <p class="text-muted small">{{ __('properties.no_maintenances') }}</p>
             @endforelse
         </div>
     </div>

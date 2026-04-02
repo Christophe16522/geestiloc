@@ -13,9 +13,9 @@
     </div>
     <x-status-badge :status="$tenant->payment_status" type="payment" />
     <a href="{{ route('tenants.edit', $tenant) }}" class="btn btn-sm btn-outline-primary">
-        <i class="fas fa-edit me-1"></i>Modifier
+        <i class="fas fa-edit me-1"></i>{{ __('common.edit') }}
     </a>
-    <form method="POST" action="{{ route('tenants.destroy', $tenant) }}" onsubmit="return confirm('Supprimer ce locataire ?')">
+    <form method="POST" action="{{ route('tenants.destroy', $tenant) }}" onsubmit="return confirm('{{ __('tenants.delete_confirm') }}')">
         @csrf @method('DELETE')
         <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
     </form>
@@ -52,11 +52,11 @@
     <div class="col-lg-8">
         <div class="data-table-wrap">
             <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
-                <h6 class="fw-700 mb-0">Paiements récents</h6>
+                <h6 class="fw-700 mb-0">{{ __('tenants.recent_payments') }}</h6>
                 <a href="{{ route('payments.index', ['tenant_id' => $tenant->id]) }}" class="btn btn-sm btn-outline-primary">Voir tout</a>
             </div>
             @if($tenant->payments->isEmpty())
-            <div class="p-4 text-center text-muted small">Aucun paiement enregistré</div>
+            <div class="p-4 text-center text-muted small">{{ __('tenants.no_payments') }}</div>
             @else
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
@@ -99,7 +99,7 @@
     <div class="col-lg-4">
         <div class="data-table-wrap">
             <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
-                <h6 class="fw-700 mb-0">Contrats ({{ $tenant->contracts->count() }})</h6>
+                <h6 class="fw-700 mb-0">{{ __('tenants.contracts') }} ({{ $tenant->contracts->count() }})</h6>
                 <a href="{{ route('contracts.create', ['tenant_id' => $tenant->id]) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus"></i></a>
             </div>
             @forelse($tenant->contracts as $contract)
@@ -120,7 +120,7 @@
                 </div>
             </div>
             @empty
-            <div class="p-4 text-center text-muted small">Aucun contrat</div>
+            <div class="p-4 text-center text-muted small">{{ __('tenants.no_contracts') }}</div>
             @endforelse
         </div>
     </div>

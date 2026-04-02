@@ -1,40 +1,40 @@
 @extends('layouts.app')
-@section('title', 'Maintenances')
+@section('title', __('maintenances.title'))
 @section('content')
 
 <x-page-header
-    title="Suivi des maintenances"
-    subtitle="{{ $maintenances->total() }} intervention(s) enregistrée(s)"
+    :title="__('maintenances.title')"
+    :subtitle="__('maintenances.subtitle', ['count' => $maintenances->total()])"
     :createRoute="route('maintenances.create')"
-    createLabel="Nouvelle maintenance"
+    :createLabel="__('maintenances.add')"
 />
 
 {{-- Filters --}}
 <div class="data-table-wrap p-3 mb-4">
     <form method="GET" class="row g-2 align-items-end">
         <div class="col-md-3">
-            <input type="text" name="search" class="form-control" placeholder="Rechercher..." value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="{{ __('common.search') }}..." value="{{ request('search') }}">
         </div>
         <div class="col-md-2">
             <select name="status" class="form-select">
-                <option value="">Tous statuts</option>
-                <option value="a_faire" @selected(request('status')=='a_faire')>À faire</option>
-                <option value="en_cours" @selected(request('status')=='en_cours')>En cours</option>
-                <option value="termine" @selected(request('status')=='termine')>Terminé</option>
+                <option value="">{{ __('maintenances.all_statuses') }}</option>
+                <option value="a_faire" @selected(request('status')=='a_faire')>{{ __('common.status_a_faire') }}</option>
+                <option value="en_cours" @selected(request('status')=='en_cours')>{{ __('common.status_en_cours') }}</option>
+                <option value="termine" @selected(request('status')=='termine')>{{ __('common.status_termine') }}</option>
             </select>
         </div>
         <div class="col-md-2">
             <select name="priority" class="form-select">
-                <option value="">Toutes priorités</option>
-                <option value="faible" @selected(request('priority')=='faible')>Faible</option>
-                <option value="normale" @selected(request('priority')=='normale')>Normale</option>
-                <option value="haute" @selected(request('priority')=='haute')>Haute</option>
-                <option value="urgente" @selected(request('priority')=='urgente')>Urgente</option>
+                <option value="">{{ __('maintenances.all_priorities') }}</option>
+                <option value="faible" @selected(request('priority')=='faible')>{{ __('common.priority_basse') }}</option>
+                <option value="normale" @selected(request('priority')=='normale')>{{ __('common.priority_moyenne') }}</option>
+                <option value="haute" @selected(request('priority')=='haute')>{{ __('common.priority_haute') }}</option>
+                <option value="urgente" @selected(request('priority')=='urgente')>{{ __('maintenances.priority_urgente') }}</option>
             </select>
         </div>
         <div class="col-md-2">
             <select name="property_id" class="form-select">
-                <option value="">Tous les biens</option>
+                <option value="">{{ __('maintenances.all_properties') }}</option>
                 @foreach($properties as $property)
                 <option value="{{ $property->id }}" @selected(request('property_id')==$property->id)>{{ $property->name }}</option>
                 @endforeach
@@ -45,27 +45,27 @@
         </div>
         @if(request()->hasAny(['search','status','priority','property_id']))
         <div class="col-md-2">
-            <a href="{{ route('maintenances.index') }}" class="btn btn-outline-secondary w-100">Réinitialiser</a>
+            <a href="{{ route('maintenances.index') }}" class="btn btn-outline-secondary w-100">{{ __('common.reset') }}</a>
         </div>
         @endif
     </form>
 </div>
 
 @if($maintenances->isEmpty())
-    <x-empty-state icon="wrench" title="Aucune maintenance trouvée" text="Aucune intervention ne correspond à vos critères." :actionRoute="route('maintenances.create')" actionLabel="Nouvelle maintenance" />
+    <x-empty-state icon="wrench" :title="__('maintenances.empty_title')" :text="__('maintenances.empty_text')" :actionRoute="route('maintenances.create')" :actionLabel="__('maintenances.add')" />
 @else
 <div class="data-table-wrap">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>Titre</th>
-                    <th>Bien</th>
-                    <th>Priorité</th>
-                    <th>Statut</th>
-                    <th>Avancement</th>
-                    <th>Coût estimé</th>
-                    <th class="text-end">Actions</th>
+                    <th>{{ __('maintenances.title_col') }}</th>
+                    <th>{{ __('maintenances.property') }}</th>
+                    <th>{{ __('maintenances.priority') }}</th>
+                    <th>{{ __('common.status') }}</th>
+                    <th>{{ __('maintenances.progress') }}</th>
+                    <th>{{ __('maintenances.estimated_cost') }}</th>
+                    <th class="text-end">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,15 +102,15 @@
                     </td>
                     <td class="text-end">
                         <div class="d-flex gap-1 justify-content-end">
-                            <a href="{{ route('maintenances.show', $maintenance) }}" class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2" title="Voir">
+                            <a href="{{ route('maintenances.show', $maintenance) }}" class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2" title="{{ __('common.edit') }}">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="{{ route('maintenances.edit', $maintenance) }}" class="btn btn-xs btn-outline-primary btn-sm py-0 px-2" title="Modifier">
+                            <a href="{{ route('maintenances.edit', $maintenance) }}" class="btn btn-xs btn-outline-primary btn-sm py-0 px-2" title="{{ __('common.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form method="POST" action="{{ route('maintenances.destroy', $maintenance) }}" onsubmit="return confirm('Supprimer cette maintenance ?')">
+                            <form method="POST" action="{{ route('maintenances.destroy', $maintenance) }}" onsubmit="return confirm('{{ __('maintenances.delete_confirm') }}')">
                                 @csrf @method('DELETE')
-                                <button class="btn btn-xs btn-outline-danger btn-sm py-0 px-2" title="Supprimer">
+                                <button class="btn btn-xs btn-outline-danger btn-sm py-0 px-2" title="{{ __('common.delete') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

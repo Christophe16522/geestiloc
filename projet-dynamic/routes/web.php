@@ -43,4 +43,11 @@ Route::middleware(['auth'])->group(function () {
 Route::get('auth/google',          [GoogleController::class, 'redirect'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'callback'])->name('auth.google.callback');
 
+Route::get('lang/{locale}', function (string $locale) {
+    if (in_array($locale, ['fr', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
 require __DIR__.'/auth.php';

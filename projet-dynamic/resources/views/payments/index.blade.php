@@ -1,27 +1,27 @@
 @extends('layouts.app')
-@section('title', 'Paiements')
+@section('title', __('payments.title'))
 @section('content')
 
 <x-page-header
-    title="Suivi des paiements"
-    subtitle="Gestion des loyers et encaissements"
+    :title="__('payments.title')"
+    :subtitle="__('payments.subtitle')"
     :createRoute="route('payments.create')"
-    createLabel="Nouveau paiement"
+    :createLabel="__('payments.add')"
 />
 
 {{-- Monthly Stats --}}
 <div class="row g-4 mb-4">
     <div class="col-6 col-lg-3">
-        <x-stat-card label="Total du mois" :value="number_format($stats['total'] ?? 0, 0, ',', ' ').' €'" icon="euro-sign" variant="primary" />
+        <x-stat-card :label="__('payments.total_month')" :value="number_format($stats['total'] ?? 0, 0, ',', ' ').' €'" icon="euro-sign" variant="primary" />
     </div>
     <div class="col-6 col-lg-3">
-        <x-stat-card label="Payés" :value="number_format($stats['paid'] ?? 0, 0, ',', ' ').' €'" icon="check-circle" variant="success" />
+        <x-stat-card :label="__('common.status_paye')" :value="number_format($stats['paid'] ?? 0, 0, ',', ' ').' €'" icon="check-circle" variant="success" />
     </div>
     <div class="col-6 col-lg-3">
-        <x-stat-card label="En attente" :value="number_format($stats['pending'] ?? 0, 0, ',', ' ').' €'" icon="clock" variant="accent" />
+        <x-stat-card :label="__('common.status_attente')" :value="number_format($stats['pending'] ?? 0, 0, ',', ' ').' €'" icon="clock" variant="accent" />
     </div>
     <div class="col-6 col-lg-3">
-        <x-stat-card label="En retard" :value="number_format($stats['late'] ?? 0, 0, ',', ' ').' €'" icon="exclamation-triangle" variant="danger" />
+        <x-stat-card :label="__('common.status_retard')" :value="number_format($stats['late'] ?? 0, 0, ',', ' ').' €'" icon="exclamation-triangle" variant="danger" />
     </div>
 </div>
 
@@ -29,53 +29,53 @@
 <div class="data-table-wrap p-3 mb-4">
     <form method="GET" class="row g-2 align-items-end">
         <div class="col-md-3">
-            <input type="text" name="search" class="form-control" placeholder="Rechercher par locataire..." value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="{{ __('common.search') }}..." value="{{ request('search') }}">
         </div>
         <div class="col-md-2">
             <select name="status" class="form-select">
-                <option value="">Tous statuts</option>
-                <option value="paye" @selected(request('status')=='paye')>Payé</option>
-                <option value="attente" @selected(request('status')=='attente')>En attente</option>
-                <option value="retard" @selected(request('status')=='retard')>En retard</option>
+                <option value="">{{ __('common.all') }}</option>
+                <option value="paye" @selected(request('status')=='paye')>{{ __('common.status_paye') }}</option>
+                <option value="attente" @selected(request('status')=='attente')>{{ __('common.status_attente') }}</option>
+                <option value="retard" @selected(request('status')=='retard')>{{ __('common.status_retard') }}</option>
             </select>
         </div>
         <div class="col-md-2">
             <select name="month" class="form-select">
-                <option value="">Tous les mois</option>
+                <option value="">{{ __('payments.all_months') }}</option>
                 @foreach(range(1,12) as $m)
                 <option value="{{ $m }}" @selected(request('month')==$m)>{{ \Carbon\Carbon::create()->month($m)->isoFormat('MMMM') }}</option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-2">
-            <input type="number" name="year" class="form-control" placeholder="Année" value="{{ request('year', now()->year) }}" min="2000" max="2100">
+            <input type="number" name="year" class="form-control" placeholder="{{ __('payments.year') }}" value="{{ request('year', now()->year) }}" min="2000" max="2100">
         </div>
         <div class="col-md-1">
             <button type="submit" class="btn btn-primary-custom w-100">OK</button>
         </div>
         @if(request()->hasAny(['search','status','month','year']))
         <div class="col-md-2">
-            <a href="{{ route('payments.index') }}" class="btn btn-outline-secondary w-100">Réinitialiser</a>
+            <a href="{{ route('payments.index') }}" class="btn btn-outline-secondary w-100">{{ __('common.reset') }}</a>
         </div>
         @endif
     </form>
 </div>
 
 @if($payments->isEmpty())
-    <x-empty-state icon="euro-sign" title="Aucun paiement trouvé" text="Aucun paiement ne correspond à vos critères." :actionRoute="route('payments.create')" actionLabel="Nouveau paiement" />
+    <x-empty-state icon="euro-sign" :title="__('payments.empty_title')" :text="__('payments.empty_text')" :actionRoute="route('payments.create')" :actionLabel="__('payments.add')" />
 @else
 <div class="data-table-wrap">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>Locataire</th>
-                    <th>Bien</th>
-                    <th>Période</th>
-                    <th>Montant</th>
-                    <th>Statut</th>
-                    <th>Date de paiement</th>
-                    <th class="text-end">Actions</th>
+                    <th>{{ __('payments.tenant') }}</th>
+                    <th>{{ __('payments.property') }}</th>
+                    <th>{{ __('payments.period') }}</th>
+                    <th>{{ __('payments.amount') }}</th>
+                    <th>{{ __('common.status') }}</th>
+                    <th>{{ __('payments.payment_date') }}</th>
+                    <th class="text-end">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,17 +108,17 @@
                             @if($payment->status !== 'paye')
                             <form method="POST" action="{{ route('payments.markPaid', $payment) }}">
                                 @csrf @method('PATCH')
-                                <button class="btn btn-xs btn-outline-success btn-sm py-0 px-2" title="Marquer payé" style="font-size:.75rem;">
-                                    <i class="fas fa-check me-1"></i>Payé
+                                <button class="btn btn-xs btn-outline-success btn-sm py-0 px-2" title="{{ __('payments.mark_paid') }}" style="font-size:.75rem;">
+                                    <i class="fas fa-check me-1"></i>{{ __('payments.mark_paid') }}
                                 </button>
                             </form>
                             @endif
-                            <a href="{{ route('payments.edit', $payment) }}" class="btn btn-xs btn-outline-primary btn-sm py-0 px-2" title="Modifier">
+                            <a href="{{ route('payments.edit', $payment) }}" class="btn btn-xs btn-outline-primary btn-sm py-0 px-2" title="{{ __('common.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form method="POST" action="{{ route('payments.destroy', $payment) }}" onsubmit="return confirm('Supprimer ce paiement ?')">
+                            <form method="POST" action="{{ route('payments.destroy', $payment) }}" onsubmit="return confirm('{{ __('payments.delete_confirm') }}')">
                                 @csrf @method('DELETE')
-                                <button class="btn btn-xs btn-outline-danger btn-sm py-0 px-2" title="Supprimer">
+                                <button class="btn btn-xs btn-outline-danger btn-sm py-0 px-2" title="{{ __('common.delete') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

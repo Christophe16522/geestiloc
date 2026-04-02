@@ -1,0 +1,20 @@
+<?php
+return [
+    'title'              => 'Tableau de bord',
+    'subtitle'           => "Vue d'ensemble de votre portefeuille immobilier",
+    'total_properties'   => 'Biens totaux',
+    'occupancy_rate'     => "Taux d'occupation",
+    'monthly_revenue'    => 'Revenus du mois',
+    'late_rents'         => 'Loyers en retard',
+    'occupied'           => 'occupés',
+    'vacant'             => 'vacants',
+    'revenue_chart'      => 'Revenus mensuels (12 derniers mois)',
+    'quick_access'       => 'Accès rapides',
+    'add_property'       => 'Ajouter un bien',
+    'add_tenant'         => 'Ajouter un locataire',
+    'view_payments'      => 'Voir les paiements',
+    'active_maintenances'=> 'Maintenances en cours',
+    'reports'            => 'Rapports',
+    'alerts'             => 'Alertes',
+    'no_alerts'          => 'Aucune alerte',
+];

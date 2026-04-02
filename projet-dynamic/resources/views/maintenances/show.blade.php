@@ -16,9 +16,9 @@
     <span class="badge bg-{{ $maintenance->priority_color ?? 'secondary' }} fs-6">{{ ucfirst($maintenance->priority ?? '—') }}</span>
     <x-status-badge :status="$maintenance->status" type="maintenance" />
     <a href="{{ route('maintenances.edit', $maintenance) }}" class="btn btn-sm btn-outline-primary">
-        <i class="fas fa-edit me-1"></i>Modifier
+        <i class="fas fa-edit me-1"></i>{{ __('common.edit') }}
     </a>
-    <form method="POST" action="{{ route('maintenances.destroy', $maintenance) }}" onsubmit="return confirm('Supprimer cette maintenance ?')">
+    <form method="POST" action="{{ route('maintenances.destroy', $maintenance) }}" onsubmit="return confirm('{{ __('maintenances.delete_confirm') }}')">
         @csrf @method('DELETE')
         <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
     </form>
@@ -27,16 +27,16 @@
 {{-- Stats --}}
 <div class="row g-4 mb-4">
     <div class="col-md-3">
-        <x-stat-card label="Avancement" :value="($maintenance->progress_percentage ?? 0).'%'" icon="tasks" variant="primary" />
+        <x-stat-card :label="__('maintenances.progress')" :value="($maintenance->progress_percentage ?? 0).'%'" icon="tasks" variant="primary" />
     </div>
     <div class="col-md-3">
-        <x-stat-card label="Coût estimé" :value="$maintenance->estimated_cost ? number_format($maintenance->estimated_cost, 0, ',', ' ').' €' : '—'" icon="euro-sign" variant="accent" />
+        <x-stat-card :label="__('maintenances.estimated_cost')" :value="$maintenance->estimated_cost ? number_format($maintenance->estimated_cost, 0, ',', ' ').' €' : '—'" icon="euro-sign" variant="accent" />
     </div>
     <div class="col-md-3">
-        <x-stat-card label="Coût réel" :value="$maintenance->actual_cost ? number_format($maintenance->actual_cost, 0, ',', ' ').' €' : '—'" icon="receipt" variant="warning" />
+        <x-stat-card :label="__('maintenances.actual_cost')" :value="$maintenance->actual_cost ? number_format($maintenance->actual_cost, 0, ',', ' ').' €' : '—'" icon="receipt" variant="warning" />
     </div>
     <div class="col-md-3">
-        <x-stat-card label="Créé le" :value="$maintenance->created_at->format('d/m/Y')" icon="calendar-alt" variant="success" />
+        <x-stat-card :label="__('maintenances.created_at')" :value="$maintenance->created_at->format('d/m/Y')" icon="calendar-alt" variant="success" />
     </div>
 </div>
 
@@ -44,19 +44,19 @@
     <div class="col-lg-8">
         {{-- Description --}}
         <div class="data-table-wrap p-3 mb-4">
-            <h6 class="fw-700 mb-3">Description</h6>
+            <h6 class="fw-700 mb-3">{{ __('maintenances.description') }}</h6>
             @if($maintenance->description)
             <p class="mb-0">{{ $maintenance->description }}</p>
             @else
-            <p class="text-muted small mb-0">Aucune description renseignée.</p>
+            <p class="text-muted small mb-0">{{ __('maintenances.no_description') }}</p>
             @endif
         </div>
 
         {{-- Progress bar --}}
         <div class="data-table-wrap p-3 mb-4">
-            <h6 class="fw-700 mb-3">Avancement global</h6>
+            <h6 class="fw-700 mb-3">{{ __('maintenances.global_progress') }}</h6>
             <div class="mb-2 d-flex justify-content-between small">
-                <span>Progression</span>
+                <span>{{ __('maintenances.progression') }}</span>
                 <span class="fw-600">{{ $maintenance->progress_percentage ?? 0 }}%</span>
             </div>
             <div class="progress" style="height:12px;border-radius:8px;">
@@ -70,7 +70,7 @@
             </div>
             @if($maintenance->status !== 'termine')
             <div class="mt-3 small text-muted">
-                <i class="fas fa-info-circle me-1"></i>Utilisez le formulaire ci-dessous pour mettre à jour l'avancement.
+                <i class="fas fa-info-circle me-1"></i>{{ __('maintenances.update_hint') }}
             </div>
             @endif
         </div>
@@ -80,12 +80,12 @@
         {{-- Update Progress --}}
         @if($maintenance->status !== 'termine')
         <div class="data-table-wrap p-3 mb-4">
-            <h6 class="fw-700 mb-3">Mettre à jour l'avancement</h6>
+            <h6 class="fw-700 mb-3">{{ __('maintenances.update_progress') }}</h6>
             <form method="POST" action="{{ route('maintenances.progress', $maintenance) }}">
                 @csrf @method('PATCH')
                 <div class="mb-3">
                     <label class="form-label-custom d-flex justify-content-between">
-                        <span>Progression</span>
+                        <span>{{ __('maintenances.progression') }}</span>
                         <span id="progressValue" class="fw-600">{{ $maintenance->progress_percentage ?? 0 }}%</span>
                     </label>
                     <input type="range" name="progress_percentage" class="form-range" min="0" max="100" step="5"
@@ -93,15 +93,15 @@
                            oninput="document.getElementById('progressValue').textContent = this.value + '%'">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label-custom">Nouveau statut</label>
+                    <label class="form-label-custom">{{ __('maintenances.new_status') }}</label>
                     <select name="status" class="form-select">
-                        <option value="a_faire" @selected($maintenance->status=='a_faire')>À faire</option>
-                        <option value="en_cours" @selected($maintenance->status=='en_cours')>En cours</option>
-                        <option value="termine" @selected($maintenance->status=='termine')>Terminé</option>
+                        <option value="a_faire" @selected($maintenance->status=='a_faire')>{{ __('common.status_a_faire') }}</option>
+                        <option value="en_cours" @selected($maintenance->status=='en_cours')>{{ __('common.status_en_cours') }}</option>
+                        <option value="termine" @selected($maintenance->status=='termine')>{{ __('common.status_termine') }}</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary-custom w-100 btn-sm">
-                    <i class="fas fa-sync me-2"></i>Mettre à jour
+                    <i class="fas fa-sync me-2"></i>{{ __('common.update') }}
                 </button>
             </form>
         </div>
@@ -109,15 +109,15 @@
         <div class="data-table-wrap p-3 mb-4">
             <div class="text-center py-3">
                 <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
-                <div class="fw-700">Intervention terminée</div>
-                <div class="small text-muted">Cette maintenance est clôturée.</div>
+                <div class="fw-700">{{ __('maintenances.completed') }}</div>
+                <div class="small text-muted">{{ __('maintenances.completed_desc') }}</div>
             </div>
             <form method="POST" action="{{ route('maintenances.progress', $maintenance) }}">
                 @csrf @method('PATCH')
                 <input type="hidden" name="status" value="en_cours">
                 <input type="hidden" name="progress_percentage" value="{{ $maintenance->progress_percentage ?? 100 }}">
                 <button type="submit" class="btn btn-outline-warning w-100 btn-sm">
-                    <i class="fas fa-undo me-2"></i>Réouvrir
+                    <i class="fas fa-undo me-2"></i>{{ __('maintenances.reopen') }}
                 </button>
             </form>
         </div>
@@ -126,11 +126,11 @@
         {{-- Bien info --}}
         @if($maintenance->property)
         <div class="data-table-wrap p-3">
-            <h6 class="fw-700 mb-3">Bien concerné</h6>
+            <h6 class="fw-700 mb-3">{{ __('maintenances.concerned_property') }}</h6>
             <div class="fw-700">{{ $maintenance->property->name }}</div>
             <div class="small text-muted">{{ $maintenance->property->full_address }}</div>
             <a href="{{ route('properties.show', $maintenance->property) }}" class="btn btn-outline-secondary btn-sm mt-2 w-100">
-                <i class="fas fa-building me-1"></i>Voir le bien
+                <i class="fas fa-building me-1"></i>{{ __('maintenances.view_property') }}
             </a>
         </div>
         @endif

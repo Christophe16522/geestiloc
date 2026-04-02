@@ -15,22 +15,22 @@
             <x-form-section title="Informations personnelles" :step="1">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label-custom">Prénom *</label>
+                        <label class="form-label-custom">{{ __('tenants.first_name') }}</label>
                         <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name', $tenant->first_name) }}" required>
                         @error('first_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label-custom">Nom *</label>
+                        <label class="form-label-custom">{{ __('tenants.last_name') }}</label>
                         <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ old('last_name', $tenant->last_name) }}" required>
                         @error('last_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label-custom">Email *</label>
+                        <label class="form-label-custom">{{ __('common.email') }}</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $tenant->email) }}" required>
                         @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label-custom">Téléphone</label>
+                        <label class="form-label-custom">{{ __('common.phone') }}</label>
                         <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', $tenant->phone) }}">
                         @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
@@ -40,7 +40,7 @@
             <x-form-section title="Informations de location" :step="2">
                 <div class="row g-3">
                     <div class="col-md-12">
-                        <label class="form-label-custom">Bien loué</label>
+                        <label class="form-label-custom">{{ __('tenants.property') }}</label>
                         <select name="property_id" class="form-select @error('property_id') is-invalid @enderror">
                             <option value="">— Sélectionner un bien —</option>
                             @foreach($properties as $property)
@@ -52,21 +52,21 @@
                         @error('property_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label-custom">Loyer mensuel (€) *</label>
+                        <label class="form-label-custom">{{ __('tenants.monthly_rent') }}</label>
                         <input type="number" name="monthly_rent" class="form-control @error('monthly_rent') is-invalid @enderror" value="{{ old('monthly_rent', $tenant->monthly_rent) }}" step="0.01" min="0" required>
                         @error('monthly_rent')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label-custom">Date de début de bail</label>
+                        <label class="form-label-custom">{{ __('tenants.lease_start') }}</label>
                         <input type="date" name="lease_start_date" class="form-control @error('lease_start_date') is-invalid @enderror" value="{{ old('lease_start_date', $tenant->lease_start_date?->format('Y-m-d')) }}">
                         @error('lease_start_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label-custom">Statut de paiement</label>
+                        <label class="form-label-custom">{{ __('tenants.payment_status') }}</label>
                         <select name="payment_status" class="form-select @error('payment_status') is-invalid @enderror">
-                            <option value="attente" @selected(old('payment_status', $tenant->payment_status)=='attente')>En attente</option>
-                            <option value="paye" @selected(old('payment_status', $tenant->payment_status)=='paye')>Payé</option>
-                            <option value="retard" @selected(old('payment_status', $tenant->payment_status)=='retard')>En retard</option>
+                            <option value="attente" @selected(old('payment_status', $tenant->payment_status)=='attente')>{{ __('common.status_attente') }}</option>
+                            <option value="paye" @selected(old('payment_status', $tenant->payment_status)=='paye')>{{ __('common.status_paye') }}</option>
+                            <option value="retard" @selected(old('payment_status', $tenant->payment_status)=='retard')>{{ __('common.status_retard') }}</option>
                         </select>
                         @error('payment_status')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
@@ -75,17 +75,17 @@
         </div>
         <div class="col-lg-4">
             <div class="form-section">
-                <div class="form-section-title">Actions</div>
+                <div class="form-section-title">{{ __('common.actions') }}</div>
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary-custom"><i class="fas fa-save me-2"></i>Mettre à jour</button>
-                    <a href="{{ route('tenants.show', $tenant) }}" class="btn btn-outline-secondary">Annuler</a>
+                    <button type="submit" class="btn btn-primary-custom"><i class="fas fa-save me-2"></i>{{ __('common.update') }}</button>
+                    <a href="{{ route('tenants.show', $tenant) }}" class="btn btn-outline-secondary">{{ __('common.cancel') }}</a>
                 </div>
             </div>
             <div class="form-section mt-3">
                 <div class="form-section-title text-danger">Zone de danger</div>
-                <form method="POST" action="{{ route('tenants.destroy', $tenant) }}" onsubmit="return confirm('Supprimer définitivement ce locataire ?')">
+                <form method="POST" action="{{ route('tenants.destroy', $tenant) }}" onsubmit="return confirm('{{ __('tenants.delete_confirm') }}')">
                     @csrf @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger w-100 btn-sm"><i class="fas fa-trash me-2"></i>Supprimer ce locataire</button>
+                    <button type="submit" class="btn btn-outline-danger w-100 btn-sm"><i class="fas fa-trash me-2"></i>{{ __('common.delete') }}</button>
                 </form>
             </div>
         </div>

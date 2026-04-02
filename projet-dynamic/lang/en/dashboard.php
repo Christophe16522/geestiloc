@@ -1,0 +1,20 @@
+<?php
+return [
+    'title'              => 'Dashboard',
+    'subtitle'           => 'Overview of your real estate portfolio',
+    'total_properties'   => 'Total properties',
+    'occupancy_rate'     => 'Occupancy rate',
+    'monthly_revenue'    => 'Monthly revenue',
+    'late_rents'         => 'Late rents',
+    'occupied'           => 'occupied',
+    'vacant'             => 'vacant',
+    'revenue_chart'      => 'Monthly revenue (last 12 months)',
+    'quick_access'       => 'Quick access',
+    'add_property'       => 'Add a property',
+    'add_tenant'         => 'Add a tenant',
+    'view_payments'      => 'View payments',
+    'active_maintenances'=> 'Active maintenances',
+    'reports'            => 'Reports',
+    'alerts'             => 'Alerts',
+    'no_alerts'          => 'No alerts',
+];
