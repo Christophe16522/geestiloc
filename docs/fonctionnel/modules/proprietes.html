@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Propriétés — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../.." data-page="fonctionnel/modules/proprietes.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Module : Propriétés</h1>
+          <p class="page-subtitle">Gestion du parc immobilier du bailleur.</p>
+
+          <h2>Description</h2>
+          <p>
+            Chaque bien appartient à un utilisateur (<code>user_id</code>) et peut être de types variés.
+            Une référence unique est auto-générée à la création (ex : <code>PROP-001</code>).
+          </p>
+
+          <h2>Champs</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>reference</code></td><td>string unique</td><td>Auto-générée (ex : <code>PROP-001</code>)</td></tr>
+                <tr><td><code>name</code></td><td>string</td><td>Nom / libellé du bien</td></tr>
+                <tr><td><code>address</code></td><td>string</td><td>Adresse</td></tr>
+                <tr><td><code>city</code></td><td>string</td><td>Ville</td></tr>
+                <tr><td><code>postal_code</code></td><td>string</td><td>Code postal (nullable)</td></tr>
+                <tr><td><code>type</code></td><td>enum</td><td><code>appartement</code>, <code>maison</code>, <code>studio</code>, <code>commercial</code>, <code>autre</code></td></tr>
+                <tr><td><code>surface_m2</code></td><td>decimal</td><td>Surface en m² (nullable)</td></tr>
+                <tr><td><code>monthly_rent</code></td><td>decimal</td><td>Loyer mensuel</td></tr>
+                <tr><td><code>charges</code></td><td>decimal</td><td>Charges mensuelles (défaut : 0)</td></tr>
+                <tr><td><code>deposit</code></td><td>decimal</td><td>Dépôt de garantie (défaut : 0)</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>occupee</code>, <code>vacante</code></td></tr>
+                <tr><td><code>description</code></td><td>text</td><td>Description libre (nullable)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Relations</h2>
+          <ul>
+            <li>Appartient à un <code>User</code></li>
+            <li>A plusieurs <code>Tenant</code>, <code>Contract</code>, <code>Payment</code>, <code>Document</code>, <code>Maintenance</code></li>
+          </ul>
+          <p>La suppression d'un bien déclenche une suppression en cascade de toutes ses données associées.</p>
+
+          <h2>Accessors Eloquent</h2>
+          <ul>
+            <li><code>full_address</code> — adresse complète formatée (adresse + code postal + ville)</li>
+            <li><code>occupancy_rate</code> — taux d'occupation (100% si occupé, 0% si vacant)</li>
+          </ul>
+
+          <h2>Routes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Méthode</th><th>URL</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><code>GET</code></td><td><code>/properties</code></td><td>Liste des biens</td></tr>
+                <tr><td><code>GET</code></td><td><code>/properties/create</code></td><td>Formulaire de création</td></tr>
+                <tr><td><code>POST</code></td><td><code>/properties</code></td><td>Créer un bien</td></tr>
+                <tr><td><code>GET</code></td><td><code>/properties/{id}</code></td><td>Détail d'un bien</td></tr>
+                <tr><td><code>GET</code></td><td><code>/properties/{id}/edit</code></td><td>Formulaire de modification</td></tr>
+                <tr><td><code>PUT/PATCH</code></td><td><code>/properties/{id}</code></td><td>Modifier un bien</td></tr>
+                <tr><td><code>DELETE</code></td><td><code>/properties/{id}</code></td><td>Supprimer un bien</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/main.js"></script>
+</body>
+</html>

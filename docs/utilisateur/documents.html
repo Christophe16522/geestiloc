@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documents — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/documents.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Documents</h1>
+          <p class="page-subtitle">Centraliser et retrouver tous les fichiers liés à vos biens.</p>
+
+          <h2>À quoi sert ce module ?</h2>
+          <p>
+            Le module Documents vous permet de stocker en ligne tous les fichiers liés à votre
+            activité de bailleur : contrats de bail signés, diagnostics obligatoires (DPE, électricité…),
+            quittances de loyer, attestations d'assurance, et tout autre document utile.
+          </p>
+
+          <h2>Uploader un document</h2>
+          <ol>
+            <li>Cliquez sur <strong>Documents</strong> dans le menu latéral.</li>
+            <li>Cliquez sur <strong>Ajouter un document</strong>.</li>
+            <li>Remplissez le formulaire :</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Nom</strong></td><td>Nom du document (ex : « DPE appartement Lyon »)</td><td>Oui</td></tr>
+                <tr><td><strong>Catégorie</strong></td><td>Contrat, diagnostic, quittance, assurance ou autre</td><td>Oui</td></tr>
+                <tr><td><strong>Bien associé</strong></td><td>Bien auquel ce document se rattache</td><td>Non</td></tr>
+                <tr><td><strong>Date d'upload</strong></td><td>Date de dépôt du document</td><td>Oui</td></tr>
+                <tr><td><strong>Date d'expiration</strong></td><td>Date de validité (ex : pour un DPE ou une assurance)</td><td>Non</td></tr>
+                <tr><td><strong>Fichier</strong></td><td>Le fichier à uploader (PDF, image, etc.)</td><td>Oui</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol start="4">
+            <li>Cliquez sur <strong>Uploader</strong>.</li>
+          </ol>
+
+          <h2>Catégories de documents</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Catégorie</th><th>Exemples</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Contrat</strong></td><td>Bail de location signé, avenant au bail</td></tr>
+                <tr><td><strong>Diagnostic</strong></td><td>DPE, diagnostic électricité, amiante, plomb, gaz</td></tr>
+                <tr><td><strong>Quittance</strong></td><td>Quittance de loyer mensuelle</td></tr>
+                <tr><td><strong>Assurance</strong></td><td>Attestation assurance propriétaire non occupant (PNO), attestation locataire</td></tr>
+                <tr><td><strong>Autre</strong></td><td>Photos, relevés de charges, factures de travaux</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Télécharger un document</h2>
+          <p>
+            Dans la liste des documents, cliquez sur le nom ou le bouton <strong>Télécharger</strong>
+            pour récupérer le fichier sur votre appareil.
+          </p>
+
+          <h2>Supprimer un document</h2>
+          <p>
+            Cliquez sur <strong>Supprimer</strong> dans la liste. La suppression est définitive.
+            Si vous avez uploadé un mauvais fichier, supprimez-le et ré-uploadez le bon.
+          </p>
+
+          <div class="note">
+            Il n'est pas possible de modifier un document déjà uploadé. Pour remplacer un fichier,
+            supprimez l'ancienne version puis uploadez la nouvelle.
+          </div>
+
+          <h2>Bonne pratique : les diagnostics</h2>
+          <div class="tip">
+            Renseignez la <strong>date d'expiration</strong> pour vos diagnostics obligatoires
+            (DPE valable 10 ans, diagnostic électricité 6 ans, etc.). Cela vous permettra de
+            suivre leur validité et d'anticiper leur renouvellement.
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

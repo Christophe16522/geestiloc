@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="technique/architecture.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Architecture technique</h1>
+          <p class="page-subtitle">Stack technologique, structure des dossiers et flux d'authentification.</p>
+
+          <h2>Stack</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Couche</th><th>Technologie</th></tr></thead>
+              <tbody>
+                <tr><td>Framework backend</td><td>Laravel 10</td></tr>
+                <tr><td>Langage</td><td>PHP 8.1+</td></tr>
+                <tr><td>Templating</td><td>Blade (composants réutilisables)</td></tr>
+                <tr><td>CSS</td><td>Tailwind CSS (via Vite)</td></tr>
+                <tr><td>JS interactivité</td><td>Alpine.js</td></tr>
+                <tr><td>Build tool</td><td>Vite</td></tr>
+                <tr><td>Authentification</td><td>Laravel Breeze</td></tr>
+                <tr><td>Base de données</td><td>SQLite (dev) / MySQL (prod)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Structure des dossiers</h2>
+          <pre><code>projet-dynamic/
+├── app/
+│   ├── Http/Controllers/      ← contrôleurs (un par module)
+│   └── Models/                ← modèles Eloquent
+├── database/
+│   └── migrations/            ← schéma BDD versionné
+├── resources/
+│   └── views/
+│       ├── components/        ← composants Blade réutilisables
+│       ├── layouts/           ← layouts (app, guest)
+│       ├── properties/        ← vues du module propriétés
+│       ├── tenants/
+│       ├── contracts/
+│       ├── payments/
+│       ├── documents/
+│       ├── maintenances/
+│       ├── dashboard.blade.php
+│       └── reports/
+├── routes/
+│   ├── web.php                ← routes protégées (auth)
+│   └── auth.php               ← routes Breeze (login, register…)
+├── public/                    ← point d'entrée web
+├── .env                       ← configuration locale
+└── vite.config.js</code></pre>
+
+          <h2>Flux d'authentification</h2>
+          <ol>
+            <li>L'utilisateur accède à <code>/</code> → redirection automatique vers <code>/dashboard</code></li>
+            <li>Si non authentifié → redirection vers <code>/login</code> (middleware <code>auth</code>)</li>
+            <li>Inscription via <code>/register</code> (Laravel Breeze)</li>
+            <li>Après login → accès à toutes les routes du groupe <code>auth</code></li>
+            <li>Toutes les données sont filtrées par <code>user_id</code> (isolation multi-utilisateurs)</li>
+          </ol>
+
+          <h2>Contrôleurs</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Contrôleur</th><th>Responsabilité</th></tr></thead>
+              <tbody>
+                <tr><td><code>DashboardController</code></td><td>Statistiques globales du tableau de bord</td></tr>
+                <tr><td><code>PropertyController</code></td><td>CRUD biens</td></tr>
+                <tr><td><code>TenantController</code></td><td>CRUD locataires</td></tr>
+                <tr><td><code>ContractController</code></td><td>CRUD contrats + archivage</td></tr>
+                <tr><td><code>PaymentController</code></td><td>CRUD paiements + mark-paid</td></tr>
+                <tr><td><code>DocumentController</code></td><td>Upload / suppression documents</td></tr>
+                <tr><td><code>MaintenanceController</code></td><td>CRUD maintenance + progression</td></tr>
+                <tr><td><code>ReportController</code></td><td>Page de rapports agrégés</td></tr>
+                <tr><td><code>ProfileController</code></td><td>Modification du profil utilisateur</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Principes appliqués</h2>
+          <ul>
+            <li><strong>SOLID</strong> — un contrôleur par ressource, responsabilité unique</li>
+            <li><strong>DRY</strong> — composants Blade réutilisables pour tous les éléments d'UI récurrents</li>
+            <li><strong>Scoped data</strong> — chaque query filtre sur <code>user_id</code> pour isoler les données par bailleur</li>
+          </ul>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes contrats — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/contrats.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Mes contrats</h1>
+          <p class="page-subtitle">Créer et gérer vos baux de location, archiver les contrats terminés.</p>
+
+          <div class="note">
+            Avant de créer un contrat, assurez-vous d'avoir ajouté le bien et le locataire concernés.
+          </div>
+
+          <h2>Créer un contrat</h2>
+          <ol>
+            <li>Cliquez sur <strong>Contrats</strong> dans le menu latéral.</li>
+            <li>Cliquez sur <strong>Nouveau contrat</strong>.</li>
+            <li>Remplissez le formulaire :</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Locataire</strong></td><td>Locataire concerné par ce bail</td><td>Oui</td></tr>
+                <tr><td><strong>Bien</strong></td><td>Bien faisant l'objet du bail</td><td>Oui</td></tr>
+                <tr><td><strong>Type de bail</strong></td><td>Vide, meublé ou commercial</td><td>Oui</td></tr>
+                <tr><td><strong>Date de début</strong></td><td>Date d'entrée dans les lieux</td><td>Oui</td></tr>
+                <tr><td><strong>Date de fin</strong></td><td>Date d'échéance du bail (laisser vide pour un bail à durée indéterminée)</td><td>Non</td></tr>
+                <tr><td><strong>Loyer mensuel</strong></td><td>Montant du loyer hors charges</td><td>Oui</td></tr>
+                <tr><td><strong>Charges</strong></td><td>Charges mensuelles</td><td>Non</td></tr>
+                <tr><td><strong>Dépôt de garantie</strong></td><td>Montant du dépôt de garantie versé</td><td>Non</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol start="4">
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Statuts d'un contrat</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Statut</th><th>Signification</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Actif</strong></td><td>Le bail est en cours. Le locataire occupe le bien.</td></tr>
+                <tr><td><strong>Expiré</strong></td><td>La date de fin est dépassée mais le contrat n'a pas été archivé.</td></tr>
+                <tr><td><strong>Archivé</strong></td><td>Le bail est terminé et classé dans les archives.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Archiver un contrat</h2>
+          <p>
+            Lorsqu'un locataire quitte le logement, archivez son contrat pour conserver
+            l'historique tout en le retirant de la vue active.
+          </p>
+          <ol>
+            <li>Depuis la liste des contrats, cliquez sur <strong>Archiver</strong> sur le contrat concerné.</li>
+            <li>Le contrat passe en statut <strong>Archivé</strong> et n'apparaît plus dans la liste principale.</li>
+          </ol>
+
+          <div class="tip">
+            Les contrats archivés restent accessibles via le filtre <strong>Archivés</strong> en haut
+            de la liste des contrats.
+          </div>
+
+          <h2>Alerte d'expiration</h2>
+          <p>
+            GestiLoc vous alerte automatiquement sur le tableau de bord lorsqu'un contrat
+            arrive à échéance dans moins de <strong>30 jours</strong>. Pensez à renouveler
+            ou archiver ces contrats en temps voulu.
+          </p>
+
+          <h2>Modifier ou supprimer un contrat</h2>
+          <ul>
+            <li>
+              <strong>Modifier</strong> — cliquez sur le bouton <strong>Modifier</strong>
+              dans la liste pour corriger les informations d'un contrat actif.
+            </li>
+            <li>
+              <strong>Supprimer</strong> — supprime définitivement le contrat. Préférez
+              l'archivage pour conserver l'historique.
+            </li>
+          </ul>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base de données — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="technique/base-de-donnees.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Base de données</h1>
+          <p class="page-subtitle">Schéma des 6 tables métier et relations Eloquent.</p>
+
+          <h2>Vue d'ensemble</h2>
+          <pre><code>users
+  ├── properties       (user_id → users)
+  │     ├── tenants    (user_id → users, property_id → properties)
+  │     ├── contracts  (user_id → users, tenant_id → tenants, property_id → properties)
+  │     ├── payments   (user_id → users, tenant_id → tenants, property_id → properties)
+  │     ├── documents  (user_id → users, property_id → properties)
+  │     └── maintenances (user_id → users, property_id → properties)</code></pre>
+
+          <h2>Table <code>properties</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK auto-increment</td></tr>
+                <tr><td><code>user_id</code></td><td>bigint</td><td>FK → users (cascade delete)</td></tr>
+                <tr><td><code>reference</code></td><td>string</td><td>unique</td></tr>
+                <tr><td><code>name</code></td><td>string</td><td></td></tr>
+                <tr><td><code>address</code></td><td>string</td><td></td></tr>
+                <tr><td><code>city</code></td><td>string</td><td></td></tr>
+                <tr><td><code>postal_code</code></td><td>string</td><td>nullable</td></tr>
+                <tr><td><code>type</code></td><td>enum</td><td><code>appartement</code>, <code>maison</code>, <code>studio</code>, <code>commercial</code>, <code>autre</code></td></tr>
+                <tr><td><code>surface_m2</code></td><td>decimal(8,2)</td><td>nullable</td></tr>
+                <tr><td><code>monthly_rent</code></td><td>decimal(10,2)</td><td></td></tr>
+                <tr><td><code>charges</code></td><td>decimal(10,2)</td><td>default 0</td></tr>
+                <tr><td><code>deposit</code></td><td>decimal(10,2)</td><td>default 0</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>occupee</code>, <code>vacante</code></td></tr>
+                <tr><td><code>description</code></td><td>text</td><td>nullable</td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Table <code>tenants</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK</td></tr>
+                <tr><td><code>user_id</code></td><td>bigint</td><td>FK → users (cascade delete)</td></tr>
+                <tr><td><code>property_id</code></td><td>bigint</td><td>FK → properties (null on delete), nullable</td></tr>
+                <tr><td><code>first_name</code></td><td>string</td><td></td></tr>
+                <tr><td><code>last_name</code></td><td>string</td><td></td></tr>
+                <tr><td><code>email</code></td><td>string</td><td>nullable</td></tr>
+                <tr><td><code>phone</code></td><td>string</td><td>nullable</td></tr>
+                <tr><td><code>monthly_rent</code></td><td>decimal(10,2)</td><td>default 0</td></tr>
+                <tr><td><code>lease_start_date</code></td><td>date</td><td>nullable</td></tr>
+                <tr><td><code>payment_status</code></td><td>enum</td><td><code>paye</code>, <code>attente</code>, <code>retard</code></td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Table <code>contracts</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK</td></tr>
+                <tr><td><code>user_id</code></td><td>bigint</td><td>FK → users (cascade delete)</td></tr>
+                <tr><td><code>tenant_id</code></td><td>bigint</td><td>FK → tenants (cascade delete)</td></tr>
+                <tr><td><code>property_id</code></td><td>bigint</td><td>FK → properties (cascade delete)</td></tr>
+                <tr><td><code>type</code></td><td>enum</td><td><code>vide</code>, <code>meuble</code>, <code>commercial</code></td></tr>
+                <tr><td><code>start_date</code></td><td>date</td><td></td></tr>
+                <tr><td><code>end_date</code></td><td>date</td><td>nullable</td></tr>
+                <tr><td><code>monthly_rent</code></td><td>decimal(10,2)</td><td></td></tr>
+                <tr><td><code>charges</code></td><td>decimal(10,2)</td><td>default 0</td></tr>
+                <tr><td><code>deposit</code></td><td>decimal(10,2)</td><td>default 0</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>actif</code>, <code>expire</code>, <code>archive</code></td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Table <code>payments</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK</td></tr>
+                <tr><td><code>user_id</code></td><td>bigint</td><td>FK → users (cascade delete)</td></tr>
+                <tr><td><code>tenant_id</code></td><td>bigint</td><td>FK → tenants (cascade delete)</td></tr>
+                <tr><td><code>property_id</code></td><td>bigint</td><td>FK → properties (cascade delete)</td></tr>
+                <tr><td><code>amount</code></td><td>decimal(10,2)</td><td></td></tr>
+                <tr><td><code>period_month</code></td><td>tinyint unsigned</td><td>1–12</td></tr>
+                <tr><td><code>period_year</code></td><td>smallint unsigned</td><td></td></tr>
+                <tr><td><code>payment_date</code></td><td>date</td><td>nullable</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>paye</code>, <code>attente</code>, <code>retard</code></td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Table <code>documents</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK</td></tr>
+                <tr><td><code>user_id</code></td><td>bigint</td><td>FK → users (cascade delete)</td></tr>
+                <tr><td><code>property_id</code></td><td>bigint</td><td>FK → properties (null on delete), nullable</td></tr>
+                <tr><td><code>name</code></td><td>string</td><td></td></tr>
+                <tr><td><code>category</code></td><td>enum</td><td><code>contrat</code>, <code>diagnostic</code>, <code>quittance</code>, <code>assurance</code>, <code>autre</code></td></tr>
+                <tr><td><code>upload_date</code></td><td>date</td><td></td></tr>
+                <tr><td><code>expiration_date</code></td><td>date</td><td>nullable</td></tr>
+                <tr><td><code>file_path</code></td><td>string</td><td></td></tr>
+                <tr><td><code>file_size</code></td><td>bigint unsigned</td><td>default 0</td></tr>
+                <tr><td><code>mime_type</code></td><td>string</td><td>nullable</td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Table <code>maintenances</code></h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>bigint</td><td>PK</td></tr>
+                <tr><td><code>user_id</code></td><td>bigint</td><td>FK → users (cascade delete)</td></tr>
+                <tr><td><code>property_id</code></td><td>bigint</td><td>FK → properties (cascade delete)</td></tr>
+                <tr><td><code>title</code></td><td>string</td><td></td></tr>
+                <tr><td><code>description</code></td><td>text</td><td>nullable</td></tr>
+                <tr><td><code>priority</code></td><td>enum</td><td><code>haute</code>, <code>moyenne</code>, <code>basse</code></td></tr>
+                <tr><td><code>estimated_cost</code></td><td>decimal(10,2)</td><td>nullable</td></tr>
+                <tr><td><code>actual_cost</code></td><td>decimal(10,2)</td><td>nullable</td></tr>
+                <tr><td><code>progress_percentage</code></td><td>tinyint unsigned</td><td>default 0</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>a_faire</code>, <code>en_cours</code>, <code>termine</code></td></tr>
+                <tr><td><code>started_at</code></td><td>timestamp</td><td>nullable</td></tr>
+                <tr><td><code>completed_at</code></td><td>timestamp</td><td>nullable</td></tr>
+                <tr><td><code>created_at / updated_at</code></td><td>timestamp</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Relations Eloquent — résumé</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Modèle</th><th>hasMany</th><th>belongsTo</th></tr></thead>
+              <tbody>
+                <tr><td><code>User</code></td><td>Property, Tenant, Contract, Payment, Document, Maintenance</td><td>—</td></tr>
+                <tr><td><code>Property</code></td><td>Tenant, Contract, Payment, Document, Maintenance</td><td>User</td></tr>
+                <tr><td><code>Tenant</code></td><td>Payment, Contract</td><td>User, Property</td></tr>
+                <tr><td><code>Contract</code></td><td>—</td><td>User, Tenant, Property</td></tr>
+                <tr><td><code>Payment</code></td><td>—</td><td>User, Tenant, Property</td></tr>
+                <tr><td><code>Document</code></td><td>—</td><td>User, Property</td></tr>
+                <tr><td><code>Maintenance</code></td><td>—</td><td>User, Property</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Stories — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="fonctionnel/user-stories.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>User Stories</h1>
+          <p class="page-subtitle">Cas d'usage par module, basés sur les routes et controllers Laravel.</p>
+
+          <div class="note">
+            Toutes les stories ci-dessous correspondent à des actions réelles implémentées dans
+            <code>projet-dynamic/routes/web.php</code> et les controllers associés.
+          </div>
+
+          <h2>Authentification</h2>
+          <ul>
+            <li>En tant que bailleur, je peux m'inscrire avec un email et un mot de passe.</li>
+            <li>En tant que bailleur, je peux me connecter et me déconnecter.</li>
+            <li>En tant que bailleur, je peux modifier mon profil (nom, email, mot de passe).</li>
+            <li>En tant que bailleur, je peux supprimer mon compte.</li>
+          </ul>
+
+          <h2>Tableau de bord</h2>
+          <ul>
+            <li>En tant que bailleur, je peux voir un résumé de mon parc : nombre de biens, nombre de locataires, loyers du mois, alertes en cours.</li>
+          </ul>
+
+          <h2>Propriétés</h2>
+          <ul>
+            <li>En tant que bailleur, je peux ajouter un bien immobilier (type, adresse, loyer, charges, dépôt de garantie).</li>
+            <li>En tant que bailleur, je peux consulter la liste de mes biens avec leur statut (occupé / vacant).</li>
+            <li>En tant que bailleur, je peux modifier les informations d'un bien.</li>
+            <li>En tant que bailleur, je peux supprimer un bien (et toutes ses données associées en cascade).</li>
+            <li>En tant que bailleur, une référence unique est auto-générée pour chaque bien (ex : <code>PROP-001</code>).</li>
+          </ul>
+
+          <h2>Locataires</h2>
+          <ul>
+            <li>En tant que bailleur, je peux ajouter un locataire et l'associer à un bien.</li>
+            <li>En tant que bailleur, je peux consulter la liste de mes locataires avec leur statut de paiement.</li>
+            <li>En tant que bailleur, je peux rechercher un locataire par nom ou email.</li>
+            <li>En tant que bailleur, je peux modifier les informations d'un locataire.</li>
+            <li>En tant que bailleur, je peux supprimer un locataire.</li>
+          </ul>
+
+          <h2>Contrats</h2>
+          <ul>
+            <li>En tant que bailleur, je peux créer un contrat de location (type vide/meublé/commercial, dates, loyer).</li>
+            <li>En tant que bailleur, je peux consulter la liste de mes contrats et leur statut (actif, expiré, archivé).</li>
+            <li>En tant que bailleur, je peux archiver un contrat actif via <code>PATCH /contracts/{id}/archive</code>.</li>
+            <li>En tant que bailleur, je suis alerté lorsqu'un contrat expire dans les 30 jours.</li>
+            <li>En tant que bailleur, je peux modifier ou supprimer un contrat.</li>
+          </ul>
+
+          <h2>Paiements</h2>
+          <ul>
+            <li>En tant que bailleur, je peux enregistrer un paiement mensuel pour un locataire.</li>
+            <li>En tant que bailleur, je peux consulter l'historique des paiements par locataire ou par bien.</li>
+            <li>En tant que bailleur, je peux marquer un paiement comme « payé » en un clic via <code>PATCH /payments/{id}/mark-paid</code>.</li>
+            <li>En tant que bailleur, je peux voir les paiements en retard.</li>
+          </ul>
+
+          <h2>Documents</h2>
+          <ul>
+            <li>En tant que bailleur, je peux uploader un document et le rattacher à un bien (contrat, diagnostic, quittance, assurance).</li>
+            <li>En tant que bailleur, je peux consulter la liste de mes documents avec leur catégorie et date d'expiration.</li>
+            <li>En tant que bailleur, je peux télécharger ou supprimer un document.</li>
+          </ul>
+
+          <h2>Maintenance</h2>
+          <ul>
+            <li>En tant que bailleur, je peux créer une intervention de maintenance pour un bien (titre, description, priorité, coût estimé).</li>
+            <li>En tant que bailleur, je peux consulter la liste des interventions et leur avancement.</li>
+            <li>En tant que bailleur, je peux mettre à jour la progression d'une intervention via <code>PATCH /maintenances/{id}/progress</code>.</li>
+            <li>En tant que bailleur, je peux voir les interventions urgentes (priorité haute, non terminées).</li>
+          </ul>
+
+          <h2>Rapports</h2>
+          <ul>
+            <li>En tant que bailleur, je peux accéder à une page de rapports pour visualiser les données financières et opérationnelles agrégées.</li>
+          </ul>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

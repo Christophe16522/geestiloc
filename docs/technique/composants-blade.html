@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Composants Blade — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="technique/composants-blade.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Composants Blade</h1>
+          <p class="page-subtitle">
+            Tous les composants sont dans <code>projet-dynamic/resources/views/components/</code>.
+            Ils s'utilisent avec la syntaxe <code>&lt;x-nom-du-composant /&gt;</code>.
+          </p>
+
+          <h2>Composants génériques (Breeze)</h2>
+          <p>Ces composants proviennent de Laravel Breeze et sont utilisés dans les formulaires et l'authentification.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Composant</th><th>Fichier</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>&lt;x-primary-button&gt;</code></td><td><code>primary-button.blade.php</code></td><td>Bouton principal (action principale)</td></tr>
+                <tr><td><code>&lt;x-secondary-button&gt;</code></td><td><code>secondary-button.blade.php</code></td><td>Bouton secondaire</td></tr>
+                <tr><td><code>&lt;x-danger-button&gt;</code></td><td><code>danger-button.blade.php</code></td><td>Bouton destructif (suppression)</td></tr>
+                <tr><td><code>&lt;x-text-input&gt;</code></td><td><code>text-input.blade.php</code></td><td>Champ texte standard</td></tr>
+                <tr><td><code>&lt;x-input-label&gt;</code></td><td><code>input-label.blade.php</code></td><td>Label de formulaire</td></tr>
+                <tr><td><code>&lt;x-input-error&gt;</code></td><td><code>input-error.blade.php</code></td><td>Affichage des erreurs de validation</td></tr>
+                <tr><td><code>&lt;x-dropdown&gt;</code></td><td><code>dropdown.blade.php</code></td><td>Menu déroulant Alpine.js</td></tr>
+                <tr><td><code>&lt;x-dropdown-link&gt;</code></td><td><code>dropdown-link.blade.php</code></td><td>Lien dans un dropdown</td></tr>
+                <tr><td><code>&lt;x-modal&gt;</code></td><td><code>modal.blade.php</code></td><td>Modale Alpine.js</td></tr>
+                <tr><td><code>&lt;x-nav-link&gt;</code></td><td><code>nav-link.blade.php</code></td><td>Lien de navigation (actif / inactif)</td></tr>
+                <tr><td><code>&lt;x-responsive-nav-link&gt;</code></td><td><code>responsive-nav-link.blade.php</code></td><td>Lien nav mobile</td></tr>
+                <tr><td><code>&lt;x-auth-session-status&gt;</code></td><td><code>auth-session-status.blade.php</code></td><td>Message de statut session</td></tr>
+                <tr><td><code>&lt;x-application-logo&gt;</code></td><td><code>application-logo.blade.php</code></td><td>Logo de l'application</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Composants métier GestiLoc</h2>
+          <p>Ces composants ont été créés spécifiquement pour l'application, selon le principe DRY.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Composant</th><th>Fichier</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>&lt;x-navbar&gt;</code></td><td><code>navbar.blade.php</code></td><td>Barre de navigation principale</td></tr>
+                <tr><td><code>&lt;x-sidebar&gt;</code></td><td><code>sidebar.blade.php</code></td><td>Menu latéral de navigation</td></tr>
+                <tr><td><code>&lt;x-page-header&gt;</code></td><td><code>page-header.blade.php</code></td><td>En-tête de page (titre + bouton d'action)</td></tr>
+                <tr><td><code>&lt;x-stat-card&gt;</code></td><td><code>stat-card.blade.php</code></td><td>Carte de statistique pour le dashboard</td></tr>
+                <tr><td><code>&lt;x-status-badge&gt;</code></td><td><code>status-badge.blade.php</code></td><td>Badge coloré pour afficher un statut</td></tr>
+                <tr><td><code>&lt;x-action-buttons&gt;</code></td><td><code>action-buttons.blade.php</code></td><td>Boutons d'action (éditer, supprimer)</td></tr>
+                <tr><td><code>&lt;x-data-table&gt;</code></td><td><code>data-table.blade.php</code></td><td>Tableau de données réutilisable</td></tr>
+                <tr><td><code>&lt;x-empty-state&gt;</code></td><td><code>empty-state.blade.php</code></td><td>Message quand une liste est vide</td></tr>
+                <tr><td><code>&lt;x-progress-bar&gt;</code></td><td><code>progress-bar.blade.php</code></td><td>Barre de progression (maintenance)</td></tr>
+                <tr><td><code>&lt;x-form-section&gt;</code></td><td><code>form-section.blade.php</code></td><td>Section de formulaire avec titre</td></tr>
+                <tr><td><code>&lt;x-toast&gt;</code></td><td><code>toast.blade.php</code></td><td>Notification flash (succès, erreur)</td></tr>
+                <tr><td><code>&lt;x-property-card&gt;</code></td><td><code>property-card.blade.php</code></td><td>Carte d'affichage d'un bien</td></tr>
+                <tr><td><code>&lt;x-tenant-card&gt;</code></td><td><code>tenant-card.blade.php</code></td><td>Carte d'affichage d'un locataire</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Principe d'utilisation</h2>
+          <p>Les composants métier acceptent des <code>props</code> pour être configurables sans duplication. Exemples :</p>
+          <pre><code>&lt;x-page-header title="Mes biens" :count="$properties-&gt;count()"&gt;
+    &lt;x-slot:action&gt;
+        &lt;a href="{{ route('properties.create') }}"&gt;Ajouter&lt;/a&gt;
+    &lt;/x-slot:action&gt;
+&lt;/x-page-header&gt;
+
+&lt;x-status-badge :status="$property-&gt;status" /&gt;
+
+&lt;x-stat-card label="Biens occupés" :value="$occupied" icon="home" color="green" /&gt;
+
+&lt;x-progress-bar :value="$maintenance-&gt;progress_percentage" /&gt;</code></pre>
+
+          <div class="note">
+            Pour ajouter un composant : créer le fichier dans <code>resources/views/components/</code>.
+            Laravel le détecte automatiquement via la convention de nommage — aucune déclaration manuelle requise.
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

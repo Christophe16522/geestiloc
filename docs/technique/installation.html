@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installation — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="technique/installation.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Installation</h1>
+          <p class="page-subtitle">Setup de l'application Laravel pas à pas.</p>
+
+          <h2>Prérequis</h2>
+          <ul>
+            <li>PHP 8.1+</li>
+            <li>Composer</li>
+            <li>Node.js 18+ et npm</li>
+            <li>SQLite (inclus dans PHP) ou MySQL</li>
+          </ul>
+
+          <h2>1. Cloner le dépôt</h2>
+          <pre><code>git clone &lt;url-du-repo&gt; gestiloc
+cd gestiloc/projet-dynamic</code></pre>
+
+          <h2>2. Installer les dépendances PHP</h2>
+          <pre><code>composer install</code></pre>
+
+          <h2>3. Configurer l'environnement</h2>
+          <pre><code>cp .env.example .env
+php artisan key:generate</code></pre>
+
+          <p>Éditer <code>.env</code> selon votre environnement :</p>
+          <pre><code># SQLite (développement)
+DB_CONNECTION=sqlite
+# Le fichier sera créé à database/database.sqlite
+
+# MySQL (production)
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=gestiloc
+# DB_USERNAME=root
+# DB_PASSWORD=secret</code></pre>
+
+          <h2>4. Créer la base de données SQLite</h2>
+          <pre><code>touch database/database.sqlite</code></pre>
+          <p class="note">Cette étape est uniquement nécessaire pour SQLite. Sur MySQL, créer la base via votre interface habituelle.</p>
+
+          <h2>5. Exécuter les migrations</h2>
+          <pre><code>php artisan migrate</code></pre>
+
+          <p>Optionnel — peupler avec des données de test :</p>
+          <pre><code>php artisan db:seed</code></pre>
+
+          <h2>6. Installer les dépendances front-end</h2>
+          <pre><code>npm install</code></pre>
+
+          <h2>7. Compiler les assets</h2>
+          <pre><code># Développement (avec hot reload)
+npm run dev
+
+# Production
+npm run build</code></pre>
+
+          <h2>8. Lancer le serveur</h2>
+          <pre><code>php artisan serve</code></pre>
+          <p>L'application est accessible sur <code>http://localhost:8000</code>.</p>
+
+          <h2>Récapitulatif rapide</h2>
+          <pre><code>composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+npm install &amp;&amp; npm run dev
+php artisan serve</code></pre>
+
+          <div class="tip">
+            Pour le développement, laissez <code>npm run dev</code> tourner dans un terminal séparé afin de bénéficier du hot module replacement (HMR) de Vite.
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

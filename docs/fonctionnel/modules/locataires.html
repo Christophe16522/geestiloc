@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Locataires — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../.." data-page="fonctionnel/modules/locataires.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Module : Locataires</h1>
+          <p class="page-subtitle">Gestion des locataires associés aux biens immobiliers.</p>
+
+          <h2>Description</h2>
+          <p>
+            Chaque locataire appartient à un utilisateur et peut être rattaché à un bien (<code>property_id</code> nullable).
+            Le statut de paiement est mis à jour manuellement ou via les actions du module Paiements.
+          </p>
+
+          <h2>Champs</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>first_name</code></td><td>string</td><td>Prénom</td></tr>
+                <tr><td><code>last_name</code></td><td>string</td><td>Nom</td></tr>
+                <tr><td><code>email</code></td><td>string</td><td>Email (nullable)</td></tr>
+                <tr><td><code>phone</code></td><td>string</td><td>Téléphone (nullable)</td></tr>
+                <tr><td><code>property_id</code></td><td>FK</td><td>Bien associé (nullable — mis à null si bien supprimé)</td></tr>
+                <tr><td><code>monthly_rent</code></td><td>decimal</td><td>Loyer mensuel (défaut : 0)</td></tr>
+                <tr><td><code>lease_start_date</code></td><td>date</td><td>Date de début de bail (nullable)</td></tr>
+                <tr><td><code>payment_status</code></td><td>enum</td><td><code>paye</code>, <code>attente</code>, <code>retard</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Accessors Eloquent</h2>
+          <ul>
+            <li><code>full_name</code> — prénom + nom concaténés</li>
+            <li><code>initials</code> — initiales en majuscules (ex : <code>JD</code> pour Jean Dupont)</li>
+            <li><code>is_late</code> — booléen, vrai si <code>payment_status === 'retard'</code></li>
+          </ul>
+
+          <h2>Relations</h2>
+          <ul>
+            <li>Appartient à un <code>User</code></li>
+            <li>Appartient à une <code>Property</code> (nullable)</li>
+            <li>A plusieurs <code>Payment</code>, <code>Contract</code></li>
+          </ul>
+
+          <h2>Scopes Eloquent</h2>
+          <ul>
+            <li><code>scopePaye</code> — filtre les locataires à jour</li>
+            <li><code>scopeAttente</code> — filtre les locataires en attente de paiement</li>
+            <li><code>scopeRetard</code> — filtre les locataires en retard</li>
+            <li><code>scopeSearch($search)</code> — recherche par prénom, nom ou email</li>
+          </ul>
+
+          <h2>Routes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Méthode</th><th>URL</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><code>GET</code></td><td><code>/tenants</code></td><td>Liste des locataires</td></tr>
+                <tr><td><code>GET</code></td><td><code>/tenants/create</code></td><td>Formulaire de création</td></tr>
+                <tr><td><code>POST</code></td><td><code>/tenants</code></td><td>Créer un locataire</td></tr>
+                <tr><td><code>GET</code></td><td><code>/tenants/{id}</code></td><td>Détail d'un locataire</td></tr>
+                <tr><td><code>GET</code></td><td><code>/tenants/{id}/edit</code></td><td>Formulaire de modification</td></tr>
+                <tr><td><code>PUT/PATCH</code></td><td><code>/tenants/{id}</code></td><td>Modifier un locataire</td></tr>
+                <tr><td><code>DELETE</code></td><td><code>/tenants/{id}</code></td><td>Supprimer un locataire</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/main.js"></script>
+</body>
+</html>

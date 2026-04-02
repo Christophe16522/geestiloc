@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POC vs Dynamic — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="technique/poc-vs-dynamic.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>POC vs Projet Dynamic</h1>
+          <p class="page-subtitle">Comparaison entre le prototype statique (<code>poc/</code>) et l'application Laravel (<code>projet-dynamic/</code>).</p>
+
+          <h2>Vue d'ensemble</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Critère</th><th><code>poc/</code></th><th><code>projet-dynamic/</code></th></tr></thead>
+              <tbody>
+                <tr><td>Type</td><td>Prototype statique</td><td>Application Laravel complète</td></tr>
+                <tr><td>Données</td><td>Fictives / codées en dur</td><td>Persistées en base de données</td></tr>
+                <tr><td>Authentification</td><td>Aucune</td><td>Laravel Breeze (email + mot de passe)</td></tr>
+                <tr><td>Backend</td><td>Aucun</td><td>Laravel 10 / PHP 8.1</td></tr>
+                <tr><td>Templating</td><td>HTML brut</td><td>Blade + composants réutilisables</td></tr>
+                <tr><td>CSS</td><td>Tailwind CDN</td><td>Tailwind compilé via Vite</td></tr>
+                <tr><td>JS</td><td>Alpine.js CDN</td><td>Alpine.js via npm</td></tr>
+                <tr><td>Multi-utilisateurs</td><td>Non</td><td>Oui (isolation par <code>user_id</code>)</td></tr>
+                <tr><td>CRUD réel</td><td>Non</td><td>Oui (tous les modules)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Objectif du POC</h2>
+          <p>Le dossier <code>poc/</code> est une maquette haute-fidélité destinée à :</p>
+          <ul>
+            <li>Valider l'interface et la navigation avant le développement</li>
+            <li>Présenter le projet sans infrastructure back-end</li>
+            <li>Servir de référence visuelle pendant le développement</li>
+          </ul>
+
+          <h2>Ce que le projet dynamic ajoute</h2>
+          <ol>
+            <li><strong>Persistance</strong> — les données survivent au rechargement de page</li>
+            <li><strong>Authentification</strong> — chaque bailleur a ses propres données cloisonnées</li>
+            <li><strong>Validation serveur</strong> — les formulaires sont validés côté Laravel</li>
+            <li><strong>Actions métier</strong> — mark-paid, archivage contrat, progression maintenance</li>
+            <li><strong>Composants réutilisables</strong> — zéro duplication HTML grâce aux composants Blade</li>
+            <li><strong>Rapports</strong> — agrégation de données réelles</li>
+            <li><strong>Upload de fichiers</strong> — stockage des documents sur le serveur</li>
+          </ol>
+
+          <h2>Correspondance des modules</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Module</th><th>POC</th><th>Projet dynamic</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Dashboard</td>
+                  <td>Page statique avec chiffres fictifs</td>
+                  <td><code>DashboardController</code> + données réelles</td>
+                </tr>
+                <tr>
+                  <td>Propriétés</td>
+                  <td>Liste HTML fixe</td>
+                  <td>CRUD complet + référence auto-générée</td>
+                </tr>
+                <tr>
+                  <td>Locataires</td>
+                  <td>Liste HTML fixe</td>
+                  <td>CRUD + recherche + statut de paiement</td>
+                </tr>
+                <tr>
+                  <td>Contrats</td>
+                  <td>Affiché statiquement</td>
+                  <td>CRUD + archivage + alertes expiration 30j</td>
+                </tr>
+                <tr>
+                  <td>Paiements</td>
+                  <td>Tableau statique</td>
+                  <td>CRUD + mark-paid + filtres par période</td>
+                </tr>
+                <tr>
+                  <td>Documents</td>
+                  <td>Liste statique</td>
+                  <td>Upload réel + téléchargement + catégories</td>
+                </tr>
+                <tr>
+                  <td>Maintenance</td>
+                  <td>Liste statique</td>
+                  <td>CRUD + barre de progression + suivi des coûts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

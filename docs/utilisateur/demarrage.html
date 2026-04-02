@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premiers pas — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/demarrage.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Premiers pas</h1>
+          <p class="page-subtitle">Créer votre compte, vous connecter et configurer votre profil.</p>
+
+          <h2>Créer un compte</h2>
+          <p>
+            Si vous n'avez pas encore de compte, rendez-vous sur la page d'inscription
+            accessible depuis la page de connexion.
+          </p>
+          <ol>
+            <li>Cliquez sur <strong>S'inscrire</strong> depuis la page de connexion.</li>
+            <li>Renseignez votre nom, votre adresse email et un mot de passe.</li>
+            <li>Cliquez sur <strong>S'inscrire</strong> pour valider.</li>
+            <li>Vous êtes automatiquement connecté et redirigé vers le tableau de bord.</li>
+          </ol>
+
+          <div class="note">
+            Chaque compte est indépendant : vos biens, locataires et données ne sont visibles
+            que par vous. Plusieurs bailleurs peuvent utiliser la même application sans se voir.
+          </div>
+
+          <h2>Se connecter</h2>
+          <ol>
+            <li>Accédez à l'application dans votre navigateur.</li>
+            <li>Saisissez votre adresse email et votre mot de passe.</li>
+            <li>Cliquez sur <strong>Se connecter</strong>.</li>
+          </ol>
+          <p>
+            Si vous avez oublié votre mot de passe, utilisez le lien
+            <strong>Mot de passe oublié ?</strong> présent sur la page de connexion.
+          </p>
+
+          <h2>Se déconnecter</h2>
+          <p>
+            Cliquez sur votre nom en haut à droite de la navigation, puis sur
+            <strong>Se déconnecter</strong>.
+          </p>
+
+          <h2>Modifier votre profil</h2>
+          <p>
+            Pour changer votre nom, votre adresse email ou votre mot de passe :
+          </p>
+          <ol>
+            <li>Cliquez sur votre nom en haut à droite.</li>
+            <li>Sélectionnez <strong>Profil</strong>.</li>
+            <li>Modifiez les informations souhaitées.</li>
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Supprimer votre compte</h2>
+          <div class="warning">
+            La suppression de votre compte est définitive. Toutes vos données (biens, locataires,
+            contrats, paiements, documents, maintenances) seront effacées sans possibilité de récupération.
+          </div>
+          <p>
+            Cette option se trouve en bas de la page <strong>Profil</strong>, dans la section
+            <em>Supprimer le compte</em>. Une confirmation par mot de passe est requise.
+          </p>
+
+          <h2>Étape suivante</h2>
+          <p>
+            Une fois connecté, commencez par ajouter vos biens immobiliers.
+            Consultez la section <a href="proprietes.html">Mes biens</a> pour savoir comment procéder.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GestiLoc — Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-root="." data-page="index.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>GestiLoc — Documentation</h1>
+          <p class="page-subtitle">Documentation technique et fonctionnelle du projet de gestion locative.</p>
+
+          <h2>Structure du projet</h2>
+          <div class="table-wrap">
+            <table class="index-table">
+              <thead>
+                <tr><th>Dossier</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>poc/</code></td><td>Prototype statique HTML/CSS/JS (maquette fonctionnelle)</td></tr>
+                <tr><td><code>projet-dynamic/</code></td><td>Application Laravel dynamique</td></tr>
+                <tr><td><code>docs/</code></td><td>Documentation technique et fonctionnelle</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Guide utilisateur</h2>
+          <div class="card-grid">
+            <a class="card" href="utilisateur/demarrage.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Premiers pas</h3>
+              <p>Créer un compte, se connecter, modifier son profil.</p>
+            </a>
+            <a class="card" href="utilisateur/tableau-de-bord.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Tableau de bord</h3>
+              <p>Comprendre les indicateurs et les alertes automatiques.</p>
+            </a>
+            <a class="card" href="utilisateur/proprietes.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Mes biens</h3>
+              <p>Ajouter, modifier et gérer votre parc immobilier.</p>
+            </a>
+            <a class="card" href="utilisateur/locataires.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Mes locataires</h3>
+              <p>Gérer vos locataires et suivre leur statut de paiement.</p>
+            </a>
+            <a class="card" href="utilisateur/contrats.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Mes contrats</h3>
+              <p>Créer des baux, gérer les échéances et archiver.</p>
+            </a>
+            <a class="card" href="utilisateur/paiements.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Paiements</h3>
+              <p>Enregistrer les loyers et marquer les paiements reçus.</p>
+            </a>
+            <a class="card" href="utilisateur/documents.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Documents</h3>
+              <p>Uploader et retrouver vos fichiers (baux, diagnostics, assurances…).</p>
+            </a>
+            <a class="card" href="utilisateur/maintenance.html">
+              <div class="card-label">Guide utilisateur</div>
+              <h3>Maintenance</h3>
+              <p>Planifier et suivre vos interventions et travaux.</p>
+            </a>
+          </div>
+
+          <h2>Documentation fonctionnelle</h2>
+          <div class="card-grid">
+            <a class="card" href="fonctionnel/apercu.html">
+              <div class="card-label">Fonctionnel</div>
+              <h3>Aperçu métier</h3>
+              <p>Présentation de GestiLoc, modules disponibles et rôles utilisateurs.</p>
+            </a>
+            <a class="card" href="fonctionnel/user-stories.html">
+              <div class="card-label">Fonctionnel</div>
+              <h3>User Stories</h3>
+              <p>Cas d'usage par module, basés sur les routes et controllers Laravel.</p>
+            </a>
+          </div>
+
+          <h3>Modules</h3>
+          <div class="card-grid">
+            <a class="card" href="fonctionnel/modules/proprietes.html">
+              <div class="card-label">Module</div>
+              <h3>Propriétés</h3>
+              <p>Gestion du parc immobilier, types, statuts et références auto-générées.</p>
+            </a>
+            <a class="card" href="fonctionnel/modules/locataires.html">
+              <div class="card-label">Module</div>
+              <h3>Locataires</h3>
+              <p>Gestion des locataires, statuts de paiement et recherche.</p>
+            </a>
+            <a class="card" href="fonctionnel/modules/contrats.html">
+              <div class="card-label">Module</div>
+              <h3>Contrats</h3>
+              <p>Baux de location, archivage et alertes d'expiration.</p>
+            </a>
+            <a class="card" href="fonctionnel/modules/paiements.html">
+              <div class="card-label">Module</div>
+              <h3>Paiements</h3>
+              <p>Suivi des loyers mensuels et marquage comme payé.</p>
+            </a>
+            <a class="card" href="fonctionnel/modules/documents.html">
+              <div class="card-label">Module</div>
+              <h3>Documents</h3>
+              <p>Upload et gestion des fichiers liés aux biens.</p>
+            </a>
+            <a class="card" href="fonctionnel/modules/maintenance.html">
+              <div class="card-label">Module</div>
+              <h3>Maintenance</h3>
+              <p>Suivi des interventions, priorités, coûts et avancement.</p>
+            </a>
+          </div>
+
+          <h2>Documentation technique</h2>
+          <div class="card-grid">
+            <a class="card" href="technique/architecture.html">
+              <div class="card-label">Technique</div>
+              <h3>Architecture</h3>
+              <p>Stack, structure des dossiers et flux d'authentification.</p>
+            </a>
+            <a class="card" href="technique/base-de-donnees.html">
+              <div class="card-label">Technique</div>
+              <h3>Base de données</h3>
+              <p>Schéma des 6 tables métier et relations Eloquent.</p>
+            </a>
+            <a class="card" href="technique/installation.html">
+              <div class="card-label">Technique</div>
+              <h3>Installation</h3>
+              <p>Setup Laravel pas à pas : clone, .env, migrate, serve.</p>
+            </a>
+            <a class="card" href="technique/composants-blade.html">
+              <div class="card-label">Technique</div>
+              <h3>Composants Blade</h3>
+              <p>Liste et description des 26 composants réutilisables.</p>
+            </a>
+            <a class="card" href="technique/poc-vs-dynamic.html">
+              <div class="card-label">Technique</div>
+              <h3>POC vs Dynamic</h3>
+              <p>Différences entre le prototype statique et l'application Laravel.</p>
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

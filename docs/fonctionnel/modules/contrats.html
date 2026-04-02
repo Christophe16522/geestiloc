@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Contrats — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../.." data-page="fonctionnel/modules/contrats.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Module : Contrats</h1>
+          <p class="page-subtitle">Gestion des baux de location, archivage et alertes d'expiration.</p>
+
+          <h2>Description</h2>
+          <p>Un contrat lie un locataire à un bien pour une période donnée. La date de fin est nullable pour les baux à durée indéterminée.</p>
+
+          <h2>Champs</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>tenant_id</code></td><td>FK</td><td>Locataire (cascade delete)</td></tr>
+                <tr><td><code>property_id</code></td><td>FK</td><td>Bien (cascade delete)</td></tr>
+                <tr><td><code>type</code></td><td>enum</td><td><code>vide</code>, <code>meuble</code>, <code>commercial</code></td></tr>
+                <tr><td><code>start_date</code></td><td>date</td><td>Date de début</td></tr>
+                <tr><td><code>end_date</code></td><td>date</td><td>Date de fin (nullable — bail illimité)</td></tr>
+                <tr><td><code>monthly_rent</code></td><td>decimal</td><td>Loyer mensuel</td></tr>
+                <tr><td><code>charges</code></td><td>decimal</td><td>Charges (défaut : 0)</td></tr>
+                <tr><td><code>deposit</code></td><td>decimal</td><td>Dépôt de garantie (défaut : 0)</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>actif</code>, <code>expire</code>, <code>archive</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Accessors Eloquent</h2>
+          <ul>
+            <li><code>duration</code> — durée en mois (null si pas de date de fin)</li>
+            <li><code>is_expiring</code> — vrai si le contrat expire dans les 30 jours</li>
+          </ul>
+
+          <h2>Scopes Eloquent</h2>
+          <ul>
+            <li><code>scopeActif</code> — filtre les contrats actifs</li>
+            <li><code>scopeExpirant($days = 30)</code> — contrats actifs expirant dans N jours</li>
+            <li><code>scopeArchive</code> — filtre les contrats archivés</li>
+          </ul>
+
+          <h2>Actions spéciales</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Méthode</th><th>URL</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>PATCH</code></td><td><code>/contracts/{id}/archive</code></td><td>Passe le statut à <code>archive</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Relations</h2>
+          <ul>
+            <li>Appartient à un <code>User</code>, un <code>Tenant</code>, une <code>Property</code></li>
+          </ul>
+
+          <h2>Routes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Méthode</th><th>URL</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><code>GET</code></td><td><code>/contracts</code></td><td>Liste des contrats</td></tr>
+                <tr><td><code>GET</code></td><td><code>/contracts/create</code></td><td>Formulaire de création</td></tr>
+                <tr><td><code>POST</code></td><td><code>/contracts</code></td><td>Créer un contrat</td></tr>
+                <tr><td><code>GET</code></td><td><code>/contracts/{id}</code></td><td>Détail</td></tr>
+                <tr><td><code>GET</code></td><td><code>/contracts/{id}/edit</code></td><td>Formulaire de modification</td></tr>
+                <tr><td><code>PUT/PATCH</code></td><td><code>/contracts/{id}</code></td><td>Modifier</td></tr>
+                <tr><td><code>DELETE</code></td><td><code>/contracts/{id}</code></td><td>Supprimer</td></tr>
+                <tr><td><code>PATCH</code></td><td><code>/contracts/{id}/archive</code></td><td>Archiver</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/main.js"></script>
+</body>
+</html>

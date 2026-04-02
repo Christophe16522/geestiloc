@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes locataires — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/locataires.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Mes locataires</h1>
+          <p class="page-subtitle">Ajouter et gérer vos locataires, suivre leur statut de paiement.</p>
+
+          <h2>Ajouter un locataire</h2>
+          <ol>
+            <li>Cliquez sur <strong>Locataires</strong> dans le menu latéral.</li>
+            <li>Cliquez sur <strong>Ajouter un locataire</strong>.</li>
+            <li>Remplissez le formulaire :</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Prénom</strong></td><td>Prénom du locataire</td><td>Oui</td></tr>
+                <tr><td><strong>Nom</strong></td><td>Nom de famille</td><td>Oui</td></tr>
+                <tr><td><strong>Email</strong></td><td>Adresse email de contact</td><td>Non</td></tr>
+                <tr><td><strong>Téléphone</strong></td><td>Numéro de téléphone</td><td>Non</td></tr>
+                <tr><td><strong>Bien associé</strong></td><td>Bien occupé par ce locataire</td><td>Non</td></tr>
+                <tr><td><strong>Loyer mensuel</strong></td><td>Montant du loyer de ce locataire</td><td>Non</td></tr>
+                <tr><td><strong>Date de début de bail</strong></td><td>Date d'entrée dans le logement</td><td>Non</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol start="4">
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Comprendre les statuts de paiement</h2>
+          <p>Chaque locataire affiche un statut de paiement :</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Statut</th><th>Signification</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Payé</strong></td><td>Le loyer du mois en cours a été encaissé.</td></tr>
+                <tr><td><strong>En attente</strong></td><td>Le paiement n'a pas encore été reçu pour ce mois.</td></tr>
+                <tr><td><strong>En retard</strong></td><td>Le paiement est dû mais n'a pas été encaissé après l'échéance.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tip">
+            Le statut de paiement d'un locataire se met à jour via le module
+            <a href="paiements.html">Paiements</a> lorsque vous marquez un loyer comme payé.
+          </div>
+
+          <h2>Rechercher un locataire</h2>
+          <p>
+            La barre de recherche en haut de la liste permet de filtrer les locataires
+            par prénom, nom ou adresse email. La recherche s'effectue en temps réel.
+          </p>
+
+          <h2>Modifier un locataire</h2>
+          <ol>
+            <li>Dans la liste, cliquez sur <strong>Modifier</strong> à côté du locataire.</li>
+            <li>Mettez à jour les informations.</li>
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Supprimer un locataire</h2>
+          <div class="warning">
+            La suppression d'un locataire supprime également tous ses paiements et contrats associés.
+          </div>
+          <ol>
+            <li>Cliquez sur <strong>Supprimer</strong> dans la liste.</li>
+            <li>Confirmez la suppression.</li>
+          </ol>
+
+          <h2>Étape suivante</h2>
+          <p>
+            Après avoir ajouté vos locataires, créez les contrats de bail.
+            Consultez la section <a href="contrats.html">Mes contrats</a>.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

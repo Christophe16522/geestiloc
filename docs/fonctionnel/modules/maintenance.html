@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Maintenance — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../.." data-page="fonctionnel/modules/maintenance.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Module : Maintenance</h1>
+          <p class="page-subtitle">Suivi des interventions sur les biens, avec priorités, coûts et avancement.</p>
+
+          <h2>Description</h2>
+          <p>
+            Permet de planifier et suivre les travaux et interventions sur les biens immobiliers.
+            Chaque intervention dispose d'une priorité, d'un suivi de progression en pourcentage
+            et d'un suivi de coûts (estimé vs réel).
+          </p>
+
+          <h2>Champs</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>property_id</code></td><td>FK</td><td>Bien concerné (cascade delete)</td></tr>
+                <tr><td><code>title</code></td><td>string</td><td>Titre de l'intervention</td></tr>
+                <tr><td><code>description</code></td><td>text</td><td>Description détaillée (nullable)</td></tr>
+                <tr><td><code>priority</code></td><td>enum</td><td><code>haute</code>, <code>moyenne</code>, <code>basse</code></td></tr>
+                <tr><td><code>estimated_cost</code></td><td>decimal</td><td>Coût estimé (nullable)</td></tr>
+                <tr><td><code>actual_cost</code></td><td>decimal</td><td>Coût réel (nullable)</td></tr>
+                <tr><td><code>progress_percentage</code></td><td>tinyint</td><td>Avancement en % (0–100, défaut : 0)</td></tr>
+                <tr><td><code>status</code></td><td>enum</td><td><code>a_faire</code>, <code>en_cours</code>, <code>termine</code></td></tr>
+                <tr><td><code>started_at</code></td><td>datetime</td><td>Date de début effective (nullable)</td></tr>
+                <tr><td><code>completed_at</code></td><td>datetime</td><td>Date de fin effective (nullable)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Accessors Eloquent</h2>
+          <ul>
+            <li><code>status_label</code> — libellé lisible (<code>À faire</code>, <code>En cours</code>, <code>Terminé</code>)</li>
+            <li><code>priority_color</code> — couleur sémantique (<code>danger</code>, <code>warning</code>, <code>success</code>)</li>
+          </ul>
+
+          <h2>Scopes Eloquent</h2>
+          <ul>
+            <li><code>scopeAFaire</code> — interventions à faire</li>
+            <li><code>scopeEnCours</code> — interventions en cours</li>
+            <li><code>scopeTermine</code> — interventions terminées</li>
+            <li><code>scopeByPriority($priority)</code> — filtre par priorité</li>
+            <li><code>scopeUrgent</code> — priorité haute et non terminées</li>
+          </ul>
+
+          <h2>Actions spéciales</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Méthode</th><th>URL</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>PATCH</code></td>
+                  <td><code>/maintenances/{id}/progress</code></td>
+                  <td>Met à jour <code>progress_percentage</code> et <code>status</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Relations</h2>
+          <ul>
+            <li>Appartient à un <code>User</code> et une <code>Property</code></li>
+          </ul>
+
+          <h2>Routes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Méthode</th><th>URL</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><code>GET</code></td><td><code>/maintenances</code></td><td>Liste des interventions</td></tr>
+                <tr><td><code>GET</code></td><td><code>/maintenances/create</code></td><td>Formulaire de création</td></tr>
+                <tr><td><code>POST</code></td><td><code>/maintenances</code></td><td>Créer une intervention</td></tr>
+                <tr><td><code>GET</code></td><td><code>/maintenances/{id}</code></td><td>Détail</td></tr>
+                <tr><td><code>GET</code></td><td><code>/maintenances/{id}/edit</code></td><td>Formulaire de modification</td></tr>
+                <tr><td><code>PUT/PATCH</code></td><td><code>/maintenances/{id}</code></td><td>Modifier</td></tr>
+                <tr><td><code>DELETE</code></td><td><code>/maintenances/{id}</code></td><td>Supprimer</td></tr>
+                <tr><td><code>PATCH</code></td><td><code>/maintenances/{id}/progress</code></td><td>Mettre à jour la progression</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/main.js"></script>
+</body>
+</html>

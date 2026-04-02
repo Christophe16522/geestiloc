@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiements — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/paiements.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Paiements</h1>
+          <p class="page-subtitle">Enregistrer les loyers mensuels et suivre leur encaissement.</p>
+
+          <h2>Enregistrer un paiement</h2>
+          <ol>
+            <li>Cliquez sur <strong>Paiements</strong> dans le menu latéral.</li>
+            <li>Cliquez sur <strong>Nouveau paiement</strong>.</li>
+            <li>Remplissez le formulaire :</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Locataire</strong></td><td>Locataire concerné</td><td>Oui</td></tr>
+                <tr><td><strong>Bien</strong></td><td>Bien concerné</td><td>Oui</td></tr>
+                <tr><td><strong>Montant</strong></td><td>Montant du loyer à encaisser</td><td>Oui</td></tr>
+                <tr><td><strong>Mois</strong></td><td>Mois concerné (1 à 12)</td><td>Oui</td></tr>
+                <tr><td><strong>Année</strong></td><td>Année concernée</td><td>Oui</td></tr>
+                <tr><td><strong>Date de paiement</strong></td><td>Date effective du versement (si déjà reçu)</td><td>Non</td></tr>
+                <tr><td><strong>Statut</strong></td><td>En attente, payé ou en retard</td><td>Oui</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol start="4">
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Marquer un paiement comme payé</h2>
+          <p>
+            Lorsque vous recevez un loyer, vous pouvez le valider rapidement sans passer
+            par le formulaire de modification :
+          </p>
+          <ol>
+            <li>Dans la liste des paiements, repérez le paiement concerné (statut : <strong>En attente</strong>).</li>
+            <li>Cliquez sur le bouton <strong>Marquer comme payé</strong>.</li>
+            <li>Le statut passe à <strong>Payé</strong> et la date du jour est enregistrée automatiquement.</li>
+          </ol>
+
+          <div class="tip">
+            Utilisez ce bouton chaque mois au moment où vous recevez les virements.
+            C'est plus rapide que d'ouvrir le formulaire complet.
+          </div>
+
+          <h2>Statuts des paiements</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Statut</th><th>Signification</th></tr></thead>
+              <tbody>
+                <tr><td><strong>En attente</strong></td><td>Loyer attendu mais pas encore encaissé.</td></tr>
+                <tr><td><strong>Payé</strong></td><td>Loyer reçu. La date de paiement est enregistrée.</td></tr>
+                <tr><td><strong>En retard</strong></td><td>Loyer non encaissé après l'échéance prévue.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Workflow mensuel recommandé</h2>
+          <ol>
+            <li>
+              En début de mois, créez un paiement <strong>En attente</strong> pour chaque locataire
+              (ou utilisez un seed/export si vous avez beaucoup de locataires).
+            </li>
+            <li>
+              À réception de chaque virement, cliquez sur <strong>Marquer comme payé</strong>.
+            </li>
+            <li>
+              En milieu de mois, vérifiez le tableau de bord pour identifier les paiements
+              encore en attente et les passer en <strong>Retard</strong> si nécessaire.
+            </li>
+          </ol>
+
+          <h2>Filtrer les paiements</h2>
+          <p>
+            La liste des paiements peut être filtrée par statut, par locataire ou par période
+            (mois / année) grâce aux filtres disponibles en haut de page.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

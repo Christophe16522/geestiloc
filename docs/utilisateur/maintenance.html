@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/maintenance.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Maintenance</h1>
+          <p class="page-subtitle">Planifier et suivre les travaux et interventions sur vos biens.</p>
+
+          <h2>À quoi sert ce module ?</h2>
+          <p>
+            Le module Maintenance vous permet de tracer toutes les interventions sur vos biens :
+            réparations urgentes signalées par un locataire, travaux de rénovation, entretien courant,
+            sinistres… Chaque intervention est suivie avec sa priorité, son avancement et ses coûts.
+          </p>
+
+          <h2>Créer une intervention</h2>
+          <ol>
+            <li>Cliquez sur <strong>Maintenance</strong> dans le menu latéral.</li>
+            <li>Cliquez sur <strong>Nouvelle intervention</strong>.</li>
+            <li>Remplissez le formulaire :</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Bien</strong></td><td>Bien concerné par l'intervention</td><td>Oui</td></tr>
+                <tr><td><strong>Titre</strong></td><td>Résumé court (ex : « Fuite robinet cuisine »)</td><td>Oui</td></tr>
+                <tr><td><strong>Description</strong></td><td>Détail de l'intervention</td><td>Non</td></tr>
+                <tr><td><strong>Priorité</strong></td><td>Haute, moyenne ou basse</td><td>Oui</td></tr>
+                <tr><td><strong>Coût estimé</strong></td><td>Montant prévu pour l'intervention</td><td>Non</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol start="4">
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Niveaux de priorité</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Priorité</th><th>Usage recommandé</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Haute</strong></td><td>Urgence : fuite d'eau, panne de chauffage en hiver, problème de sécurité. Apparaît dans les alertes du tableau de bord.</td></tr>
+                <tr><td><strong>Moyenne</strong></td><td>Intervention à planifier rapidement mais sans urgence immédiate.</td></tr>
+                <tr><td><strong>Basse</strong></td><td>Entretien courant ou amélioration à réaliser à terme.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Suivre l'avancement d'une intervention</h2>
+          <p>
+            Au fur et à mesure que les travaux avancent, mettez à jour la progression :
+          </p>
+          <ol>
+            <li>Dans la liste des interventions, cliquez sur <strong>Mettre à jour</strong>.</li>
+            <li>Ajustez le <strong>pourcentage d'avancement</strong> (0 % à 100 %).</li>
+            <li>Mettez à jour le <strong>statut</strong> si nécessaire.</li>
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Statuts d'une intervention</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Statut</th><th>Signification</th></tr></thead>
+              <tbody>
+                <tr><td><strong>À faire</strong></td><td>L'intervention est planifiée mais n'a pas encore commencé.</td></tr>
+                <tr><td><strong>En cours</strong></td><td>Les travaux ont démarré.</td></tr>
+                <tr><td><strong>Terminé</strong></td><td>L'intervention est clôturée.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Enregistrer le coût réel</h2>
+          <p>
+            Une fois l'intervention terminée, renseignez le <strong>coût réel</strong> dans le formulaire
+            de modification. Cela vous permet de comparer le budget prévu avec la dépense effective,
+            et de constituer un historique de vos dépenses par bien.
+          </p>
+
+          <div class="tip">
+            Passez une intervention en statut <strong>Terminé</strong> plutôt que de la supprimer.
+            Vous conservez ainsi l'historique complet des travaux réalisés sur chaque bien,
+            utile notamment lors d'une revente ou d'un litige.
+          </div>
+
+          <h2>Interventions urgentes</h2>
+          <p>
+            Les interventions à priorité <strong>Haute</strong> non encore terminées apparaissent
+            automatiquement dans les alertes du <a href="tableau-de-bord.html">tableau de bord</a>.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

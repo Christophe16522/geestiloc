@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aperçu métier — GestiLoc Docs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="fonctionnel/apercu.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Aperçu fonctionnel</h1>
+          <p class="page-subtitle">Présentation métier de GestiLoc, ses modules et ses rôles utilisateurs.</p>
+
+          <h2>Présentation</h2>
+          <p>
+            GestiLoc est une application web de gestion locative destinée aux bailleurs privés. Elle centralise la
+            gestion des biens immobiliers, des locataires, des contrats de location, des paiements de loyer,
+            des documents et des interventions de maintenance.
+          </p>
+
+          <h2>Objectifs</h2>
+          <ul>
+            <li>Offrir une vue d'ensemble du parc immobilier (biens occupés / vacants)</li>
+            <li>Suivre les locataires et leur statut de paiement</li>
+            <li>Gérer les contrats de location (création, archivage, alertes d'expiration)</li>
+            <li>Enregistrer et suivre les paiements mensuels</li>
+            <li>Centraliser les documents liés aux biens (contrats, diagnostics, quittances, assurances)</li>
+            <li>Planifier et suivre les travaux de maintenance</li>
+          </ul>
+
+          <h2>Modules disponibles</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Module</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Tableau de bord</strong></td><td>Statistiques globales, alertes, vue synthétique</td></tr>
+                <tr><td><strong>Propriétés</strong></td><td>CRUD des biens immobiliers</td></tr>
+                <tr><td><strong>Locataires</strong></td><td>CRUD des locataires, statut de paiement</td></tr>
+                <tr><td><strong>Contrats</strong></td><td>Gestion des baux, archivage, alertes d'expiration</td></tr>
+                <tr><td><strong>Paiements</strong></td><td>Suivi des loyers mensuels, marquage comme payé</td></tr>
+                <tr><td><strong>Documents</strong></td><td>Upload et gestion des fichiers liés aux biens</td></tr>
+                <tr><td><strong>Maintenance</strong></td><td>Suivi des interventions avec progression et coûts</td></tr>
+                <tr><td><strong>Rapports</strong></td><td>Vue agrégée financière et opérationnelle</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Rôles utilisateurs</h2>
+          <p>L'application gère actuellement un seul rôle :</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Rôle</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bailleur (utilisateur authentifié)</strong></td>
+                  <td>
+                    Accès complet à toutes les fonctionnalités. Toutes les données sont cloisonnées par
+                    <code>user_id</code> — chaque bailleur ne voit que ses propres biens, locataires, contrats, etc.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>L'authentification est gérée par <strong>Laravel Breeze</strong> (email + mot de passe).</p>
+
+          <div class="note">
+            La gestion multi-rôles (propriétaire, gestionnaire, locataire) n'est pas implémentée dans la version
+            actuelle mais peut être ajoutée via un package comme Spatie Laravel Permission.
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes biens — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/proprietes.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Mes biens</h1>
+          <p class="page-subtitle">Ajouter, consulter et gérer vos biens immobiliers.</p>
+
+          <h2>Ajouter un bien</h2>
+          <ol>
+            <li>Cliquez sur <strong>Propriétés</strong> dans le menu latéral.</li>
+            <li>Cliquez sur le bouton <strong>Ajouter un bien</strong>.</li>
+            <li>Remplissez le formulaire :</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Nom</strong></td><td>Libellé du bien (ex : « Appartement Paris 11e »)</td><td>Oui</td></tr>
+                <tr><td><strong>Type</strong></td><td>Appartement, maison, studio, commercial ou autre</td><td>Oui</td></tr>
+                <tr><td><strong>Adresse</strong></td><td>Adresse complète du bien</td><td>Oui</td></tr>
+                <tr><td><strong>Ville</strong></td><td>Ville</td><td>Oui</td></tr>
+                <tr><td><strong>Code postal</strong></td><td>Code postal</td><td>Non</td></tr>
+                <tr><td><strong>Surface</strong></td><td>Surface en m²</td><td>Non</td></tr>
+                <tr><td><strong>Loyer mensuel</strong></td><td>Montant du loyer hors charges</td><td>Oui</td></tr>
+                <tr><td><strong>Charges</strong></td><td>Montant des charges mensuelles</td><td>Non (défaut : 0)</td></tr>
+                <tr><td><strong>Dépôt de garantie</strong></td><td>Montant du dépôt de garantie</td><td>Non (défaut : 0)</td></tr>
+                <tr><td><strong>Description</strong></td><td>Notes libres sur le bien</td><td>Non</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol start="4">
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <div class="note">
+            Une référence unique est attribuée automatiquement à chaque bien
+            (ex : <strong>PROP-001</strong>). Vous n'avez pas à la saisir manuellement.
+          </div>
+
+          <h2>Consulter la liste de vos biens</h2>
+          <p>
+            La page <strong>Propriétés</strong> affiche l'ensemble de vos biens avec pour chacun :
+            sa référence, son adresse, son type, son loyer mensuel et son statut (occupé / vacant).
+          </p>
+
+          <h2>Modifier un bien</h2>
+          <ol>
+            <li>Dans la liste des biens, cliquez sur le bouton <strong>Modifier</strong> du bien souhaité.</li>
+            <li>Mettez à jour les informations.</li>
+            <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+          </ol>
+
+          <h2>Supprimer un bien</h2>
+          <div class="warning">
+            La suppression d'un bien entraîne la suppression de toutes ses données associées :
+            locataires rattachés, contrats, paiements, documents et interventions de maintenance.
+            Cette action est irréversible.
+          </div>
+          <ol>
+            <li>Dans la liste des biens, cliquez sur <strong>Supprimer</strong>.</li>
+            <li>Confirmez la suppression dans la fenêtre qui s'affiche.</li>
+          </ol>
+
+          <h2>Statut d'un bien</h2>
+          <p>Un bien peut avoir deux statuts :</p>
+          <ul>
+            <li><strong>Occupé</strong> — un locataire est en cours de location.</li>
+            <li><strong>Vacant</strong> — le bien est disponible à la location.</li>
+          </ul>
+          <p>Le statut est mis à jour automatiquement selon les contrats actifs associés au bien.</p>
+
+          <h2>Étape suivante</h2>
+          <p>
+            Une fois vos biens enregistrés, ajoutez vos locataires.
+            Consultez la section <a href="locataires.html">Mes locataires</a>.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

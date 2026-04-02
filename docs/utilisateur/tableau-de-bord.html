@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord — GestiLoc</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root=".." data-page="utilisateur/tableau-de-bord.html">
+
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo">GestiLoc <span>Docs</span></a>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <div class="content">
+        <nav class="breadcrumb" id="breadcrumb"></nav>
+
+        <article>
+          <h1>Tableau de bord</h1>
+          <p class="page-subtitle">Vue d'ensemble de votre patrimoine locatif en un coup d'œil.</p>
+
+          <h2>Ce que vous voyez</h2>
+          <p>
+            Le tableau de bord est la première page que vous voyez après la connexion.
+            Il résume l'état de votre parc locatif à la date du jour.
+          </p>
+
+          <h2>Les cartes de statistiques</h2>
+          <p>En haut du tableau de bord, quatre indicateurs clés s'affichent :</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Biens</strong></td>
+                  <td>Nombre total de biens enregistrés, avec le nombre de biens occupés et vacants.</td>
+                </tr>
+                <tr>
+                  <td><strong>Locataires</strong></td>
+                  <td>Nombre total de locataires actifs.</td>
+                </tr>
+                <tr>
+                  <td><strong>Loyers du mois</strong></td>
+                  <td>Montant total attendu pour le mois en cours, et part déjà encaissée.</td>
+                </tr>
+                <tr>
+                  <td><strong>Paiements en retard</strong></td>
+                  <td>Nombre de loyers non réglés dont l'échéance est dépassée.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Les alertes</h2>
+          <p>Le tableau de bord signale automatiquement les situations nécessitant votre attention :</p>
+          <ul>
+            <li><strong>Contrats expirant bientôt</strong> — contrats dont la date de fin est dans les 30 jours.</li>
+            <li><strong>Paiements en retard</strong> — loyers dont le statut est « en retard ».</li>
+            <li><strong>Interventions urgentes</strong> — travaux de maintenance à priorité haute non encore terminés.</li>
+          </ul>
+
+          <div class="tip">
+            Consultez le tableau de bord chaque début de mois pour identifier rapidement
+            les loyers non encaissés et planifier vos relances.
+          </div>
+
+          <h2>Navigation rapide</h2>
+          <p>
+            Depuis le tableau de bord, vous pouvez accéder directement à chaque module
+            via le menu latéral ou les liens dans les cartes d'alertes.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>
