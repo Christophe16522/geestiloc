@@ -2,7 +2,7 @@
 @section('title', __('maintenances.title'))
 @section('content')
 
-<x-page-header :title="__('maintenances.title')" :subtitle="__('maintenances.empty_text')" :createRoute="'maintenances.create'" :createLabel="__('maintenances.add')" />
+<x-page-header :title="__('maintenances.title')" :subtitle="__('maintenances.subtitle')" :createRoute="'maintenances.create'" :createLabel="__('maintenances.add')" />
 
 <div class="filters-bar mb-4">
     <form method="GET">

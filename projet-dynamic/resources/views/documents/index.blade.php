@@ -49,7 +49,7 @@
                 <tr>
                     <td>
                         <div class="d-flex align-items-center gap-2">
-                            <div class="doc-icon doc-icon--{{ $document->category }}"><i class="fa-solid fa-file-{{ in_array($document->category,['contrat','quittance']) ? 'contract' : 'alt' }}"></i></div>
+                            <div class="doc-icon doc-icon--{{ $document->category }}"><i class="fa-solid fa-file-{{ in_array($document->category,['contrat','quittance']) ? 'contract' : 'lines' }}"></i></div>
                             <span class="fw-600 small">{{ $document->name }}</span>
                         </div>
                     </td>
@@ -68,7 +68,7 @@
                     </td>
                     <td><span class="small text-muted">{{ $document->getFileSizeFormattedAttribute() }}</span></td>
                     <td class="text-end">
-                        <x-action-buttons :showRoute="route('documents.show', $document)" :downloadRoute="route('documents.show', $document)" :deleteRoute="route('documents.destroy', $document)" :confirmMessage="__('documents.delete_confirm')" />
+                        <x-action-buttons :showRoute="route('documents.show', $document)" :deleteRoute="route('documents.destroy', $document)" :confirmMessage="__('documents.delete_confirm')" />
                     </td>
                 </tr>
                 @empty

@@ -1,6 +1,7 @@
 <?php
 return [
     'title'                => 'Maintenance',
+    'subtitle'             => 'Track maintenance jobs on your properties',
     'add'                  => 'Add a job',
     'edit'                 => 'Edit job',
     'create_title'         => 'New job',

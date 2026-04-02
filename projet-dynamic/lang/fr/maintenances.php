@@ -1,6 +1,7 @@
 <?php
 return [
     'title'                => 'Maintenance',
+    'subtitle'             => 'Suivi des interventions sur vos biens',
     'add'                  => 'Ajouter une intervention',
     'edit'                 => "Modifier l'intervention",
     'create_title'         => 'Nouvelle intervention',

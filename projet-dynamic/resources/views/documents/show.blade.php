@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-6">
         <div class="data-table-wrap p-3 text-center" style="padding: 3rem 1.5rem !important;">
-            <i class="fas fa-file-alt" style="font-size:4rem;color:var(--border);"></i>
+            <i class="fas fa-file-lines" style="font-size:4rem;color:var(--border);"></i>
             <h6 class="mt-3 fw-700">{{ $document->name }}</h6>
             <p class="text-muted small">{{ $document->file_size_formatted }}</p>
             @if($document->is_expired)
