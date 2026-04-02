@@ -22,6 +22,29 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.filters-bar form').forEach(function (form) {
+            // Hide the manual submit button — submission is now automatic
+            const submitBtn = form.querySelector('.filter-actions button[type="submit"]');
+            if (submitBtn) submitBtn.style.display = 'none';
+
+            // Selects → submit immediately on change
+            form.querySelectorAll('select').forEach(function (select) {
+                select.addEventListener('change', function () { form.submit(); });
+            });
+
+            // Text inputs → submit after 400 ms of inactivity
+            let debounceTimer;
+            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (input) {
+                input.addEventListener('input', function () {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(function () { form.submit(); }, 400);
+                });
+            });
+        });
+    });
+    </script>
     @stack('scripts')
 </body>
 </html>
